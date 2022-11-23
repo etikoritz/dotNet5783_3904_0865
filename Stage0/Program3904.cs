@@ -2,7 +2,7 @@
 using System;
 namespace Stage0
 {
-    partial class Program3904
+    partial class Program
     {
         static void Main(String[]args)
         {
@@ -10,9 +10,7 @@ namespace Stage0
             Welcome3904();
             Console.ReadKey();
         }
-
         static partial void Welcome0865();
-
         private static void Welcome3904()
         {
             Console.WriteLine("Enter your name: ");

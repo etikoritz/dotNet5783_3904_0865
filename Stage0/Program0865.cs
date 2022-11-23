@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Stage0
 {
-    partial class Program0865
+    partial class Program
     {
         static partial void Welcome0865()
         {
