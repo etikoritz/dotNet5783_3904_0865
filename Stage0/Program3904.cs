@@ -1,8 +1,8 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System;
-namespace Targil0
+namespace Stage0
 {
-    partial class Program
+    partial class Program3904
     {
         static void Main(String[]args)
         {
@@ -10,6 +10,9 @@ namespace Targil0
             Welcome3904();
             Console.ReadKey();
         }
+
+        static partial void Welcome0865();
+
         private static void Welcome3904()
         {
             Console.WriteLine("Enter your name: ");
