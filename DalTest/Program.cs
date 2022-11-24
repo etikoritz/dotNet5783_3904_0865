@@ -60,7 +60,7 @@ Please enter the name of the Product:");
                     try
                     {
 
-                        dalProduct.Add(newProduct);
+                        dalProduct.AddProduct(newProduct);
                         Console.WriteLine("secsess");
                     }
                     catch (Exception ex)
@@ -238,7 +238,6 @@ Enter customer name:");
                 //---------update Order-----------//
                 case 'd':
                     Console.WriteLine(@"
-You have selected to add a new Order.
 Enter order ID:");
                     int.TryParse(Console.ReadLine(), out newOrderID);
                     Console.WriteLine("Enter customer name:");
