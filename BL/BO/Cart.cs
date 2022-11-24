@@ -6,7 +6,19 @@ using System.Threading.Tasks;
 
 namespace BO
 {
-    internal class Cart
+    public class Cart
     {
+        public string CustomerName { get; set; }
+        public string CustomerEmail { get; set; }
+        public string CustomerAddress { get; set; }
+        public OrderItem Items { get; set; }
+        public double TotalPrice { get; set; }
+
+        public override string ToString() => $@"
+        Customer name: {CustomerName} 
+        Customer Email: {CustomerEmail} 
+        Customer address: {CustomerAddress} 
+        Items: {Items} 
+        Total price: {TotalPrice}"; 
     }
 }
