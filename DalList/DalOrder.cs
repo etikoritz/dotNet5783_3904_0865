@@ -4,6 +4,7 @@
 //using System.Text;
 //using System.Threading.Tasks;
 using DO;
+using DalApi;
 
 namespace Dal;
 
@@ -25,7 +26,7 @@ public class DalOrder
             if (DataSource.orderList[i].ID==id)
                 return DataSource.orderList[i];
         }
-        throw new Exception("the order doesn't exist in the array");
+        throw new DataNotExistException();
     }
     public  List<Order> getList()
     {
@@ -48,7 +49,7 @@ public class DalOrder
                 return;
             }
         }
-        throw new Exception("the order doesn't exist in the array");
+        throw new DataNotExistException();
     }
     public  void updateOrder(Order order)
     {
@@ -60,6 +61,6 @@ public class DalOrder
                 return;
             }
         }
-        throw new Exception("the order doesn't exist in the array");
+        throw new DataNotExistException();
     }
 }

@@ -1,6 +1,7 @@
 ﻿using DO;
 using System.ComponentModel;
 using System.Security.Cryptography;
+using DalApi;
 
 namespace Dal;
 
@@ -12,6 +13,17 @@ public class DalOrderItem
         DataSource.orderItemList.Add(ori);
         //DataSource.orderItemList[DataSource.Confing.indexOrderItem] = ori;
         //DataSource.Confing.indexOrderItem++;
+
+        ///
+        ///do we need to check the ID??
+        ///
+        for(int i=0;i<DataSource.orderItemList.Count;i++)
+        {
+            if(DataSource.orderItemList[i].ID == ori.ID)
+            {
+                throw new DataAlreadyExistException();
+            }
+        }
         return ori.ID;
     }
     public OrderItem GetOrderItem(int id)
@@ -21,7 +33,7 @@ public class DalOrderItem
             if (DataSource.orderItemList[i].ID == id)
                 return DataSource.orderItemList[i];
         }
-        throw new Exception("the orderItem doesn't exist i the array");
+        throw new DataNotExistException();
     }
     public List<OrderItem> getList()
     {
@@ -44,7 +56,7 @@ public class DalOrderItem
                 return;
             }
         }
-        throw new Exception("the orderItem doesn't exist in the array");
+        throw new DataNotExistException();
     }
     public void updateOrderItem(OrderItem orderItem)
     {
@@ -56,7 +68,7 @@ public class DalOrderItem
                 return;
             }
         }
-        throw new Exception("the orderItem doesn't exist in the array");
+        throw new DataNotExistException();
     }
 
 
@@ -68,7 +80,7 @@ public class DalOrderItem
             if(DataSource.orderItemList[i].OrderID == m_orderID && DataSource.orderItemList[i].ProductID==m_productID)
                 return DataSource.orderItemList[i];
         }
-        throw new Exception("the orderItem doesn't exist in the array");
+        throw new DataNotExistException();
     }
 
     //public static OrderItem[] getList(int orderId)
