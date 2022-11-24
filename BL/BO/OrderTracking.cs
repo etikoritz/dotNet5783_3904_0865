@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace BO
 {
-    internal class OrderTracking
+    public class OrderTracking
     {
+        public int ID { get; set; }
+        public OrderStatus Status { get; set; }
+
+        public override string ToString() => $@"
+        Order ID: {ID} 
+        Order status: {Status}";
     }
 }

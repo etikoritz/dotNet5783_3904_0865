@@ -21,6 +21,5 @@ public class Product
         Product Name: {Name}
         category: {Category}
     	Price: {Price}
-    	Amount in stock: {InStock}
-";
+    	Amount in stock: {InStock}";
 }

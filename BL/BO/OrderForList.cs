@@ -6,7 +6,19 @@ using System.Threading.Tasks;
 
 namespace BO
 {
-    internal class OrderForList
+    public class OrderForList
     {
+        public int ID { get; set; }
+        public string CustomerName { get; set; }
+        public OrderStatus Status { get; set; }
+        public int AmountOfItems { get; set; }
+        public double TotalPrice { get; set; }
+
+        public override string ToString() => $@"
+        Order ID: {ID} 
+        Customer name: {CustomerName}
+        Order status: {Status}
+        Amount of items: {AmountOfItems}
+        Total price: {TotalPrice}";
     }
 }
