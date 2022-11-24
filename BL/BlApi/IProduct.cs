@@ -1,12 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BO;
+using Dal;
+using DalApi;
 
-namespace BlApi
+namespace BlApi;
+
+public interface IProduct
 {
-    internal class IProduct
+    public IEnumerable<ProductForList> GetProductList()
     {
+        
     }
 }
