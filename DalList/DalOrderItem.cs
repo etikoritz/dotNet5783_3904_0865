@@ -1,6 +1,7 @@
 ﻿using DO;
 using System.ComponentModel;
 using System.Security.Cryptography;
+using DalApi;
 
 namespace Dal;
 

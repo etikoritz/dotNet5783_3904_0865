@@ -4,10 +4,11 @@
 //using System.Text;
 //using System.Threading.Tasks;
 using DO;
+using DalApi;
 
 namespace Dal;
 
-public class DalOrder
+internal class DalOrder
 {
     public  int Add(Order ord)
     {
