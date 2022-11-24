@@ -9,7 +9,34 @@ namespace BlApi;
 
 public interface ICart
 {
+    /// <summary>
+    /// Add product to the cart
+    /// --Catalog screen,Product details screen--
+    /// </summary>
+    /// <param name="cart"></param>
+    /// <param name="productId"></param>
+    /// <returns>updated cart (after the adding of the product)</returns>
     public Cart AddToCart(Cart cart, int productId);
+
+    /// <summary>
+    /// Update the amount of product in the cart by its ID
+    /// --Cart screen--
+    /// </summary>
+    /// <param name="cart"></param>
+    /// <param name="productId"></param>
+    /// <param name="newAmount"></param>
+    /// <returns>Updated cart</returns>
     public Cart UpdateAmount(Cart cart, int productId, int newAmount);
+
+    /// <summary>
+    /// Recives a cart, checks its propriety, 
+    /// make a new Order and OrderItem (Dal) 
+    /// and removing products from stock
+    /// --Cart screen or Completing order screen--
+    /// </summary>
+    /// <param name="cart"></param>
+    /// <param name="customerName"></param>
+    /// <param name="customerEmail"></param>
+    /// <param name="customerAddress"></param>
     public void ConfirmOrder(Cart cart, string customerName, string customerEmail, string customerAddress);
 }
