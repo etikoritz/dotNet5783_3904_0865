@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlApi
+namespace BlApi;
+
+public interface IBl
 {
-    internal class IBl
-    {
-    }
+    public IProduct Product { get; }
+    public IOrder Order { get; }
+    public IOrderItem orderItem { get; }
 }
