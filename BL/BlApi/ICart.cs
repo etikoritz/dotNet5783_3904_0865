@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BO;
-
-public struct Enum
+namespace BlApi
 {
-    public enum Category
+    internal class ICart
     {
-        Laptop, DesktopComputer, Tablet, Cellphone, Headphones
     }
 }
