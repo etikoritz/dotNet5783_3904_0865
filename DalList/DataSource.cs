@@ -7,9 +7,9 @@ namespace Dal;
 internal static class DataSource
 {
     internal static readonly Random random = new Random();
-    internal static Product[] productArray = new Product[50];
-    internal static Order[] orderArray = new Order[100];
-    internal static OrderItem[] orderItemArray = new OrderItem[200];
+    internal static List<Product> productList = new List<Product>(new Product[50]) { };
+    internal static List<Order> orderList = new List<Order>(new Order[100]) { };
+    internal static List<OrderItem> orderItemList = new List<OrderItem>(new OrderItem[200]) { };
     internal static string[] productName = new string[] { "Laptopxr", "LaptopV11", "Desktopgameing23", "LaptopAppleM1", "Cellphon_ealaxy21", "iphone13", "ipadPro_Tablet", "ipadMini_Tablet", "nothing1_Headphones", "sonyX_Headphones" };
     internal static int[] productPrice = new int[] { 2500, 3000, 5000, 4500, 2000, 4000, 4200, 3000, 350, 100 };
 
@@ -31,7 +31,7 @@ internal static class DataSource
             product.ID = Confing.get_ID_Product;
             for (int j = 0; j < 10; j++)                 //loop to theck if the id already belong to another product and if it does draw a new id, and check the new one..
             {
-                if (product.ID == productArray[j].ID)
+                if (product.ID == productList[j].ID)
                 {
                     product.ID = Confing.get_ID_Product;
                     j = 0;                               //reseting j in order to go all over they array again
@@ -56,7 +56,8 @@ internal static class DataSource
                 int temp = random.Next(0, 100);
                 product.InStock = temp;
             }
-            productArray[i] = product;
+            productList.Add(product);
+           
         }
 
         //order
@@ -89,7 +90,7 @@ internal static class DataSource
             }
             TimeSpan spaceTimeShipping = TimeSpan.FromDays(dayOfShipping);
             order.ShipDate = order.OrderDate + spaceTimeShipping;
-            orderArray[i] = order;
+            orderList.Add(order);
         }
 
         //Confing.indexOrder = 20;
@@ -101,28 +102,28 @@ internal static class DataSource
             orderItem.ID = Confing.get_ID_OrderItem;
             for (int j = 0; j < 40; j++)
             {
-                if (orderItem.ID == orderItemArray[j].ID)
+                if (orderItem.ID == orderItemList[j].ID)
                 {
                     orderItem.ID = Confing.get_ID_OrderItem;
                     j = 0;
                 }
             }
             int index = random.Next(0, 10);
-            orderItem.ProductID = productArray[index].ID;
+            orderItem.ProductID = productList[index].ID;
             int index1 = random.Next(0, 20);
-            orderItem.OrderID = orderArray[index1].ID;
+            orderItem.OrderID = orderList[index1].ID;
             orderItem.Price = productPrice[index];
             orderItem.Amount = random.Next(1, 4);
-            orderItemArray[i] = orderItem;
+            orderItemList.Add(orderItem);
         }
-        Confing.indexOrderItem = 40;
+        //Confing.indexOrderItem = 40;
     }
 
     internal static class Confing
     {
-        internal static int indexOrder = 20;
-        internal static int indexProduct = 10;
-        internal static int indexOrderItem = 40;
+        //internal static int indexOrder = 20;
+        //internal static int indexProduct = 10;
+        //internal static int indexOrderItem = 40;
         private static int ID_Order = 99999;//reseting the id at 99999 so hthe id will start at 100000, (every time w'ill call it in get_ID_Order w'ill do ++..)  
         public static int get_ID_Order
         {
