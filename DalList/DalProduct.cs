@@ -34,7 +34,7 @@ public class DalProduct
             if (DataSource.productList[i].ID == id)
                 return DataSource.productList[i];
         }
-        throw new Exception("the product doesn't exist in the array");
+        throw new DataNotExistException();
     }
     public  List<Product> getList()
     {
@@ -58,7 +58,7 @@ public class DalProduct
                 return;
             }
         }
-        throw new Exception("the product doesn't exist in the array");
+        throw new DataNotExistException();
     }
     public  void updateProduct(Product m_product)
     {
@@ -70,6 +70,6 @@ public class DalProduct
                 return;
             }
         }
-        throw new Exception("the product doesn't exist in the array");
+        throw new DataNotExistException();
     }
 }

@@ -8,7 +8,7 @@ using DalApi;
 
 namespace Dal;
 
-internal class DalOrder
+public class DalOrder
 {
     public  int Add(Order ord)
     {
@@ -26,7 +26,7 @@ internal class DalOrder
             if (DataSource.orderList[i].ID==id)
                 return DataSource.orderList[i];
         }
-        throw new Exception("the order doesn't exist in the array");
+        throw new DataNotExistException();
     }
     public  List<Order> getList()
     {
@@ -49,7 +49,7 @@ internal class DalOrder
                 return;
             }
         }
-        throw new Exception("the order doesn't exist in the array");
+        throw new DataNotExistException();
     }
     public  void updateOrder(Order order)
     {
@@ -61,6 +61,6 @@ internal class DalOrder
                 return;
             }
         }
-        throw new Exception("the order doesn't exist in the array");
+        throw new DataNotExistException();
     }
 }
