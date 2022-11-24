@@ -12,4 +12,8 @@ public struct Enum
     {
         Laptop, DesktopComputer, Tablet, Cellphone, Headphones
     }
+    public enum OrderStatus
+    {
+        Confirmed, Shipped, Delivered
+    }
 }

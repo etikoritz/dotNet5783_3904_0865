@@ -14,4 +14,6 @@ public interface ICrud<T>
     void Delete(int id);
     void Update(T item);
     T GetById(int id);
+
+    //IEnumerator<T> GetList();
 }
