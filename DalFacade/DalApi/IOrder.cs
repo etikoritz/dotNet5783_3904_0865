@@ -9,5 +9,6 @@ namespace DalApi
 {
     public interface IOrder : ICrud<Order>
     {
+        List<Order> GetList();
     }
 }

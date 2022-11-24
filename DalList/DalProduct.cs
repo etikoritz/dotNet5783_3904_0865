@@ -10,9 +10,9 @@ using System.Security.Cryptography;
 
 namespace Dal;
 
-public class DalProduct
+internal class DalProduct:IProduct
 {
-    public  int AddProduct(Product m_product)
+    public  int Add(Product m_product)
     {
         int temp = DataSource.Confing.get_ID_Product;
         m_product.ID = temp;
@@ -23,7 +23,7 @@ public class DalProduct
         DataSource.productList.Add(m_product);
         return m_product.ID;
     }
-    public  Product GetProduct(int id)
+    public  Product GetById(int id)
     {
         for (int i = 0; i < DataSource.productList.Count; i++)
         {
@@ -32,14 +32,14 @@ public class DalProduct
         }
         throw new DataNotExistException();
     }
-    public  List<Product> getList()
+    public  List<Product> GetList()
     {
         List<Product> arr = new List<Product>();
         //Array.Copy(DataSource.productList, arr, DataSource.Confing.indexProduct);
         arr = new List<Product>(DataSource.productList);
         return arr;
     }
-    public  void deleteProduct(int id)
+    public  void Delete(int id)
     {
         for (int i = 0; i < DataSource.productList.Count; i++)
         {
@@ -56,7 +56,7 @@ public class DalProduct
         }
         throw new DataNotExistException();
     }
-    public  void updateProduct(Product m_product)
+    public  void Update(Product m_product)
     {
         for (int i = 0; i < DataSource.productList.Count; i++)
         {

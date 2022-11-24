@@ -13,5 +13,5 @@ public interface ICrud<T>
     int Add(T item);
     void Delete(int id);
     void Update(T item);
-    void GetById(int id);
+    T GetById(int id);
 }

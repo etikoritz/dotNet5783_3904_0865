@@ -5,7 +5,7 @@ using DalApi;
 
 namespace Dal;
 
-public class DalOrderItem
+internal class DalOrderItem: IOrderItem
 {
     public int Add(OrderItem ori)
     {;
@@ -18,7 +18,7 @@ public class DalOrderItem
         DataSource.orderItemList.Add(ori);
         return ori.ID;
     }
-    public OrderItem GetOrderItem(int id)
+    public OrderItem GetById(int id)
     {
         for (int i = 0; i < DataSource.orderItemList.Count; i++)
         {
@@ -27,13 +27,13 @@ public class DalOrderItem
         }
         throw new DataNotExistException();
     }
-    public List<OrderItem> getList()
+    public List<OrderItem> GetList()
     {
         List<OrderItem> arr = new List<OrderItem>();
         arr = new List<OrderItem>(DataSource.orderItemList);
         return arr;
     }
-    public void deleteOrderItem(int id)
+    public void Delete(int id)
     {
         for (int i = 0; i < DataSource.orderItemList.Count; i++)
         {
@@ -50,7 +50,7 @@ public class DalOrderItem
         }
         throw new DataNotExistException();
     }
-    public void updateOrderItem(OrderItem orderItem)
+    public void Update(OrderItem orderItem)
     {
         for (int i = 0; i < DataSource.orderItemList.Count; i++)
         {

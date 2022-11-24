@@ -2,16 +2,15 @@
 using DO;
 using Microsoft.VisualBasic;
 using System.Data;
+using System.Diagnostics;
+
 namespace Dal;
 
 public class Program
 {
-    private static DalProduct dalProduct = new DalProduct();
-    private static DalOrder dalOrder = new DalOrder();
-    private static DalOrderItem dalOrderItem = new DalOrderItem();
+    private static DalList dalList = new DalList();
 
-
-    static void OptionProduct(DalProduct dalProduct)
+    static void OptionProduct(DalList dalList)
     {
         int newProductInStock;
         double newProductPrice;
@@ -60,7 +59,7 @@ Please enter the name of the Product:");
                     try
                     {
 
-                        dalProduct.AddProduct(newProduct);
+                        dalList.Product.Add(newProduct);
                         Console.WriteLine("secsess");
                     }
                     catch (Exception ex)
@@ -73,10 +72,9 @@ Please enter the name of the Product:");
                 case 'b':
                     Console.WriteLine(@"Enter product ID:");
                     int.TryParse(Console.ReadLine(), out int id);
-                    //Console.WriteLine(id);
                     try
                     {
-                        Console.WriteLine(dalProduct.GetProduct(id));
+                        Console.WriteLine(dalList.Product.GetById(id));
                     }
                     catch (Exception ex)
                     {
@@ -85,7 +83,7 @@ Please enter the name of the Product:");
                     break;
 
                 case 'c':
-                    foreach (var item in dalProduct.getList())
+                    foreach (var item in dalList.Product.GetList())
                     {
                         Console.WriteLine(item);
                     }
@@ -118,7 +116,7 @@ Please enter the name of the Product:");
                     };
                     try
                     {
-                        dalProduct.updateProduct(updateProduct);
+                        dalList.Product.Update(updateProduct);
                     }
                     catch (Exception str)
                     {
@@ -130,7 +128,7 @@ Please enter the name of the Product:");
                     int.TryParse(Console.ReadLine(), out newProductID);
                     try
                     {
-                        dalProduct.deleteProduct(newProductID);
+                        dalList.Product.Delete(newProductID);
                         Console.WriteLine("The product is deleted\n");
                     }
                     catch (Exception str)
@@ -152,7 +150,7 @@ Please enter the name of the Product:");
     }
 
 
-    static void OptionOrder(DalOrder dalOrder)
+    static void OptionOrder(DalList dalList)
     {
         int newOrderID;
         string newCustomerName;
@@ -205,7 +203,7 @@ Enter customer name:");
                     };
                     try
                     {
-                        dalOrder.Add(newOrder);
+                        dalList.Order.Add(newOrder);
                     }
                     catch (Exception str)
                     {
@@ -219,7 +217,7 @@ Enter customer name:");
                     int.TryParse(Console.ReadLine(), out newOrderID);
                     try
                     {
-                        Console.WriteLine(dalOrder.GetOrder(newOrderID));
+                        Console.WriteLine(dalList.Order.GetById(newOrderID));
                     }
                     catch (Exception ex)
                     {
@@ -229,7 +227,7 @@ Enter customer name:");
 
                 //---------get list Order-----------//
                 case 'c':
-                    foreach (var order in dalOrder.getList())
+                    foreach (var order in dalList.Order.GetList())
                     {
                         Console.WriteLine(order);
                     }
@@ -265,7 +263,7 @@ Enter order ID:");
                     };
                     try
                     {
-                        dalOrder.updateOrder(updateOrder);
+                        dalList.Order.Update(updateOrder);
                     }
                     catch (Exception str)
                     {
@@ -279,7 +277,7 @@ Enter order ID:");
                     int.TryParse(Console.ReadLine(), out newOrderID);
                     try
                     {
-                        dalOrder.deleteOrder(newOrderID);
+                        dalList.Order.Delete(newOrderID);
                         Console.WriteLine("The Order is deleted\n");
                     }
                     catch (Exception str)
@@ -296,7 +294,7 @@ Enter order ID:");
     }
 
 
-    static void OptionOrderItem(DalOrderItem dalOrderItem)
+    static void OptionOrderItem(DalList dalList)
     {
         int newOrderItemID;
         int newProductID;
@@ -341,7 +339,7 @@ Enter Product ID");
                     };
                     try
                     {
-                        dalOrderItem.Add(newOrderItem);
+                        dalList.OrderItem.Add(newOrderItem);
                     }
                     catch (Exception str)
                     {
@@ -355,7 +353,7 @@ Enter Product ID");
                     int.TryParse(Console.ReadLine(), out newOrderItemID);
                     try
                     {
-                        Console.WriteLine(dalOrderItem.GetOrderItem(newOrderItemID));
+                        Console.WriteLine(dalList.OrderItem.GetById(newOrderItemID));
                     }
                     catch (Exception ex)
                     {
@@ -365,7 +363,7 @@ Enter Product ID");
 
                 //---------get list Order-----------//
                 case 'c':
-                    foreach (var orderItem in dalOrderItem.getList())
+                    foreach (var orderItem in dalList.OrderItem.GetList())
                     {
                         Console.WriteLine(orderItem);
                     }
@@ -374,7 +372,6 @@ Enter Product ID");
                 //---------update OrderItem-----------//
                 case 'd':
                     Console.WriteLine(@"
-You have selected to add a new OrderItem.
 Enter OrderItem ID:");
                     int.TryParse(Console.ReadLine(), out newOrderItemID);
                     Console.WriteLine("Enter Product ID:");
@@ -396,7 +393,7 @@ Enter OrderItem ID:");
                     };
                     try
                     {
-                        dalOrderItem.updateOrderItem(updateOrderItem);
+                        dalList.OrderItem.Update(updateOrderItem);
                     }
                     catch (Exception str)
                     {
@@ -410,7 +407,7 @@ Enter OrderItem ID:");
                     int.TryParse(Console.ReadLine(), out newOrderItemID);
                     try
                     {
-                        dalOrderItem.deleteOrderItem(newOrderItemID);
+                        dalList.OrderItem.Delete(newOrderItemID);
                         Console.WriteLine("The OrderItem is deleted\n");
                     }
                     catch (Exception str)
@@ -439,13 +436,13 @@ Press 0 to exit");
             switch (choice)
             {
                 case 1:
-                    OptionProduct(dalProduct);
+                    OptionProduct(dalList);
                     break;
                 case 2:
-                    OptionOrder(dalOrder);
+                    OptionOrder(dalList);
                     break;
                 case 3:
-                    OptionOrderItem(dalOrderItem);
+                    OptionOrderItem(dalList);
                     break;
                 default:
                     break;
