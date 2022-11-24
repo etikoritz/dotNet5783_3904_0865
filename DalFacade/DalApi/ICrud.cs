@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DO;
 
-namespace DalApi
+
+namespace DalApi;
+
+public interface ICrud<T>
 {
-    internal interface ICrud<T>
-    {
-    }
+    int Add(T item);
+    void Delete(int id);
+    void Update(T item);
+    void GetById(int id);
 }
