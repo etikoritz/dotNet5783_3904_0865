@@ -6,6 +6,7 @@
 
 using DO;
 using DalApi;
+using System.Security.Cryptography;
 
 namespace Dal;
 
@@ -15,16 +16,11 @@ public class DalProduct
     {
         int temp = DataSource.Confing.get_ID_Product;
         m_product.ID = temp;
-        //for (int i = 0; i < DataSource.Confing.I_Product; i++)//logical fonctions not allowed, where to put it?
-        //{
-        //    if (DataSource.productArray[i].ID == temp)
-        //    {
-        //        temp = DataSource.Confing.get_ID_Product;
-        //        i = 0;
-        //    }
-        //}
+        if (DataSource.productList.Exists(product => product.ID == m_product.ID))
+        {
+            throw new DataAlreadyExistException();
+        }
         DataSource.productList.Add(m_product);
-        //DataSource.Confing.indexProduct++;
         return m_product.ID;
     }
     public  Product GetProduct(int id)

@@ -1,4 +1,5 @@
-﻿using DO;
+﻿using DalApi;
+using DO;
 using System.Reflection.Emit;
 using static DO.Enums;
 
@@ -7,8 +8,8 @@ namespace Dal;
 internal static class DataSource
 {
     internal static readonly Random random = new Random();
-    internal static List<Product> productList = new List<Product>(new Product[50]) { };
-    internal static List<Order> orderList = new List<Order>(new Order[100]) { };
+    internal static List<Product> productList = new List<Product>() { };
+    internal static List<Order> orderList = new List<Order>() { };
     internal static List<OrderItem> orderItemList = new List<OrderItem>(new OrderItem[200]) { };
     internal static string[] productName = new string[] { "Laptopxr", "LaptopV11", "Desktopgameing23", "LaptopAppleM1", "Cellphon_ealaxy21", "iphone13", "ipadPro_Tablet", "ipadMini_Tablet", "nothing1_Headphones", "sonyX_Headphones" };
     internal static int[] productPrice = new int[] { 2500, 3000, 5000, 4500, 2000, 4000, 4200, 3000, 350, 100 };
@@ -29,13 +30,17 @@ internal static class DataSource
         {
             Product product = new Product();             
             product.ID = Confing.get_ID_Product;
-            for (int j = 0; j < 10; j++)                 //loop to theck if the id already belong to another product and if it does draw a new id, and check the new one..
+            //for (int j = 0; j < 10; j++)                 //loop to theck if the id already belong to another product and if it does draw a new id, and check the new one..
+            //{
+            //    if (product.ID == productList[j].ID)
+            //    {
+            //        product.ID = Confing.get_ID_Product;
+            //        j = 0;                               //reseting j in order to go all over they array again
+            //    }
+            //}
+            while (productList.Exists(p => p.ID == product.ID))
             {
-                if (product.ID == productList[j].ID)
-                {
-                    product.ID = Confing.get_ID_Product;
-                    j = 0;                               //reseting j in order to go all over they array again
-                }
+                product.ID = Confing.get_ID_Product;
             }
             int index = random.Next(0, 10);
             int indexEnum = random.Next(0, 6);
@@ -100,13 +105,17 @@ internal static class DataSource
         {
             OrderItem orderItem = new OrderItem();
             orderItem.ID = Confing.get_ID_OrderItem;
-            for (int j = 0; j < 40; j++)
+            //for (int j = 0; j < 40; j++)
+            //{
+            //    if (orderItem.ID == orderItemList[j].ID)
+            //    {
+            //        orderItem.ID = Confing.get_ID_OrderItem;
+            //        j = 0;
+            //    }
+            //}
+            while (orderItemList.Exists(o => o.ID == orderItem.ID))
             {
-                if (orderItem.ID == orderItemList[j].ID)
-                {
-                    orderItem.ID = Confing.get_ID_OrderItem;
-                    j = 0;
-                }
+                orderItem.ID = Confing.get_ID_OrderItem;
             }
             int index = random.Next(0, 10);
             orderItem.ProductID = productList[index].ID;

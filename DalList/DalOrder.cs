@@ -14,10 +14,17 @@ public class DalOrder
     {
         int temp = DataSource.Confing.get_ID_Order;
         ord.ID = temp;
-        //DataSource.orderList[DataSource.Confing.indexOrder] = ord;
-        //DataSource.Confing.indexOrder++;
+        ////DataSource.orderList[DataSource.Confing.indexOrder] = ord;
+        ////DataSource.Confing.indexOrder++;
+        //DataSource.orderList.Add(ord);
+        //return ord.ID;
+        if (DataSource.orderList.Exists(o=>o.ID==ord.ID))
+        {
+            throw new DataAlreadyExistException();
+        }
         DataSource.orderList.Add(ord);
         return ord.ID;
+
     }
     public  Order GetOrder(int id)
     {
@@ -30,8 +37,10 @@ public class DalOrder
     }
     public  List<Order> getList()
     {
-        List<Order> arr = new List<Order>(DataSource.orderList); 
+        List<Order> arr = new List<Order>();
+            //(DataSource.orderList); 
         //arr= DataSource.orderList, arr, DataSource.Confing.indexOrder);
+        arr=new List<Order>(DataSource.orderList);
         return arr;
     }
     public  void deleteOrder(int id)

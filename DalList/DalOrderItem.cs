@@ -9,21 +9,13 @@ public class DalOrderItem
 {
     public int Add(OrderItem ori)
     {;
-        ori.ID = DataSource.Confing.get_ID_OrderItem;
-        DataSource.orderItemList.Add(ori);
-        //DataSource.orderItemList[DataSource.Confing.indexOrderItem] = ori;
-        //DataSource.Confing.indexOrderItem++;
-
-        ///
-        ///do we need to check the ID??
-        ///
-        for(int i=0;i<DataSource.orderItemList.Count;i++)
+        int temp = DataSource.Confing.get_ID_OrderItem;
+        ori.ID = temp;
+        if (DataSource.orderItemList.Exists(orderItem => orderItem.ID == ori.ID))
         {
-            if(DataSource.orderItemList[i].ID == ori.ID)
-            {
-                throw new DataAlreadyExistException();
-            }
+            throw new DataAlreadyExistException();
         }
+        DataSource.orderItemList.Add(ori);
         return ori.ID;
     }
     public OrderItem GetOrderItem(int id)
