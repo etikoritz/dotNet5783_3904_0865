@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace BlApi;
 
-public class IProductItem
+public interface IProductItem
 {
 }
