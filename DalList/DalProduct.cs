@@ -1,10 +1,4 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
-
-using DO;
+﻿using DO;
 using DalApi;
 using System.Security.Cryptography;
 
@@ -12,7 +6,7 @@ namespace Dal;
 
 internal class DalProduct:IProduct
 {
-    public  int Add(Product m_product)
+    public int Add(Product m_product)
     {
         int temp = DataSource.Confing.get_ID_Product;
         m_product.ID = temp;
@@ -23,7 +17,7 @@ internal class DalProduct:IProduct
         DataSource.productList.Add(m_product);
         return m_product.ID;
     }
-    public  Product GetById(int id)
+    public Product GetById(int id)
     {
         for (int i = 0; i < DataSource.productList.Count; i++)
         {
@@ -32,14 +26,20 @@ internal class DalProduct:IProduct
         }
         throw new DataNotExistException();
     }
-    public  List<Product> GetList()
+
+    /// <summary>
+    /// Get product list
+    /// </summary>
+    /// <returns>List of all products</returns>
+    public List<Product> GetList()
     {
         List<Product> arr = new List<Product>();
         //Array.Copy(DataSource.productList, arr, DataSource.Confing.indexProduct);
         arr = new List<Product>(DataSource.productList);
         return arr;
     }
-    public  void Delete(int id)
+
+    public void Delete(int id)
     {
         for (int i = 0; i < DataSource.productList.Count; i++)
         {
@@ -56,7 +56,7 @@ internal class DalProduct:IProduct
         }
         throw new DataNotExistException();
     }
-    public  void Update(Product m_product)
+    public void Update(Product m_product)
     {
         for (int i = 0; i < DataSource.productList.Count; i++)
         {

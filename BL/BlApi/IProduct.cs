@@ -55,5 +55,5 @@ public interface IProduct
     /// --Manager screen--
     /// </summary>
     /// <param name="product"></param>
-    public void Delete(Product product);
+    public void Delete(int productID);
 }
