@@ -153,13 +153,7 @@ internal class BoProduct : IProduct
         /// <exception cref="NotImplementedException"></exception>
     public void Delete(int productID)
     {
-        //BO.OrderForList ordersList = BoOrder.GetOrderList();
-        //foreach (BO.OrderForList order in ordersList)
-        //{
-        //    if()
-        //}
-
-        if()
+        if(Dal.OrderItem.GetList().Exists(x=>x.ID!=productID))
         {
             try
             {
