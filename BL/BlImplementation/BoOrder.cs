@@ -6,13 +6,46 @@ using System.Text;
 using System.Threading.Tasks;
 using BlApi;
 
-
 namespace BlImplementation;
 
 internal class BoOrder : IOrder
 {
     private DalApi.IDal Dal = new Dal.DalList();
     private Dal.DalList dalList = new Dal.DalList();
+
+    /// <summary>
+    /// --inner function for BO.Order-- that recives a BO.order and return the order's status
+    /// </summary>
+    /// <param name="order"></param>
+    /// <returns>OrderStatus</returns>
+    private BO.Enum.OrderStatus OrderStatus(BO.Order order)
+    {
+        BO.Enum.OrderStatus orderStatus = new BO.Enum.OrderStatus();
+        if (order.DeliveryDate <= DateTime.Now)
+            orderStatus = BO.Enum.OrderStatus.Delivered;
+        else if (order.ShipDate <= DateTime.Now)
+            orderStatus = BO.Enum.OrderStatus.Shipped;
+        else
+            orderStatus = BO.Enum.OrderStatus.Confirmed;
+        return orderStatus;
+    }
+
+    /// <summary>
+    /// --inner function for DO.Order-- that recives a DO.order and return the order's status
+    /// </summary>
+    /// <param name="order"></param>
+    /// <returns>OrderStatus</returns>
+    private BO.Enum.OrderStatus OrderStatus(DO.Order order)
+    {
+        BO.Enum.OrderStatus orderStatus = new BO.Enum.OrderStatus();
+        if (order.DeliveryDate <= DateTime.Now)
+            orderStatus = BO.Enum.OrderStatus.Delivered;
+        else if (order.ShipDate <= DateTime.Now)
+            orderStatus = BO.Enum.OrderStatus.Shipped;
+        else
+            orderStatus = BO.Enum.OrderStatus.Confirmed;
+        return orderStatus;
+    }
 
     /// <summary>
     /// Get OrderList from DO (manager screen)
@@ -35,12 +68,8 @@ internal class BoOrder : IOrder
                 CustomerName= order.CustomerName
             };
             //order Status
-            if (order.DeliveryDate <= DateTime.Now)
-                ord.Status = BO.Enum.OrderStatus.Delivered;
-            else if (order.ShipDate <= DateTime.Now)
-                ord.Status = BO.Enum.OrderStatus.Shipped;
-            else
-                ord.Status= BO.Enum.OrderStatus.Confirmed;
+            ord.Status = OrderStatus(order);
+
 
             //order AmountOfItems
             ord.AmountOfItems = dalList.OrderItem.GetById(order.ID).Amount;
@@ -88,13 +117,8 @@ internal class BoOrder : IOrder
                     DeliveryDate = dalOrder.DeliveryDate
                 };
                 //order Status
-                if (order.DeliveryDate <= DateTime.Now)
-                    order.Status = BO.Enum.OrderStatus.Delivered;
-                else if (order.ShipDate <= DateTime.Now)
-                    order.Status = BO.Enum.OrderStatus.Shipped;
-                else
-                    order.Status = BO.Enum.OrderStatus.Confirmed;
-
+                order.Status = OrderStatus(order);
+               
                 //order TotalPrice
                 order.TotalPrice = 0;
                 List<DO.OrderItem> orderItemList = dalList.OrderItem.GetList();
@@ -215,8 +239,6 @@ internal class BoOrder : IOrder
         return order;
     }
 
-
-
     /// <summary>
     /// Track order by its ID
     /// </summary>
@@ -258,6 +280,8 @@ internal class BoOrder : IOrder
         return orderTracking;
     }
 
+
+    //----------BONUS-----------
     public BO.Order UpdateOrderByManager(int orderID)
     {
         throw new NotImplementedException();
