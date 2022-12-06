@@ -18,7 +18,7 @@ internal class BoOrder : IOrder
     /// </summary>
     /// <param name="order"></param>
     /// <returns>OrderStatus</returns>
-    private BO.Enum.OrderStatus OrderStatus(BO.Order order)
+    internal BO.Enum.OrderStatus OrderStatus(BO.Order order)
     {
         BO.Enum.OrderStatus orderStatus = new BO.Enum.OrderStatus();
         if (order.DeliveryDate <= DateTime.Now)
@@ -35,7 +35,7 @@ internal class BoOrder : IOrder
     /// </summary>
     /// <param name="order"></param>
     /// <returns>OrderStatus</returns>
-    private BO.Enum.OrderStatus OrderStatus(DO.Order order)
+    internal BO.Enum.OrderStatus OrderStatus(DO.Order order)
     {
         BO.Enum.OrderStatus orderStatus = new BO.Enum.OrderStatus();
         if (order.DeliveryDate <= DateTime.Now)
