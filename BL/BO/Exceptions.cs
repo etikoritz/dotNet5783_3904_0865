@@ -77,3 +77,30 @@ public class BODataNotExistException : Exception
     }
 }
 
+/// <summary>
+/// //////////
+/// </summary>
+public class NoCustomerNameException : Exception
+{
+    public override string Message => "ERROR: Empty customer name!";
+    public override string ToString()
+    {
+        return Message;
+    }
+}
+public class NoCustomerAddressException : Exception
+{
+    public override string Message => "ERROR: Empty Address name!";
+    public override string ToString()
+    {
+        return Message;
+    }
+}
+public class NoCustomerEmailException : Exception
+{
+    public override string Message => "ERROR: Empty email address!";
+    public override string ToString()
+    {
+        return Message;
+    }
+}
