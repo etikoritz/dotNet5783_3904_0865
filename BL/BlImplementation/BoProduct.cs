@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BlApi;
-using BO;
-using Dal;
 
 namespace BlImplementation;
 internal class BoProduct : IProduct
@@ -45,7 +43,7 @@ internal class BoProduct : IProduct
     /// <param name="ID"></param>
     /// <returns>BO product</returns>
     /// <exception cref="BO.BODataAlreadyExistException"></exception>
-    /// <exception cref="BO.NegativeProductIdException"></exception>
+    /// <exception cref="BO.NegativeIdException"></exception>
     public BO.Product GetProductDetails(int ID)
     {
         if(ID > 0)
@@ -69,7 +67,7 @@ internal class BoProduct : IProduct
             }
         }
         else
-            throw new BO.NegativeProductIdException();
+            throw new BO.NegativeIdException();
     }
 
     /// <summary>
@@ -78,7 +76,7 @@ internal class BoProduct : IProduct
     /// <param name="ID"></param>
     /// <returns>BO product</returns>
     /// <exception cref="BO.BODataAlreadyExistException"></exception>
-    /// <exception cref="BO.NegativeProductIdException"></exception>
+    /// <exception cref="BO.NegativeIdException"></exception>
     public BO.ProductItem GetProductDetails(int ID, BO.Cart cart)
     {
         if (ID > 0)
@@ -104,14 +102,14 @@ internal class BoProduct : IProduct
             }
         }
         else
-            throw new BO.NegativeProductIdException();
+            throw new BO.NegativeIdException();
     }
    
     /// <summary>
     /// Add new product (manager screen)
     /// </summary>
     /// <param name="product"></param>
-    /// <exception cref="BO.NegativeProductIdException"></exception>
+    /// <exception cref="BO.NegativeIdException"></exception>
     /// <exception cref="BO.NoProductNameException"></exception>
     /// <exception cref="BO.NegativePriceException"></exception>
     /// <exception cref="BO.OutOfStockProductException"></exception>
@@ -120,7 +118,7 @@ internal class BoProduct : IProduct
     {
         //check product propriety
         if (product.ID <= 0) 
-            throw new BO.NegativeProductIdException();
+            throw new BO.NegativeIdException();
         if (product.Name == "") 
             throw new BO.NoProductNameException();
         if (product.Price <= 0) 
@@ -172,7 +170,7 @@ internal class BoProduct : IProduct
     /// Update product data (manager screen)
     /// </summary>
     /// <param name="product"></param>
-    /// <exception cref="BO.NegativeProductIdException"></exception>
+    /// <exception cref="BO.NegativeIdException"></exception>
     /// <exception cref="BO.NoProductNameException"></exception>
     /// <exception cref="BO.NegativePriceException"></exception>
     /// <exception cref="BO.OutOfStockProductException"></exception>
@@ -182,7 +180,7 @@ internal class BoProduct : IProduct
     {
         //check product propriety
         if (product.ID <= 0)
-            throw new BO.NegativeProductIdException();
+            throw new BO.NegativeIdException();
         if (product.Name == "")
             throw new BO.NoProductNameException();
         if (product.Price <= 0)

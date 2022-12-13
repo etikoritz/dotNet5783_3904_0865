@@ -11,12 +11,12 @@ public interface IBl
 {
     public IProduct Product { get; }
     public IOrder Order { get; }
-    public IOrderItem orderItem { get; }
+    public IOrderItem OrderItem { get; }
+    public ICart Cart { get; }
 
     //----NOT IN USE FOR NOW--
     public IProductForList ProductForList { get; }
     public IProductItem ProductItem { get; }
     public IOrderForList OrderForList { get; }
-    public IOrderItem OrderItem { get; }
     public IOrderTracking OrderTracking { get; }
 }

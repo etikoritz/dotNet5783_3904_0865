@@ -10,6 +10,8 @@ namespace BO
     {
         public int ID { get; set; }
         public Enum.OrderStatus Status { get; set; }
+        public List<Tuple<DateTime?, Enum.OrderStatus>> DateAndPrograss { get; set; }
+
 
         public override string ToString() => $@"
         Order ID: {ID} 

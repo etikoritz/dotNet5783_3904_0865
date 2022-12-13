@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 
 namespace BO;
-public class NegativeProductIdException : Exception
+public class NegativeIdException : Exception
 {
-    public override string Message => "ERROR: Wrong product ID!";
+    public override string Message => "ERROR: Wrong ID!";
     public override string ToString()
     {
         return Message;
@@ -104,3 +104,22 @@ public class NoCustomerEmailException : Exception
         return Message;
     }
 }
+
+public class OrderAlreadyShippedException : Exception
+{
+    public override string Message => "ERROR: Order have already been shipped!";
+    public override string ToString()
+    {
+        return Message;
+    }
+}
+
+public class OrderAlreadySuppliedException : Exception
+{
+    public override string Message => "ERROR: Order have already been supplied!";
+    public override string ToString()
+    {
+        return Message;
+    }
+}
+

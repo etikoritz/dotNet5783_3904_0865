@@ -7,8 +7,14 @@ namespace Dal;
 
 internal class DalOrderItem: IOrderItem
 {
+    /// <summary>
+    /// Add new OrderItem and return its ID
+    /// </summary>
+    /// <param name="ori"></param>
+    /// <returns>OrderItem ID</returns>
+    /// <exception cref="DataAlreadyExistException"></exception>
     public int Add(OrderItem ori)
-    {;
+    {
         int temp = DataSource.Confing.get_ID_OrderItem;
         ori.ID = temp;
         if (DataSource.orderItemList.Exists(orderItem => orderItem.ID == ori.ID))
@@ -18,6 +24,13 @@ internal class DalOrderItem: IOrderItem
         DataSource.orderItemList.Add(ori);
         return ori.ID;
     }
+
+    /// <summary>
+    /// Get OrderItem by order ID
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns>the OrderItem</returns>
+    /// <exception cref="DataNotExistException"></exception>
     public OrderItem GetById(int id)
     {
         for (int i = 0; i < DataSource.orderItemList.Count; i++)
@@ -27,12 +40,23 @@ internal class DalOrderItem: IOrderItem
         }
         throw new DataNotExistException();
     }
+
+    /// <summary>
+    /// Get list of all OrderItems
+    /// </summary>
+    /// <returns>list of OrderItem</returns>
     public List<OrderItem> GetList()
     {
         List<OrderItem> arr = new List<OrderItem>();
         arr = new List<OrderItem>(DataSource.orderItemList);
         return arr;
     }
+
+    /// <summary>
+    /// Delete OrderItem by its ID
+    /// </summary>
+    /// <param name="id"></param>
+    /// <exception cref="DataNotExistException"></exception>
     public void Delete(int id)
     {
         for (int i = 0; i < DataSource.orderItemList.Count; i++)
@@ -50,6 +74,12 @@ internal class DalOrderItem: IOrderItem
         }
         throw new DataNotExistException();
     }
+
+    /// <summary>
+    /// Update existing OrderItem
+    /// </summary>
+    /// <param name="orderItem"></param>
+    /// <exception cref="DataNotExistException"></exception>
     public void Update(OrderItem orderItem)
     {
         for (int i = 0; i < DataSource.orderItemList.Count; i++)
@@ -63,9 +93,14 @@ internal class DalOrderItem: IOrderItem
         throw new DataNotExistException();
     }
 
-
-
-    public OrderItem get(int m_orderID, int m_productID)
+    /// <summary>
+    /// Get OrderItem by its order-ID and product-ID
+    /// </summary>
+    /// <param name="m_orderID"></param>
+    /// <param name="m_productID"></param>
+    /// <returns></returns>
+    /// <exception cref="DataNotExistException"></exception>
+    public OrderItem Get(int m_orderID, int m_productID)
     {
         for(int i=0;i<DataSource.orderItemList.Count;i++)
         {
