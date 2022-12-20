@@ -123,3 +123,24 @@ public class OrderAlreadySuppliedException : Exception
     }
 }
 
+public class InvalidChoisException : Exception
+{
+    public override string Message => "ERROR: please enter valid choise";
+    public override string ToString()
+    {
+        return Message;
+    }
+}
+
+public class IlegalDataException : Exception
+{
+    //public override string Message;
+    public IlegalDataException(string? message) : base(message)
+    {
+    }
+    public override string ToString()
+    {
+        return Message;
+    }
+}
+

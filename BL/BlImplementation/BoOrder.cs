@@ -5,10 +5,14 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using BlApi;
+using BO;
+using DalApi;
+using DO;
+using static System.Collections.Specialized.BitVector32;
 
 namespace BlImplementation;
 
-internal class BoOrder : IOrder
+internal class BoOrder : BlApi.IOrder
 {
     private DalApi.IDal Dal = new Dal.DalList();
     private Dal.DalList dalList = new Dal.DalList();
@@ -65,17 +69,21 @@ internal class BoOrder : IOrder
             BO.OrderForList ord = new()
             {
                 ID= order.ID,
-                CustomerName= order.CustomerName
+                CustomerName= order.CustomerName,
+                //Status=OrderStatus(order),
+                //AmountOfItems= dalList.OrderItem.GetById(order.ID).Amount,
+                //TotalPrice=order.
             };
             //order Status
             ord.Status = OrderStatus(order);
 
 
             //order AmountOfItems
-            ord.AmountOfItems = dalList.OrderItem.GetById(order.ID).Amount;
+            ord.AmountOfItems+= dalList.OrderItem.GetById(order.ID).Amount;
 
             //order TotalPrice
             ord.TotalPrice = 0;
+            //ord.TotalPrice += dalList.OrderItem.GetById(order.ID).Amount *dalList.OrderItem.GetById(order.ID).Price;
             List <DO.OrderItem> orderItemList = dalList.OrderItem.GetList();
             //to get all the products from the specific order
             foreach(DO.OrderItem item in orderItemList)
@@ -288,8 +296,70 @@ internal class BoOrder : IOrder
 אין יותר פירוט (כי זה לבונוס) - אך ניקוד הבונוס יינתן (בפרויקט הסופי) רק במקרה של השלמת כל הפונקציונליות (כולל בשכבת התצוגה) בצורה מלאה.
 
      */
-    public BO.Order UpdateOrderByManager(int orderID)
+    public void UpdateOrderByManager(int orderID, int productID, string action, int amount)
     {
+        //DO.Order dalOrder = Dal.Order.GetById(orderID);
+        //List<DO.OrderItem> orderItems = new List<DO.OrderItem>();
+        //if (action== "remove")
+        //{
+        //    foreach (var item in orderItems)
+        //    {
+        //        if(item.OrderID == orderID)
+        //        {
+        //            Dal.OrderItem.Delete(item.OrderID);
+        //        }
+        //    }
+            
+        //}
+        //if(action== "add")
+        //{
+        //    BO.OrderItem item = new()
+        //    {
+        //        //ID = item.ID,
+        //        ProductID = productID,
+        //        Price = Dal.Product.GetById(productID).Price,
+        //        Amount = 1,
+        //        Name= Dal.Product.GetById(productID).Name
+        //    };
+            
+        //    BO.Order order = new()
+        //    {
+        //        ID = dalOrder.ID,
+        //        CustomerName = dalOrder.CustomerName,
+        //        CustomerEmail = dalOrder.CustomerEmail,
+        //        CustomerAddress = dalOrder.CustomerAddress,
+        //        OrderDate = dalOrder.OrderDate,
+        //        ShipDate = dalOrder.ShipDate,
+        //        DeliveryDate = dalOrder.DeliveryDate
+        //    };
+        //    order.TotalPrice += item.Price;
+        //    order.Items.Add(item);
+        //}
+        //if (action == "addAmount")
+        //{
+        //    //int count = 0;
+        //    //DO.Product product = Dal.Product.GetById(productID);
+        //    //foreach (var item in dalOrder.it)
+        //    //{
+        //    //    if (item.ProductID == productId)
+        //    //    {
+        //    //        if (product.InStock - newAmount <= 0)
+        //    //        {
+        //    //            throw new OutOfStockProductException();
+        //    //        }
+        //    //        //product.InStock -= item.Amount;
+        //    //        cart.TotalPrice -= item.Amount * item.Price;
+        //    //        item.Amount = newAmount;
+        //    //        cart.TotalPrice += item.Price * newAmount;
+        //    //        //product.InStock -= newAmount;
+        //    //        //Dal.Product.Update(product);
+        //    //        cart.Items[count] = item;
+        //    //        return cart;
+        //    //    }
+        //    //    count++;
+            
+            
+        //}
         throw new NotImplementedException();
     }
 }

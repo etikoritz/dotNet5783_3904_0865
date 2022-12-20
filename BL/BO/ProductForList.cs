@@ -13,11 +13,12 @@ public class ProductForList
     public string Name { get; set; }
     public double Price { get; set; }
     public Enums.Category Category { get; set; }
-
+    public int inStock { get; set; }/// <summary>
     public override string ToString() => $@"
         Product ID: {ID}
         Product Name: {Name}
         category: {Category}
     	Price: {Price}
+        in Stock: {inStock}
 ";
 }

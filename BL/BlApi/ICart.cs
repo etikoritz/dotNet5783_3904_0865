@@ -38,5 +38,7 @@ public interface ICart
     /// <param name="customerName"></param>
     /// <param name="customerEmail"></param>
     /// <param name="customerAddress"></param>
-    public void ConfirmOrder(Cart cart, string customerName, string customerEmail, string customerAddress);
+    public int ConfirmOrder(Cart cart, string customerName, string customerEmail, string customerAddress);
+
+    //public void GetItemInCartList(Cart cart, string customerName, string customerEmail, string customerAddress);
 }

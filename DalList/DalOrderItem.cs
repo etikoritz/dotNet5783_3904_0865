@@ -15,11 +15,19 @@ internal class DalOrderItem: IOrderItem
     /// <exception cref="DataAlreadyExistException"></exception>
     public int Add(OrderItem ori)
     {
-        int temp = DataSource.Confing.get_ID_OrderItem;
-        ori.ID = temp;
+        if(ori.OrderID==0)
+        {
+            int temp = DataSource.Confing.get_ID_OrderItem;
+            ori.ID = temp;
+        }
+        else
+        {
+            ori.ID = ori.OrderID;
+        }
+       
         if (DataSource.orderItemList.Exists(orderItem => orderItem.ID == ori.ID))
         {
-            throw new DataAlreadyExistException();
+            //throw new DataAlreadyExistException();!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         }
         DataSource.orderItemList.Add(ori);
         return ori.ID;

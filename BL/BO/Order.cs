@@ -30,6 +30,6 @@ public class Order
         Date of payment: {PaymentDate}
         Datev of shipping: {ShipDate}
         Date of delivery: {DeliveryDate}
-        Items: {Items}
+        Items: {string.Join(Environment.NewLine, Items)}
         Total price: {TotalPrice}";
 }

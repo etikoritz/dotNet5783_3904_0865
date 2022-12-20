@@ -9,6 +9,7 @@ namespace BlImplementation;
 internal class BoProduct : IProduct
 {
     private DalApi.IDal Dal = new Dal.DalList();
+    public static int count = 0;
 
     /// <summary>
     /// Get list of products from DO
@@ -16,12 +17,40 @@ internal class BoProduct : IProduct
     /// <returns>Returns the list as a BO ProductForList</returns>
     public IEnumerable<BO.ProductForList> GetProductList()
     {
+        ////creates random to inisialise amount in stock randomly to the initialise list
+        //Random random = new Random();
+
         //get the products list from dal
         List<DO.Product> DalProductList = Dal.Product.GetList();
 
         //creates new BO products list
         List<BO.ProductForList> productsList = new();
 
+        /////
+        /////the folowing "if" take the list from DO and add to each product a variable of "InStock"
+        /////updating it randomely and add it to the new list of "itemForList"
+        /////(we have 10 objects in the inisialised list, so the loop runs 10 times)
+        /////
+        //if (count<10)
+        //{
+        //    foreach (DO.Product product in DalProductList)
+        //    {
+
+        //        //creates new ProductForList items from the dal products list
+        //        BO.ProductForList p = new BO.ProductForList();
+        //        p.ID = product.ID;
+        //        p.Name = product.Name;
+        //        p.Category = product.Category;
+        //        p.Price = product.Price;
+        //        p.inStock = random.Next(5, 100);
+        //        count++;
+        //        productsList.Add(p);
+        //    }
+        //}
+
+        ///
+        ///for adding new product to the list (after inisialsition)
+        ///
         foreach (DO.Product product in DalProductList)
         {
             //creates new ProductForList items from the dal products list
@@ -30,7 +59,8 @@ internal class BoProduct : IProduct
                 ID = product.ID,
                 Name = product.Name,
                 Category = product.Category,
-                Price = product.Price
+                Price = product.Price,
+                inStock = product.InStock
             };
             productsList.Add(p);
         }
@@ -131,7 +161,9 @@ internal class BoProduct : IProduct
             {
                 ID = product.ID,
                 Name = product.Name,
-                Price = product.Price
+                Category=product.Category,
+                Price = product.Price,
+                InStock=product.InStock,
             };
             try
             {

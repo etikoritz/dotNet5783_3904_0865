@@ -8,8 +8,13 @@ internal class DalProduct:IProduct
 {
     public int Add(Product m_product)
     {
-        int temp = DataSource.Confing.get_ID_Product;
-        m_product.ID = temp;
+        if(m_product.ID == 0)
+        {
+            int temp = DataSource.Confing.get_ID_Product;
+            m_product.ID = temp;
+        }
+
+        
         if (DataSource.productList.Exists(product => product.ID == m_product.ID))
         {
             throw new DataAlreadyExistException();

@@ -151,7 +151,7 @@ internal static class DataSource
                 return ID_Product;
             }
         }
-        private static int ID_OrderItem = 100000; 
+        private static int ID_OrderItem = 99999; 
         public static int get_ID_OrderItem
         {
             get

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,11 +15,16 @@ namespace BO
         public List<OrderItem> Items { get; set; }
         public double TotalPrice { get; set; }
 
-        public override string ToString() => $@"
+
+        public override string ToString()
+        {
+            return $@"
         Customer name: {CustomerName} 
         Customer Email: {CustomerEmail} 
-        Customer address: {CustomerAddress} 
-        Items: {Items} 
-        Total price: {TotalPrice}"; 
+        Customer address: {CustomerAddress}
+        Items:
+        {string.Join(Environment.NewLine, Items)}
+        TotalPrice: {TotalPrice}";
+        }
     }
 }
