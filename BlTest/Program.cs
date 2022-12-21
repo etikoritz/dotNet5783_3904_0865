@@ -362,7 +362,7 @@ public class Program
                     action = "addAmount";
                     Bl.Order.UpdateOrderByManager(ID, productID, action, amount);
                     break;
-
+                default: break;
             }
             
         }

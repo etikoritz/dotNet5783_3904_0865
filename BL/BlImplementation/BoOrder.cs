@@ -71,13 +71,9 @@ internal class BoOrder : BlApi.IOrder
             {
                 ID = order.ID,
                 CustomerName = order.CustomerName,
-                //Status=OrderStatus(order),
-                //AmountOfItems= dalList.OrderItem.GetById(order.ID).Amount,
-                //TotalPrice=order.
             };
             //order Status
             ord.Status = OrderStatus(order);
-
 
             ord.AmountOfItems = 0;
             //order TotalPrice
@@ -89,16 +85,6 @@ internal class BoOrder : BlApi.IOrder
             {
                 if (item.OrderID == order.ID)
                 {
-                    //if (item.Amount > 0)
-                    //{
-                    //    ord.AmountOfItems += item.Amount;
-                    //    ord.TotalPrice += item.Price * item.Amount;
-                    //    //ordersList.Add(ord);
-                    //}
-                    //else
-                    //{
-                    //    break;
-                    //}
                     ord.AmountOfItems += item.Amount;
                     ord.TotalPrice += item.Price * item.Amount;
                 }
@@ -303,58 +289,79 @@ internal class BoOrder : BlApi.IOrder
     }
 
 
-    //----------BONUS-----------
-    /*
-     * לבונוס - עדכון הזמנה (עבור מסך מנהל)
-יאפשר הוספה \ הורדה \ שינוי כמות של מוצר בהזמנה ע"י המנהל (שימו לב מתי מותר לעשות את זה!)
-אין יותר פירוט (כי זה לבונוס) - אך ניקוד הבונוס יינתן (בפרויקט הסופי) רק במקרה של השלמת כל הפונקציונליות (כולל בשכבת התצוגה) בצורה מלאה.
-
-     */
-    public void UpdateOrderByManager(int orderID, int productID, string action, int amount)
+    /// <summary>
+    /// --inner function for manager fonction-- deleting an item from the order
+    /// </summary>
+    /// <param name="orderID"></param>
+    /// <param name="productID"></param>
+    internal void deleteItemFromOrder(int orderID, int productID)
     {
-        DO.Order dalOrder = Dal.Order.GetById(orderID);
-        List<DO.Product> productsList = Dal.Product.GetList();
-        List<DO.Order> orders = Dal.Order.GetList();
         List<DO.OrderItem> orderItems = Dal.OrderItem.GetList();
-        List<BO.OrderForList> orderForLists = new List<OrderForList>(GetOrderList());
-        List<BO.OrderItem> BOOrderItems = new List<BO.OrderItem>();
-        if (action == "remove")
+        bool OnlyOneItemInOrder = true;
+        foreach (var item in orderItems)
         {
-            foreach (var item in orderItems)
+            if (item.OrderID == orderID)
             {
-                if (item.OrderID == orderID && item.ProductID == productID)
+                if (item.ProductID == productID)
                 {
                     DO.Product product = Dal.Product.GetById(productID);
                     product.InStock += item.Amount;
                     Dal.Product.Update(product);
                     Dal.OrderItem.Delete(item.ID);
                 }
-            }
-            //foreach (var item in orderForLists)
-            //{
-            //    if (item.ID == orderID)
-            //    {
-            //        orderForLists.Add(item);
-            //    }
-            //}
-            return;
-        }
-        if (action == "add")
-        {
-            DO.Product product = Dal.Product.GetById(productID);
-            foreach (var item in orderItems)
-            {
-                if (item.OrderID == orderID)
+                else
                 {
-                    if ((product.InStock - 1) >= 0)
-                    {
-                        product.InStock--;
-                        Dal.Product.Update(product);
-                    }
-                    else
-                    {
-                        throw new OutOfStockProductException();
-                    }
+                    OnlyOneItemInOrder = false;
+                }
+
+            }
+        }
+        //if the order has only one item-the one we deleted, we'll delete the order
+        if (OnlyOneItemInOrder == true)
+        {
+            Dal.Order.Delete(orderID);
+        }
+        //foreach (var item in orderForLists)
+        //{
+        //    if (item.ID == orderID)
+        //    {
+        //        orderForLists.Add(item);
+        //    }
+        //}
+        return;
+    }
+
+    /// <summary>
+    /// --inner function for manager fonction-- adding new product to an order (manager fonction)
+    /// </summary>
+    /// <param name="orderID"></param>
+    /// <param name="productID"></param>
+    /// <exception cref="OutOfStockProductException"></exception>
+    internal void addItemToOrder(int orderID, int productID)
+    {
+        List<DO.OrderItem> orderItems = Dal.OrderItem.GetList();
+        DO.Product product = Dal.Product.GetById(productID);
+        foreach (var item in orderItems)
+        {
+            if (item.OrderID == orderID)
+            {
+                if ((product.InStock - 1) >= 0)
+                {
+                    product.InStock--;
+                    Dal.Product.Update(product);
+                }
+                else
+                {
+                    throw new OutOfStockProductException();
+                }
+                ///if the product alredy exsist in the order, we will just update it and add 1 to the amount.
+                if (item.ProductID == productID)
+                {
+                    addAmuntToItemInOrder(orderID, productID, 1);
+                    return;
+                }
+                else
+                {
                     DO.OrderItem NewItemDal = new()
                     {
                         OrderID = orderID,
@@ -366,49 +373,88 @@ internal class BoOrder : BlApi.IOrder
                     int id = Dal.OrderItem.Add(NewItemDal);
                     NewItemDal.ID = id;
                 }
-            }
-            //foreach (var item in orderForLists)
-            //{
-            //    if (item.ID == orderID)
-            //    {
-            //        orderForLists.Add(item);
-            //    }
-            //}
-            return;
 
+            }
+        }
+        //foreach (var item in orderForLists)
+        //{
+        //    if (item.ID == orderID)
+        //    {
+        //        orderForLists.Add(item);
+        //    }
+        //}
+        return;
+    }
+
+    /// <summary>
+    /// --inner function for manager fonction-- updating the AMOUNT of an item in the order (manager fonction)
+    /// </summary>
+    /// <param name="orderID"></param>
+    /// <param name="productID"></param>
+    /// <param name="amount"></param>
+    /// <exception cref="OutOfStockProductException"></exception>
+    internal void addAmuntToItemInOrder(int orderID, int productID, int amount)
+    {
+        List<DO.OrderItem> orderItems = Dal.OrderItem.GetList();
+        DO.Product product = Dal.Product.GetById(productID);
+        for (int i = 0; i < orderItems.Count; i++)
+        {
+            if (orderItems[i].ProductID == productID && orderItems[i].OrderID == orderID)
+            {
+                if (product.InStock - amount < 0)
+                {
+                    throw new OutOfStockProductException();
+                }
+                int Amount = 0;
+                Amount = orderItems[i].Amount + amount;
+                product.InStock -= amount;
+                Dal.Product.Update(product);
+
+                DO.OrderItem NewItemDal = new()
+                {
+                    ID = orderID,
+                    OrderID = orderID,
+                    ProductID = productID,
+                    Price = Dal.Product.GetById(productID).Price,
+
+                };
+                NewItemDal.Amount = Amount;
+                NewItemDal.TotalPrice += Amount * orderItems[i].Price;
+                Dal.OrderItem.Update(NewItemDal);
+                return;
+            }
+        }
+    }
+
+
+    /// <summary>
+    /// updating an order Allows adding a product, deleting
+    /// a product, and updating the amount product in the order
+    /// </summary>
+    /// <param name="orderID"></param>
+    /// <param name="productID"></param>
+    /// <param name="action"></param>
+    /// <param name="amount"></param>
+    /// <exception cref="OutOfStockProductException"></exception>
+    /// 
+    public void UpdateOrderByManager(int orderID, int productID, string action, int amount)
+    {
+        //deleting an item from the order
+        if (action == "remove")
+        {
+            deleteItemFromOrder(orderID, productID);
         }
 
+        //adding new product to an order
+        if (action == "add")
+        {
+            addItemToOrder(orderID, productID);
+        }
+
+        //updating the AMOUNT of an item in the order
         if (action == "addAmount")
         {
-            DO.Product product = Dal.Product.GetById(productID);
-            for (int i = 0; i < orderItems.Count; i++)
-            {
-                if (orderItems[i].ProductID == productID && orderItems[i].OrderID == orderID)
-                {
-                    if (product.InStock - amount < 0)
-                    {
-                        throw new OutOfStockProductException();
-                    }
-                    int Amount = 0;
-                    Amount = orderItems[i].Amount + amount;
-                    product.InStock -= amount;
-                    Dal.Product.Update(product);
-
-                    DO.OrderItem NewItemDal = new()
-                    {
-                        ID = orderID,
-                        OrderID = orderID,
-                        ProductID = productID,
-                        Price = Dal.Product.GetById(productID).Price,
-
-                    };
-                    NewItemDal.Amount = Amount;
-                    NewItemDal.TotalPrice += Amount * orderItems[i].Price;
-                    Dal.OrderItem.Update(NewItemDal);
-                    return;
-                }
-            }
-           
+            addAmuntToItemInOrder(orderID, productID, amount);
         }
     }
 }
