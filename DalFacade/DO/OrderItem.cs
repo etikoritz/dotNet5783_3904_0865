@@ -14,13 +14,14 @@ public struct OrderItem
     public int OrderID { get; set; }
     public double Price { get; set; }
     public int Amount { get; set; }
+    public double TotalPrice { get; set; }
 
     public override string ToString() => $@"
         OrderItem ID: {ID}
         Product ID: {ProductID}
         Order number: {OrderID}
     	Price: {Price}
-    	Amount in stock: {Amount}";
+    	Amount: {Amount}";
 
 
 }

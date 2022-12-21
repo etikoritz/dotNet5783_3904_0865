@@ -72,10 +72,10 @@ internal class DalOrderItem: IOrderItem
             if (DataSource.orderItemList[i].ID == id)
             {
                 DataSource.orderItemList.RemoveAt(i);
-                //for (int j = i+1; j < DataSource.orderList.Count; j++)//נבצע דריסה של האובייקט ונקדם את האובייקטים במערך
-                //{
-                //    DataSource.orderItemList[j] = DataSource.orderItemList[j + 1];
-                //}
+                for (int j = i+1; j < DataSource.orderList.Count; j++)//נבצע דריסה של האובייקט ונקדם את האובייקטים במערך
+                {
+                    DataSource.orderItemList[j] = DataSource.orderItemList[j + 1];
+                }
                 //DataSource.Confing.indexOrderItem--;
                 return;
             }
@@ -92,7 +92,7 @@ internal class DalOrderItem: IOrderItem
     {
         for (int i = 0; i < DataSource.orderItemList.Count; i++)
         {
-            if (orderItem.ID == DataSource.orderItemList[i].ID)
+            if (orderItem.OrderID == DataSource.orderItemList[i].OrderID && orderItem.ProductID== DataSource.orderItemList[i].ProductID)
             {
                 DataSource.orderItemList[i] = orderItem;
                 return;

@@ -17,8 +17,6 @@ internal class BoProduct : IProduct
     /// <returns>Returns the list as a BO ProductForList</returns>
     public IEnumerable<BO.ProductForList> GetProductList()
     {
-        ////creates random to inisialise amount in stock randomly to the initialise list
-        //Random random = new Random();
 
         //get the products list from dal
         List<DO.Product> DalProductList = Dal.Product.GetList();
@@ -26,31 +24,10 @@ internal class BoProduct : IProduct
         //creates new BO products list
         List<BO.ProductForList> productsList = new();
 
-        /////
-        /////the folowing "if" take the list from DO and add to each product a variable of "InStock"
-        /////updating it randomely and add it to the new list of "itemForList"
-        /////(we have 10 objects in the inisialised list, so the loop runs 10 times)
-        /////
-        //if (count<10)
-        //{
-        //    foreach (DO.Product product in DalProductList)
-        //    {
+        
 
-        //        //creates new ProductForList items from the dal products list
-        //        BO.ProductForList p = new BO.ProductForList();
-        //        p.ID = product.ID;
-        //        p.Name = product.Name;
-        //        p.Category = product.Category;
-        //        p.Price = product.Price;
-        //        p.inStock = random.Next(5, 100);
-        //        count++;
-        //        productsList.Add(p);
-        //    }
-        //}
-
-        ///
-        ///for adding new product to the list (after inisialsition)
-        ///
+        
+        ///putting product from the DO list into the BO list
         foreach (DO.Product product in DalProductList)
         {
             //creates new ProductForList items from the dal products list

@@ -44,8 +44,8 @@ internal static class DataSource
             }
             int index = random.Next(0, 10);
             int indexEnum = random.Next(0, 6);
-            product.Name = productName[index];
-            product.Price = productPrice[index];
+            product.Name = productName[i];
+            product.Price = productPrice[i];
             if (product.Name.StartsWith("Laptop") || product.Name.EndsWith("Laptop"))
                 product.Category = Enums.Category.Laptop;
             if (product.Name.StartsWith("Desktop") || product.Name.EndsWith("Desktop"))
@@ -121,7 +121,14 @@ internal static class DataSource
             orderItem.ProductID = productList[index].ID;
             int index1 = random.Next(0, 20);
             orderItem.OrderID = orderList[index1].ID;
-            orderItem.Price = productPrice[index];
+            for(int j = 0; j < 10; j++)
+            {
+                if(orderItem.ProductID == productList[j].ID)
+                {
+                    orderItem.Price = productList[j].Price;
+                }
+            }
+            //orderItem.Price = productPrice[index];
             orderItem.Amount = random.Next(1, 4);
             orderItemList.Add(orderItem);
         }

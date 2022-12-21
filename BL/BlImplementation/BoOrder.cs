@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -68,8 +69,8 @@ internal class BoOrder : BlApi.IOrder
             //creates new OrderForList items from the dal orders list
             BO.OrderForList ord = new()
             {
-                ID= order.ID,
-                CustomerName= order.CustomerName,
+                ID = order.ID,
+                CustomerName = order.CustomerName,
                 //Status=OrderStatus(order),
                 //AmountOfItems= dalList.OrderItem.GetById(order.ID).Amount,
                 //TotalPrice=order.
@@ -78,18 +79,27 @@ internal class BoOrder : BlApi.IOrder
             ord.Status = OrderStatus(order);
 
 
-            //order AmountOfItems
-            ord.AmountOfItems+= dalList.OrderItem.GetById(order.ID).Amount;
-
+            ord.AmountOfItems = 0;
             //order TotalPrice
             ord.TotalPrice = 0;
-            //ord.TotalPrice += dalList.OrderItem.GetById(order.ID).Amount *dalList.OrderItem.GetById(order.ID).Price;
-            List <DO.OrderItem> orderItemList = dalList.OrderItem.GetList();
+
+            List<DO.OrderItem> orderItemList = dalList.OrderItem.GetList();
             //to get all the products from the specific order
-            foreach(DO.OrderItem item in orderItemList)
+            foreach (DO.OrderItem item in orderItemList)
             {
-                if(item.OrderID==order.ID)
+                if (item.OrderID == order.ID)
                 {
+                    //if (item.Amount > 0)
+                    //{
+                    //    ord.AmountOfItems += item.Amount;
+                    //    ord.TotalPrice += item.Price * item.Amount;
+                    //    //ordersList.Add(ord);
+                    //}
+                    //else
+                    //{
+                    //    break;
+                    //}
+                    ord.AmountOfItems += item.Amount;
                     ord.TotalPrice += item.Price * item.Amount;
                 }
             }
@@ -109,7 +119,7 @@ internal class BoOrder : BlApi.IOrder
     /// <exception cref="BO.NegativeIdException"></exception>
     public BO.Order GetOrderDetails(int orderID)
     {
-        if (orderID > 0) 
+        if (orderID > 0)
         {
             try
             {
@@ -126,7 +136,7 @@ internal class BoOrder : BlApi.IOrder
                 };
                 //order Status
                 order.Status = OrderStatus(order);
-               
+
                 //order TotalPrice
                 order.TotalPrice = 0;
                 List<DO.OrderItem> orderItemList = dalList.OrderItem.GetList();
@@ -139,9 +149,10 @@ internal class BoOrder : BlApi.IOrder
                     }
                 }
 
+
                 //order Items
                 order.Items = new List<BO.OrderItem>();
-                List <DO.OrderItem> orderItemList2 = dalList.OrderItem.GetList();
+                List<DO.OrderItem> orderItemList2 = dalList.OrderItem.GetList();
                 foreach (DO.OrderItem item in orderItemList2)
                 {
                     if (item.OrderID == order.ID)
@@ -153,11 +164,14 @@ internal class BoOrder : BlApi.IOrder
                             Price = item.Price,
                             Amount = item.Amount
                         };
+
                         item1.TotalPrice = item.Price * item.Amount;
-                        item1.Name = Dal.Product.GetById(item.ProductID).Name; 
+                        item1.Name = Dal.Product.GetById(item.ProductID).Name;
                         order.Items.Add(item1);
                     }
                 }
+
+
                 return order;
             }
             catch (DO.DataNotExistException ex)
@@ -182,7 +196,7 @@ internal class BoOrder : BlApi.IOrder
         try
         {
             DO.Order dalOrder = Dal.Order.GetById(orderID);
-            if (dalOrder.ShipDate == null || dalOrder.ShipDate>DateTime.Today)
+            if (dalOrder.ShipDate == null || dalOrder.ShipDate > DateTime.Today)
             {
                 //update BO entity
                 order = GetOrderDetails(orderID);
@@ -260,7 +274,7 @@ internal class BoOrder : BlApi.IOrder
         try
         {
             DO.Order dalOrder = Dal.Order.GetById(orderID);
-            orderTracking.ID= dalOrder.ID;
+            orderTracking.ID = dalOrder.ID;
             //orderTracking Status
             if (order.PaymentDate <= DateTime.Today)
             {
@@ -298,68 +312,104 @@ internal class BoOrder : BlApi.IOrder
      */
     public void UpdateOrderByManager(int orderID, int productID, string action, int amount)
     {
-        //DO.Order dalOrder = Dal.Order.GetById(orderID);
-        //List<DO.OrderItem> orderItems = new List<DO.OrderItem>();
-        //if (action== "remove")
-        //{
-        //    foreach (var item in orderItems)
-        //    {
-        //        if(item.OrderID == orderID)
-        //        {
-        //            Dal.OrderItem.Delete(item.OrderID);
-        //        }
-        //    }
-            
-        //}
-        //if(action== "add")
-        //{
-        //    BO.OrderItem item = new()
-        //    {
-        //        //ID = item.ID,
-        //        ProductID = productID,
-        //        Price = Dal.Product.GetById(productID).Price,
-        //        Amount = 1,
-        //        Name= Dal.Product.GetById(productID).Name
-        //    };
-            
-        //    BO.Order order = new()
-        //    {
-        //        ID = dalOrder.ID,
-        //        CustomerName = dalOrder.CustomerName,
-        //        CustomerEmail = dalOrder.CustomerEmail,
-        //        CustomerAddress = dalOrder.CustomerAddress,
-        //        OrderDate = dalOrder.OrderDate,
-        //        ShipDate = dalOrder.ShipDate,
-        //        DeliveryDate = dalOrder.DeliveryDate
-        //    };
-        //    order.TotalPrice += item.Price;
-        //    order.Items.Add(item);
-        //}
-        //if (action == "addAmount")
-        //{
-        //    //int count = 0;
-        //    //DO.Product product = Dal.Product.GetById(productID);
-        //    //foreach (var item in dalOrder.it)
-        //    //{
-        //    //    if (item.ProductID == productId)
-        //    //    {
-        //    //        if (product.InStock - newAmount <= 0)
-        //    //        {
-        //    //            throw new OutOfStockProductException();
-        //    //        }
-        //    //        //product.InStock -= item.Amount;
-        //    //        cart.TotalPrice -= item.Amount * item.Price;
-        //    //        item.Amount = newAmount;
-        //    //        cart.TotalPrice += item.Price * newAmount;
-        //    //        //product.InStock -= newAmount;
-        //    //        //Dal.Product.Update(product);
-        //    //        cart.Items[count] = item;
-        //    //        return cart;
-        //    //    }
-        //    //    count++;
-            
-            
-        //}
-        throw new NotImplementedException();
+        DO.Order dalOrder = Dal.Order.GetById(orderID);
+        List<DO.Product> productsList = Dal.Product.GetList();
+        List<DO.Order> orders = Dal.Order.GetList();
+        List<DO.OrderItem> orderItems = Dal.OrderItem.GetList();
+        List<BO.OrderForList> orderForLists = new List<OrderForList>(GetOrderList());
+        List<BO.OrderItem> BOOrderItems = new List<BO.OrderItem>();
+        if (action == "remove")
+        {
+            foreach (var item in orderItems)
+            {
+                if (item.OrderID == orderID && item.ProductID == productID)
+                {
+                    DO.Product product = Dal.Product.GetById(productID);
+                    product.InStock += item.Amount;
+                    Dal.Product.Update(product);
+                    Dal.OrderItem.Delete(item.ID);
+                }
+            }
+            foreach (var item in orderForLists)
+            {
+                if (item.ID == orderID)
+                {
+                    orderForLists.Add(item);
+                }
+            }
+            return;
+        }
+        if (action == "add")
+        {
+            DO.Product product = Dal.Product.GetById(productID);
+            foreach (var item in orderItems)
+            {
+                if (item.OrderID == orderID)
+                {
+                    if ((product.InStock - 1) >= 0)
+                    {
+                        product.InStock--;
+                        Dal.Product.Update(product);
+                    }
+                    else
+                    {
+                        throw new OutOfStockProductException();
+                    }
+                    DO.OrderItem NewItemDal = new()
+                    {
+                        OrderID = orderID,
+                        ProductID = productID,
+                        Price = Dal.Product.GetById(productID).Price,
+                        Amount = 1,
+                    };
+
+                    int id = Dal.OrderItem.Add(NewItemDal);
+                    NewItemDal.ID = id;
+                }
+            }
+            foreach (var item in orderForLists)
+            {
+                if (item.ID == orderID)
+                {
+                    orderForLists.Add(item);
+                }
+            }
+            return;
+
+        }
+
+        if (action == "addAmount")
+        {
+            DO.Product product = Dal.Product.GetById(productID);
+            for (int i = 0; i < orderItems.Count; i++)
+            {
+                if (orderItems[i].ProductID == productID && orderItems[i].OrderID == orderID)
+                {
+                    if (product.InStock - amount < 0)
+                    {
+                        throw new OutOfStockProductException();
+                    }
+                    int Amount = 0;
+                    Amount = orderItems[i].Amount + amount;
+                    product.InStock -= amount;
+                    Dal.Product.Update(product);
+
+                    DO.OrderItem NewItemDal = new()
+                    {
+                        ID = orderID,
+                        OrderID = orderID,
+                        ProductID = productID,
+                        Price = Dal.Product.GetById(productID).Price,
+
+                    };
+                    NewItemDal.Amount = Amount;
+                    NewItemDal.TotalPrice += Amount * orderItems[i].Price;
+                    Dal.OrderItem.Update(NewItemDal);
+                    return;
+                }
+            }
+           
+        }
     }
 }
+

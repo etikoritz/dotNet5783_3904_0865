@@ -282,10 +282,10 @@ public class Program
                 case 0: flag = false; break;
                 case 1: GetAllOrderDesc(); break;
                 case 2: GetOrderDesc(); break;
-                //case 3: UpdateShipping(); break;
-                case 4: UpdateDelivery(); break;
+                case 3: UpdateDelivery(); break;
+                case 4: UpdateShipping(); break;
                 case 5: TrackOrder(); break;
-                //case 6: UpdateOrder(); break;
+                case 6: UpdateOrder(); break;
                 default: // back to sub menu
                     break;
             }
@@ -307,19 +307,19 @@ public class Program
             throw new BO.IlegalDataException("Ilegal ID");
         Console.WriteLine(Bl.Order.GetOrderDetails(ID)); ;// printing description.
     }
-    //private static void UpdateShipping()
-    //{
-    //    Console.WriteLine("enter order ID");
-    //    if (!int.TryParse(Console.ReadLine(), out int ID)) // converts the input to integer
-    //        throw new BO.IlegalDataException("Ilegal ID");
-    //    Bl.Order.UpdateShipping(ID);
-    //}
     private static void UpdateDelivery()
     {
         Console.WriteLine("enter order ID");
         if (!int.TryParse(Console.ReadLine(), out int ID)) // converts the input to integer
             throw new BO.IlegalDataException("Ilegal ID");
         Bl.Order.UpdateOrderDelivery(ID);
+    }
+    private static void UpdateShipping()
+    {
+        Console.WriteLine("enter order ID");
+        if (!int.TryParse(Console.ReadLine(), out int ID)) // converts the input to integer
+            throw new BO.IlegalDataException("Ilegal ID");
+        Bl.Order.UpdateOrderSupply(ID);
     }
     private static void TrackOrder()
     {
@@ -328,42 +328,45 @@ public class Program
             throw new BO.IlegalDataException("Ilegal ID");
         Console.WriteLine(Bl.Order.TrackOrder(ID));
     }
-//    private static void UpdateOrder()
-//    {
-//        Console.WriteLine("enter order ID");
-//        if (!int.TryParse(Console.ReadLine(), out int ID)) // converts the input to integer
-//            throw new BO.IlegalDataException("Ilegal ID");
-//        string action="";
-//        bool flag = true;
-//        int amount = 0;
-//        Console.WriteLine("enter product id");
-//        int.TryParse(Console.ReadLine(), out int productID);
-//        while (flag)
-//        {
-//            Console.WriteLine($@"enter 1 to remove item
-//2 to add item 
-//3 to update item amount
-//0 to exit");
-//            int.TryParse(Console.ReadLine(), out int choise);
-//            switch (choise)
-//            {
-//                case 0: flag = false; break;
-//                case 1:
-//                    action = "remove";
-//                    break;
-//                case 2:
-//                    action = "add";
-//                    break;
-//                case 3:
-//                    Console.WriteLine("enter amount to update:");
-//                    int.TryParse(Console.ReadLine(), out  amount);
-//                    action = "addAmount";
-//                    break;
-                
-//            }
-//            Bl.Order.UpdateOrderByManager(ID, productID, action, amount);
-//        }
-//    }
+    private static void UpdateOrder()
+    {
+        Console.WriteLine("enter order ID");
+        if (!int.TryParse(Console.ReadLine(), out int ID)) // converts the input to integer
+            throw new BO.IlegalDataException("Ilegal ID");
+        string action = "";
+        bool flag = true;
+        int amount = 0;
+        Console.WriteLine("enter product id");
+        int.TryParse(Console.ReadLine(), out int productID);
+        while (flag)
+        {
+            Console.WriteLine($@"enter 1 to remove item
+2 to add item 
+3 to update item amount
+0 to exit");
+            int.TryParse(Console.ReadLine(), out int choise);
+            switch (choise)
+            {
+                case 0: flag = false; break;
+                case 1:
+                    action = "remove";
+                    Bl.Order.UpdateOrderByManager(ID, productID, action, amount);
+                    break;
+                case 2:
+                    action = "add";
+                    Bl.Order.UpdateOrderByManager(ID, productID, action, amount);
+                    break;
+                case 3:
+                    Console.WriteLine("enter amount to update:");
+                    int.TryParse(Console.ReadLine(), out amount);
+                    action = "addAmount";
+                    Bl.Order.UpdateOrderByManager(ID, productID, action, amount);
+                    break;
+
+            }
+            
+        }
+    }
 
     /// <summary>
     /// sub cart menu
