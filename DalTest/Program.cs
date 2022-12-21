@@ -58,7 +58,6 @@ Please enter the name of the Product:");
 
                     try
                     {
-
                         dalList.Product.Add(newProduct);
                         Console.WriteLine("secsess");
                     }

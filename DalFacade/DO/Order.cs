@@ -22,7 +22,7 @@ public struct Order
     Customer Name: {CustomerName}
     Customer Mail - {CustomerEmail}
     Customer Address - {CustomerAddress}
-    Date of order: {OrderDate}
-    Date of delivery: {DeliveryDate}
-    Datev of shipping: {ShipDate}";
+    Date of order: {OrderDate.ToShortDateString()}
+    Date of delivery: {DeliveryDate.ToShortDateString()}
+    Datev of shipping: {ShipDate.ToShortDateString()}";
 }
