@@ -330,13 +330,13 @@ internal class BoOrder : BlApi.IOrder
                     Dal.OrderItem.Delete(item.ID);
                 }
             }
-            foreach (var item in orderForLists)
-            {
-                if (item.ID == orderID)
-                {
-                    orderForLists.Add(item);
-                }
-            }
+            //foreach (var item in orderForLists)
+            //{
+            //    if (item.ID == orderID)
+            //    {
+            //        orderForLists.Add(item);
+            //    }
+            //}
             return;
         }
         if (action == "add")
@@ -367,13 +367,13 @@ internal class BoOrder : BlApi.IOrder
                     NewItemDal.ID = id;
                 }
             }
-            foreach (var item in orderForLists)
-            {
-                if (item.ID == orderID)
-                {
-                    orderForLists.Add(item);
-                }
-            }
+            //foreach (var item in orderForLists)
+            //{
+            //    if (item.ID == orderID)
+            //    {
+            //        orderForLists.Add(item);
+            //    }
+            //}
             return;
 
         }
