@@ -23,6 +23,6 @@ public struct Order
     Customer Mail - {CustomerEmail}
     Customer Address - {CustomerAddress}
     Date of order: {OrderDate.ToShortDateString()}
-    Date of delivery: {DeliveryDate.ToShortDateString()}
-    Datev of shipping: {ShipDate.ToShortDateString()}";
+    Datev of shipping: {ShipDate.ToShortDateString()}
+    Date of delivery: {DeliveryDate.ToShortDateString()}";
 }
