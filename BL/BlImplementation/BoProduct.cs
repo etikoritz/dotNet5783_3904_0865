@@ -200,7 +200,7 @@ internal class BoProduct : IProduct
         {
             DO.Product UpdatedProduct = new()
             {
-                Category = product.Category,
+                Category = (DO.Enums.Category)product.Category,
                 ID = product.ID,
                 Name = product.Name,
                 Price = product.Price,

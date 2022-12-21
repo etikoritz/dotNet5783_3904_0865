@@ -9,7 +9,7 @@ namespace BO
     public class OrderTracking
     {
         public int ID { get; set; }
-        public Enum.OrderStatus Status { get; set; }
+        public Enum.OrderStatus? Status { get; set; }
         public List<Tuple<DateTime?, Enum.OrderStatus>> DateAndPrograss { get; set; }
 
 
