@@ -5,10 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using DO;
 
-namespace DalApi
+namespace DalApi;
+
+public interface IProduct : ICrud<Product>
 {
-    public interface IProduct : ICrud<Product>
-    {
-        List<Product> GetList();
-    }
+    List<Product?> GetList();
 }

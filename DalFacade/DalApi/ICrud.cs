@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using DO;
 
-
 namespace DalApi;
 
 public interface ICrud<T>

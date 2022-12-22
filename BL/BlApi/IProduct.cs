@@ -17,7 +17,7 @@ public interface IProduct
     /// --Manager and Buyer screen--
     /// </summary>
     /// <returns>list of products (BO)</returns>
-    public IEnumerable<ProductForList> GetProductList();
+    public IEnumerable<ProductForList?> GetProductList();
 
     /// <summary>
     /// Get product's details by its ID

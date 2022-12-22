@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 using DO;
 
 
-namespace DalApi
+namespace DalApi;
+
+public interface IOrderItem : ICrud<OrderItem>
 {
-    public interface IOrderItem : ICrud<OrderItem>
-    {
-        List<OrderItem> GetList();
-    }
+    List<OrderItem?> GetList();
 }

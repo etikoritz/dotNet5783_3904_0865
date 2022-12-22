@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 
 namespace BO;
+
 public class NegativeIdException : Exception
 {
     public override string Message => "ERROR: Wrong ID!";
