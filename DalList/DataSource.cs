@@ -85,14 +85,14 @@ internal static class DataSource
             order.OrderDate = (DateTime.Today.AddDays(-random.Next(0, 90))).Date; //order date in the last 3 months
             int dayOfDelivery = random.Next(0, 7);//choose random num of days until the delivery
             TimeSpan spaceTime = TimeSpan.FromDays(dayOfDelivery);
-            order.ShipDate = (order.OrderDate + spaceTime).Date;
+            order.ShipDate = (order.OrderDate + spaceTime)?.Date;
             int dayOfShipping = random.Next(0, 7);//choosev random num of days until the shipping
             while (dayOfShipping < dayOfDelivery)// cheking that the shipping date is not earlier than the delivery date
             {
                 dayOfShipping = random.Next(0, 7);
             }
             TimeSpan spaceTimeShipping = TimeSpan.FromDays(dayOfShipping);
-            order.DeliveryDate = (order.OrderDate + spaceTimeShipping).Date;
+            order.DeliveryDate = (order.OrderDate + spaceTimeShipping)?.Date;
             orderList.Add(order);
         }
 
