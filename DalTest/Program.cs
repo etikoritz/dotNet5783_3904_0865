@@ -17,9 +17,7 @@ public class Program
         int newProducCategory;
         string newProductName;
         int newProductID;
-
         char action;
-
 
         do
         {
@@ -448,10 +446,5 @@ Press 0 to exit");
             }
 
         } while (choice != 0) ;
-
     }
-
 }
-
-
-

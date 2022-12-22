@@ -14,7 +14,6 @@ internal static class DataSource
     internal static string[] productName = new string[] { "Laptopxr", "LaptopV11", "Desktopgameing23", "LaptopAppleM1", "Cellphon_ealaxy21", "iphone13", "ipadPro_Tablet", "ipadMini_Tablet", "nothing1_Headphones", "sonyX_Headphones" };
     internal static int[] productPrice = new int[] { 2500, 3000, 5000, 4500, 2000, 4000, 4200, 3000, 350, 100 };
 
-
     static DataSource()
     {
         s_Initialize();
@@ -62,7 +61,6 @@ internal static class DataSource
                 product.InStock = temp;
             }
             productList.Add(product);
-           
         }
 
         //order
