@@ -8,9 +8,9 @@ namespace Dal;
 internal static class DataSource
 {
     internal static readonly Random random = new Random();
-    internal static List<Product> productList = new List<Product>() { };
-    internal static List<Order> orderList = new List<Order>() { };
-    internal static List<OrderItem> orderItemList = new List<OrderItem>() { };
+    internal static List<Product?> productList = new() { };
+    internal static List<Order?> orderList = new() { };
+    internal static List<OrderItem?> orderItemList = new() { };
     internal static string[] productName = new string[] { "Laptopxr", "LaptopV11", "Desktopgameing23", "LaptopAppleM1", "Cellphon_ealaxy21", "iphone13", "ipadPro_Tablet", "ipadMini_Tablet", "nothing1_Headphones", "sonyX_Headphones" };
     internal static int[] productPrice = new int[] { 2500, 3000, 5000, 4500, 2000, 4000, 4200, 3000, 350, 100 };
 
@@ -37,7 +37,7 @@ internal static class DataSource
             //        j = 0;                               //reseting j in order to go all over they array again
             //    }
             //}
-            while (productList.Exists(p => p.ID == product.ID))
+            while (productList.Exists(p => p?.ID == product.ID))
             {
                 product.ID = Confing.get_ID_Product;
             }
@@ -101,8 +101,8 @@ internal static class DataSource
         //orderItem
         for (int i = 0; i < 40; i++)
         {
-            OrderItem orderItem = new OrderItem();
-            orderItem.ID = Confing.get_ID_OrderItem;
+            OrderItem? orderItem = new();
+            orderItem?.ID = Confing.get_ID_OrderItem;
             //for (int j = 0; j < 40; j++)
             //{
             //    if (orderItem.ID == orderItemList[j].ID)
@@ -111,23 +111,23 @@ internal static class DataSource
             //        j = 0;
             //    }
             //}
-            while (orderItemList.Exists(o => o.ID == orderItem.ID))
+            while (orderItemList.Exists(o => o?.ID == orderItem?.ID))
             {
                 orderItem.ID = Confing.get_ID_OrderItem;
             }
             int index = random.Next(0, 10);
-            orderItem.ProductID = productList[index].ID;
+            orderItem?.ProductID = productList[index]?.ID;
             int index1 = random.Next(0, 20);
-            orderItem.OrderID = orderList[index1].ID;
+            orderItem?.OrderID = orderList[index1]?.ID;
             for(int j = 0; j < 10; j++)
             {
-                if(orderItem.ProductID == productList[j].ID)
+                if(orderItem?.ProductID == productList[j]?.ID)
                 {
-                    orderItem.Price = productList[j].Price;
+                    orderItem?.Price = productList[j]?.Price;
                 }
             }
             //orderItem.Price = productPrice[index];
-            orderItem.Amount = random.Next(1, 4);
+            orderItem?.Amount = random.Next(1, 4);
             orderItemList.Add(orderItem);
         }
         //Confing.indexOrderItem = 40;

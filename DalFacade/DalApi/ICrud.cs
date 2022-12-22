@@ -12,7 +12,7 @@ public interface ICrud<T>
     int Add(T item);
     void Delete(int id);
     void Update(T item);
-    T GetById(int id);
+    T? GetById(int id);
 
     //IEnumerator<T> GetList();
 }

@@ -3,7 +3,7 @@ using DalApi;
 
 namespace Dal;
 
-internal class DalOrder:IOrder
+internal class DalOrder : IOrder
 {
     /// <summary>
     /// Add new order and returns its ID
@@ -19,7 +19,7 @@ internal class DalOrder:IOrder
         ////DataSource.Confing.indexOrder++;
         //DataSource.orderList.Add(ord);
         //return ord.ID;
-        if (DataSource.orderList.Exists(o=>o.ID==ord.ID))
+        if (DataSource.orderList.Exists(o=>o?.ID ==ord.ID))
         {
             throw new DataAlreadyExistException();
         }
@@ -33,11 +33,11 @@ internal class DalOrder:IOrder
     /// <param name="id"></param>
     /// <returns>the order</returns>
     /// <exception cref="DataNotExistException"></exception>
-    public Order GetById(int id)
+    public Order? GetById(int id)
     {
         for (int i = 0; i < DataSource.orderList.Count; i++)
         {
-            if (DataSource.orderList[i].ID==id)
+            if (DataSource.orderList[i]?.ID ==id)
                 return DataSource.orderList[i];
         }
         throw new DataNotExistException();
@@ -47,12 +47,11 @@ internal class DalOrder:IOrder
     /// Get the list of all the orders and return it
     /// </summary>
     /// <returns>orders list</returns>
-    public List<Order> GetList()
+    public List<Order?> GetList()
     {
-        List<Order> arr = new List<Order>();
+        List<Order?> arr = new List<Order?>(DataSource.orderList);
         //(DataSource.orderList); 
         //arr= DataSource.orderList, arr, DataSource.Confing.indexOrder);
-        arr = new List<Order>(DataSource.orderList);
         return arr;
     }
 
@@ -65,7 +64,7 @@ internal class DalOrder:IOrder
     {
         for (int i = 0; i < DataSource.orderList.Count; i++)
         {
-            if (DataSource.orderList[i].ID == id)
+            if (DataSource.orderList[i]?.ID == id)
             {
                 //for (int j = i; j < DataSource.Confing.indexOrder; j++)//נבצע דריסה של האובייקט ונקדם את האובייקטים במערך
                 //{
@@ -88,7 +87,7 @@ internal class DalOrder:IOrder
     {
         for (int i=0;i< DataSource.orderList.Count; i++)
         {
-            if(order.ID==DataSource.orderList[i].ID)
+            if(order.ID==DataSource.orderList[i]?.ID)
             {
                 DataSource.orderList[i] = order;
                 return;

@@ -4,7 +4,7 @@ using System.Security.Cryptography;
 
 namespace Dal;
 
-internal class DalProduct:IProduct
+internal class DalProduct: IProduct
 {
     public int Add(Product m_product)
     {
@@ -13,20 +13,20 @@ internal class DalProduct:IProduct
             int temp = DataSource.Confing.get_ID_Product;
             m_product.ID = temp;
         }
-
         
-        if (DataSource.productList.Exists(product => product.ID == m_product.ID))
+        if (DataSource.productList.Exists(product => product?.ID == m_product.ID))
         {
             throw new DataAlreadyExistException();
         }
         DataSource.productList.Add(m_product);
         return m_product.ID;
     }
-    public Product GetById(int id)
+
+    public Product? GetById(int id)
     {
         for (int i = 0; i < DataSource.productList.Count; i++)
         {
-            if (DataSource.productList[i].ID == id)
+            if (DataSource.productList[i]?.ID == id)
                 return DataSource.productList[i];
         }
         throw new DataNotExistException();
@@ -36,11 +36,10 @@ internal class DalProduct:IProduct
     /// Get product list
     /// </summary>
     /// <returns>List of all products</returns>
-    public List<Product> GetList()
+    public List<Product?> GetList()
     {
-        List<Product> arr = new List<Product>();
+        List<Product?> arr = new List<Product?>(DataSource.productList);
         //Array.Copy(DataSource.productList, arr, DataSource.Confing.indexProduct);
-        arr = new List<Product>(DataSource.productList);
         return arr;
     }
 
@@ -48,7 +47,7 @@ internal class DalProduct:IProduct
     {
         for (int i = 0; i < DataSource.productList.Count; i++)
         {
-            if (DataSource.productList[i].ID == id)
+            if (DataSource.productList[i]?.ID == id)
             {
                 DataSource.productList.Remove(DataSource.productList[i]);
                 //for (int j = i; j < DataSource.productList.Count; j++)//נבצע דריסה של האובייקט ונקדם את האובייקטים במערך
@@ -65,7 +64,7 @@ internal class DalProduct:IProduct
     {
         for (int i = 0; i < DataSource.productList.Count; i++)
         {
-            if (m_product.ID == DataSource.productList[i].ID)
+            if (m_product.ID == DataSource.productList[i]?.ID)
             {
                 DataSource.productList[i] = m_product;
                 return;

@@ -25,7 +25,7 @@ internal class DalOrderItem: IOrderItem
             ori.ID = ori.OrderID;
         }
        
-        if (DataSource.orderItemList.Exists(orderItem => orderItem.ID == ori.ID))
+        if (DataSource.orderItemList.Exists(orderItem => orderItem?.ID == ori.ID))
         {
             //throw new DataAlreadyExistException();!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         }
@@ -43,7 +43,7 @@ internal class DalOrderItem: IOrderItem
     {
         for (int i = 0; i < DataSource.orderItemList.Count; i++)
         {
-            if (DataSource.orderItemList[i].ID == id)
+            if (DataSource.orderItemList[i]?.ID == id)
                 return DataSource.orderItemList[i];
         }
         throw new DataNotExistException();
@@ -53,11 +53,9 @@ internal class DalOrderItem: IOrderItem
     /// Get list of all OrderItems
     /// </summary>
     /// <returns>list of OrderItem</returns>
-    public List<OrderItem> GetList()
+    public List<OrderItem?> GetList()
     {
-        List<OrderItem> arr = new List<OrderItem>();
-        arr = new List<OrderItem>(DataSource.orderItemList);
-        return arr;
+         return new List<OrderItem?>(DataSource.orderItemList);
     }
 
     /// <summary>
@@ -69,7 +67,7 @@ internal class DalOrderItem: IOrderItem
     {
         for (int i = 0; i < DataSource.orderItemList.Count; i++)
         {
-            if (DataSource.orderItemList[i].ID == id)
+            if (DataSource.orderItemList[i]?.ID == id)
             {
                 DataSource.orderItemList.RemoveAt(i);
                 for (int j = i+1; j < DataSource.orderList.Count; j++)//נבצע דריסה של האובייקט ונקדם את האובייקטים במערך
@@ -92,7 +90,7 @@ internal class DalOrderItem: IOrderItem
     {
         for (int i = 0; i < DataSource.orderItemList.Count; i++)
         {
-            if (orderItem.OrderID == DataSource.orderItemList[i].OrderID && orderItem.ProductID== DataSource.orderItemList[i].ProductID)
+            if (orderItem.OrderID == DataSource.orderItemList[i]?.OrderID && orderItem.ProductID== DataSource.orderItemList[i]?.ProductID)
             {
                 DataSource.orderItemList[i] = orderItem;
                 return;
@@ -112,7 +110,7 @@ internal class DalOrderItem: IOrderItem
     {
         for(int i=0;i<DataSource.orderItemList.Count;i++)
         {
-            if(DataSource.orderItemList[i].OrderID == m_orderID && DataSource.orderItemList[i].ProductID==m_productID)
+            if(DataSource.orderItemList[i]?.OrderID == m_orderID && DataSource.orderItemList[i]?.ProductID == m_productID)
                 return DataSource.orderItemList[i];
         }
         throw new DataNotExistException();
