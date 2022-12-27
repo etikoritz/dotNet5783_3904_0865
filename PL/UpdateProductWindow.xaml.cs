@@ -46,6 +46,7 @@ public partial class UpdateProductWindow : Window
     public void updateProductView()
     {
         UpdateButton.Visibility=Visibility.Visible;
+        
     }
 
     private BO.Product Read()
@@ -69,6 +70,9 @@ public partial class UpdateProductWindow : Window
     {
         BO.Product product = Read();
         bl.Product.Update(product);
+        MessageBox.Show("product updated seccessfully!");
+        ProductListWindow productListWindow = new ProductListWindow();
+        Close();
     }
 
     private void AddProduct_Click(object sender, RoutedEventArgs e)

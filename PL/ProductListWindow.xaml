@@ -21,7 +21,7 @@
         <ComboBox Name="CategorySelector"  SelectionChanged="CategorySelector_SelectionChanged" Grid.ColumnSpan="1" Margin="0,15,-2,18" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         <Button  x:Name="Clear" Content="Clear" HorizontalAlignment="Left" Margin="311,0,0,0" VerticalAlignment="Center" Height="24" Width="58" Visibility="Hidden" Click="Clear_Click"/>
         <Button Content="Add new Product" Grid.Row="2" HorizontalAlignment="Right" Margin="5" Padding="5" Click="Button_Click" Grid.Column="1"/>
-        <ListView x:Name="productListView" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="2" Margin="0,55,-2,0" Grid.RowSpan="2" >
+        <ListView x:Name="productListView" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="2" Margin="0,55,-2,0" Grid.RowSpan="2" MouseDoubleClick="productListView_MouseDoubleClick" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>

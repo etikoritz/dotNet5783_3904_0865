@@ -57,12 +57,6 @@ public partial class ProductListWindow : Window
         updateProductWindow.Show();
         updateProductWindow.AddProducView();
     }
-    //private void MouseDoubleClick()
-    //{
-    //    UpdateProductWindow updateProductWindow = new UpdateProductWindow();
-    //    updateProductWindow.Show();
-    //    updateProductWindow.updateProductView();
-    //}
 
     /// <summary>
     /// refresh the list view that shows the customers information
@@ -81,4 +75,12 @@ public partial class ProductListWindow : Window
     {
         RefreshProductListView();
     }
+
+    private void productListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+    {
+        UpdateProductWindow updateProductWindow = new UpdateProductWindow();
+        updateProductWindow.Show();
+        updateProductWindow.updateProductView();
+    }
 }
+
