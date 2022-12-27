@@ -7,7 +7,7 @@ using DO;
 
 namespace DalApi;
 
-public interface IProduct : ICrud<Product>
+public interface IProduct : ICrud<DO.Product>
 {
-    List<Product?> GetList();
+    //List<Product?> GetList();
 }

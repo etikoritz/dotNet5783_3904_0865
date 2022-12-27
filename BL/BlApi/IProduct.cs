@@ -56,4 +56,7 @@ public interface IProduct
     /// </summary>
     /// <param name="product"></param>
     public void Delete(int productID);
+
+
+    public IEnumerable<ProductForList?> GetProductListBySort(BO.Enum.Category category);
 }

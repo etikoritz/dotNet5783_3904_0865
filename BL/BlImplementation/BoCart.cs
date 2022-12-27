@@ -17,7 +17,7 @@ internal class BoCart : ICart
     private List<DO.Order> orderlist = new List<DO.Order>();
     public BO.Cart AddToCart(BO.Cart cart, int id)
     {
-        DO.Product product = Dal.Product.GetById(id);
+        DO.Product product = (DO.Product)Dal.Product.GetById(id);
         foreach (var item in cart.Items)
         {
             if (item.ProductID == id)
@@ -85,7 +85,7 @@ internal class BoCart : ICart
             //check if all the items exsist in stock and the stock have enohgf  
             try
             {
-                DO.Product product = Dal.Product.GetById(item.ProductID);
+                DO.Product product = (DO.Product)Dal.Product.GetById(item.ProductID);
                 if (product.InStock - item.Amount <= 0)
                 {
                     throw new OutOfStockProductException();
@@ -147,7 +147,7 @@ internal class BoCart : ICart
             //{
             //    throw;
             //}
-            DO.Product product = Dal.Product.GetById(item.ProductID);
+            DO.Product product = (DO.Product)Dal.Product.GetById(item.ProductID);
             product.InStock -= item.Amount;
             Dal.Product.Update(product);
             //Dal.OrderItem.Add(orderItem);
@@ -161,7 +161,7 @@ internal class BoCart : ICart
     {
         int count = 0;
         //List<BO.OrderForList> orderForListsData = new List<BO.OrderForList>();
-        DO.Product product = Dal.Product.GetById(productId);
+        DO.Product product = (DO.Product)Dal.Product.GetById(productId);
         foreach (var item in cart.Items)
         {
             if(item.ProductID== productId)

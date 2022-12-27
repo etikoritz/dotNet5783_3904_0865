@@ -1,6 +1,8 @@
 ﻿using DalApi;
 using DO;
+using System.Diagnostics;
 using System.Reflection.Emit;
+using static Dal.DataSource;
 using static DO.Enums;
 
 namespace Dal;
@@ -101,8 +103,25 @@ internal static class DataSource
         //orderItem
         for (int i = 0; i < 40; i++)
         {
-            OrderItem? orderItem = new();
-            orderItem?.ID = Confing.get_ID_OrderItem;
+            DO.OrderItem orderItem=new()
+            {
+                ID = Confing.get_ID_OrderItem,
+                ProductID= ((DO.Product)productList[random.Next(0,10)]!).ID,
+                OrderID = ((DO.Order)orderList[random.Next(0, 20)]!).ID,
+                Price = productPrice[random.Next(productList.Count)],
+                Amount = random.Next(1, 4)
+            };
+        //for (int j = 0; j < 10; j++)
+        //{
+        //    if (orderItem.ProductID == productList[j]?.ID)
+        //    {
+        //        orderItem.Price = productList[j].Value.Price;
+        //    }
+        //}
+        orderItemList.Add(orderItem);
+            //orderItem?.ID = Confing.get_ID_OrderItem;
+
+
             //for (int j = 0; j < 40; j++)
             //{
             //    if (orderItem.ID == orderItemList[j].ID)
@@ -111,24 +130,28 @@ internal static class DataSource
             //        j = 0;
             //    }
             //}
-            while (orderItemList.Exists(o => o?.ID == orderItem?.ID))
-            {
-                orderItem.ID = Confing.get_ID_OrderItem;
-            }
-            int index = random.Next(0, 10);
-            orderItem?.ProductID = productList[index]?.ID;
-            int index1 = random.Next(0, 20);
-            orderItem?.OrderID = orderList[index1]?.ID;
-            for(int j = 0; j < 10; j++)
-            {
-                if(orderItem?.ProductID == productList[j]?.ID)
-                {
-                    orderItem?.Price = productList[j]?.Price;
-                }
-            }
-            //orderItem.Price = productPrice[index];
-            orderItem?.Amount = random.Next(1, 4);
-            orderItemList.Add(orderItem);
+
+
+
+
+            //while (orderItemList.Exists(o => o?.ID == orderItem?.ID))
+            //{
+            //    orderItem.ID == Confing.get_ID_OrderItem;
+            //}
+            //int index = random.Next(0, 10);
+            //orderItem?.ProductID = productList[index]?.ID;
+            //int index1 = random.Next(0, 20);
+            //orderItem?.OrderID = orderList[index1]?.ID;
+            //for(int j = 0; j < 10; j++)
+            //{
+            //    if(orderItem?.ProductID == productList[j]?.ID)
+            //    {
+            //        orderItem?.Price = productList[j]?.Price;
+            //    }
+            //}
+            ////orderItem.Price = productPrice[index];
+            //orderItem?.Amount = random.Next(1, 4);
+            //orderItemList.Add(orderItem);
         }
         //Confing.indexOrderItem = 40;
     }
@@ -146,8 +169,9 @@ internal static class DataSource
                 ID_Order++;
                 return ID_Order;
             }
+            // =Confing.
         }
-        //private static int ID_Product = 0;
+        
         public static int get_ID_Product
         {
             get

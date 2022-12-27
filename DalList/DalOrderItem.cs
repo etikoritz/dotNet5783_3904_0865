@@ -24,7 +24,7 @@ internal class DalOrderItem: IOrderItem
         {
             ori.ID = ori.OrderID;
         }
-       
+        //if (DataSource.orderItemList.Exists(orderItem => orderItem?.ID == ori.ID))
         if (DataSource.orderItemList.Exists(orderItem => orderItem?.ID == ori.ID))
         {
             //throw new DataAlreadyExistException();!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -39,23 +39,27 @@ internal class DalOrderItem: IOrderItem
     /// <param name="id"></param>
     /// <returns>the OrderItem</returns>
     /// <exception cref="DataNotExistException"></exception>
-    public OrderItem GetById(int id)
+    public OrderItem? GetById(int id)
     {
-        for (int i = 0; i < DataSource.orderItemList.Count; i++)
-        {
-            if (DataSource.orderItemList[i]?.ID == id)
-                return DataSource.orderItemList[i];
-        }
-        throw new DataNotExistException();
+        //for (int i = 0; i < DataSource.orderItemList.Count; i++)
+        //{
+        //    if (DataSource.orderItemList[i]?.ID == id)
+        //        return DataSource.orderItemList[i];
+        //}
+        //throw new DataNotExistException();
+        DO.OrderItem? orderItem = DataSource.orderItemList.FirstOrDefault(oI => oI?.ID == id);
+        if (orderItem == null)
+            throw new DataNotExistException();
+        return orderItem ?? new();
     }
 
     /// <summary>
     /// Get list of all OrderItems
     /// </summary>
     /// <returns>list of OrderItem</returns>
-    public List<OrderItem?> GetList()
+    public IEnumerable<DO.OrderItem?> GetList(Func<DO.OrderItem?, bool>? filter = null)
     {
-         return new List<OrderItem?>(DataSource.orderItemList);
+        return DataSource.orderItemList.ConvertAll(orderItem => orderItem);
     }
 
     /// <summary>
@@ -67,6 +71,7 @@ internal class DalOrderItem: IOrderItem
     {
         for (int i = 0; i < DataSource.orderItemList.Count; i++)
         {
+            //if (DataSource.orderItemList[i]?.ID == id)
             if (DataSource.orderItemList[i]?.ID == id)
             {
                 DataSource.orderItemList.RemoveAt(i);
@@ -90,6 +95,7 @@ internal class DalOrderItem: IOrderItem
     {
         for (int i = 0; i < DataSource.orderItemList.Count; i++)
         {
+            //if (orderItem.OrderID == DataSource.orderItemList[i]?.OrderID && orderItem.ProductID== DataSource.orderItemList[i]?.ProductID)
             if (orderItem.OrderID == DataSource.orderItemList[i]?.OrderID && orderItem.ProductID== DataSource.orderItemList[i]?.ProductID)
             {
                 DataSource.orderItemList[i] = orderItem;
@@ -106,11 +112,12 @@ internal class DalOrderItem: IOrderItem
     /// <param name="m_productID"></param>
     /// <returns></returns>
     /// <exception cref="DataNotExistException"></exception>
-    public OrderItem Get(int m_orderID, int m_productID)
+    public OrderItem? Get(int m_orderID, int m_productID)
     {
         for(int i=0;i<DataSource.orderItemList.Count;i++)
         {
-            if(DataSource.orderItemList[i]?.OrderID == m_orderID && DataSource.orderItemList[i]?.ProductID == m_productID)
+            //if(DataSource.orderItemList[i]?.OrderID == m_orderID && DataSource.orderItemList[i]?.ProductID == m_productID)
+            if (DataSource.orderItemList[i]?.OrderID == m_orderID && DataSource.orderItemList[i]?.ProductID == m_productID)
                 return DataSource.orderItemList[i];
         }
         throw new DataNotExistException();
