@@ -73,7 +73,7 @@ namespace PL
         {
             BO.Product product = Read();
             bl.Product.Add(product);
-            
+            ProductListWindow productListWindow = new ProductListWindow();
         }
     }
 }

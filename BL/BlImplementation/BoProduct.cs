@@ -105,7 +105,7 @@ internal class BoProduct :  BlApi.IProduct
                     Price = p.Price,
                     InStock = p.InStock,
                     Amount = cart.Items.Find(x => x.ProductID == ID).Amount
-            };                
+                };                
                 return productItem;
             }
             catch (DO.DataNotExistException ex)

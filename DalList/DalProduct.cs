@@ -13,7 +13,7 @@ internal class DalProduct: IProduct
             int temp = DataSource.Confing.get_ID_Product;
             m_product.ID = temp;
         }
-
+        //bool exists = false;
         //if (DataSource.productList.Exists(product => product?.ID == m_product.ID))
         if (DataSource.productList.Exists(product => product?.ID == m_product.ID))
         {

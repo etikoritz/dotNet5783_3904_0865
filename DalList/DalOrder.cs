@@ -35,7 +35,7 @@ internal class DalOrder : IOrder
     /// <param name="id"></param>
     /// <returns>the order</returns>
     /// <exception cref="DataNotExistException"></exception>
-    public DO.Order? GetById(int id)
+    public Order? GetById(int id)
     {
         //for (int i = 0; i < DataSource.orderList.Count; i++)
         //{
@@ -48,10 +48,10 @@ internal class DalOrder : IOrder
         //}
         //throw new DataNotExistException();
 
-        DO.Order? order = DataSource.orderList.FirstOrDefault(s => s?.ID == id);
+        DO.Order? order = DataSource.orderList.FirstOrDefault(o => o.Value.ID == id);
         if (order == null)
             throw new DataNotExistException();
-        return order ?? new();
+        return order?? new();
     }
     
 

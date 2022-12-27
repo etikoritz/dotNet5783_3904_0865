@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BlApi;
 using BO;
+using Dal;
 using DalApi;
 using DO;
 using static System.Collections.Specialized.BitVector32;
@@ -111,7 +112,8 @@ internal class BoOrder : BlApi.IOrder
         {
             try
             {
-                DO.Order dalOrder = (DO.Order)Dal.Order?.GetById(orderID);
+                //DO.Order dalOrder=(DO.Order)Dal.Order?.GetById(orderID);
+                DO.Order dalOrder = (DO.Order)Dal.Order.GetById(orderID);
                 BO.Order order = new()
                 {
                     ID = dalOrder.ID,
