@@ -13,50 +13,72 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace PL
+namespace PL;
+
+/// <summary>
+/// Interaction logic for ProductListWindow.xaml
+/// </summary>
+public partial class ProductListWindow : Window
 {
-    /// <summary>
-    /// Interaction logic for ProductListWindow.xaml
-    /// </summary>
-    public partial class ProductListWindow : Window
+    IBl bl = new BlImplementation.BI();
+
+
+    public ProductListWindow()
     {
-        IBl bl = new BlImplementation.BI();
+        InitializeComponent();
+        CategorySelector.ItemsSource = Enum.GetValues(typeof(BO.Enum.Category));
+        productListView.ItemsSource = bl.Product.GetProductList();
+    }
 
-
-        public ProductListWindow()
-        {
-            InitializeComponent();
-            CategorySelector.ItemsSource = Enum.GetValues(typeof(BO.Enum.Category));
-            productListView.ItemsSource = bl.Product.GetProductList();
-        }
-
-        private void CategorySelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            BO.Enum.Category category = (BO.Enum.Category)e.AddedItems[0];
-            productListView.ItemsSource = bl.Product?.GetProductListBySort(category);
-            //if (CategorySelector != null)
-            //{
-            //    CategorySelector.ItemsSource.clear();
-            //}
-            Clear.Visibility = Visibility.Visible;
-        }
-
-        private void Clear_Click(object sender, RoutedEventArgs e)
-        {
-            productListView.ItemsSource = bl.Product.GetProductList();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            UpdateProductWindow updateProductWindow = new UpdateProductWindow();
-            updateProductWindow.Show();
-            updateProductWindow.AddProducView();
-        }
-        //private void MouseDoubleClick()
+    private void CategorySelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        BO.Enum.Category category = (BO.Enum.Category)e.AddedItems[0];
+        productListView.ItemsSource = bl.Product?.GetProductListBySort(category);
+        //if (CategorySelector != null)
         //{
-        //    UpdateProductWindow updateProductWindow = new UpdateProductWindow();
-        //    updateProductWindow.Show();
-        //    updateProductWindow.updateProductView();
+        //    CategorySelector.ItemsSource.clear();
         //}
+        Clear.Visibility = Visibility.Visible;
+    }
+
+    private void Clear_Click(object sender, RoutedEventArgs e)
+    {
+        productListView.ItemsSource = bl.Product.GetProductList();
+    }
+
+    /// <summary>
+    /// Adding a new product button
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void Button_Click(object sender, RoutedEventArgs e)
+    {
+        UpdateProductWindow updateProductWindow = new UpdateProductWindow();
+        updateProductWindow.Show();
+        updateProductWindow.AddProducView();
+    }
+    //private void MouseDoubleClick()
+    //{
+    //    UpdateProductWindow updateProductWindow = new UpdateProductWindow();
+    //    updateProductWindow.Show();
+    //    updateProductWindow.updateProductView();
+    //}
+
+    /// <summary>
+    /// refresh the list view that shows the customers information
+    /// </summary>
+    public void RefreshProductListView()
+    {
+        this.productListView.ItemsSource = bl.Product.GetProductList();
+    }
+
+    /// <summary>
+    /// refresh the list view of the products
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void refreshWindow(object sender, EventArgs e)
+    {
+        RefreshProductListView();
     }
 }

@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="ProductListWindow" Height="450" Width="800">
+        Title="ProductListWindow" Height="450" Width="800"
+        Activated="refreshWindow">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="401*"/>
