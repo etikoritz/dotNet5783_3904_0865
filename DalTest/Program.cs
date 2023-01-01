@@ -8,9 +8,9 @@ namespace Dal;
 
 public class Program
 {
-    private static DalList dalList = new DalList();
+    private static DalApi.IDal dalList = DalApi.Factory.Get();
 
-    static void OptionProduct(DalList dalList)
+    static void OptionProduct(DalApi.IDal dalList)
     {
         int newProductInStock;
         double newProductPrice;
@@ -147,7 +147,7 @@ Please enter the name of the Product:");
     }
 
 
-    static void OptionOrder(DalList dalList)
+    static void OptionOrder(DalApi.IDal dalList)
     {
         int newOrderID;
         string newCustomerName;
@@ -291,7 +291,7 @@ Enter order ID:");
     }
 
 
-    static void OptionOrderItem(DalList dalList)
+    static void OptionOrderItem(DalApi.IDal dalList)
     {
         int newOrderItemID;
         int newProductID;

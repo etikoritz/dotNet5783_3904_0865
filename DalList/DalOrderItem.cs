@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Security.Cryptography;
 using DalApi;
+using System.Data.Common;
 
 namespace Dal;
 
@@ -15,6 +16,7 @@ internal class DalOrderItem: IOrderItem
     /// <exception cref="DataAlreadyExistException"></exception>
     public int Add(OrderItem ori)
     {
+        int count= 0;
         if(ori.OrderID==0)
         {
             int temp = DataSource.Confing.get_ID_OrderItem;
@@ -41,12 +43,6 @@ internal class DalOrderItem: IOrderItem
     /// <exception cref="DataNotExistException"></exception>
     public OrderItem? GetById(int id)
     {
-        //for (int i = 0; i < DataSource.orderItemList.Count; i++)
-        //{
-        //    if (DataSource.orderItemList[i]?.ID == id)
-        //        return DataSource.orderItemList[i];
-        //}
-        //throw new DataNotExistException();
         DO.OrderItem? orderItem = DataSource.orderItemList.FirstOrDefault(oI => oI?.ID == id);
         if (orderItem == null)
             throw new DataNotExistException();
@@ -123,10 +119,12 @@ internal class DalOrderItem: IOrderItem
         throw new DataNotExistException();
     }
 
-    //public static OrderItem[] getList(int orderId)
-    //{
-    //    OrderItem[] arr = new OrderItem[];
-    //    Array.Copy(DataSource.orderItemArray, arr, DataSource.Confing.I_OrderItem);
-    //    return arr;
-    //}
+    public OrderItem? Get(Func<OrderItem?, bool>? condition)
+    {
+
+        DO.OrderItem? orderItem = DataSource.orderItemList.FirstOrDefault(o => condition(o));
+        if (orderItem == null)
+            throw new DataNotExistException();
+        return orderItem ?? new();
+    }
 }

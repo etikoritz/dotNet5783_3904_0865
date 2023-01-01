@@ -13,8 +13,6 @@ internal class DalProduct: IProduct
             int temp = DataSource.Confing.get_ID_Product;
             m_product.ID = temp;
         }
-        //bool exists = false;
-        //if (DataSource.productList.Exists(product => product?.ID == m_product.ID))
         if (DataSource.productList.Exists(product => product?.ID == m_product.ID))
         {
             throw new DataAlreadyExistException();
@@ -25,12 +23,6 @@ internal class DalProduct: IProduct
 
     public Product? GetById(int id)
     { 
-        //for (int i = 0; i < DataSource.productList.Count; i++)
-        //{
-        //    if (DataSource.productList[i]?.ID == id)
-        //        return DataSource.productList[i];
-        //}
-        //throw new DataNotExistException();
         DO.Product? product = DataSource.productList.FirstOrDefault(p=> p.Value.ID == id);
         if (product == null)
             throw new DataNotExistException();
@@ -41,19 +33,9 @@ internal class DalProduct: IProduct
     /// Get product list
     /// </summary>
     /// <returns>List of all products</returns>
-    //public List<Product?> GetList()
-    //{
-    //    List<Product?> arr = new List<Product?>(DataSource.productList);
-    //    //Array.Copy(DataSource.productList, arr, DataSource.Confing.indexProduct);
-    //    return arr;
-    //}
     public IEnumerable<DO.Product?> GetList(Func<DO.Product?, bool>? filter = null)
     {
         return DataSource.productList.ConvertAll(product => product);
-        //if (filter == null)
-            
-        //else
-        //    return DataSource.productList.Where(product => filter(product));
     }
 
     public void Delete(int id)
@@ -64,11 +46,6 @@ internal class DalProduct: IProduct
             if (DataSource.productList[i]?.ID == id)
             {
                 DataSource.productList.Remove(DataSource.productList[i]);
-                //for (int j = i; j < DataSource.productList.Count; j++)//נבצע דריסה של האובייקט ונקדם את האובייקטים במערך
-                //{
-                //    DataSource.productList[j] = DataSource.productList[j + 1];
-                //}
-                //DataSource.Confing.indexProduct--;
                 return;
             }
         }
@@ -78,7 +55,6 @@ internal class DalProduct: IProduct
     {
         for (int i = 0; i < DataSource.productList.Count; i++)
         {
-            //if (m_product.ID == DataSource.productList[i]?.ID)
             if (m_product.ID == DataSource.productList[i]?.ID)
             {
                 DataSource.productList[i] = m_product;
@@ -86,5 +62,21 @@ internal class DalProduct: IProduct
             }
         }
         throw new DataNotExistException();
+    }
+
+    public IEnumerable<DO.Product?> DoGetProductListBySort(Func<Product?, bool> condition)
+    {
+        return DataSource.productList.FindAll(x => condition(x));
+    }
+
+
+
+    public Product? Get(Func<Product?, bool>? condition)
+    {
+
+        DO.Product? product = DataSource.productList.FirstOrDefault(p => condition(p));
+        if (product == null)
+            throw new DataNotExistException();
+        return product ?? new();
     }
 }

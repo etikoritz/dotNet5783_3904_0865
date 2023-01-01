@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BlImplementation;
 
-public class BI : IBl
+internal class BI : IBl
 {
     public IProduct Product => new BoProduct();
 

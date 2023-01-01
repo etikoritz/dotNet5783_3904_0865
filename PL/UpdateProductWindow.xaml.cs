@@ -1,4 +1,5 @@
 ﻿using BlApi;
+using DO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace PL;
 /// </summary>
 public partial class UpdateProductWindow : Window
 {
-    private static IBl bl = new BlImplementation.BI();
+    private static IBl bl = BlApi.Factory.Get();
     //public static void State(string state)
     //{
     //    if(state=="add")
@@ -43,10 +44,16 @@ public partial class UpdateProductWindow : Window
     {
         AddProduct.Visibility = Visibility.Visible;
     }
-    public void updateProductView()
+    public void updateProductView(BO.ProductForList product)
     {
         UpdateButton.Visibility=Visibility.Visible;
-        
+
+        productIdTextBox.Text = (product.ID).ToString();
+        productIdTextBox.IsReadOnly= true;
+        priceTextBox.Text = (product.Price).ToString();
+        inStockTextBox.Text = (product.inStock).ToString();
+        nameTextBox.Text=product.Name;
+        categoryComboBox.Text= product.Category.ToString();
     }
 
     private BO.Product Read()

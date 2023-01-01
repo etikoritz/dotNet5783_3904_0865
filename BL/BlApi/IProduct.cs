@@ -17,7 +17,7 @@ public interface IProduct
     /// --Manager and Buyer screen--
     /// </summary>
     /// <returns>list of products (BO)</returns>
-    public IEnumerable<ProductForList?> GetProductList();
+    public IEnumerable<ProductForList?> GetProductList(Func<BO.Product?, bool>? condition=null);
 
     /// <summary>
     /// Get product's details by its ID
@@ -58,5 +58,5 @@ public interface IProduct
     public void Delete(int productID);
 
 
-    public IEnumerable<ProductForList?> GetProductListBySort(BO.Enum.Category category);
+    public IEnumerable<ProductForList?> GetProductListBySort(Func<DO.Product?, bool>? condition);
 }

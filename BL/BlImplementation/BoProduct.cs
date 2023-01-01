@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,14 +12,14 @@ using DalApi;
 namespace BlImplementation;
 internal class BoProduct :  BlApi.IProduct
 {
-    private DalApi.IDal Dal = new Dal.DalList();
+    private DalApi.IDal Dal = DalApi.Factory.Get();
     public static int count = 0;
 
     /// <summary>
     /// Get list of products from DO
     /// </summary>
     /// <returns>Returns the list as a BO ProductForList</returns>
-    public IEnumerable<BO.ProductForList> GetProductList()
+    public IEnumerable<BO.ProductForList> GetProductList(Func<BO.Product?, bool>? condition = null)
     {
 
         //get the products list from dal
@@ -35,6 +36,7 @@ internal class BoProduct :  BlApi.IProduct
         ///putting product from the DO list into the BO list
         foreach (DO.Product product in DalProductList)
         {
+            
             //creates new ProductForList items from the dal products list
             BO.ProductForList p = new()
             {
@@ -46,6 +48,7 @@ internal class BoProduct :  BlApi.IProduct
             };
             productsList.Add(p);
         }
+        //return from prod in Dal. where condition(prod)==true select prod;
         return productsList;
     }
 
@@ -165,7 +168,7 @@ internal class BoProduct :  BlApi.IProduct
         /// <exception cref="NotImplementedException"></exception>
     public void Delete(int productID)
     {
-        if(((List<DO.Product>)Dal.OrderItem.GetList()).Exists(x=>x.ID == productID))
+        if(((List<DO.Product?>)DalApi.Factory.Get().Product.GetList()).Exists(x=>x?.ID == productID))
         {
             try
             {
@@ -227,28 +230,10 @@ internal class BoProduct :  BlApi.IProduct
 
 
 
-    public IEnumerable<BO.ProductForList> GetProductListBySort(BO.Enum.Category category)
+    public IEnumerable<BO.ProductForList> GetProductListBySort(Func<DO.Product?, bool>? condition)
     {
-        //List<BO.ProductForList> productsList = new List<BO.ProductForList>();
-        //var productsDO = Dal.Product.GetList(product => product?.Category == (DO.Enums.Category)category);
-        //foreach (var prod in productsDO)
-        //{
-
-        //    productsList.Add(new BO.ProductForList()
-        //    {
-        //        ID = prod?.ID ?? 0,
-        //        Name = prod?.Name ?? "",
-        //        Price = prod?.Price ?? 0,
-        //        inStock = prod?.InStock ?? 0,
-        //        Category = (DO.Enums.Category)(BO.Enum.Category)prod?.Category,
-        //    });
-        //}
-        //return productsList;
-
-
-
         ////get the products list from dal
-        List<DO.Product?> DalProductList = (List<DO.Product?>)Dal.Product.GetList();
+        List<DO.Product?>? DalProductList = (List<DO.Product?>?)Dal.Product.DoGetProductListBySort(condition);
 
 
 
@@ -261,18 +246,18 @@ internal class BoProduct :  BlApi.IProduct
         ///putting product from the DO list into the BO list
         foreach (DO.Product product in DalProductList)
         {
-            if (product.Category == (DO.Enums.Category)category)
+            //if (product.Category == (DO.Enums.Category)category)
+            //{
+            BO.ProductForList p = new()
             {
-                BO.ProductForList p = new()
-                {
-                    ID = product.ID,
-                    Name = product.Name,
-                    Category = product.Category,
-                    Price = product.Price,
-                    inStock = product.InStock
-                };
-                productsList.Add(p);
-            }
+                ID = product.ID,
+                Name = product.Name,
+                Category = product.Category,
+                Price = product.Price,
+                inStock = product.InStock
+            };
+            productsList.Add(p);
+            //}
             //creates new ProductForList items from the dal products list
 
         }

@@ -25,7 +25,7 @@ namespace PL
         {
             InitializeComponent();
         }
-        IBl bl = new BlImplementation.BI();
+        IBl bl = BlApi.Factory.Get();
         private void ___adminOptions__Click(object sender, RoutedEventArgs e)
         {
             new ProductListWindow().Show();

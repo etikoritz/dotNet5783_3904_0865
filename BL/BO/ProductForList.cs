@@ -18,7 +18,7 @@ public class ProductForList
         Product ID: {ID}
         Product Name: {Name}
         category: {Category}
-    	Price: {Price}
+        Price: {Price}
         in Stock: {inStock}
 ";
 }

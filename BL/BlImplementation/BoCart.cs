@@ -13,7 +13,8 @@ namespace BlImplementation;
 
 internal class BoCart : ICart
 {
-    private DalApi.IDal Dal = new Dal.DalList();
+    //i added idal? the mark in stage 4
+    private DalApi.IDal? Dal = DalApi.Factory.Get();
     private List<DO.Order> orderlist = new List<DO.Order>();
     public BO.Cart AddToCart(BO.Cart cart, int id)
     {
@@ -34,18 +35,6 @@ internal class BoCart : ICart
             }
 
         }
-        ///
-        ///create random id to the order and check if it already exsit
-        ///
-        //int orderID = random.Next(99999, 100000);
-        //for (int i=0;i<cart.Items.Count;i++)
-        //{
-        //    if (cart.Items[i].ID == orderID)
-        //    {
-        //        orderID = random.Next(99999, 100000);
-        //        i = 0;
-        //    }
-        //}
 
         if (product.InStock > 0)// add the item to cart 
         {

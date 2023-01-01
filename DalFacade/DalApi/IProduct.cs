@@ -10,4 +10,5 @@ namespace DalApi;
 public interface IProduct : ICrud<DO.Product>
 {
     //List<Product?> GetList();
+    public IEnumerable<DO.Product?> DoGetProductListBySort(Func<Product?, bool>? condition);
 }

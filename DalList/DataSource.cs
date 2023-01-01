@@ -31,14 +31,6 @@ internal static class DataSource
         {
             Product product = new Product();             
             product.ID = Confing.get_ID_Product;
-            //for (int j = 0; j < 10; j++)                 //loop to theck if the id already belong to another product and if it does draw a new id, and check the new one..
-            //{
-            //    if (product.ID == productList[j].ID)
-            //    {
-            //        product.ID = Confing.get_ID_Product;
-            //        j = 0;                               //reseting j in order to go all over they array again
-            //    }
-            //}
             while (productList.Exists(p => p?.ID == product.ID))
             {
                 product.ID = Confing.get_ID_Product;
@@ -71,16 +63,6 @@ internal static class DataSource
             int index = random.Next(0, 20);
             Order order = new Order();
             order.ID = Confing.get_ID_Order;
-            //the order id is in ascending order so we dont need to check if two orders have the same id here
-
-            //for (int j = 0; j < 20; j++)
-            //{
-            //    if (order.ID == orderArray[j].ID)
-            //    {
-            //        order.ID = Confing.get_ID_Order;
-            //        j = 0;
-            //    }
-            //}
             order.CustomerName = CustomerName[index];
             order.CustomerEmail = CustomerEmail[index];
             order.CustomerAddress = CustomerAddress[index];
@@ -98,7 +80,6 @@ internal static class DataSource
             orderList.Add(order);
         }
 
-        //Confing.indexOrder = 20;
 
         //orderItem
         for (int i = 0; i < 40; i++)
@@ -106,61 +87,33 @@ internal static class DataSource
             DO.OrderItem orderItem=new()
             {
                 ID = Confing.get_ID_OrderItem,
-                ProductID= ((DO.Product)productList[random.Next(0,10)]!).ID,
                 OrderID = ((DO.Order)orderList[random.Next(0, 20)]!).ID,
-                Price = productPrice[random.Next(productList.Count)],
+                ProductID = ((DO.Product)productList[random.Next(0, 10)]!).ID,
                 Amount = random.Next(1, 4)
             };
-        //for (int j = 0; j < 10; j++)
-        //{
-        //    if (orderItem.ProductID == productList[j]?.ID)
-        //    {
-        //        orderItem.Price = productList[j].Value.Price;
-        //    }
-        //}
-        orderItemList.Add(orderItem);
-            //orderItem?.ID = Confing.get_ID_OrderItem;
-
-
-            //for (int j = 0; j < 40; j++)
-            //{
-            //    if (orderItem.ID == orderItemList[j].ID)
-            //    {
-            //        orderItem.ID = Confing.get_ID_OrderItem;
-            //        j = 0;
-            //    }
-            //}
-
-
-
-
-            //while (orderItemList.Exists(o => o?.ID == orderItem?.ID))
-            //{
-            //    orderItem.ID == Confing.get_ID_OrderItem;
-            //}
-            //int index = random.Next(0, 10);
-            //orderItem?.ProductID = productList[index]?.ID;
-            //int index1 = random.Next(0, 20);
-            //orderItem?.OrderID = orderList[index1]?.ID;
-            //for(int j = 0; j < 10; j++)
-            //{
-            //    if(orderItem?.ProductID == productList[j]?.ID)
-            //    {
-            //        orderItem?.Price = productList[j]?.Price;
-            //    }
-            //}
-            ////orderItem.Price = productPrice[index];
-            //orderItem?.Amount = random.Next(1, 4);
-            //orderItemList.Add(orderItem);
+            //foreachh to ensure there are not items from the same product in the order
+            foreach (var item in orderItemList)
+            {
+                while(orderItem.ProductID == item?.ProductID && orderItem.OrderID == item?.OrderID)
+                {
+                    orderItem.ProductID = ((DO.Product)productList[random.Next(0, 10)]!).ID;
+                }
+                
+            }
+            //for to inisialize the price with the same price that was inisialized in product list
+            foreach (var item in productList)
+            {
+                if (orderItem.ProductID == item?.ID)
+                {
+                    orderItem.Price = item.Value.Price;
+                }
+            }
+            orderItemList.Add(orderItem);
         }
-        //Confing.indexOrderItem = 40;
     }
 
     internal static class Confing
     {
-        //internal static int indexOrder = 20;
-        //internal static int indexProduct = 10;
-        //internal static int indexOrderItem = 40;
         private static int ID_Order = 99999;//reseting the id at 99999 so hthe id will start at 100000, (every time w'ill call it in get_ID_Order w'ill do ++..)  
         public static int get_ID_Order
         {
@@ -169,9 +122,7 @@ internal static class DataSource
                 ID_Order++;
                 return ID_Order;
             }
-            // =Confing.
         }
-        
         public static int get_ID_Product
         {
             get
