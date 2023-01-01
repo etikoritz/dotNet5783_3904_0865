@@ -18,9 +18,9 @@
             <RowDefinition Height="49*"/>
         </Grid.RowDefinitions>
         <Label Name="categoryLabel"  Content="Category:" Grid.Column="0" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top" Width="172"/>
-        <ComboBox Name="CategorySelector"  SelectionChanged="CategorySelector_SelectionChanged" Grid.ColumnSpan="1" Margin="0,15,-2,18" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-        <Button  x:Name="Clear" Content="Clear" HorizontalAlignment="Left" Margin="311,0,0,0" VerticalAlignment="Center" Height="24" Width="58" Visibility="Hidden" Click="Clear_Click"/>
-        <Button Content="Add new Product" Grid.Row="2" HorizontalAlignment="Right" Margin="5" Padding="5" Click="Button_Click" Grid.Column="1"/>
+        <ComboBox Name="CategorySelector"  SelectionChanged="CategorySelector_SelectionChanged" Margin="88,18,10,15" VerticalAlignment="Stretch"/>
+        <Button  x:Name="Clear" Content="Clear" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top" Height="24" Width="100" Visibility="Collapsed" Click="Clear_Click" Grid.Column="1"/>
+        <Button Content="Add new Product" Grid.Row="2" HorizontalAlignment="Left" Margin="213,9,0,8" Padding="5" Click="Button_Click" Grid.Column="1" Width="181"/>
         <ListView x:Name="productListView" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="2" Margin="0,55,-2,0" Grid.RowSpan="2" MouseDoubleClick="productListView_MouseDoubleClick" >
             <ListView.View>
                 <GridView>
