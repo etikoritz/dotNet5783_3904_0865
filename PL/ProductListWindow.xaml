@@ -5,26 +5,76 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="ProductListWindow" Height="450" Width="800"
+        Title="ProductListWindow" Height="550" Width="630"
         Activated="refreshWindow">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="401*"/>
-            <ColumnDefinition Width="399*"/>
-        </Grid.ColumnDefinitions>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="WhiteSmoke" Offset="0.0" />
+                <GradientStop Color="#cd91ce" Offset="0.5" />
+                <GradientStop Color="#FF9B629D" Offset="0.8" />
+                <GradientStop Color="#6c366e" Offset="1.0" />
+            </LinearGradientBrush>
+        </Grid.Background>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="55*"/>
             <RowDefinition Height="330*"/>
             <RowDefinition Height="49*"/>
         </Grid.RowDefinitions>
-        <Label Name="categoryLabel"  Content="Category:" Grid.Column="0" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top" Width="172"/>
-        <ComboBox Name="CategorySelector"  SelectionChanged="CategorySelector_SelectionChanged" Margin="88,18,10,15" VerticalAlignment="Stretch"/>
-        <Button  x:Name="Clear" Content="Clear" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top" Height="24" Width="100" Visibility="Collapsed" Click="Clear_Click" Grid.Column="1"/>
-        <Button Content="Add new Product" Grid.Row="2" HorizontalAlignment="Left" Margin="213,9,0,8" Padding="5" Click="Button_Click" Grid.Column="1" Width="181"/>
-        <ListView x:Name="productListView" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="2" Margin="0,55,-2,0" Grid.RowSpan="2" MouseDoubleClick="productListView_MouseDoubleClick" >
+        <Label Name="categoryLabel"  Content="Category:" Grid.Column="0" HorizontalAlignment="Left" Margin="29,0,0,0" VerticalAlignment="Center" Width="103" Height="34" FontFamily="Comic Sans MS"/>
+        <ComboBox Name="CategorySelector" FontFamily="Comic Sans MS" SelectionChanged="CategorySelector_SelectionChanged" Margin="137,12,315,21" VerticalAlignment="Stretch"/>
+        <Button  x:Name="Clear" Content="Clear" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top" Height="24" Width="100" Visibility="Collapsed" Click="Clear_Click" Grid.Column="1"/>
+        <Button Content="Add new Product" FontFamily="Comic Sans MS" Grid.Row="2" HorizontalAlignment="Left" Margin="421,13,0,15" Padding="5" Click="Button_Click" Width="181"/>
+        <ListView 
+            x:Name="productListView" 
+            d:ItemsSource="{d:SampleData ItemCount=5}" 
+            Margin="10,10,41,10" 
+            FontFamily="Comic Sans MS"
+            MouseDoubleClick="productListView_MouseDoubleClick" Grid.Row="1" >
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn Header="Id" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding ID}" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Name" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Category" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Category}" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Price" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Price}" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="In stock" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding inStock}" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
                 </GridView>
             </ListView.View>
         </ListView>

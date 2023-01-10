@@ -5,20 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="UpdateProductWindow" Height="450" Width="800">
+        Title="UpdateProductWindow" Height="400" Width="400">
     <Grid>
-        <Label x:Name="ProudoctIdLabel" Content="Product ID:" HorizontalAlignment="Left" Margin="118,120,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="NameLabel" Content="Name:" HorizontalAlignment="Left" Margin="118,183,0,0" VerticalAlignment="Top" Height="24" Width="69"/>
-        <Label x:Name="PriceLabel" Content="Price:" HorizontalAlignment="Left" Margin="118,213,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="InStockLabel" Content="In Stock:" HorizontalAlignment="Left" Margin="118,244,0,0" VerticalAlignment="Top" Height="31" Width="59"/>
-        <ComboBox x:Name="categoryComboBox" HorizontalAlignment="Left" Margin="231,156,0,0" VerticalAlignment="Top" Width="117" Height="21" />
-        <Label x:Name="CategoryLabel" Content="Category:" HorizontalAlignment="Left" Margin="118,151,0,0" VerticalAlignment="Top" Height="26" Width="69"/>
-        <TextBox x:Name="productIdTextBox" HorizontalAlignment="Left" Margin="231,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="117" Height="26" />
-        <TextBox x:Name="nameTextBox" HorizontalAlignment="Left" Margin="231,189,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-        <TextBox x:Name="priceTextBox" HorizontalAlignment="Left" Margin="231,217,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-        <TextBox x:Name="inStockTextBox" HorizontalAlignment="Left" Margin="231,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-        <Button x:Name="AddProduct" Content="Add" HorizontalAlignment="Left" Margin="124,301,0,0" VerticalAlignment="Top" Height="32" Width="63" Visibility="Collapsed" Click="AddProduct_Click"/>
-        <Button x:Name="UpdateButton" Content="Update" HorizontalAlignment="Left" Margin="231,301,0,0" VerticalAlignment="Top" Visibility="Collapsed" Click="UpdateButton_Click"/>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="WhiteSmoke" Offset="0.0" />
+                <GradientStop Color="#cd91ce" Offset="0.5" />
+                <GradientStop Color="#FF9B629D" Offset="0.8" />
+                <GradientStop Color="#6c366e" Offset="1.0" />
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Label x:Name="ProudoctIdLabel" Content="Product ID:" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="84,76,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="NameLabel" Content="Name:" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="84,139,0,0" VerticalAlignment="Top" Height="24" Width="69"/>
+        <Label x:Name="PriceLabel" Content="Price:" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="84,170,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="InStockLabel" Content="In Stock:" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="84,200,0,0" VerticalAlignment="Top" Height="31" Width="59"/>
+        <ComboBox x:Name="categoryComboBox" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="197,110,0,0" VerticalAlignment="Top" Width="117" Height="25" />
+        <Label x:Name="CategoryLabel"  Content="Category:" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="84,107,0,0" VerticalAlignment="Top" Height="26" Width="69"/>
+        <TextBox x:Name="productIdTextBox" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="197,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="117" Height="26" />
+        <TextBox x:Name="nameTextBox" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="197,145,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
+        <TextBox x:Name="priceTextBox" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="197,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
+        <TextBox x:Name="inStockTextBox" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="197,204,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
+        <Button x:Name="AddProduct" Content="Add" FontFamily="Comic Sans MS" HorizontalAlignment="Center" Margin="0,277,0,0" VerticalAlignment="Top" Height="32" Width="80" Visibility="Collapsed" Click="AddProduct_Click"/>
+        <Button x:Name="UpdateButton" Content="Update" FontFamily="Comic Sans MS" HorizontalAlignment="Center" Margin="0,277,0,0" VerticalAlignment="Top" Visibility="Collapsed" Height="32" Width="80" Click="UpdateButton_Click"/>
 
     </Grid>
 </Window>

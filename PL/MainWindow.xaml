@@ -7,7 +7,15 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button x:Name="___adminOptions_" Content="admin" HorizontalAlignment="Left" Margin="355,279,0,0" VerticalAlignment="Top" Height="46" Width="102" Click="___adminOptions__Click"/>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="WhiteSmoke" Offset="0.0" />
+                <GradientStop Color="#cd91ce" Offset="0.5" />
+                <GradientStop Color="#FF9B629D" Offset="0.8" />
+                <GradientStop Color="#6c366e" Offset="1.0" />
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Button x:Name="___adminOptions_" Content="Admin sign in" FontFamily="Comic Sans MS" HorizontalAlignment="Center" Margin="0,277,0,0" VerticalAlignment="Top" Height="58" Width="162" Click="___adminOptions__Click"/>
 
     </Grid>
 </Window>
