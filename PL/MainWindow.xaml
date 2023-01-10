@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="700"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -15,7 +16,29 @@
                 <GradientStop Color="#6c366e" Offset="1.0" />
             </LinearGradientBrush>
         </Grid.Background>
-        <Button x:Name="___adminOptions_" Content="Admin sign in" FontFamily="Comic Sans MS" HorizontalAlignment="Center" Margin="0,277,0,0" VerticalAlignment="Top" Height="58" Width="162" Click="___adminOptions__Click"/>
+        <Label Content="Hello" 
+               FontSize="30"
+               FontFamily="Comic Sans MS"
+               HorizontalAlignment="Left" 
+               Margin="252,46,0,0" 
+               VerticalAlignment="Top"/>
+        <Label x:Name="nameOfUser_lable"
+               Content="shirel!" 
+               FontSize="30"
+               FontFamily="Comic Sans MS"
+               HorizontalAlignment="Left" 
+               Margin="337,46,0,0" 
+               VerticalAlignment="Top"/>
+        <Label x:Name="AdminLable"
+               Content="What would you like to see?" 
+               FontSize="30"
+               Visibility="Visible"
+               FontFamily="Comic Sans MS"
+               HorizontalAlignment="Left" 
+               Margin="137,106,0,0" 
+               VerticalAlignment="Top"/>
+
+        <Button x:Name="___adminOptions_" Content="Products" FontFamily="Comic Sans MS" HorizontalAlignment="Left" VerticalAlignment="Top" Height="58" Width="162" Click="___adminOptions__Click" Margin="243,202,0,0"/>
 
     </Grid>
 </Window>

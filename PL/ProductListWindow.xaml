@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="ProductListWindow" Height="550" Width="630"
-        Activated="refreshWindow">
+        Activated="refreshWindow"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
