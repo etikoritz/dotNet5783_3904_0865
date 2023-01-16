@@ -1,5 +1,4 @@
-﻿using BlApi;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,28 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for UpdateItemInOrderWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class UpdateItemInOrderWindow : Window
     {
-        public MainWindow(IBl? bl)
+        public UpdateItemInOrderWindow()
         {
             InitializeComponent();
-        }
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
-        IBl bl = BlApi.Factory.Get();
-        private void ___adminOptions__Click(object sender, RoutedEventArgs e)
-        {
-            new ProductListWindow().Show();
         }
     }
 }

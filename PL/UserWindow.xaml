@@ -1,0 +1,60 @@
+﻿<Window x:Class="PL.UserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="UserWindow" Height="450" Width="800">
+    <Grid>
+        <ListView x:Name="CatalogList" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="37,99,239,71" MouseDoubleClick="CatalogList_MouseDoubleClick">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Id" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding ID}" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Name" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Category" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Category}" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Price" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Price}" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="In stock" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding inStock}" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="cartButton" Content="Cart" HorizontalAlignment="Left" Margin="37,53,0,0" VerticalAlignment="Top" FontSize="16" Height="23" Width="56"/>
+        <Label Content="Enter your name" HorizontalAlignment="Left" Margin="601,115,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label Content="Enter your Address" HorizontalAlignment="Left" Margin="601,0,0,0" VerticalAlignment="Center" FontSize="16"/>
+        <TextBox HorizontalAlignment="Left" Margin="614,171,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="613,238,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="614,316,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Enter your Email Address" HorizontalAlignment="Left" Margin="601,268,0,0" VerticalAlignment="Top" FontSize="16"/>
+
+    </Grid>
+</Window>

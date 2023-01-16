@@ -1,0 +1,86 @@
+﻿<Window x:Class="PL.OrderWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="Order" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="216*"/>
+        </Grid.RowDefinitions>
+        <Label Content="order ID" HorizontalAlignment="Left" Margin="26,19,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+        <Label Content="Status" HorizontalAlignment="Left" Margin="199,19,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+        <Label Content="Customer address" HorizontalAlignment="Left" Margin="26,132,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+        <Label Content="Customer email" HorizontalAlignment="Left" Margin="26,101,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+        <Label Content="Customer name" HorizontalAlignment="Left" Margin="26,70,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+        <Label Content="Delivery date" HorizontalAlignment="Left" Margin="26,230,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+        <Label Content="Ship date" HorizontalAlignment="Left" Margin="26,264,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+        <Label Content="Order date" HorizontalAlignment="Left" Margin="26,197,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+        <Label Content="Date of payment" HorizontalAlignment="Left" Margin="26,316,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+        <Label Content="Total price" HorizontalAlignment="Left" Margin="301,324,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+        <Label Content="Items" HorizontalAlignment="Left" Margin="301,70,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+        <ListView x:Name="itemsList" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="301,101,107,122" Grid.Row="1">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="order id" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding ID}" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Name" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Product ID" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding ProductID}" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Price" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Price}" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Amount" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Amount}" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    
+                </GridView>
+                
+            </ListView.View>
+            
+        </ListView>
+        <TextBox HorizontalAlignment="Left" Margin="147,74,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding CustomerName}" VerticalAlignment="Top" Width="110" Height="22"/>
+        <TextBox HorizontalAlignment="Left" Margin="147,134,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding CustomerAddress}" VerticalAlignment="Top" Width="110" Height="22"/>
+        <TextBox HorizontalAlignment="Left" Margin="147,103,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding CustomerEmail}" VerticalAlignment="Top" Width="110" Height="22"/>
+        <TextBox HorizontalAlignment="Left" Margin="147,266,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding ShipDate}" VerticalAlignment="Top" Width="110" Height="22"/>
+        <TextBox HorizontalAlignment="Left" Margin="147,232,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding DeliveryDate}" VerticalAlignment="Top" Width="110" Height="22"/>
+        <TextBox HorizontalAlignment="Left" Margin="147,197,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding OrderDate}" VerticalAlignment="Top" Width="110" Height="22"/>
+        <TextBox HorizontalAlignment="Left" Margin="85,21,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding ID}" VerticalAlignment="Top" Width="110" Height="22"/>
+        <TextBox HorizontalAlignment="Left" Margin="147,318,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding DateOfPayment}" VerticalAlignment="Top" Width="110" Height="22"/>
+        <TextBox HorizontalAlignment="Left" Margin="370,326,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding TotalPrice}" VerticalAlignment="Top" Width="110" Height="22"/>
+        <TextBox HorizontalAlignment="Left" Margin="246,21,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Status}" VerticalAlignment="Top" Width="110" Height="22"/>
+        <Button x:Name="UpdateOrderB" Content="Update order" HorizontalAlignment="Left" Margin="626,374,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16"/>
+        <Button x:Name="AddOrderB" Content="Add order" HorizontalAlignment="Left" Margin="626,374,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16" Width="98"/>
+        <Button x:Name="AddAmountB" Content="Add Amount" Tag="" HorizontalAlignment="Left" Margin="698,103,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16" RenderTransformOrigin="0.673,0.666" Height="37" Width="102" Click="AddAmountB_Click"
+  />
+        <TextBox x:Name="amountTextBox" HorizontalAlignment="Left" Margin="698,158,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+
+    </Grid>
+</Window>

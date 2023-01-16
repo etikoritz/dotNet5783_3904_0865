@@ -420,7 +420,7 @@ internal class BoOrder : BlApi.IOrder
     /// <param name="productID"></param>
     /// <param name="amount"></param>
     /// <exception cref="OutOfStockProductException"></exception>
-    internal void addAmuntToItemInOrder(int orderID, int productID, int amount)
+    public void addAmuntToItemInOrder(int orderID, int productID, int amount)
     {
         List<DO.OrderItem?> orderItems = (List<DO.OrderItem?>)DalApi.Factory.Get().OrderItem.GetList();
         DO.Product product = (DO.Product)DalApi.Factory.Get().Product.GetById(productID);

@@ -5,14 +5,14 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
-            <!-- primary -->
+            <!--  primary 
             <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#94ce90"/>
             <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="Black"/>
             <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#FF649D62"/>
             <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="Black"/>
             <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#366e37"/>
             <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="White"/>
-            <!-- accent -->
+            <!accent 
             <SolidColorBrush x:Key="SecondaryHueMidBrush" Color="#FF9B629D"/>
             <SolidColorBrush x:Key="SecondaryHueMidForegroundBrush" Color="#FFFFFF"/>
 
@@ -21,7 +21,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
-            </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary.MergedDictionaries> -->
         </ResourceDictionary>
     </Application.Resources>
 </Application>

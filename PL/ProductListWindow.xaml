@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="ProductListWindow" Height="550" Width="630"
+        Title="ProductListWindow" Height="566" Width="905"
         Activated="refreshWindow"
         WindowStartupLocation="CenterScreen">
     <Grid>
@@ -26,11 +26,11 @@
         <Label Name="categoryLabel"  Content="Category:" Grid.Column="0" HorizontalAlignment="Left" Margin="29,0,0,0" VerticalAlignment="Center" Width="103" Height="34" FontFamily="Comic Sans MS"/>
         <ComboBox Name="CategorySelector" FontFamily="Comic Sans MS" SelectionChanged="CategorySelector_SelectionChanged" Margin="137,12,315,21" VerticalAlignment="Stretch"/>
         <Button  x:Name="Clear" Content="Clear" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top" Height="24" Width="100" Visibility="Collapsed" Click="Clear_Click" Grid.Column="1"/>
-        <Button Content="Add new Product" FontFamily="Comic Sans MS" Grid.Row="2" HorizontalAlignment="Left" Margin="421,13,0,15" Padding="5" Click="Button_Click" Width="181"/>
+        <Button x:Name="addProductButton" Content="Add new Product" FontFamily="Comic Sans MS" Grid.Row="2" HorizontalAlignment="Left" Margin="695,14,0,14" Padding="5" Click="Button_Click" Width="181"/>
         <ListView 
             x:Name="productListView" 
             d:ItemsSource="{d:SampleData ItemCount=5}" 
-            Margin="10,10,41,10" 
+            Margin="10,10,210,10" 
             FontFamily="Comic Sans MS"
             MouseDoubleClick="productListView_MouseDoubleClick" Grid.Row="1" >
             <ListView.ItemContainerStyle>
@@ -79,6 +79,59 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        <ListView 
+            x:Name="orderListView" 
+            d:ItemsSource="{d:SampleData ItemCount=5}" 
+            Margin="10,10,210,10" 
+            FontFamily="Comic Sans MS" Grid.Row="1" MouseDoubleClick="orderListView_MouseDoubleClick" >
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Id" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding ID}" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Customer Name" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding CustomerName}" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Status" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Status}" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Amount Of Items" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding AmountOfItems}" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Total Price" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding TotalPrice}" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="orderButton" Content="Order" HorizontalAlignment="Left" Margin="724,27,0,0" Grid.Row="1" VerticalAlignment="Top" Height="42" Width="122" FontSize="16" Click="orderButton_Click"/>
+        <Button x:Name="productButton" Content="Product" HorizontalAlignment="Left" Margin="724,98,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16" Height="42" Width="122" Click="productButton_Click"/>
 
     </Grid>
 </Window>

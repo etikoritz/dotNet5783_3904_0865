@@ -1,0 +1,24 @@
+﻿<Window x:Class="PL.UpdateItemInOrderWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="UpdateItemInOrderWindow" Height="450" Width="800">
+    <Grid>
+        <Label Content="order ID" HorizontalAlignment="Left" Margin="112,117,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label Content="Amount" HorizontalAlignment="Left" Margin="112,267,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label Content="Price" HorizontalAlignment="Left" Margin="112,231,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label Content="Name" HorizontalAlignment="Left" Margin="112,195,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label Content="product ID" HorizontalAlignment="Left" Margin="112,153,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <TextBox HorizontalAlignment="Left" Margin="225,124,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="225,274,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="225,238,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="225,202,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="225,160,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Confirm" HorizontalAlignment="Left" Margin="590,333,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Button Content="Remove Item " HorizontalAlignment="Left" Margin="112,333,0,0" VerticalAlignment="Top" FontSize="16"/>
+
+    </Grid>
+</Window>

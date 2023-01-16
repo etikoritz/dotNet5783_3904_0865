@@ -16,7 +16,7 @@
                 <GradientStop Color="#6c366e" Offset="1.0" />
             </LinearGradientBrush>
         </Grid.Background>
-        <Label Content="Hello" 
+        <!--Label Content="Hello" 
                FontSize="30"
                FontFamily="Comic Sans MS"
                HorizontalAlignment="Left" 
@@ -28,17 +28,21 @@
                FontFamily="Comic Sans MS"
                HorizontalAlignment="Left" 
                Margin="337,46,0,0" 
-               VerticalAlignment="Top"/>
+               VerticalAlignment="Top"/>-->
         <Label x:Name="AdminLable"
-               Content="What would you like to see?" 
+               Content="Welcome to the store!" 
                FontSize="30"
                Visibility="Visible"
                FontFamily="Comic Sans MS"
                HorizontalAlignment="Left" 
-               Margin="137,106,0,0" 
+               Margin="162,106,0,0" 
                VerticalAlignment="Top"/>
 
-        <Button x:Name="___adminOptions_" Content="Products" FontFamily="Comic Sans MS" HorizontalAlignment="Left" VerticalAlignment="Top" Height="58" Width="162" Click="___adminOptions__Click" Margin="243,202,0,0"/>
+        <Button x:Name="___adminOptions_" Content="Admin" FontFamily="Comic Sans MS" HorizontalAlignment="Left" VerticalAlignment="Center" Height="58" Width="162" Click="___adminOptions__Click" Margin="108,0,0,0"/>
+        <Button x:Name="orderButton" Content="new order" FontFamily="Comic Sans MS" HorizontalAlignment="Left" VerticalAlignment="Center" Height="58" Width="162" Click="___adminOptions__Click" Margin="383,0,0,0"/>
+        <TextBox x:Name="trackOrderTExtBox" HorizontalAlignment="Left" Margin="290,317,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="87"/>
+        <Label Content="Enter order ID:" HorizontalAlignment="Left" Margin="290,286,0,0" VerticalAlignment="Top"/>
+        <Button Content="Track order" HorizontalAlignment="Left" Margin="290,357,0,0" VerticalAlignment="Top" Width="87" Height="22"/>
 
     </Grid>
 </Window>

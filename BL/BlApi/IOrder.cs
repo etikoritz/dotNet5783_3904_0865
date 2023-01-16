@@ -55,6 +55,7 @@ namespace BlApi
         /// <param name="orderID"></param>
         /// <returns></returns>
         public void UpdateOrderByManager(int orderID, int productID, string action, int amount);
+        public void addAmuntToItemInOrder(int orderID, int productID, int amount);
 
     }
 }

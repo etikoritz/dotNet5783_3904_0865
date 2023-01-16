@@ -18,13 +18,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BL\BL.csproj" />
+  </ItemGroup>
+
+	<!--ItemGroup>
     <PackageReference Include="MaterialDesignColors" Version="2.0.9" />
     <PackageReference Include="MaterialDesignThemes" Version="4.6.1" />
     <PackageReference Include="ShowMeTheXAML.MSBuild" Version="2.0.0" />
-  </ItemGroup>
+  </ItemGroup>-->
 
-  <ItemGroup>
+ <!-- <ItemGroup>
     <ProjectReference Include="..\BL\BL.csproj" />
-  </ItemGroup>
+  </ItemGroup>-->
 
 </Project>

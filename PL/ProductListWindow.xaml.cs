@@ -32,6 +32,8 @@ public partial class ProductListWindow : Window
         InitializeComponent();
         CategorySelector.ItemsSource = Enum.GetValues(typeof(BO.Enum.Category));
         productListView.ItemsSource = bl.Product.GetProductList(p =>p!=null);
+        orderListView.ItemsSource = bl.Order.GetOrderList();
+        orderListView.Visibility=Visibility.Hidden;
     }
 
     private void CategorySelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -89,6 +91,33 @@ public partial class ProductListWindow : Window
         //Product product = productListView.SelectedItem.GetType(property);
         
 
+    }
+
+    private void orderButton_Click(object sender, RoutedEventArgs e)
+    {
+        orderListView.Visibility = Visibility.Visible;
+    }
+
+    private void productButton_Click(object sender, RoutedEventArgs e)
+    {
+        orderListView.Visibility = Visibility.Hidden;
+        productListView.Visibility = Visibility.Visible;
+        addProductButton.Visibility = Visibility.Visible;
+    }
+
+    private void addOrderButton_Click(object sender, RoutedEventArgs e)
+    {
+        new OrderWindow().Show();
+    }
+
+    private void orderListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+    {
+        //if (productListView.SelectedItems.Count >= 1)
+        //{
+            BO.OrderForList item = (BO.OrderForList)orderListView.SelectedItems[0];
+            new OrderWindow(item).Show();
+        //}
+        
     }
 }
 
