@@ -55,9 +55,10 @@ namespace PL
 
         private void AddAmountB_Click(object sender, RoutedEventArgs e)
         {
+            int amount;
             //var button = (Button)sender;
-            //var obj = (BO.OrderItem)button.Tag;
-            //bl.Order.UpdateOrderByManager(obj.ID, obj.ProductID, "add", DataContext);
+            var obj = (BO.OrderItem)AddAmountB.Tag;
+            bl.Order.UpdateOrderByManager(obj.ID, obj.ProductID, "add", (int)DataContext);
 
         }
     }

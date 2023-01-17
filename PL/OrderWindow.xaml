@@ -78,9 +78,9 @@
         <TextBox HorizontalAlignment="Left" Margin="246,21,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Status}" VerticalAlignment="Top" Width="110" Height="22"/>
         <Button x:Name="UpdateOrderB" Content="Update order" HorizontalAlignment="Left" Margin="626,374,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16"/>
         <Button x:Name="AddOrderB" Content="Add order" HorizontalAlignment="Left" Margin="626,374,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16" Width="98"/>
-        <Button x:Name="AddAmountB" Content="Add Amount" Tag="" HorizontalAlignment="Left" Margin="698,103,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16" RenderTransformOrigin="0.673,0.666" Height="37" Width="102" Click="AddAmountB_Click"
+        <Button x:Name="AddAmountB" Content="Add Amount" Tag="{Binding Path=itemsList}" HorizontalAlignment="Left" Margin="698,103,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16" RenderTransformOrigin="0.673,0.666" Height="37" Width="102" Click="AddAmountB_Click"
   />
-        <TextBox x:Name="amountTextBox" HorizontalAlignment="Left" Margin="698,158,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="amountTextBox" HorizontalAlignment="Left" Margin="698,158,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding amount}" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Window>
