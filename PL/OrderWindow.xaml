@@ -5,8 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="Order" Height="450" Width="800">
+        Title="Order" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
     <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="WhiteSmoke" Offset="0.0" />
+                <GradientStop Color="#cd91ce" Offset="0.5" />
+                <GradientStop Color="#FF9B629D" Offset="0.8" />
+                <GradientStop Color="#6c366e" Offset="1.0" />
+            </LinearGradientBrush>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="216*"/>

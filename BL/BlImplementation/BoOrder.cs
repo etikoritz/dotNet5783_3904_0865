@@ -161,8 +161,6 @@ internal class BoOrder : BlApi.IOrder
                         order.Items.Add(item1);
                     }
                 }
-
-
                 return order;
             }
             catch (DO.DataNotExistException ex)
