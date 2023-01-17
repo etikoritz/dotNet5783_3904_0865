@@ -1,0 +1,108 @@
+﻿<Window x:Class="PL.TrackOrderWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="Order tracking" Height="450" Width="400"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="WhiteSmoke" Offset="0.0" />
+                <GradientStop Color="#cd91ce" Offset="0.5" />
+                <GradientStop Color="#FF9B629D" Offset="0.8" />
+                <GradientStop Color="#6c366e" Offset="1.0" />
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Label x:Name="OrderIDHeaderLable"
+               Content="Order ID: " 
+               FontSize="20"
+               Visibility="Visible"
+               FontFamily="Comic Sans MS"
+               HorizontalAlignment="Left" 
+               Margin="110,64,0,0" 
+               VerticalAlignment="Top"/>
+        <Label x:Name="OrderIDLable"
+               Content="'id'" 
+               FontSize="20"
+               Visibility="Visible"
+               FontFamily="Comic Sans MS"
+               HorizontalAlignment="Left" 
+               Margin="211,64,0,0" 
+               VerticalAlignment="Top"/>
+        <Label x:Name="OrderStatusHeaderLable"
+               Content="Your order has "
+               FontWeight="Bold"
+               FontSize="17"
+               Visibility="Visible"
+               FontFamily="Comic Sans MS"
+               HorizontalAlignment="Left" 
+               Margin="84,135,0,0" 
+               VerticalAlignment="Top"/>
+        <Label x:Name="OrderStatusLable"
+               Content="confirmed"
+               FontWeight="Bold"
+               FontSize="17"
+               Visibility="Visible"
+               FontFamily="Comic Sans MS"
+               HorizontalAlignment="Left" 
+               Margin="214,135,0,0" 
+               VerticalAlignment="Top"/>
+        <Label x:Name="PaymentStatusHeaderLable"
+               Content="Payment date:" 
+               FontSize="15"
+               Visibility="Visible"
+               FontFamily="Comic Sans MS"
+               HorizontalAlignment="Left" 
+               Margin="90,191,0,0" 
+               VerticalAlignment="Top"/>
+        <Label x:Name="PaymentStatusLable"
+               Content="PaymentDate" 
+               FontSize="15"
+               Visibility="Visible"
+               FontFamily="Comic Sans MS"
+               HorizontalAlignment="Left" 
+               Margin="200,191,0,0" 
+               VerticalAlignment="Top"/>
+        <Grid x:Name="ShippingGrid" Visibility="Collapsed">
+            <Label x:Name="ShippingHeaderLable"
+               Content="shipping date: " 
+               FontSize="15"
+               Visibility="Visible"
+               FontFamily="Comic Sans MS"
+               HorizontalAlignment="Left" 
+               Margin="90,221,0,0" 
+               VerticalAlignment="Top"/>
+            <Label x:Name="ShippingLable"
+               Content="ShipDate " 
+               FontSize="15"
+               Visibility="Visible"
+               FontFamily="Comic Sans MS"
+               HorizontalAlignment="Left" 
+               Margin="200,221,0,0" 
+               VerticalAlignment="Top"/>
+        </Grid>
+        <Grid x:Name="DeliveryGrid" Visibility="Collapsed">
+            <Label x:Name="DeliveryHeaderLable"
+                   Content="Delivery date:" 
+                   FontSize="15"
+                   Visibility="Visible"
+                   FontFamily="Comic Sans MS"
+                   HorizontalAlignment="Left" 
+                   Margin="90,251,0,0" 
+                   VerticalAlignment="Top"/>
+            <Label x:Name="DeliveryLable"
+                   Content="DeliveryDate " 
+                   FontSize="15"
+                   Visibility="Visible"
+                   FontFamily="Comic Sans MS"
+                   HorizontalAlignment="Left" 
+                   Margin="200,251,0,0" 
+                   VerticalAlignment="Top"/>
+        </Grid>
+
+
+    </Grid>
+</Window>

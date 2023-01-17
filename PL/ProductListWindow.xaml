@@ -43,7 +43,7 @@
                     <GridViewColumn Header="Id" Width="Auto">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding ID}" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
+                                <TextBlock Text="{Binding ID}" TextAlignment="Center" Margin="-5,-1" Padding="10"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
