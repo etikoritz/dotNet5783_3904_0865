@@ -45,29 +45,39 @@ public partial class MainWindow : Window
     /// <param name="e"></param>
     private void TrackOrderButton_Click(object sender, RoutedEventArgs e)
     {
-        int orderID = Int32.Parse(this.trackOrderTextBox.Text);
+        int orderID = -1;
         Order order = new();
 
-        if (orderID <= 0)
+        try
         {
-            MessageBox.Show("Negative order ID, please try again");
-            this.trackOrderTextBox.Text = "";
-            this.trackOrderTextBox.Focus();
-        }
-        else
-        {
-            try
+            orderID = Int32.Parse(this.trackOrderTextBox.Text);
+            if (orderID > 0)
             {
-                order = bl.Order.GetOrderDetails(o=>o.Value.ID == orderID);
-                TrackOrderWindow trackOrderWindow = new TrackOrderWindow(order);
-                trackOrderWindow.Show();
+                try
+                {
+                    order = bl.Order.GetOrderDetails(orderID);
+                    TrackOrderWindow trackOrderWindow = new TrackOrderWindow(order);
+                    trackOrderWindow.Show();
+                }
+                catch (BO.BODataNotExistException ex)
+                {
+                    MessageBox.Show("Order ID does not exist, please try again");
+                    this.trackOrderTextBox.Text = "";
+                    this.trackOrderTextBox.Focus();
+                }
             }
-            catch (BO.BODataNotExistException ex)
+            else
             {
-                MessageBox.Show("Order ID does not exist, please try again");
+                MessageBox.Show("Order ID should be a positive number, please try again");
                 this.trackOrderTextBox.Text = "";
                 this.trackOrderTextBox.Focus();
             }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show("Order ID should be a positive number, please try again");
+            this.trackOrderTextBox.Text = "";
+            this.trackOrderTextBox.Focus();
         }
     }
 
