@@ -42,7 +42,7 @@
         <Button x:Name="orderButton" Content="new order" FontFamily="Comic Sans MS" HorizontalAlignment="Left" VerticalAlignment="Center" Height="58" Width="162" Click="___adminOptions__Click" Margin="383,0,0,0"/>
         <TextBox x:Name="trackOrderTextBox" HorizontalAlignment="Left" Margin="290,317,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="87" KeyDown="trackOrderTextBox_KeyDown"/>
         <Label Content="Enter order ID:" HorizontalAlignment="Left" Margin="290,286,0,0" VerticalAlignment="Top"/>
-        <Button Content="Track order" HorizontalAlignment="Left" Margin="290,357,0,0" VerticalAlignment="Top" Width="87" Height="22" Click="TrackOrderButton_Click"/>
+        <Button Content="Track order" HorizontalAlignment="Left" Margin="276,359,0,0" VerticalAlignment="Top" Width="113" Height="35" Click="TrackOrderButton_Click"/>
 
     </Grid>
 </Window>

@@ -36,5 +36,17 @@ namespace PL
                 //new UpdateProductWindow(cart item).Show();
             }
         }
+
+
+        /// <summary>
+        /// Go to cart button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cartButton_Click(object sender, RoutedEventArgs e)
+        {
+            //להוסיף בדיקה של יוזר ולהגיע לסל הקניות הספציפי שלו
+            //new CartWindow(userName).Show();
+        }
     }
 }

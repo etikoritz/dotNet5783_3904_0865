@@ -23,5 +23,10 @@ namespace PL
         {
             InitializeComponent();
         }
+        public CartWindow(String userName)
+        {
+            InitializeComponent();
+        }
+
     }
 }

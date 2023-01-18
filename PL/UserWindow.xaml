@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"        
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="UserWindow" Height="450" Width="800"
@@ -57,13 +58,42 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="cartButton" Content="Cart" HorizontalAlignment="Left" Margin="37,53,0,0" VerticalAlignment="Top" FontSize="16" Height="23" Width="56"/>
-        <Label Content="Enter your name" HorizontalAlignment="Left" Margin="601,115,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <Label Content="Enter your Address" HorizontalAlignment="Left" Margin="601,0,0,0" VerticalAlignment="Center" FontSize="16"/>
-        <TextBox HorizontalAlignment="Left" Margin="614,171,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Margin="613,238,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Margin="614,316,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Enter your Email Address" HorizontalAlignment="Left" Margin="601,268,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Button x:Name="cartButton" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="14,14,0,0" Height="50" Width="60" Background="Transparent" BorderBrush="Transparent" Click="cartButton_Click">
+            <materialDesign:PackIcon Kind="Cart" Height="30" Width="30" />
+        </Button>
+        <TextBox
+            x:Name="NameTextBox"
+            materialDesign:HintAssist.HelperText="Enter your name"
+            materialDesign:HintAssist.Hint="Name" Width="120" Margin="612,117,68,292">
+            <TextBox.Text>
+                <Binding
+                    Path="Name"
+                    UpdateSourceTrigger="PropertyChanged">
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox
+            x:Name="AdressTextBox"
+            materialDesign:HintAssist.HelperText="Enter your adress"
+            materialDesign:HintAssist.Hint="Adress" Width="120" Margin="612,172,68,237">
+            <TextBox.Text>
+                <Binding
+                    Path="Adress"
+                    UpdateSourceTrigger="PropertyChanged">
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox
+            x:Name="EmailTextBox"
+            materialDesign:HintAssist.HelperText="Enter your Email"
+            materialDesign:HintAssist.Hint="Email" Width="120" Margin="612,231,68,178">
+            <TextBox.Text>
+                <Binding
+                    Path="Email"
+                    UpdateSourceTrigger="PropertyChanged">
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
 
     </Grid>
 </Window>
