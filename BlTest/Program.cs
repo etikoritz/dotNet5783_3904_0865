@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using BO;
 using BlApi;
 using System.Linq.Expressions;
+using DO;
 
 namespace BL;
 
@@ -305,7 +306,7 @@ public class Program
         Console.WriteLine("enter order ID");
         if (!int.TryParse(Console.ReadLine(), out int ID)) // converts the input to integer
             throw new BO.IlegalDataException("Ilegal ID");
-        Console.WriteLine(Bl.Order.GetOrderDetails(ID)); ;// printing description.
+        Console.WriteLine(Bl.Order.GetOrderDetails(o=>o.Value.ID == ID)); ;// printing description.
     }
     private static void UpdateDelivery()
     {

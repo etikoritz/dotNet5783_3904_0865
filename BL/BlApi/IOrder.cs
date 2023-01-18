@@ -24,7 +24,7 @@ namespace BlApi
         /// </summary>
         /// <param name="orderID"></param>
         /// <returns></returns>
-        public Order GetOrderDetails(int orderID);
+        public BO.Order GetOrderDetails(Func<DO.Order?, bool>? condition);
 
         /// <summary>
         /// Update order delivery date in Dal and BO
@@ -54,7 +54,7 @@ namespace BlApi
         /// </summary>
         /// <param name="orderID"></param>
         /// <returns></returns>
-        public void UpdateOrderByManager(int orderID, int productID, string action, int amount);
+        public void UpdateOrderByManager(int orderID, int productID, string action, int amount=1);
         public void addAmuntToItemInOrder(int orderID, int productID, int amount);
 
     }

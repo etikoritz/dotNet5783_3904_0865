@@ -96,6 +96,7 @@ public partial class ProductListWindow : Window
     private void orderButton_Click(object sender, RoutedEventArgs e)
     {
         orderListView.Visibility = Visibility.Visible;
+        addProductButton.Visibility = Visibility.Hidden;
     }
 
     private void productButton_Click(object sender, RoutedEventArgs e)

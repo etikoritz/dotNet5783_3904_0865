@@ -58,7 +58,7 @@ public partial class MainWindow : Window
         {
             try
             {
-                order = bl.Order.GetOrderDetails(orderID);
+                order = bl.Order.GetOrderDetails(o=>o.Value.ID == orderID);
                 TrackOrderWindow trackOrderWindow = new TrackOrderWindow(order);
                 trackOrderWindow.Show();
             }

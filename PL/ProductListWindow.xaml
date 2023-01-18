@@ -43,35 +43,35 @@
                     <GridViewColumn Header="Id" Width="Auto">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding ID}" TextAlignment="Center" Margin="-5,-1" Padding="10"/>
+                                <TextBlock Text="{Binding ID}" Width="auto" TextAlignment="Center" Margin="-5,-1" Padding="10"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                     <GridViewColumn Header="Name" Width="Auto">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Name}" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
+                                <TextBlock Text="{Binding Name}" TextAlignment="Center" Margin="-5,-1" Padding="2" Width="auto"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                     <GridViewColumn Header="Category" Width="Auto">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Category}" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
+                                <TextBlock Text="{Binding Category}" Width="auto" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                     <GridViewColumn Header="Price" Width="Auto">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Price}" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
+                                <TextBlock Text="{Binding Price}" Width="auto" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                     <GridViewColumn Header="In stock" Width="Auto">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding inStock}" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
+                                <TextBlock Text="{Binding inStock}" Width="auto" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -91,38 +91,38 @@
             </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Id" Width="Auto">
+                    <GridViewColumn Header="Id" Width="90">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding ID}" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
+                                <TextBlock Text="{Binding ID}" Width="auto" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Customer Name" Width="Auto">
+                    <GridViewColumn Header="Customer Name" Width="137">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding CustomerName}" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
+                                <TextBlock Text="{Binding CustomerName}" Width="auto" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Status" Width="Auto">
+                    <GridViewColumn Header="Status" Width="137">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Status}" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
+                                <TextBlock Text="{Binding Status}" Width="auto" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Amount Of Items" Width="Auto">
+                    <GridViewColumn Header="Amount Of Items" Width="137">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding AmountOfItems}" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
+                                <TextBlock Text="{Binding AmountOfItems}" Width="auto" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Total Price" Width="Auto">
+                    <GridViewColumn Header="Total Price" Width="137">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding TotalPrice}" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
+                                <TextBlock Text="{Binding TotalPrice}" Width="auto" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

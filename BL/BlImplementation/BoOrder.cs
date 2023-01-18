@@ -96,8 +96,8 @@ internal class BoOrder : BlApi.IOrder
         }
         return ordersList;
     }
-    
-   
+
+
 
     /// <summary>
     /// Get order details by its ID
@@ -106,13 +106,13 @@ internal class BoOrder : BlApi.IOrder
     /// <returns>the order</returns>
     /// <exception cref="BO.BODataNotExistException"></exception>
     /// <exception cref="BO.NegativeIdException"></exception>
-    public BO.Order GetOrderDetails(int orderID)
+    public BO.Order GetOrderDetails(Func<DO.Order?, bool>? condition)
     {
-        if (orderID > 0)
-        {
+        //if (condition > 0)
+        //{
             try
             {
-                DO.Order dalOrder=(DO.Order)DalApi.Factory.Get().Order?.Get(o=> o?.ID ==orderID);
+                DO.Order dalOrder=(DO.Order)DalApi.Factory.Get().Order?.Get(condition);
                 //DO.Order dalOrder = (DO.Order)Dal.Order.GetById(orderID);
                 BO.Order order = new()
                 {
@@ -157,7 +157,7 @@ internal class BoOrder : BlApi.IOrder
                         };
 
                         item1.TotalPrice = item.Price * item.Amount;
-                        item1.Name = DalApi.Factory.Get().Product.GetById(item.ProductID).Value.Name;
+                        item1.Name = DalApi.Factory.Get().Product.GetById(item.ProductID)?.Name;////////////////////////////////////////////////////////////////////////////////
                         order.Items.Add(item1);
                     }
                 }
@@ -167,9 +167,9 @@ internal class BoOrder : BlApi.IOrder
             {
                 throw new BO.BODataNotExistException(ex.Message);
             }
-        }
-        else
-            throw new BO.NegativeIdException();
+       // }
+        //else
+            //throw new BO.NegativeIdException();
     }
 
     /// <summary>
@@ -188,7 +188,7 @@ internal class BoOrder : BlApi.IOrder
             if (dalOrder.ShipDate == null || dalOrder.ShipDate > DateTime.Today)
             {
                 //update BO entity
-                order = GetOrderDetails(orderID);
+                order = GetOrderDetails(o=>o.Value.ID== orderID);
                 order.ShipDate = DateTime.Now;
                 //update DO entity
                 dalOrder.ShipDate = DateTime.Now;
@@ -227,7 +227,7 @@ internal class BoOrder : BlApi.IOrder
             if (dalOrder.ShipDate != null && dalOrder.DeliveryDate == null)
             {
                 //update BO entity
-                order = GetOrderDetails(orderID);
+                order = GetOrderDetails(o=>o.Value.ID==orderID);
                 order.DeliveryDate = DateTime.Today;
                 //update DO entity
                 dalOrder.DeliveryDate = DateTime.Today;
@@ -443,8 +443,37 @@ internal class BoOrder : BlApi.IOrder
                     Price = DalApi.Factory.Get().Product.GetById(productID).Value.Price,
 
                 };
-                NewItemDal.Amount = Amount;
+                NewItemDal.Amount += Amount;
                 NewItemDal.TotalPrice += Amount * orderItems[i].Value.Price;
+                Dal.OrderItem.Update(NewItemDal);
+                return;
+            }
+        }
+    }
+
+    public void SubtractAmuntToItemInOrder(int orderID, int productID, int amount)
+    {
+        List<DO.OrderItem?> orderItems = (List<DO.OrderItem?>)DalApi.Factory.Get().OrderItem.GetList();
+        DO.Product product = (DO.Product)DalApi.Factory.Get().Product?.Get(p=>p?.ID==productID);
+        for (int i = 0; i < orderItems.Count; i++)
+        {
+            if (orderItems[i]?.ProductID == productID && orderItems[i]?.OrderID == orderID)
+            {
+                int Amount = 0;
+                Amount = orderItems[i].Value.Amount - amount;
+                product.InStock += amount;
+                Dal.Product.Update(product);
+
+                DO.OrderItem NewItemDal = new()
+                {
+                    ID = orderID,
+                    OrderID = orderID,
+                    ProductID = productID,
+                    Price = DalApi.Factory.Get().Product.Get(p=> p?.ID==productID).Value.Price,
+
+                };
+                NewItemDal.Amount = Amount;
+                NewItemDal.TotalPrice -= amount * orderItems[i].Value.Price;
                 Dal.OrderItem.Update(NewItemDal);
                 return;
             }
@@ -462,7 +491,7 @@ internal class BoOrder : BlApi.IOrder
     /// <param name="amount"></param>
     /// <exception cref="OutOfStockProductException"></exception>
     /// 
-    public void UpdateOrderByManager(int orderID, int productID, string action, int amount)
+    public void UpdateOrderByManager(int orderID, int productID, string action, int amount=1)
     {
         //deleting an item from the order
         if (action == "remove")
@@ -480,6 +509,11 @@ internal class BoOrder : BlApi.IOrder
         if (action == "addAmount")
         {
             addAmuntToItemInOrder(orderID, productID, amount);
+        }
+
+        if (action == "subtract")
+        {
+            SubtractAmuntToItemInOrder(orderID, productID, amount);
         }
     }
 }
