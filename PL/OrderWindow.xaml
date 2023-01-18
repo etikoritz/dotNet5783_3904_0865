@@ -43,10 +43,10 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Product ID" Width="Auto">
+                    <GridViewColumn Header="Product ID" Width="auto">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Path=ProductID}" Width="Auto" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
+                                <TextBlock Text="{Binding Path=ProductID}" Width="auto" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

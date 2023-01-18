@@ -46,6 +46,7 @@ public partial class ProductListWindow : Window
     private void Clear_Click(object sender, RoutedEventArgs e)
     {
         productListView.ItemsSource = bl.Product.GetProductList(p => p != null);
+        Clear.Visibility = Visibility.Hidden;
     }
 
     /// <summary>
@@ -95,8 +96,10 @@ public partial class ProductListWindow : Window
 
     private void orderButton_Click(object sender, RoutedEventArgs e)
     {
-        orderListView.Visibility = Visibility.Visible;
         addProductButton.Visibility = Visibility.Hidden;
+        productListView.Visibility=Visibility.Hidden;
+        orderListView.Visibility = Visibility.Visible;
+        
     }
 
     private void productButton_Click(object sender, RoutedEventArgs e)
