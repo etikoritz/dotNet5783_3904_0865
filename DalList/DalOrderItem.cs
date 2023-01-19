@@ -67,16 +67,15 @@ internal class DalOrderItem: IOrderItem
     {
         for (int i = 0; i < DataSource.orderItemList.Count; i++)
         {
-            //if (DataSource.orderItemList[i]?.ID == id)
             if (DataSource.orderItemList[i]?.ID == id)
             {
-                DataSource.orderItemList.RemoveAt(i);
-                for (int j = i+1; j < DataSource.orderList.Count; j++)//נבצע דריסה של האובייקט ונקדם את האובייקטים במערך
+                DataSource.orderItemList.Remove(DataSource.orderItemList.FirstOrDefault(o=>((o?.OrderID== DataSource.orderItemList[i]?.OrderID) &&(o?.ProductID== DataSource.orderItemList[i]?.ProductID))));
+                for (int j = i + 1; j < DataSource.orderList.Count; j++)//נבצע דריסה של האובייקט ונקדם את האובייקטים במערך
                 {
                     DataSource.orderItemList[j] = DataSource.orderItemList[j + 1];
                 }
-                //DataSource.Confing.indexOrderItem--;
-                return;
+                    //DataSource.Confing.indexOrderItem--;
+                    return;
             }
         }
         throw new DataNotExistException();

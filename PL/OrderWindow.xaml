@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="Order" Height="450" Width="800"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Activated="refreshWindow"
+        Title="Order" Height="450" Width="800"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.Background>
@@ -32,7 +33,7 @@
         <Label Content="Date of payment" HorizontalAlignment="Left" Margin="26,316,0,0" VerticalAlignment="Top" Grid.Row="1"/>
         <Label Content="Total price" HorizontalAlignment="Left" Margin="301,324,0,0" VerticalAlignment="Top" Grid.Row="1"/>
         <Label Content="Items" HorizontalAlignment="Left" Margin="301,70,0,0" VerticalAlignment="Top" Grid.Row="1"/>
-        <ListView x:Name="itemsList" Margin="301,101,107,122" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount= 7}">
+        <ListView x:Name="itemsList" Margin="301,101,107,122" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount= 7}" ItemsSource="{Binding}">
             <ListView.View>
                 <GridView>
                     
@@ -102,6 +103,8 @@
         <TextBox HorizontalAlignment="Left" Margin="246,21,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Path=Status}" VerticalAlignment="Top" Width="110" Height="22"/>
         <Button x:Name="UpdateOrderB" Content="Update order" HorizontalAlignment="Left" Margin="626,374,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16"/>
         <Button x:Name="AddOrderB" Content="Add order" HorizontalAlignment="Left" Margin="626,374,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16" Width="98"/>
+
+        <!--Activated="refreshWindow"-->
 
     </Grid>
 </Window>
