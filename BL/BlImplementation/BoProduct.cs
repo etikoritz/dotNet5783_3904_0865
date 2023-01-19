@@ -29,25 +29,16 @@ internal class BoProduct :  BlApi.IProduct
 
         //creates new BO products list
         List<BO.ProductForList> productsList = new();
-
-        
-
-        
-        ///putting product from the DO list into the BO list
-        foreach (DO.Product product in DalProductList)
-        {
-            
-            //creates new ProductForList items from the dal products list
-            BO.ProductForList p = new()
-            {
-                ID = product.ID,
-                Name = product.Name,
-                Category = product.Category,
-                Price = product.Price,
-                inStock = product.InStock
-            };
-            productsList.Add(p);
-        }
+        productsList.AddRange(from DO.Product product in DalProductList//creates new ProductForList items from the dal products list
+                              let p = new BO.ProductForList()
+                              {
+                                  ID = product.ID,
+                                  Name = product.Name,
+                                  Category = product.Category,
+                                  Price = product.Price,
+                                  inStock = product.InStock
+                              }
+                              select p);
         //return from prod in Dal. where condition(prod)==true select prod;
         return productsList;
     }
@@ -239,28 +230,19 @@ internal class BoProduct :  BlApi.IProduct
 
         //creates new BO products list
         List<BO.ProductForList> productsList = new();
-
-
-
-
-        ///putting product from the DO list into the BO list
-        foreach (DO.Product product in DalProductList)
-        {
-            //if (product.Category == (DO.Enums.Category)category)
-            //{
-            BO.ProductForList p = new()
-            {
-                ID = product.ID,
-                Name = product.Name,
-                Category = product.Category,
-                Price = product.Price,
-                inStock = product.InStock
-            };
-            productsList.Add(p);
-            //}
-            //creates new ProductForList items from the dal products list
-
-        }
+        productsList.AddRange(from DO.Product product in DalProductList//if (product.Category == (DO.Enums.Category)category)
+                                                                       //{
+                              let p = new BO.ProductForList()
+                              {
+                                  ID = product.ID,
+                                  Name = product.Name,
+                                  Category = product.Category,
+                                  Price = product.Price,
+                                  inStock = product.InStock
+                              }
+                              select p//}
+                                      //creates new ProductForList items from the dal products list
+);
         return productsList;
     }
 }
