@@ -66,8 +66,13 @@ public partial class ProductListWindow : Window
     /// </summary>
     public void RefreshProductListView()
     {
-        this.productListView.ItemsSource = bl.Product.GetProductList(p => p != null);
+        this.productListView.ItemsSource = bl?.Product.GetProductList(p => p != null);
     }
+    public void RefreshOrderListView()
+    {
+        this.orderListView.ItemsSource = bl?.Order.GetOrderList(p => p != null);
+    }
+
 
     /// <summary>
     /// refresh the list view of the products
@@ -77,6 +82,7 @@ public partial class ProductListWindow : Window
     private void refreshWindow(object sender, EventArgs e)
     {
         RefreshProductListView();
+        RefreshOrderListView();
     }
     private DataTable dt = new DataTable();
     private void productListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)

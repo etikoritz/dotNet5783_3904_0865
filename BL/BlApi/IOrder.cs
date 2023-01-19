@@ -16,7 +16,7 @@ namespace BlApi
         /// --Manager screen--
         /// </summary>
         /// <returns>BO order list</returns>
-        public IEnumerable<OrderForList?> GetOrderList();
+        public IEnumerable<OrderForList?> GetOrderList(Func<BO.Product?, bool>? condition = null);
 
         /// <summary>
         /// get order details by its ID
