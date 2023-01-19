@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Reflection.Emit;
 using static Dal.DataSource;
 using static DO.Enums;
+using System.Linq;
 
 namespace Dal;
 
@@ -101,13 +102,14 @@ internal static class DataSource
                 
             }
             //for to inisialize the price with the same price that was inisialized in product list
-            foreach (var item in productList)
+            foreach (var item in
+            from item in productList
+            where orderItem.ProductID == item?.ID
+            select item)
             {
-                if (orderItem.ProductID == item?.ID)
-                {
-                    orderItem.Price = item.Value.Price;
-                }
+                orderItem.Price = item.Value.Price;
             }
+
             orderItemList.Add(orderItem);
         }
     }

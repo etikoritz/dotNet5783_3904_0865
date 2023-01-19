@@ -63,37 +63,35 @@ internal class BoOrder : BlApi.IOrder
 
         //creates new BO orders list
         List<BO.OrderForList> ordersList = new();
-
-        foreach (DO.Order order in DalOrdersList)
+        foreach (var (order, ord) in from DO.Order order in DalOrdersList
+                                     //creates new OrderForList items from the dal orders list
+                                     let ord = new BO.OrderForList()
+                                     {
+                                         ID = order.ID,
+                                         CustomerName = order.CustomerName,
+                                     }
+                                     select (order, ord))
         {
-            //creates new OrderForList items from the dal orders list
-            BO.OrderForList ord = new()
-            {
-                ID = order.ID,
-                CustomerName = order.CustomerName,
-            };
             //order Status
             ord.Status = OrderStatus(order);
-
             ord.AmountOfItems = 0;
             //order TotalPrice
             ord.TotalPrice = 0;
-
             //List<DO.OrderItem?> orderItemList = (List<DO.OrderItem?>)dalList.OrderItem.GetList();
             List<DO.OrderItem?> orderItemList = (List<DO.OrderItem?>)DalApi.Factory.Get().OrderItem?.GetList();
             //to get all the products from the specific order
-            foreach (DO.OrderItem item in orderItemList)
+            foreach (var item in
+            from DO.OrderItem item in orderItemList
+            where item.OrderID == order.ID
+            select item)
             {
-                if (item.OrderID == order.ID)
-                {
-                    ord.AmountOfItems += item.Amount;
-                    ord.TotalPrice += item.Price * item.Amount;
-                }
+                ord.AmountOfItems += item.Amount;
+                ord.TotalPrice += item.Price * item.Amount;
             }
-
             //Add the new order to the list
             ordersList.Add(ord);
         }
+
         return ordersList;
     }
 
@@ -132,36 +130,35 @@ internal class BoOrder : BlApi.IOrder
                 //List<DO.OrderItem?> orderItemList = (List<DO.OrderItem?>)dalList.OrderItem?.GetList();
                 List<DO.OrderItem?> orderItemList = (List<DO.OrderItem?>)DalApi.Factory.Get().OrderItem?.GetList();
                 //to get all the products from the specific order
-                foreach (DO.OrderItem item in orderItemList)
+                foreach (var item in
+                         from DO.OrderItem item in orderItemList
+                         where item.OrderID == order.ID
+                         select item)
                 {
-                    if (item.OrderID == order.ID)
-                    {
-                        order.TotalPrice += item.Price * item.Amount;
-                    }
+                    order.TotalPrice += item.Price * item.Amount;
                 }
 
 
-                //order Items
-                order.Items = new List<BO.OrderItem>();
+            //order Items
+            order.Items = new List<BO.OrderItem>();
                 List<DO.OrderItem?> orderItemList2 = (List<DO.OrderItem?>)DalApi.Factory.Get().OrderItem?.GetList();
-                foreach (DO.OrderItem item in orderItemList2)
-                {
-                    if (item.OrderID == order.ID)
-                    {
-                        BO.OrderItem item1 = new()
-                        {
-                            ID = item.ID,
-                            ProductID = item.ProductID,
-                            Price = item.Price,
-                            Amount = item.Amount
-                        };
+            foreach (var (item, item1) in from DO.OrderItem item in orderItemList2
+                                          where item.OrderID == order.ID
+                                          let item1 = new BO.OrderItem()
+                                          {
+                                              ID = item.ID,
+                                              ProductID = item.ProductID,
+                                              Price = item.Price,
+                                              Amount = item.Amount
+                                          }
+                                          select (item, item1))
+            {
+                item1.TotalPrice = item.Price * item.Amount;
+                item1.Name = DalApi.Factory.Get().Product.GetById(item.ProductID)?.Name;////////////////////////////////////////////////////////////////////////////////
+                order.Items.Add(item1);
+            }
 
-                        item1.TotalPrice = item.Price * item.Amount;
-                        item1.Name = DalApi.Factory.Get().Product.GetById(item.ProductID)?.Name;////////////////////////////////////////////////////////////////////////////////
-                        order.Items.Add(item1);
-                    }
-                }
-                return order;
+            return order;
             }
             catch (DO.DataNotExistException ex)
             {
@@ -312,21 +309,20 @@ internal class BoOrder : BlApi.IOrder
         //    orderForList?.Remove(orderForList.Find(o => o?.ID == orderID));
         //}
         bool OnlyOneItemInOrder = true;
-        foreach (var item in orderItems)
+        foreach (var item in from item in orderItems
+                             where item?.OrderID == orderID
+                             select item)
         {
-            if (item?.OrderID == orderID)
+            if (item?.ProductID == productID)
             {
-                if (item?.ProductID == productID)
-                {
-                    DO.Product product = (DO.Product)Dal.Product.GetById(productID);
-                    product.InStock += item.Value.Amount;
-                    Dal.Product.Update(product);
-                    Dal.OrderItem.Delete(item.Value.ID);
-                }
-                else
-                {
-                    OnlyOneItemInOrder = false;
-                }
+                DO.Product product = (DO.Product)Dal.Product.GetById(productID);
+                product.InStock += item.Value.Amount;
+                Dal.Product.Update(product);
+                Dal.OrderItem.Delete(item.Value.ID);
+            }
+            else
+            {
+                OnlyOneItemInOrder = false;
             }
         }
 
@@ -344,61 +340,58 @@ internal class BoOrder : BlApi.IOrder
     {
         List<DO.OrderItem?> orderItems = (List<DO.OrderItem?>)DalApi.Factory.Get().OrderItem?.GetList();
         DO.Product product = (DO.Product)DalApi.Factory.Get().Product.GetById(productID);
-       
-        foreach (var item in orderItems)
+        foreach (var _ in from item in orderItems
+                          where item?.OrderID == orderID
+                          where item?.ProductID == productID
+                          select new { })
         {
-            if (item?.OrderID == orderID)
+            if ((product.InStock - 1) >= 0)
             {
-                
-                ///if the product alredy exsist in the order, we will just update it and add 1 to the amount.
-                if (item?.ProductID == productID)
-                { 
-                    if ((product.InStock - 1) >= 0)
-                    {
-                        product.InStock--;
-                        Dal.Product.Update(product);
-                    }
-                    else
-                    {
-                        throw new OutOfStockProductException();
-                    }
-                
-                    addAmuntToItemInOrder(orderID, productID, 1);
-                    return;
-                }
-               
-
+                product.InStock--;
+                Dal.Product.Update(product);
             }
+            else
+            {
+                throw new OutOfStockProductException();
+            }
+
+            addAmuntToItemInOrder(orderID, productID, 1);
+            return;
         }
 
-        foreach (var item in orderItems)
+        foreach (var x in from item in orderItems
+                          where item?.OrderID == orderID
+                          select new { })
         {
-            if (item?.OrderID == orderID)
+            if ((product.InStock - 1) >= 0)
             {
-                    if ((product.InStock - 1) >= 0)
-                    {
-                        product.InStock--;
-                        Dal.Product.Update(product);
-                    }
-                    else
-                    {
-                        throw new OutOfStockProductException();
-                    }
-                    DO.OrderItem NewItemDal = new()
-                    {
-                        OrderID = orderID,
-                        ProductID = productID,
-                        Price = DalApi.Factory.Get().Product.GetById(productID).Value.Price,
-                        Amount = 1,
-                    };
-
-                    int id = DalApi.Factory.Get().OrderItem.Add(NewItemDal);
-                    NewItemDal.ID = id;
-
-                return;
+                product.InStock--;
+                Dal.Product.Update(product);
             }
+            else
+            {
+                throw new OutOfStockProductException();
+            }
+
+            DO.OrderItem NewItemDal = new()
+            {
+                OrderID = orderID,
+                ProductID = productID,
+                Price = DalApi.Factory.Get().Product.GetById(productID).Value.Price,
+                Amount = 1,
+            };
+            int id = DalApi.Factory.Get().OrderItem.Add(NewItemDal);
+            NewItemDal.ID = id;
+            return;
         }
-                return;
+        //foreach (var item in orderForLists)
+        //{
+        //    if (item.ID == orderID)
+        //    {
+        //        orderForLists.Add(item);
+        //    }
+        //}
+        return;
     }
 
     /// <summary>

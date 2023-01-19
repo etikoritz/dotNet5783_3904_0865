@@ -33,7 +33,6 @@ internal class DalOrder : IOrder
     /// <exception cref="DataNotExistException"></exception>
     public Order? GetById(int id)
     {
-
         DO.Order? order = DataSource.orderList.FirstOrDefault(o => o.Value.ID == id);
         if (order == null)
             throw new DataNotExistException();

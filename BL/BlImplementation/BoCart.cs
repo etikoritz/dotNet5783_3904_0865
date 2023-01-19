@@ -19,21 +19,21 @@ internal class BoCart : ICart
     public BO.Cart AddToCart(BO.Cart cart, int id)
     {
         DO.Product product = (DO.Product)Dal.Product.GetById(id);
-        foreach (var item in cart.Items)
+        //item alredy in cart- amount++
+        foreach (var item in
+        from item in cart.Items
+        where item.ProductID == id
+        select item)
         {
-            if (item.ProductID == id)
-            {//item alredy in cart- amount++
-                if (product.InStock - item.Amount >= 0)
-                {
-                    product.InStock -= item.Amount;
-                    item.Amount++;///
-                    item.TotalPrice += product.Price*item.Amount;
-                    Dal.Product.Update(product);
-                    return cart;
-                }
-                else throw new OutOfStockProductException();
+            if (product.InStock - item.Amount >= 0)
+            {
+                product.InStock -= item.Amount;
+                item.Amount++;///
+                item.TotalPrice += product.Price * item.Amount;
+                Dal.Product.Update(product);
+                return cart;
             }
-
+            else throw new OutOfStockProductException();
         }
 
         if (product.InStock > 0)// add the item to cart 
@@ -115,7 +115,7 @@ internal class BoCart : ICart
         
         foreach (var item in cart.Items)
         { 
-            DO.OrderItem orderItem = new()
+            DO.OrderItem orderItem = new DO.OrderItem()
             {
                 ID = order.ID,
                 OrderID = orderId,
@@ -123,23 +123,12 @@ internal class BoCart : ICart
                 Price = item.Price,
                 
             };
-            orderItem.Amount+=item.Amount;////!!!!!!!!!!!1
-            //try
-            //{
+            orderItem.Amount += item.Amount;
             Dal.OrderItem.Add(orderItem);
-            //Dal.Order.Add(order);
             orderlist.Add(order);
-            //List<DO.OrderForList> orderlist = new List<BO.OrderForList>();
-            //orderlist.Add(order);
-            //}
-            //catch///////////////////////
-            //{
-            //    throw;
-            //}
             DO.Product product = (DO.Product)Dal.Product.GetById(item.ProductID);
             product.InStock -= item.Amount;
             Dal.Product.Update(product);
-            //Dal.OrderItem.Add(orderItem);
         }
         return orderId;
     }
@@ -167,11 +156,6 @@ internal class BoCart : ICart
             }
             count++;
         }
-        //foreach(var item in orderForListsData)
-        //{
-
-        //}
-        //orderForLists.
         throw new NotImplementedException();
 
     }
