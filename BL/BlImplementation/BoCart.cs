@@ -115,7 +115,7 @@ internal class BoCart : ICart
         
         foreach (var item in cart.Items)
         { 
-            DO.OrderItem orderItem = new()
+            DO.OrderItem orderItem = new DO.OrderItem()
             {
                 ID = order.ID,
                 OrderID = orderId,
@@ -123,7 +123,7 @@ internal class BoCart : ICart
                 Price = item.Price,
                 
             };
-            orderItem.Amount+=item.Amount;
+            orderItem.Amount += item.Amount;
             Dal.OrderItem.Add(orderItem);
             orderlist.Add(order);
             DO.Product product = (DO.Product)Dal.Product.GetById(item.ProductID);

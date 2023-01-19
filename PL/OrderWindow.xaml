@@ -3,9 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="Order" Height="450" Width="800"
+        Title="Order" Height="550" Width="950"
         Activated="refreshWindow"
         WindowStartupLocation="CenterScreen">
     <Grid>
@@ -21,21 +22,11 @@
             <RowDefinition/>
             <RowDefinition Height="216*"/>
         </Grid.RowDefinitions>
-        <Label Content="order ID" HorizontalAlignment="Left" Margin="26,19,0,0" VerticalAlignment="Top" Grid.Row="1"/>
-        <Label Content="Status" HorizontalAlignment="Left" Margin="199,19,0,0" VerticalAlignment="Top" Grid.Row="1"/>
-        <Label Content="Customer address" HorizontalAlignment="Left" Margin="26,132,0,0" VerticalAlignment="Top" Grid.Row="1"/>
-        <Label Content="Customer email" HorizontalAlignment="Left" Margin="26,101,0,0" VerticalAlignment="Top" Grid.Row="1"/>
-        <Label Content="Customer name" HorizontalAlignment="Left" Margin="26,70,0,0" VerticalAlignment="Top" Grid.Row="1"/>
-        <Label Content="Delivery date" HorizontalAlignment="Left" Margin="26,230,0,0" VerticalAlignment="Top" Grid.Row="1"/>
-        <Label Content="Ship date" HorizontalAlignment="Left" Margin="26,264,0,0" VerticalAlignment="Top" Grid.Row="1"/>
-        <Label Content="Order date" HorizontalAlignment="Left" Margin="26,197,0,0" VerticalAlignment="Top" Grid.Row="1"/>
-        <Label Content="Date of payment" HorizontalAlignment="Left" Margin="26,316,0,0" VerticalAlignment="Top" Grid.Row="1"/>
-        <Label Content="Total price" HorizontalAlignment="Left" Margin="301,324,0,0" VerticalAlignment="Top" Grid.Row="1"/>
-        <Label Content="Items" HorizontalAlignment="Left" Margin="301,70,0,0" VerticalAlignment="Top" Grid.Row="1"/>
-        <ListView x:Name="itemsList" Margin="301,101,107,122" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount= 7}">
+        <Label Content="Items" HorizontalAlignment="Center" Margin="0,43,0,0" VerticalAlignment="Top" Grid.Row="1" FontWeight="Bold"/>
+        <ListView x:Name="itemsList" Margin="222,82,29,91" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount= 7}">
             <ListView.View>
                 <GridView>
-                    
+
                     <GridViewColumn Header="Name" Width="Auto">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -90,18 +81,129 @@
             </ListView.View>
 
         </ListView>
-        <TextBox HorizontalAlignment="Left" Margin="147,74,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Path=CustomerName}" VerticalAlignment="Top" Width="110" Height="22"/>
-        <TextBox HorizontalAlignment="Left" Margin="147,134,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Path=CustomerAddress}" VerticalAlignment="Top" Width="110" Height="22"/>
-        <TextBox HorizontalAlignment="Left" Margin="147,103,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Path=CustomerEmail}" VerticalAlignment="Top" Width="110" Height="22"/>
-        <TextBox HorizontalAlignment="Left" Margin="147,266,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Path=ShipDate}" VerticalAlignment="Top" Width="110" Height="22"/>
-        <TextBox HorizontalAlignment="Left" Margin="147,232,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Path=DeliveryDate}" VerticalAlignment="Top" Width="110" Height="22"/>
-        <TextBox HorizontalAlignment="Left" Margin="147,197,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Path=OrderDate}" VerticalAlignment="Top" Width="110" Height="22"/>
-        <TextBox HorizontalAlignment="Left" Margin="85,21,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Path=ID}" VerticalAlignment="Top" Width="110" Height="22"/>
-        <TextBox HorizontalAlignment="Left" Margin="147,318,0,0" Grid.Row="1" TextWrapping="Wrap"   Text="{Binding Path=DateOfPayment}" VerticalAlignment="Top" Width="110" Height="22"/>
-        <TextBox HorizontalAlignment="Left" Margin="370,326,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Path=TotalPrice}" VerticalAlignment="Top" Width="110" Height="22"/>
-        <TextBox HorizontalAlignment="Left" Margin="246,21,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Path=Status}" VerticalAlignment="Top" Width="110" Height="22"/>
-        <Button x:Name="UpdateOrderB" Content="Update order" HorizontalAlignment="Left" Margin="626,374,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16"/>
-        <Button x:Name="AddOrderB" Content="Add order" HorizontalAlignment="Left" Margin="626,374,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16" Width="98"/>
+        <TextBox
+            x:Name="NameTextBox"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Width="135"
+            Height="25"
+            materialDesign:HintAssist.HelperText="Customer name"
+            materialDesign:HintAssist.Hint="Name" Margin="38,0,0,408" Grid.Row="1">
+            <TextBox.Text>
+                <Binding Path="CustomerName" UpdateSourceTrigger="PropertyChanged"/>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox
+            x:Name="EmailTextBox"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Width="135"
+            Height="25"
+            materialDesign:HintAssist.HelperText="Email"
+            materialDesign:HintAssist.Hint="Email" Margin="38,0,0,352" Grid.Row="1">
+            <TextBox.Text>
+                <Binding Path="CustomerEmail" UpdateSourceTrigger="PropertyChanged"/>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox
+            x:Name="AdressTextBox"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Width="135"
+            Height="25"
+            materialDesign:HintAssist.HelperText="Adress"
+            materialDesign:HintAssist.Hint="Adress" Margin="38,0,0,297" Grid.Row="1">
+            <TextBox.Text>
+                <Binding Path="CustomerAddress" UpdateSourceTrigger="PropertyChanged"/>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox
+            x:Name="ShippingTextBox"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Width="135"
+            Height="25"
+            materialDesign:HintAssist.HelperText="Shipping date"
+            materialDesign:HintAssist.Hint="Shipping date" Margin="38,0,0,120" Grid.Row="1">
+            <TextBox.Text>
+                <Binding Path="ShipDate" UpdateSourceTrigger="PropertyChanged"/>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox
+            x:Name="DeliveryTextBox"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Width="135"
+            Height="25"
+            materialDesign:HintAssist.HelperText="Delivery date"
+            materialDesign:HintAssist.Hint="Delivery date" Margin="38,0,0,181" Grid.Row="1">
+            <TextBox.Text>
+                <Binding Path="DeliveryDate" UpdateSourceTrigger="PropertyChanged"/>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox
+            x:Name="OrderDateTextBox"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Width="135"
+            Height="25"
+            materialDesign:HintAssist.HelperText="Order date"
+            materialDesign:HintAssist.Hint="Date" Margin="38,0,0,237" Grid.Row="1">
+            <TextBox.Text>
+                <Binding Path="OrderDate" UpdateSourceTrigger="PropertyChanged"/>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox
+            x:Name="OrderIdTextBox"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Width="135"
+            Height="25"
+            materialDesign:HintAssist.HelperText="Order ID"
+            materialDesign:HintAssist.Hint="Order ID" Margin="38,0,0,464" Grid.Row="1">
+            <TextBox.Text>
+                <Binding Path="ID" UpdateSourceTrigger="PropertyChanged"/>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox
+            x:Name="PaymentDateTextBox"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Width="135"
+            Height="25"
+            materialDesign:HintAssist.HelperText="Payment date"
+            materialDesign:HintAssist.Hint="Payment date" Margin="38,0,0,60" Grid.Row="1">
+            <TextBox.Text>
+                <Binding Path="DateOfPayment" UpdateSourceTrigger="PropertyChanged"/>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox
+            x:Name="TotalPriceTextBox"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Width="135"
+            Height="25"
+            materialDesign:HintAssist.HelperText="Total price"
+            materialDesign:HintAssist.Hint="Total price" Margin="222,0,0,34" Grid.Row="1">
+            <TextBox.Text>
+                <Binding Path="TotalPrice" UpdateSourceTrigger="PropertyChanged"/>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox
+            x:Name="StatusTextBox"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Width="135"
+            Height="25"
+            materialDesign:HintAssist.HelperText="Status"
+            materialDesign:HintAssist.Hint="Status" Margin="191,0,0,464" Grid.Row="1">
+            <TextBox.Text>
+                <Binding Path="Status" UpdateSourceTrigger="PropertyChanged"/>
+            </TextBox.Text>
+        </TextBox>
+
+        <Button x:Name="UpdateOrderB" Content="Update order" HorizontalAlignment="Left" Margin="626,466,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16"/>
+        <Button x:Name="AddOrderB" Content="Add order" HorizontalAlignment="Left" Margin="626,463,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16" Width="98"/>
 
     </Grid>
 </Window>
