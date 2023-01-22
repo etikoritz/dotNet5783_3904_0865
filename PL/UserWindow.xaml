@@ -62,13 +62,15 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    
+
                 </GridView>
             </ListView.View>
         </ListView>
         <Button x:Name="cartButton" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="14,14,0,0" Height="50" Width="60" Background="Transparent" BorderBrush="Transparent" Click="cartButton_Click">
             <materialDesign:PackIcon Kind="Cart" Height="30" Width="30" />
         </Button>
-
+        <Label Content="Hellow"  HorizontalAlignment="Left" Margin="95,14,0,0" VerticalAlignment="Top" Height="50" Width="144" FontSize="24" FontWeight="Bold"/>
+        <Label Content="{Binding Path=CustomerName, Source= Cart}"  HorizontalAlignment="Left" Margin="202,14,0,0" VerticalAlignment="Top" Height="50" Width="156" FontSize="24"/>
+         
     </Grid>
 </Window>

@@ -38,7 +38,7 @@ public interface ICart
     /// <param name="customerName"></param>
     /// <param name="customerEmail"></param>
     /// <param name="customerAddress"></param>
-    public int ConfirmOrder(Cart cart, string customerName, string customerEmail, string customerAddress);
+    public int ConfirmOrder(Cart cart);
 
     public IEnumerable<BO.OrderItem> GetItemInCartList(BO.Cart cart);
 }

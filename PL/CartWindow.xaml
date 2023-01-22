@@ -48,24 +48,28 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="" Width="auto">
+                    <GridViewColumn Header="-" Width="auto">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button x:Name="subtractItemButton" Content="-" Width="20" Click="subtractItemButton_Click" />
+                                <Button x:Name="subtractItemButton" Width="20" Click="subtractItemButton_Click" 
+                                        Content="{materialDesign:PackIcon Minus}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="" Width="auto">
+                    <GridViewColumn Header="+" Width="auto">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button x:Name="addToItemButton" Content="+" Width="20" Click="addToItemButton_Click"  />
+                                <Button x:Name="addToItemButton"  Width="20" Click="addToItemButton_Click" 
+                                        Content="{materialDesign:PackIcon Plus}"
+                                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" IsDefault="True"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="" Width="auto">
+                    <GridViewColumn Header="X" Width="auto">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button x:Name="RemoveItemButton" Content="X" Width="20" Click="RemoveItemButton_Click"  />
+                                <Button x:Name="RemoveItemButton" Width="20" Click="RemoveItemButton_Click" 
+                                        Content="{materialDesign:PackIcon Close}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

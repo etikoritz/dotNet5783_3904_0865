@@ -38,9 +38,22 @@ namespace PL
             {
                 MessageBox.Show("Please fill all the fields");
             }
+            if(!(((BO.Cart)DataContext).CustomerAddress is string))
+            {
+                MessageBox.Show("ivalid address input, please try again");
+            }
+            if (!(((BO.Cart)DataContext).CustomerName is string))
+            {
+                MessageBox.Show("ivalid Name input, please try again");
+            }
+            if (!((((BO.Cart)DataContext).CustomerEmail)).Contains("@gmail.com"))
+            {
+                MessageBox.Show("ivalid Email input, please try again");
+            }
             else
             {
                 new UserWindow(((BO.Cart)DataContext)).Show();
+                this.Close();
             }
         }
         //private Trigger UpdateSourceTrigger PropertyChanged();

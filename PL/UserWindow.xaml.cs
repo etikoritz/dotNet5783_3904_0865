@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,6 +30,12 @@ namespace PL
             cartID++;
             cart = cartWithUserDetails;
             cart.Items = new List<BO.OrderItem>();
+            //var CustomerName= cart.CustomerName;
+            DataContext = new BO.Cart(); 
+
+
+            ((BO.Cart)DataContext).Amount= 0;
+            //()DataContext = cart.CustomerName;
             //cart.Items;
         }
         public UserWindow()
@@ -65,16 +72,10 @@ namespace PL
         {
             var button = (Button)sender;
             var item = (BO.ProductForList)button.DataContext;
-            BO.ProductItem productItem = new()
-            {
-                ID = item.ID,
-                Name = item.Name,
-                Amount = 1,
-                Category = item.Category,
-                Price = item.Price,
-            };
-            
             bl?.Cart.AddToCart(cart, item.ID);
+            ///(cart?.Amount)(this.DataContext)=cart.Items.Count;
+            ///
+            //((BO.Cart)DataContext).Amount++;
         }
     }
 }

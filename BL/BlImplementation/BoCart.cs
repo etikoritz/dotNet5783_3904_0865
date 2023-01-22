@@ -32,15 +32,15 @@ internal class BoCart : ICart
             {
                 if (item?.ProductID == id)
                 {
-                    if (product.InStock - item.Amount >= 0)
-                    {
+                    //if (product.InStock - item.Amount >= 0)
+                    //{
                         product.InStock -= item.Amount;
                         item.Amount++;///
                         item.TotalPrice += product.Price * item.Amount;
                         Dal.Product.Update(product);
                         return cart;
-                    }
-                    else throw new OutOfStockProductException();
+                    //}
+                    //else throw new OutOfStockProductException();
                 }
             }
         }
@@ -93,7 +93,7 @@ internal class BoCart : ICart
     /// and removing products from stock
     /// --Cart screen or Completing order screen--
     /// </summary>
-    public int ConfirmOrder(BO.Cart cart, string customerName, string customerEmail, string customerAddress)
+    public int ConfirmOrder(BO.Cart cart)
     {
         foreach (var item in cart.Items)
         {
@@ -134,9 +134,9 @@ internal class BoCart : ICart
         DO.Order order = new()
         {
             //id=Dal.Order.*/
-            CustomerName = customerName,
-            CustomerEmail = customerEmail,
-            CustomerAddress = customerAddress,
+            CustomerName = cart.CustomerName,
+            CustomerEmail = cart.CustomerEmail,
+            CustomerAddress = cart.CustomerAddress,
             OrderDate = DateTime.Today,
             ShipDate=DateTime.Today,
             DeliveryDate=DateTime.Today,
@@ -175,13 +175,13 @@ internal class BoCart : ICart
         {
             if(item.ProductID== productId)
             {
-                if(product.InStock-newAmount<=0)
-                {
-                    throw new OutOfStockProductException();
-                }
-                cart.TotalPrice -= item.Amount * item.Price;
-                item.Amount = newAmount;
-                cart.TotalPrice += item.Price * newAmount;
+                //if(product.InStock-newAmount<=0)
+                //{
+                //    throw new OutOfStockProductException();
+                //}
+                //cart.TotalPrice -= item.Amount * item.Price;
+                item.Amount -= newAmount;
+                cart.TotalPrice -= item.Price * newAmount;
                 cart.Items[count]=item;
                 return cart ;
             }
