@@ -6,8 +6,17 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"    
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="CustomerDetalesWindow" Height="450" Width="400">
+        Title="CustomerDetalesWindow" Height="450" Width="400"
+        WindowStartupLocation="CenterScreen">
     <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="WhiteSmoke" Offset="0.0" />
+                <GradientStop Color="#cd91ce" Offset="0.5" />
+                <GradientStop Color="#FF9B629D" Offset="0.8" />
+                <GradientStop Color="#6c366e" Offset="1.0" />
+            </LinearGradientBrush>
+        </Grid.Background>
         <TextBox
             x:Name="AddressTextBox"
             HorizontalAlignment="Left"
@@ -15,7 +24,7 @@
             Width="135"
             Height="25"
             materialDesign:HintAssist.HelperText="Enter your Address"
-            materialDesign:HintAssist.Hint="Address" Margin="108,0,0,118">
+            materialDesign:HintAssist.Hint="Address" Margin="125,0,0,132">
             <TextBox.Text>
                 <Binding Path="CustomerAddress" UpdateSourceTrigger="PropertyChanged"/>
             </TextBox.Text>
@@ -28,7 +37,7 @@
             Width="135"
             Height="25"
             materialDesign:HintAssist.HelperText="Enter your Email"
-            materialDesign:HintAssist.Hint="Email" Margin="108,0,0,172">
+            materialDesign:HintAssist.Hint="Email" Margin="125,0,0,186">
         </TextBox>
         <TextBox
             x:Name="NameTextBox"
@@ -38,11 +47,11 @@
             Width="135"
             Height="25"
             materialDesign:HintAssist.HelperText="Enter your Name"
-            materialDesign:HintAssist.Hint="Name" Margin="108,0,0,217">
+            materialDesign:HintAssist.Hint="Name" Margin="125,0,0,231">
         </TextBox>
         <Label Content="Please enter your details:" HorizontalAlignment="Center" Margin="0,119,0,0" VerticalAlignment="Top" FontSize="16"/>
         <Button Content="Proceed" HorizontalAlignment="Left" Margin="151,362,0,0" VerticalAlignment="Top" Click="Button_Click"/>
-        
+
 
 
 
