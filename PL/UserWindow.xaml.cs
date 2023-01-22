@@ -42,12 +42,10 @@ namespace PL
 
         private void CatalogList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (CatalogList.SelectedItems.Count >= 1)
-            {
-                BO.ProductForList prod = (BO.ProductForList)CatalogList.SelectedItems[0];
-                
-                new UpdateProductWindow(prod).Show();
-            }
+            //if (CatalogList.SelectedItems.Count >= 1)
+            //{
+            //    new UpdateProductWindow(item).Show();
+            //}
         }
 
 
