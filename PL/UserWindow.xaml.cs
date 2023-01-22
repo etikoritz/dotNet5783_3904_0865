@@ -1,6 +1,8 @@
 ﻿using BO;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO.Packaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +25,7 @@ namespace PL
         BlApi.IBl? bl = BlApi.Factory.Get();
         static int cartID=999999;
         BO.Cart cart;
+        private static ObservableCollection<BO.OrderItem> orderitems = new ObservableCollection<BO.OrderItem>();
         public UserWindow(BO.Cart cartWithUserDetails)
         {
             InitializeComponent();
@@ -63,7 +66,7 @@ namespace PL
         private void cartButton_Click(object sender, RoutedEventArgs e)
         {
             //להוסיף בדיקה של יוזר ולהגיע לסל הקניות הספציפי שלו
-            new CartWindow(cart).Show();
+            new CartWindow(cart, orderitems).Show();
 
         }
 
@@ -73,9 +76,22 @@ namespace PL
             var button = (Button)sender;
             var item = (BO.ProductForList)button.DataContext;
             bl?.Cart.AddToCart(cart, item.ID);
+            //orderitems.Add(bl.Cart.GetItemInCartList(cart).FirstOrDefault(o => o?.ProductID == item.ID));
             ///(cart?.Amount)(this.DataContext)=cart.Items.Count;
             ///
             //((BO.Cart)DataContext).Amount++;
+            
+            if(orderitems.Contains(bl?.Cart.GetItemInCartList(cart).FirstOrDefault(o => o?.ProductID == item.ID)))
+            {
+                BO.OrderItem updateItem = cart.Items.FirstOrDefault(p => p?.ProductID == item.ID);
+                int index = orderitems.IndexOf(cart.Items.FirstOrDefault(p => p?.ProductID == item.ID));
+                orderitems[index] = updateItem;
+            }
+            else
+            {
+                orderitems.Add(bl?.Cart.GetItemInCartList(cart).FirstOrDefault(o => o?.ProductID == item.ID));
+            }
+            //orderitems. = cart?.Items;
         }
     }
 }

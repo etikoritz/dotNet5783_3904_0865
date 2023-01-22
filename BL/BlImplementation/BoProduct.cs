@@ -240,11 +240,14 @@ internal class BoProduct :  BlApi.IProduct
                                   Price = product.Price,
                                   inStock = product.InStock
                               }
-                              select p//}
-                                      //creates new ProductForList items from the dal products list
-);
+                              select p);//}
+                                      //creates new ProductForList items from the dal products list);
         return productsList;
     }
+    //public IEnumerable<BO.OrderItem?> GetOrderItemList(Func<DO.OrderItem?, bool>? filter = null)
+    //{
+    //    return Dal.OrderItem.GetList(filter);
+    //}
 }
 
 

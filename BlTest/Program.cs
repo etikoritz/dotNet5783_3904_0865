@@ -392,7 +392,7 @@ public class Program
                 case 1: AddToCart(cart); break;
                 case 2: UpdateAmountInCart(cart); break;
                 case 3: OrderCart(cart); break;
-                case 4: GetListItemInCart(cart, customerName, customerEmail, customerAddress); break;
+                case 4: GetListItemInCart(cart); break;
                 default: // back to sub menu
                     break;
             }
@@ -438,11 +438,11 @@ public class Program
         //string? address = Console.ReadLine();
         //Console.WriteLine("enter custumer email:");
         //string? email = Console.ReadLine();
-        int orderID = Bl.Cart.ConfirmOrder(cart, cart.CustomerName, cart.CustomerEmail, cart.CustomerAddress);
+        int orderID = Bl.Cart.ConfirmOrder(cart);
         Console.WriteLine("your order ID is: "+ orderID);
     }
 
-    private static void GetListItemInCart(BO.Cart cart, string customerName, string customerEmail, string customerAddress)
+    private static void GetListItemInCart(BO.Cart cart)
     {
         Console.WriteLine(cart);
         //Bl.Cart.GetItemInCartList(cart, customerName, customerEmail, customerAddress);

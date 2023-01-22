@@ -26,49 +26,41 @@ internal class BoCart : ICart
         //where item.ProductID == id
         //select item)
         List<BO.OrderItem?>? items = cart?.Items;
-        if(cart.Items!=null)
-        {
-            foreach (var item in items)
+        //if(cart.Items!=null)
+        //{
+        //foreach (var item in items)
+        //{
+        //    if (item?.ProductID == id)
+        //    {
+        //if (product.InStock - item.Amount >= 0)
+        //if(items?.Count!=0)
+        //{
+            foreach (var item in
+        from item in cart?.Items
+        where item.ProductID == id
+        select item)
             {
-                if (item?.ProductID == id)
-                {
-                    //if (product.InStock - item.Amount >= 0)
-                    //{
-                        product.InStock -= item.Amount;
-                        item.Amount++;///
-                        item.TotalPrice += product.Price * item.Amount;
-                        Dal.Product.Update(product);
-                        return cart;
+                product.InStock -= item.Amount;
+                item.Amount++;
+                item.TotalPrice += product.Price * item.Amount;
+                Dal.Product.Update(product);
+                return cart;
+            }
+        //}
+        
+       
                     //}
                     //else throw new OutOfStockProductException();
-                }
-            }
-        }
+               // }
+           // }
+        //}
 
         //from item
         //{
 
         //}
-        if (cart.Items == null)
-        {
-            BO.OrderItem newItem = new BO.OrderItem//maybe its DO
-            {
-                //ID=orderID,
-                Name = product.Name,
-                ProductID = id,
-                Price = product.Price,
-                TotalPrice = product.Price,
-                Amount = 1
-            };
-            cart.Items[0]=newItem;
-            //product.InStock -= 1;
-            //Dal.Product.Update(product);
-            cart.TotalPrice += product.Price;
-            return cart;
-        }
-
-        if (product.InStock > 0)// add the item to cart 
-        {
+        //if (items?.Count == 0)
+        //{
             BO.OrderItem newItem = new BO.OrderItem//maybe its DO
             {
                 //ID=orderID,
@@ -82,9 +74,27 @@ internal class BoCart : ICart
             //product.InStock -= 1;
             //Dal.Product.Update(product);
             cart.TotalPrice += product.Price;
-            return cart;
-        }
-        else throw new OutOfStockProductException();
+        return cart;
+        //}
+
+        //if (product.InStock > 0)// add the item to cart 
+        //{
+        //    BO.OrderItem newItem = new BO.OrderItem//maybe its DO
+        //    {
+        //        //ID=orderID,
+        //        Name = product.Name,
+        //        ProductID = id,
+        //        Price = product.Price,
+        //        TotalPrice = product.Price,
+        //        Amount = 1
+        //    };
+        //    cart?.Items?.Add(newItem);
+        //    //product.InStock -= 1;
+        //    //Dal.Product.Update(product);
+        //    cart.TotalPrice += product.Price;
+        //    return cart;
+        //}
+        //else throw new OutOfStockProductException();
     }
 
     /// <summary>
@@ -190,11 +200,28 @@ internal class BoCart : ICart
         throw new NotImplementedException();
 
     }
-
-    public IEnumerable<BO.OrderItem?> GetItemInCartList(BO.Cart cart)
+    public BO.Cart? DeleteFromeCart(BO.Cart cart, int ProductId)
     {
-        //List<BO.OrderItem?> items = new List<BO.OrderItem?>();
-        //items = cart.Items;
+        DO.Product product = (DO.Product)Dal.Product.GetById(ProductId);
+        List<BO.OrderItem?> items = cart.Items;
+
+
+        foreach (var item in
+        from item in cart?.Items
+        where item.ProductID == ProductId
+        select item)
+        {
+            product.InStock += item.Amount;
+            items?.Remove(item);
+            item.TotalPrice -= product.Price * item.Amount;
+            Dal.Product.Update(product);
+            
+        }
+        return cart;
+    }
+
+    public IEnumerable<BO.OrderItem> GetItemInCartList(BO.Cart cart)
+    {
         return cart.Items;
     }
 }

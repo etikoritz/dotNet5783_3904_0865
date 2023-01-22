@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -21,17 +22,23 @@ namespace PL
     public partial class CartWindow : Window
     {
         static int count = 0;
+        private ObservableCollection<BO.OrderItem?> items = new ObservableCollection<BO.OrderItem?>();
         BlApi.IBl? bl = BlApi.Factory.Get();
         BO.Cart cart1;
-
+        private void refreshWindow(object sender, EventArgs e)
+        {
+            //RefreshItemListView();
+            Dispatcher.Invoke(() => { }, System.Windows.Threading.DispatcherPriority.Render);
+        }
         public CartWindow()
         {
             InitializeComponent();
         }
-        public CartWindow(BO.Cart cart)
+        public CartWindow(BO.Cart cart, ObservableCollection<BO.OrderItem?> orderItems)
         {
             InitializeComponent();
-            orderItemList.ItemsSource=bl.Cart.GetItemInCartList(cart);
+            orderItemList.ItemsSource=orderItems;
+            //items=orderItems;
             cart1 = cart;
         }
 
@@ -39,27 +46,37 @@ namespace PL
         {
             var button = (Button)sender;
             var item = (BO.OrderItem)button.DataContext;
-            cart1.Items.Remove(item);
-            orderItemList.Items.Remove(item);
+            //cart1?.Items.Remove(item);
+            //orderItemList.Items.Remove(item)
+            // orderItemList.Items.Remove(item));
+            bl?.Cart.DeleteFromeCart(cart1, item.ProductID);
+            //items.Remove(item);
+            DataContext = items;
+            orderItemList.Items.Refresh();
+            //orderItemList.item.
+            //orderItemList.ItemsSource = bl?.Cart.GetItemInCartList(cart1);
+            //List<BO.OrderItem> orderItems=bl?.OrderItem.
             //bl?.Cart.GetItemInCartList(cart1).Select(o=>o?.ProductID==item.ProductID).r;
-            orderItemList.Items.DeferRefresh();
+            //orderItemList.Items.DeferRefresh();
         }
+       
 
         private void addToItemButton_Click(object sender, RoutedEventArgs e)
         {
             var button = (Button)sender;
             var item = (BO.OrderItem)button.DataContext;
             bl?.Cart.AddToCart(cart1, item.ProductID);
-            orderItemList.Items.DeferRefresh();
+            DataContext = bl?.Cart.GetItemInCartList(cart1);
+            orderItemList.Items.Refresh();
         }
         private void subtractItemButton_Click(object sender, RoutedEventArgs e)
         {
             var button = (Button)sender;
             var item = (BO.OrderItem)button.DataContext;
             int amount = 1;
-            //orderItemList.Items.
             bl?.Cart.UpdateAmount(cart1, item.ProductID, amount);
-            orderItemList.Items.DeferRefresh();
+            DataContext = bl?.Cart.GetItemInCartList(cart1);
+            orderItemList.Items.Refresh();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

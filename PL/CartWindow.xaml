@@ -60,8 +60,7 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Button x:Name="addToItemButton"  Width="20" Click="addToItemButton_Click" 
-                                        Content="{materialDesign:PackIcon Plus}"
-                                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" IsDefault="True"/>
+                                        Content="{materialDesign:PackIcon Plus}"></Button>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
