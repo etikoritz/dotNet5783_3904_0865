@@ -26,6 +26,10 @@ public partial class ProductListWindow : Window
     BlApi.IBl? bl = BlApi.Factory.Get();
 
 
+    public ProductListWindow(string name, string email, string address)
+    {
+
+    }
 
     public ProductListWindow()
     {

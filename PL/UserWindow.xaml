@@ -17,7 +17,7 @@
                 <GradientStop Color="#6c366e" Offset="1.0" />
             </LinearGradientBrush>
         </Grid.Background>
-        <ListView x:Name="CatalogList" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="37,99,239,71" MouseDoubleClick="CatalogList_MouseDoubleClick">
+        <ListView x:Name="CatalogList" d:ItemsSource="{d:SampleData ItemCount=6}" Margin="37,99,239,71" MouseDoubleClick="CatalogList_MouseDoubleClick">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Id" Width="Auto">
@@ -55,45 +55,20 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
+                    <GridViewColumn Header="Add" Width="auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="addItemButton" Content="+" Width="20" Click="addItemButton_Click"  />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    
                 </GridView>
             </ListView.View>
         </ListView>
         <Button x:Name="cartButton" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="14,14,0,0" Height="50" Width="60" Background="Transparent" BorderBrush="Transparent" Click="cartButton_Click">
             <materialDesign:PackIcon Kind="Cart" Height="30" Width="30" />
         </Button>
-        <TextBox
-            x:Name="NameTextBox"
-            materialDesign:HintAssist.HelperText="Enter your name"
-            materialDesign:HintAssist.Hint="Name" Width="120" Margin="612,117,68,292">
-            <TextBox.Text>
-                <Binding
-                    Path="Name"
-                    UpdateSourceTrigger="PropertyChanged">
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
-        <TextBox
-            x:Name="AdressTextBox"
-            materialDesign:HintAssist.HelperText="Enter your adress"
-            materialDesign:HintAssist.Hint="Adress" Width="120" Margin="612,172,68,237">
-            <TextBox.Text>
-                <Binding
-                    Path="Adress"
-                    UpdateSourceTrigger="PropertyChanged">
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
-        <TextBox
-            x:Name="EmailTextBox"
-            materialDesign:HintAssist.HelperText="Enter your Email"
-            materialDesign:HintAssist.Hint="Email" Width="120" Margin="612,231,68,178">
-            <TextBox.Text>
-                <Binding
-                    Path="Email"
-                    UpdateSourceTrigger="PropertyChanged">
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
 
     </Grid>
 </Window>

@@ -17,5 +17,62 @@
                 <GradientStop Color="#6c366e" Offset="1.0" />
             </LinearGradientBrush>
         </Grid.Background>
+        <ListView x:Name="orderItemList" d:ItemsSource="{d:SampleData ItemCount= 7}" Margin="35,73,156,52">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=Name}" Width="Auto" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Product ID" Width="auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=ProductID}" Width="auto" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Price" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=Price}" Width="Auto" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Amount" Width="Auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=Amount}" Width="Auto" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="" Width="auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="subtractItemButton" Content="-" Width="20" Click="subtractItemButton_Click" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="" Width="auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="addToItemButton" Content="+" Width="20" Click="addToItemButton_Click"  />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="" Width="auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="RemoveItemButton" Content="X" Width="20" Click="RemoveItemButton_Click"  />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+
+            </ListView.View>
+        </ListView>
+        <Button Content="Confirm order" HorizontalAlignment="Left" Margin="668,379,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.015,0.998"/>
     </Grid>
 </Window>

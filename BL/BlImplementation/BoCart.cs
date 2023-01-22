@@ -16,24 +16,55 @@ internal class BoCart : ICart
     //i added idal? the mark in stage 4
     private DalApi.IDal? Dal = DalApi.Factory.Get();
     private List<DO.Order> orderlist = new List<DO.Order>();
+    private List<DO.OrderItem?> itemlist = new List<DO.OrderItem?>();
     public BO.Cart AddToCart(BO.Cart cart, int id)
     {
         DO.Product product = (DO.Product)Dal.Product.GetById(id);
         //item alredy in cart- amount++
-        foreach (var item in
-        from item in cart.Items
-        where item.ProductID == id
-        select item)
+        //foreach (var item in
+        //from item in cart.Items
+        //where item.ProductID == id
+        //select item)
+        List<BO.OrderItem?>? items = cart?.Items;
+        if(cart.Items!=null)
         {
-            if (product.InStock - item.Amount >= 0)
+            foreach (var item in items)
             {
-                product.InStock -= item.Amount;
-                item.Amount++;///
-                item.TotalPrice += product.Price * item.Amount;
-                Dal.Product.Update(product);
-                return cart;
+                if (item?.ProductID == id)
+                {
+                    if (product.InStock - item.Amount >= 0)
+                    {
+                        product.InStock -= item.Amount;
+                        item.Amount++;///
+                        item.TotalPrice += product.Price * item.Amount;
+                        Dal.Product.Update(product);
+                        return cart;
+                    }
+                    else throw new OutOfStockProductException();
+                }
             }
-            else throw new OutOfStockProductException();
+        }
+
+        //from item
+        //{
+
+        //}
+        if (cart.Items == null)
+        {
+            BO.OrderItem newItem = new BO.OrderItem//maybe its DO
+            {
+                //ID=orderID,
+                Name = product.Name,
+                ProductID = id,
+                Price = product.Price,
+                TotalPrice = product.Price,
+                Amount = 1
+            };
+            cart.Items[0]=newItem;
+            //product.InStock -= 1;
+            //Dal.Product.Update(product);
+            cart.TotalPrice += product.Price;
+            return cart;
         }
 
         if (product.InStock > 0)// add the item to cart 
@@ -47,7 +78,7 @@ internal class BoCart : ICart
                 TotalPrice = product.Price,
                 Amount = 1
             };
-            cart.Items.Add(newItem);
+            cart?.Items?.Add(newItem);
             //product.InStock -= 1;
             //Dal.Product.Update(product);
             cart.TotalPrice += product.Price;
@@ -160,11 +191,10 @@ internal class BoCart : ICart
 
     }
 
-    //public void GetItemInCartList(BO.Cart cart, string customerName, string customerEmail, string customerAddress)
-    //{
-    //    foreach (var item in cart.Items)
-    //    {
-    //        Console.WriteLine(item);
-    //    }
-    //}
+    public IEnumerable<BO.OrderItem?> GetItemInCartList(BO.Cart cart)
+    {
+        //List<BO.OrderItem?> items = new List<BO.OrderItem?>();
+        //items = cart.Items;
+        return cart.Items;
+    }
 }

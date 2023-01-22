@@ -88,4 +88,10 @@ public partial class MainWindow : Window
             TrackOrderButton_Click(sender, e);
         }
     }
+
+    private void orderButton_Click(object sender, RoutedEventArgs e)
+    {
+        BO.Cart cart = new BO.Cart();
+        new CustomerDetalesWindow(cart).Show();
+    }
 }

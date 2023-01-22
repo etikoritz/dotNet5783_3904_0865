@@ -21,6 +21,16 @@ namespace PL
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
         static int cartID=999999;
+        BO.Cart cart;
+        public UserWindow(BO.Cart cartWithUserDetails)
+        {
+            InitializeComponent();
+            CatalogList.ItemsSource = bl.Product.GetProductList(p => p != null);
+            cartID++;
+            cart = cartWithUserDetails;
+            cart.Items = new List<BO.OrderItem>();
+            //cart.Items;
+        }
         public UserWindow()
         {
             InitializeComponent();
@@ -31,9 +41,9 @@ namespace PL
         {
             if (CatalogList.SelectedItems.Count >= 1)
             {
-                BO.ProductForList item = (BO.ProductForList)CatalogList.SelectedItems[0];
+                BO.ProductForList prod = (BO.ProductForList)CatalogList.SelectedItems[0];
                 
-                //new UpdateProductWindow(cart item).Show();
+                new UpdateProductWindow(prod).Show();
             }
         }
 
@@ -46,7 +56,25 @@ namespace PL
         private void cartButton_Click(object sender, RoutedEventArgs e)
         {
             //להוסיף בדיקה של יוזר ולהגיע לסל הקניות הספציפי שלו
-            //new CartWindow(userName).Show();
+            new CartWindow(cart).Show();
+
+        }
+
+
+        private void addItemButton_Click(object sender, RoutedEventArgs e)
+        {
+            var button = (Button)sender;
+            var item = (BO.ProductForList)button.DataContext;
+            BO.ProductItem productItem = new()
+            {
+                ID = item.ID,
+                Name = item.Name,
+                Amount = 1,
+                Category = item.Category,
+                Price = item.Price,
+            };
+            
+            bl?.Cart.AddToCart(cart, item.ID);
         }
     }
 }

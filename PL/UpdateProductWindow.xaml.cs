@@ -34,11 +34,18 @@ public partial class UpdateProductWindow : Window
     static State state;
 
 
-    public UpdateProductWindow()
+    public UpdateProductWindow(BO.ProductForList productForList)
     {
         InitializeComponent();
         categoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.Enum.Category));
 
+    }
+ 
+    public UpdateProductWindow()
+    {
+        InitializeComponent();
+        categoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.Enum.Category));
+        
     }
     public void AddProducView()
     {
