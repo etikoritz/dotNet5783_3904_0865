@@ -76,6 +76,6 @@
 
             </ListView.View>
         </ListView>
-        <Button Content="Confirm order" HorizontalAlignment="Left" Margin="668,379,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.015,0.998"/>
+        <Button Content="Confirm order" HorizontalAlignment="Left" Margin="668,379,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.015,0.998" Click="Button_Click"/>
     </Grid>
 </Window>

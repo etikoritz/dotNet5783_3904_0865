@@ -23,28 +23,21 @@ namespace PL
     public partial class UserWindow : Window
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
-        static int cartID=999999;
         BO.Cart cart;
-        private static ObservableCollection<BO.OrderItem> orderitems = new ObservableCollection<BO.OrderItem>();
+        private ObservableCollection<BO.OrderItem> orderitems = new ObservableCollection<BO.OrderItem>();
         public UserWindow(BO.Cart cartWithUserDetails)
         {
             InitializeComponent();
             CatalogList.ItemsSource = bl.Product.GetProductList(p => p != null);
-            cartID++;
             cart = cartWithUserDetails;
             cart.Items = new List<BO.OrderItem>();
-            //var CustomerName= cart.CustomerName;
-            DataContext = new BO.Cart(); 
-
-
-            ((BO.Cart)DataContext).Amount= 0;
-            //()DataContext = cart.CustomerName;
-            //cart.Items;
+            DataContext = new BO.Cart();
+            CategorySelector.ItemsSource = System.Enum.GetValues(typeof(BO.Enum.Category));
         }
         public UserWindow()
         {
             InitializeComponent();
-            cartID++;
+            CategorySelector.ItemsSource = System.Enum.GetValues(typeof(BO.Enum.Category));
         }
 
         private void CatalogList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -92,6 +85,19 @@ namespace PL
                 orderitems.Add(bl?.Cart.GetItemInCartList(cart).FirstOrDefault(o => o?.ProductID == item.ID));
             }
             //orderitems. = cart?.Items;
+        }
+
+        private void Clear_Click(object sender, RoutedEventArgs e)
+        {
+            CatalogList.ItemsSource = bl?.Product.GetProductList(p => p != null);
+            Clear.Visibility = Visibility.Hidden;
+        }
+
+        private void CategorySelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            BO.Enum.Category category = (BO.Enum.Category)e.AddedItems[0];
+            CatalogList.ItemsSource = bl.Product?.GetProductListBySort(p => (BO.Enum.Category)p?.Category == category);
+            Clear.Visibility = Visibility.Visible;
         }
     }
 }

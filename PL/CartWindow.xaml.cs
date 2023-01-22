@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BO;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -38,7 +39,6 @@ namespace PL
         {
             InitializeComponent();
             orderItemList.ItemsSource=orderItems;
-            //items=orderItems;
             cart1 = cart;
         }
 
@@ -46,18 +46,9 @@ namespace PL
         {
             var button = (Button)sender;
             var item = (BO.OrderItem)button.DataContext;
-            //cart1?.Items.Remove(item);
-            //orderItemList.Items.Remove(item)
-            // orderItemList.Items.Remove(item));
             bl?.Cart.DeleteFromeCart(cart1, item.ProductID);
-            //items.Remove(item);
             DataContext = items;
             orderItemList.Items.Refresh();
-            //orderItemList.item.
-            //orderItemList.ItemsSource = bl?.Cart.GetItemInCartList(cart1);
-            //List<BO.OrderItem> orderItems=bl?.OrderItem.
-            //bl?.Cart.GetItemInCartList(cart1).Select(o=>o?.ProductID==item.ProductID).r;
-            //orderItemList.Items.DeferRefresh();
         }
        
 
@@ -81,10 +72,20 @@ namespace PL
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            int id= bl.Cart.ConfirmOrder(cart1);
-            MessageBox.Show(@$"your order is confirmed!
+            try
+            {
+                int id = bl.Cart.ConfirmOrder(cart1);
+                MessageBox.Show(@$"your order is confirmed!
 your orderID is: {id}");
-            this.Close();
+                cart1.Items.Clear();
+                this.Close();
+                //orderItemList.Items.Clear();
+            }
+            catch(OutOfStockProductException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
 
         }
     }

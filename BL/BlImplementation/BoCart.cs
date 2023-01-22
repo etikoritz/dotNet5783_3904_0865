@@ -40,7 +40,7 @@ internal class BoCart : ICart
         where item.ProductID == id
         select item)
             {
-                product.InStock -= item.Amount;
+                //product.InStock -= item.Amount;
                 item.Amount++;
                 item.TotalPrice += product.Price * item.Amount;
                 Dal.Product.Update(product);
@@ -126,20 +126,6 @@ internal class BoCart : ICart
                 throw new BO.BODataNotExistException(ex.Message);
             }
         }
-        //    //need to check if product exist
-        //}
-        //if (customerName == "")
-        //{
-        //    throw new BO.NoCustomerNameException();
-        //}
-        ////if (customerEmail == "" || !customerEmail.Contains("@") || customerEmail[0] == '@' || customerEmail[customerEmail.Length + 1] == '@')
-        ////{
-        ////    throw new BO.NoCustomerEmailException();
-        ////}
-        //if (customerAddress == "")
-        //{
-        //    throw new BO.NoCustomerAddressException();
-        //}
         
         DO.Order order = new()
         {
