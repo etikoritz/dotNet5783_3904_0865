@@ -6,9 +6,8 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        Title="Order" Height="550" Width="950"
         Activated="refreshWindow"
-        Title="Order" Height="450" Width="800"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.Background>
@@ -27,7 +26,6 @@
         <ListView x:Name="itemsList" Margin="222,82,29,91" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount= 7}">
             <ListView.View>
                 <GridView>
-
                     <GridViewColumn Header="Name" Width="Auto">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -56,31 +54,38 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="" Width="auto">
+                    <GridViewColumn Header="-" Width="auto">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button x:Name="subtractItemButton" Content="-" Width="20" Click="subtractItemButton_Click" />
+                                <Button x:Name="subtractItemButton"
+                                        Click="subtractItemButton_Click"
+                                        Content="{materialDesign:PackIcon MinusBoxOutline}"
+                                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="" Width="auto">
+                    <GridViewColumn Header="+" Width="auto">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button x:Name="addToItemButton" Content="+" Width="20" Click="addToItemButton_Click"  />
+                                <Button x:Name="addToItemButton"
+                                        Click="addToItemButton_Click"
+                                        Content="{materialDesign:PackIcon PlusBoxOutline}"
+                                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="" Width="auto">
+                    <GridViewColumn Header="X" Width="auto">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button x:Name="RemoveItemButton" Content="X" Width="20" Click="RemoveItemButton_Click"  />
+                                <Button x:Name="RemoveItemButton"
+                                        Click="RemoveItemButton_Click"
+                                        Content="{materialDesign:PackIcon CloseBoxOutline}"
+                                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                 </GridView>
-
             </ListView.View>
-
         </ListView>
         <TextBox
             x:Name="NameTextBox"
@@ -118,7 +123,7 @@
                 <Binding Path="CustomerAddress" UpdateSourceTrigger="PropertyChanged"/>
             </TextBox.Text>
         </TextBox>
-        <TextBox
+        <!--<TextBox
             x:Name="ShippingTextBox"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
@@ -129,8 +134,20 @@
             <TextBox.Text>
                 <Binding Path="ShipDate" UpdateSourceTrigger="PropertyChanged"/>
             </TextBox.Text>
-        </TextBox>
-        <TextBox
+        </TextBox>-->
+        <DatePicker Visibility="Visible"
+                    IsEnabled="True"
+            x:Name="ShippingDatePicker"
+            Width="130" Height="35"
+            HorizontalAlignment="Left"
+            materialDesign:HintAssist.Hint="Shipping date"
+            materialDesign:TextFieldAssist.HasClearButton="True"
+            Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="38,446,0,0" Grid.Row="1" VerticalAlignment="Top" >
+            <DatePicker.Text>
+                <Binding Path="ShipDate" UpdateSourceTrigger="PropertyChanged"/>
+            </DatePicker.Text>
+        </DatePicker>
+        <!--<TextBox Visibility="Collapsed"
             x:Name="DeliveryTextBox"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
@@ -141,8 +158,20 @@
             <TextBox.Text>
                 <Binding Path="DeliveryDate" UpdateSourceTrigger="PropertyChanged"/>
             </TextBox.Text>
-        </TextBox>
-        <TextBox
+        </TextBox>-->
+        <DatePicker Visibility="Visible"
+                    IsEnabled="True"
+            x:Name="DeliveryDatePicker"
+            Width="130" Height="35"
+            HorizontalAlignment="Left"
+            materialDesign:HintAssist.Hint="Delivery date"
+            materialDesign:TextFieldAssist.HasClearButton="True"
+            Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="38,385,0,0" Grid.Row="1" VerticalAlignment="Top" >
+            <DatePicker.Text>
+                <Binding Path="DeliveryDate" UpdateSourceTrigger="PropertyChanged"/>
+            </DatePicker.Text>
+        </DatePicker>
+        <!--<TextBox
             x:Name="OrderDateTextBox"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
@@ -153,7 +182,19 @@
             <TextBox.Text>
                 <Binding Path="OrderDate" UpdateSourceTrigger="PropertyChanged"/>
             </TextBox.Text>
-        </TextBox>
+        </TextBox>-->
+        <DatePicker Visibility="Visible"
+                    IsEnabled="True"
+            x:Name="OrderDateTextBox"
+            Width="130" Height="35"
+            HorizontalAlignment="Left"
+            materialDesign:HintAssist.Hint="Order date"
+            materialDesign:TextFieldAssist.HasClearButton="True"
+            Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="40,265,0,0" Grid.Row="1" VerticalAlignment="Top" >
+            <DatePicker.Text>
+                <Binding Path="OrderDate" UpdateSourceTrigger="PropertyChanged"/>
+            </DatePicker.Text>
+        </DatePicker>
         <TextBox
             x:Name="OrderIdTextBox"
             HorizontalAlignment="Left"
@@ -166,7 +207,7 @@
                 <Binding Path="ID" UpdateSourceTrigger="PropertyChanged"/>
             </TextBox.Text>
         </TextBox>
-        <TextBox
+        <!--<TextBox
             x:Name="PaymentDateTextBox"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
@@ -177,7 +218,19 @@
             <TextBox.Text>
                 <Binding Path="DateOfPayment" UpdateSourceTrigger="PropertyChanged"/>
             </TextBox.Text>
-        </TextBox>
+        </TextBox>-->
+        <DatePicker Visibility="Visible"
+                    IsEnabled="True"
+            x:Name="PaymentDatePicker"
+            Width="130" Height="35"
+            HorizontalAlignment="Left"
+            materialDesign:HintAssist.Hint="Payment date"
+            materialDesign:TextFieldAssist.HasClearButton="True"
+            Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="38,326,0,0" Grid.Row="1" VerticalAlignment="Top" >
+            <DatePicker.Text>
+                <Binding Path="DateOfPayment" UpdateSourceTrigger="PropertyChanged"/>
+            </DatePicker.Text>
+        </DatePicker>
         <TextBox
             x:Name="TotalPriceTextBox"
             HorizontalAlignment="Left"
@@ -202,11 +255,7 @@
                 <Binding Path="Status" UpdateSourceTrigger="PropertyChanged"/>
             </TextBox.Text>
         </TextBox>
-
         <Button x:Name="UpdateOrderB" Content="Update order" HorizontalAlignment="Left" Margin="626,466,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16"/>
-        <Button x:Name="AddOrderB" Content="Add order" HorizontalAlignment="Left" Margin="626,463,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16" Width="98"/>
-
-        <!--Activated="refreshWindow"-->
-
+        <Button x:Name="AddOrderB" Content="Add order" HorizontalAlignment="Left" Margin="626,465,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16" Width="129"/>
     </Grid>
 </Window>
