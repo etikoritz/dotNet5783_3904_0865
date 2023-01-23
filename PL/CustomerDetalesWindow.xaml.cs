@@ -52,7 +52,7 @@ namespace PL
             }
             else
             {
-                new UserWindow(((BO.Cart)DataContext), NameTextBox.Text).Show();
+                new UserWindow((BO.Cart)DataContext).Show() ;
                 this.Close();
             }
         }

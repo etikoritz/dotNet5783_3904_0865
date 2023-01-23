@@ -106,6 +106,7 @@
         <Label Content="{Binding Path=CustomerName, Source= Cart}"  HorizontalAlignment="Left" Margin="268,14,0,0" VerticalAlignment="Top" Height="50" Width="156" FontSize="24" FontFamily="Comic Sans MS"/>
         <Label Name="categoryLabel" Content="Category:" Grid.Column="0" HorizontalAlignment="Left" Margin="307,30,0,0" VerticalAlignment="Top" Width="103" Height="34" FontFamily="Comic Sans MS"/>
         <ComboBox Name="CategorySelector" FontFamily="Comic Sans MS" SelectionChanged="CategorySelector_SelectionChanged" Margin="379,44,177,360" VerticalAlignment="Stretch"/>
+        <Button Content="group by category" HorizontalAlignment="Left" Margin="596,340,0,0" VerticalAlignment="Top" Click="Button_Click" />
         <Button x:Name="Clear" Content="Clear" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="616,31,0,0" VerticalAlignment="Top" Height="24" Width="100" Visibility="Visible" Click="Clear_Click"/>
     </Grid>
 </Window>

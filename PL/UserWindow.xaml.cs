@@ -27,13 +27,13 @@ namespace PL
         private ObservableCollection<BO.OrderItem> orderitems = new ObservableCollection<BO.OrderItem>();
         public ObservableCollection<BO.OrderForList?> groupingProducts= new ObservableCollection<BO.OrderForList?>();
        // public IEnumerable<OrderForList?> groupingProducts = new List<OrderForList?>();
-        public UserWindow(BO.Cart cartWithUserDetails)
+        //public UserWindow(BO.Cart cartWithUserDetails)
         /// <summary>
         /// ctor with username
         /// </summary>
         /// <param name="cartWithUserDetails"></param>
         /// <param name="username"></param>
-        public UserWindow(BO.Cart cartWithUserDetails, string username = ":-)")
+        public UserWindow(BO.Cart cartWithUserDetails)
         {
             InitializeComponent();
             CatalogList.ItemsSource = bl.Product.GetProductList(p => p != null);
@@ -41,14 +41,14 @@ namespace PL
             cart.Items = new List<BO.OrderItem>();
             DataContext = new BO.Cart();
             CategorySelector.ItemsSource = System.Enum.GetValues(typeof(BO.Enum.Category));
-            nameOfUser_lable.Content = username + "!";
+            nameOfUser_lable.Content = cartWithUserDetails.CustomerName + "!";
         }
         public enum Categoryenum
         {
             Laptop, DesktopComputer, Tablet, Cellphone, Headphones
         }
-        public UserWindow()
-        public UserWindow(string username = ":-)")
+        //public UserWindow()
+        public UserWindow(string username)
         {
             InitializeComponent();
             CategorySelector.ItemsSource = System.Enum.GetValues(typeof(BO.Enum.Category));
