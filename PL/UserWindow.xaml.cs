@@ -38,7 +38,7 @@ namespace PL
             InitializeComponent();
             CatalogList.ItemsSource = bl.Product.GetProductList(p => p != null);
             cart = cartWithUserDetails;
-            cart.Items = new List<BO.OrderItem>();
+            cart.Items = cartWithUserDetails.Items;
             DataContext = new BO.Cart();
             CategorySelector.ItemsSource = System.Enum.GetValues(typeof(BO.Enum.Category));
             nameOfUser_lable.Content = cartWithUserDetails.CustomerName + "!";
@@ -47,7 +47,10 @@ namespace PL
         {
             Laptop, DesktopComputer, Tablet, Cellphone, Headphones
         }
-        //public UserWindow()
+        public UserWindow()
+        {
+            InitializeComponent();
+        }
         public UserWindow(string username)
         {
             InitializeComponent();
@@ -75,7 +78,6 @@ namespace PL
         {
             //להוסיף בדיקה של יוזר ולהגיע לסל הקניות הספציפי שלו
             new CartWindow(cart, orderitems).Show();
-
         }
 
         /// <summary>
@@ -90,10 +92,6 @@ namespace PL
             var button = (Button)sender;
             var item = (BO.ProductForList)button.DataContext;
             bl?.Cart.AddToCart(cart, item.ID);
-            //orderitems.Add(bl.Cart.GetItemInCartList(cart).FirstOrDefault(o => o?.ProductID == item.ID));
-            ///(cart?.Amount)(this.DataContext)=cart.Items.Count;
-            ///
-            //((BO.Cart)DataContext).Amount++;
 
             if (orderitems.Contains(bl?.Cart.GetItemInCartList(cart).FirstOrDefault(o => o?.ProductID == item.ID)))
             {
@@ -107,7 +105,6 @@ namespace PL
                 orderitems.Add(bl?.Cart.GetItemInCartList(cart).FirstOrDefault(o => o?.ProductID == item.ID));
                 cartCounterLabel.Content = counter++.ToString();
             }
-            //orderitems. = cart?.Items;
         }
 
         private void Clear_Click(object sender, RoutedEventArgs e)
@@ -119,7 +116,7 @@ namespace PL
         private void CategorySelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             BO.Enum.Category category = (BO.Enum.Category)e.AddedItems[0];
-            CatalogList.ItemsSource = bl.Product?.GetProductListBySort(p => (BO.Enum.Category)p?.Category == category);
+            CatalogList.ItemsSource = bl?.Product.GetProductListBySort(p => (BO.Enum.Category)p?.Category == category);
             Clear.Visibility = Visibility.Visible;
         }
 
@@ -129,7 +126,6 @@ namespace PL
             PropertyGroupDescription groupDescription = new PropertyGroupDescription("Category");
             view.GroupDescriptions.Add(groupDescription);
             var button = (Button)sender;
-            button.IsEnabled=false;
 
         }
     }

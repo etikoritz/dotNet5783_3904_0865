@@ -63,7 +63,7 @@
                             <DataTemplate>
                                 <Button x:Name="subtractItemButton"
                                         Click="subtractItemButton_Click"
-                                        Content="{materialDesign:PackIcon MinusBoxOutline}"
+                                        Content="{materialDesign:PackIcon minus}"
                                         IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
@@ -73,7 +73,7 @@
                             <DataTemplate>
                                 <Button x:Name="RemoveItemButton"
                                         Click="RemoveItemButton_Click"
-                                        Content="{materialDesign:PackIcon CloseBoxOutline}"
+                                        Content="{materialDesign:PackIcon delete}"
                                         IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
@@ -82,6 +82,18 @@
 
             </ListView.View>
         </ListView>
-        <Button Content="Confirm order" HorizontalAlignment="Left" Margin="668,379,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.015,0.998" Click="Button_Click"/>
+        <Button Content="Confirm order" HorizontalAlignment="Left"
+                Margin="668,379,0,0" VerticalAlignment="Top"
+                RenderTransformOrigin="0.015,0.998"
+                Click="Button_Click"/>
+        <Button HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                x:Name="backButton"
+                Content="{materialDesign:PackIcon Kind=ArrowBack}"
+                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Click="backButton_Click">
+            <Button.Background>
+                <SolidColorBrush Color="#FF9E9E9E" Opacity="0"/>
+            </Button.Background>
+        </Button>
     </Grid>
 </Window>

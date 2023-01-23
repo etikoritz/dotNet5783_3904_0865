@@ -39,6 +39,7 @@ namespace PL
         {
             InitializeComponent();
             orderItemList.ItemsSource=orderItems;
+            DataContext = cart;
             cart1 = cart;
         }
 
@@ -87,6 +88,12 @@ your orderID is: {id}");
             }
             
 
+        }
+
+        private void backButton_Click(object sender, RoutedEventArgs e)
+        {
+            new UserWindow().Activate();
+            this.Close();
         }
     }
 }

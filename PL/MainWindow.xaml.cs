@@ -92,6 +92,7 @@ public partial class MainWindow : Window
     private void orderButton_Click(object sender, RoutedEventArgs e)
     {
         BO.Cart cart = new BO.Cart();
+        cart.Items = new List<BO.OrderItem>();
         new CustomerDetalesWindow(cart).Show();
     }
 }

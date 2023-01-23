@@ -105,31 +105,24 @@ internal class BoCart : ICart
     /// </summary>
     public int ConfirmOrder(BO.Cart cart)
     {
-        foreach (var item in cart.Items)
+        //check if the amaount negetive
+        if (cart.Items.Where(i => i.Amount <= 0).Any())
         {
-            //check if the amount is negative
-            if (item.Amount <= 0)
-            {
-                throw new NegativeIdException();
-            }
-            //check if all the items exsist in stock and the stock have enohgf  
-            try
-            {
-                DO.Product product = (DO.Product)Dal.Product.GetById(item.ProductID);
-                if (product.InStock - item.Amount <= 0)
-                {
-                    throw new OutOfStockProductException();
-                }
-            }
-            catch (DO.DataNotExistException ex)
-            {
-                throw new BO.BODataNotExistException(ex.Message);
-            }
+            throw new NegativeIdException();
         }
-        
+        //check if fthe stock have enogh
+        if (cart.Items.Where(i =>
+        {
+            DO.Product product = (DO.Product)Dal.Product.GetById(i.ProductID);
+            return product.InStock - i.Amount <= 0;
+        }
+        ).Any())
+        {
+            throw new OutOfStockProductException();
+        }
+
         DO.Order order = new()
         {
-            //id=Dal.Order.*/
             CustomerName = cart.CustomerName,
             CustomerEmail = cart.CustomerEmail,
             CustomerAddress = cart.CustomerAddress,
@@ -138,6 +131,7 @@ internal class BoCart : ICart
             DeliveryDate=DateTime.Today,
         };
         int orderId = Dal.Order.Add(order);
+        //getting the id
         order.ID=orderId;
         
         foreach (var item in cart.Items)
@@ -148,7 +142,6 @@ internal class BoCart : ICart
                 OrderID = orderId,
                 ProductID = item.ProductID,
                 Price = item.Price,
-                
             };
             orderItem.Amount += item.Amount;
             Dal.OrderItem.Add(orderItem);
@@ -160,31 +153,31 @@ internal class BoCart : ICart
         return orderId;
     }
 
-    
+
 
     public BO.Cart UpdateAmount(BO.Cart cart, int productId, int newAmount)
     {
-        int count = 0;
-        //List<BO.OrderForList> orderForListsData = new List<BO.OrderForList>();
         DO.Product product = (DO.Product)Dal.Product.GetById(productId);
-        foreach (var item in cart.Items)
+        if (cart.Items.Exists(o => o?.ProductID == productId))
         {
-            if(item.ProductID== productId)
+            var item = cart.Items.FirstOrDefault(o => o?.ProductID == productId);
+            if (!(item.Amount-newAmount<0))
             {
-                //if(product.InStock-newAmount<=0)
-                //{
-                //    throw new OutOfStockProductException();
-                //}
-                //cart.TotalPrice -= item.Amount * item.Price;
                 item.Amount -= newAmount;
                 cart.TotalPrice -= item.Price * newAmount;
-                cart.Items[count]=item;
-                return cart ;
+                cart.Amount -= newAmount;
+                return cart;
             }
-            count++;
+            if(item.Amount - newAmount == 0)
+            {
+                DeleteFromeCart(cart, product.ID);
+            }
         }
-        throw new NotImplementedException();
-
+        else
+        {
+            throw new NotImplementedException();
+        }
+        return cart;
     }
     public BO.Cart? DeleteFromeCart(BO.Cart cart, int ProductId)
     {
@@ -201,8 +194,8 @@ internal class BoCart : ICart
             items?.Remove(item);
             item.TotalPrice -= product.Price * item.Amount;
             Dal.Product.Update(product);
-            
         }
+        cart.Amount--;
         return cart;
     }
 

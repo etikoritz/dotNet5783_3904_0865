@@ -69,7 +69,7 @@
                             <DataTemplate>
                                 <Button x:Name="subtractItemButton"
                                         Click="subtractItemButton_Click"
-                                        Content="{materialDesign:PackIcon MinusBoxOutline}"
+                                        Content="{materialDesign:PackIcon Kind=Minus}"
                                         IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
@@ -79,7 +79,7 @@
                             <DataTemplate>
                                 <Button x:Name="RemoveItemButton"
                                         Click="RemoveItemButton_Click"
-                                        Content="{materialDesign:PackIcon CloseBoxOutline}"
+                                        Content="{materialDesign:PackIcon delete}"
                                         IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
