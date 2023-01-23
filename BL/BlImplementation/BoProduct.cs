@@ -130,7 +130,7 @@ internal class BoProduct :  BlApi.IProduct
         if (product.Price <= 0) 
             throw new BO.NegativePriceException();
         if(product.InStock<=0)
-            throw new BO.OutOfStockProductException();
+            throw new BO.OutOfStockProductException("the product is out of stock!");
         else
         {
             DO.Product newProduct = new()
@@ -194,7 +194,7 @@ internal class BoProduct :  BlApi.IProduct
         if (product.Price <= 0)
             throw new BO.NegativePriceException();
         if (product.InStock <= 0)
-            throw new BO.OutOfStockProductException();
+            throw new BO.OutOfStockProductException("the product is out of stock!");
         else
         {
             DO.Product UpdatedProduct = new()

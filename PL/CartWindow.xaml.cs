@@ -35,7 +35,7 @@ namespace PL
         {
             InitializeComponent();
         }
-        public CartWindow(BO.Cart cart, ObservableCollection<BO.OrderItem?> orderItems)
+        public CartWindow(BO.Cart cart, List<BO.OrderItem> orderItems)
         {
             InitializeComponent();
             orderItemList.ItemsSource=orderItems;
@@ -75,11 +75,14 @@ namespace PL
         {
             try
             {
+                //new UserWindow().Close();
                 int id = bl.Cart.ConfirmOrder(cart1);
                 MessageBox.Show(@$"your order is confirmed!
 your orderID is: {id}");
                 cart1.Items.Clear();
+                cart1.TotalPrice = 0;
                 this.Close();
+                new UserWindow(cart1).Show();
                 //orderItemList.Items.Clear();
             }
             catch(OutOfStockProductException ex)
@@ -92,7 +95,7 @@ your orderID is: {id}");
 
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
-            new UserWindow().Activate();
+            new UserWindow(cart1).Show();
             this.Close();
         }
     }
