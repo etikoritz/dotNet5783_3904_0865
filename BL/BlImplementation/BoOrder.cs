@@ -311,19 +311,13 @@ internal class BoOrder : BlApi.IOrder
         //bool OnlyOneItemInOrder = true;
         foreach (var item in from item in orderItems
                              where item?.OrderID == orderID
+                             where item?.ProductID == productID
                              select item)
         {
-            //if (item?.ProductID == productID)
-            //{
-                var product = (DO.Product)Dal.Product.GetById(productID);
-                product.InStock += item.Value.Amount;
-                Dal.Product.Update(product);
-                Dal.OrderItem.Delete(item.Value.ID);
-            //}
-            //else
-            //{
-            //    OnlyOneItemInOrder = false;
-            //}
+            var product = (DO.Product)Dal.Product.GetById(productID);
+            product.InStock += item.Value.Amount;
+            Dal.Product.Update(product);
+            Dal.OrderItem.Delete(item.Value.ID);
         }
 
         //if the order has only one item-the one we deleted, we'll delete the order
