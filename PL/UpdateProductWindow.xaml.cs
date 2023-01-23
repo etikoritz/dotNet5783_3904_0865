@@ -2,6 +2,7 @@
 using DO;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,9 @@ namespace PL;
 public partial class UpdateProductWindow : Window
 {
     private static IBl bl = BlApi.Factory.Get();
+    BlApi.IBl? bl2 = BlApi.Factory.Get();
+    private ObservableCollection<BO.OrderItem> orderitems = new ObservableCollection<BO.OrderItem>();
+
     //public static void State(string state)
     //{
     //    if(state=="add")
@@ -37,7 +41,10 @@ public partial class UpdateProductWindow : Window
     public UpdateProductWindow(BO.ProductForList productForList)
     {
         InitializeComponent();
+        DataContext = bl.Product.GetProductList(p => p != null);
         categoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.Enum.Category));
+        //for user the window is for view only
+        fieldsGrid.IsEnabled = false;
 
     }
  

@@ -28,7 +28,7 @@ namespace PL
         {
             InitializeComponent();
             DataContext=cart;
-
+            NameTextBox.Focus();
         }
 
 
@@ -38,23 +38,42 @@ namespace PL
             {
                 MessageBox.Show("Please fill all the fields");
             }
-            if(!(((BO.Cart)DataContext).CustomerAddress is string))
+            else if(!(((BO.Cart)DataContext).CustomerAddress is string))
             {
                 MessageBox.Show("ivalid address input, please try again");
             }
-            if (!(((BO.Cart)DataContext).CustomerName is string))
+            else if (!(((BO.Cart)DataContext).CustomerName is string))
             {
                 MessageBox.Show("ivalid Name input, please try again");
             }
-            if (!((((BO.Cart)DataContext).CustomerEmail)).Contains("@gmail.com"))
+            else if (!((((BO.Cart)DataContext).CustomerEmail)).Contains("@gmail.com"))
             {
                 MessageBox.Show("ivalid Email input, please try again");
             }
             else
             {
-                new UserWindow(((BO.Cart)DataContext)).Show();
+                new UserWindow(((BO.Cart)DataContext), NameTextBox.Text).Show();
                 this.Close();
             }
+        }
+
+        /// <summary>
+        /// when pressing Enter while on the AddressTextBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AddressTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                Button_Click(sender, e);
+            }
+        }
+
+        private void AddressTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+
         }
         //private Trigger UpdateSourceTrigger PropertyChanged();
         //private void PropertyChanged(string propertyName)

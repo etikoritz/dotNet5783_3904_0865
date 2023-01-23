@@ -28,6 +28,12 @@ namespace PL
         public ObservableCollection<BO.OrderForList?> groupingProducts= new ObservableCollection<BO.OrderForList?>();
        // public IEnumerable<OrderForList?> groupingProducts = new List<OrderForList?>();
         public UserWindow(BO.Cart cartWithUserDetails)
+        /// <summary>
+        /// ctor with username
+        /// </summary>
+        /// <param name="cartWithUserDetails"></param>
+        /// <param name="username"></param>
+        public UserWindow(BO.Cart cartWithUserDetails, string username = ":-)")
         {
             InitializeComponent();
             CatalogList.ItemsSource = bl.Product.GetProductList(p => p != null);
@@ -35,25 +41,28 @@ namespace PL
             cart.Items = new List<BO.OrderItem>();
             DataContext = new BO.Cart();
             CategorySelector.ItemsSource = System.Enum.GetValues(typeof(BO.Enum.Category));
-
-
+            nameOfUser_lable.Content = username + "!";
         }
         public enum Categoryenum
         {
             Laptop, DesktopComputer, Tablet, Cellphone, Headphones
         }
         public UserWindow()
+        public UserWindow(string username = ":-)")
         {
             InitializeComponent();
             CategorySelector.ItemsSource = System.Enum.GetValues(typeof(BO.Enum.Category));
+            nameOfUser_lable.Content = username + "!";
         }
 
         private void CatalogList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            //if (CatalogList.SelectedItems.Count >= 1)
-            //{
-            //    new UpdateProductWindow(item).Show();
-            //}
+            if (CatalogList.SelectedItems.Count >= 1)
+            {
+                BO.ProductForList prod = (BO.ProductForList)CatalogList.SelectedItems[0];
+
+                new UpdateProductWindow(prod).Show();
+            }
         }
 
 
@@ -69,9 +78,15 @@ namespace PL
 
         }
 
-
+        /// <summary>
+        /// When clicking on the + button to add to cart
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void addItemButton_Click(object sender, RoutedEventArgs e)
         {
+            //רעיון לממימוש: לעשות טריי וקאטצ על ההוספה לסל, אם זה מצליח - לעשות שהמספר ליד סל הקניות יעלה ב-1
+            int counter = Convert.ToInt32(cartCounterLabel.Content);
             var button = (Button)sender;
             var item = (BO.ProductForList)button.DataContext;
             bl?.Cart.AddToCart(cart, item.ID);
@@ -79,16 +94,18 @@ namespace PL
             ///(cart?.Amount)(this.DataContext)=cart.Items.Count;
             ///
             //((BO.Cart)DataContext).Amount++;
-            
-            if(orderitems.Contains(bl?.Cart.GetItemInCartList(cart).FirstOrDefault(o => o?.ProductID == item.ID)))
+
+            if (orderitems.Contains(bl?.Cart.GetItemInCartList(cart).FirstOrDefault(o => o?.ProductID == item.ID)))
             {
                 BO.OrderItem updateItem = cart.Items.FirstOrDefault(p => p?.ProductID == item.ID);
                 int index = orderitems.IndexOf(cart.Items.FirstOrDefault(p => p?.ProductID == item.ID));
                 orderitems[index] = updateItem;
+                cartCounterLabel.Content = counter++.ToString();
             }
             else
             {
                 orderitems.Add(bl?.Cart.GetItemInCartList(cart).FirstOrDefault(o => o?.ProductID == item.ID));
+                cartCounterLabel.Content = counter++.ToString();
             }
             //orderitems. = cart?.Items;
         }

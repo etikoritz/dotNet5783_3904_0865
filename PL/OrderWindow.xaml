@@ -54,16 +54,6 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="-" Width="auto">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button x:Name="subtractItemButton"
-                                        Click="subtractItemButton_Click"
-                                        Content="{materialDesign:PackIcon MinusBoxOutline}"
-                                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
                     <GridViewColumn Header="+" Width="auto">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -71,6 +61,16 @@
                                         Click="addToItemButton_Click"
                                         Content="{materialDesign:PackIcon Plus}"
                                         IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" IsDefault="True"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="-" Width="auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="subtractItemButton"
+                                        Click="subtractItemButton_Click"
+                                        Content="{materialDesign:PackIcon MinusBoxOutline}"
+                                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

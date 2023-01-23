@@ -48,27 +48,33 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="-" Width="auto">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button x:Name="subtractItemButton" Width="20" Click="subtractItemButton_Click" 
-                                        Content="{materialDesign:PackIcon Minus}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
                     <GridViewColumn Header="+" Width="auto">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button x:Name="addToItemButton"  Width="20" Click="addToItemButton_Click" 
-                                        Content="{materialDesign:PackIcon Plus}"></Button>
+                                <Button x:Name="addToItemButton"
+                                        Click="addToItemButton_Click"
+                                        Content="{materialDesign:PackIcon Plus}"
+                                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" IsDefault="True"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="-" Width="auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="subtractItemButton"
+                                        Click="subtractItemButton_Click"
+                                        Content="{materialDesign:PackIcon MinusBoxOutline}"
+                                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                     <GridViewColumn Header="X" Width="auto">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button x:Name="RemoveItemButton" Width="20" Click="RemoveItemButton_Click" 
-                                        Content="{materialDesign:PackIcon Close}"/>
+                                <Button x:Name="RemoveItemButton"
+                                        Click="RemoveItemButton_Click"
+                                        Content="{materialDesign:PackIcon CloseBoxOutline}"
+                                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
