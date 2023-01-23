@@ -25,6 +25,8 @@ namespace PL
         BlApi.IBl? bl = BlApi.Factory.Get();
         BO.Cart cart;
         private ObservableCollection<BO.OrderItem> orderitems = new ObservableCollection<BO.OrderItem>();
+        public ObservableCollection<BO.OrderForList?> groupingProducts= new ObservableCollection<BO.OrderForList?>();
+       // public IEnumerable<OrderForList?> groupingProducts = new List<OrderForList?>();
         public UserWindow(BO.Cart cartWithUserDetails)
         {
             InitializeComponent();
@@ -33,6 +35,12 @@ namespace PL
             cart.Items = new List<BO.OrderItem>();
             DataContext = new BO.Cart();
             CategorySelector.ItemsSource = System.Enum.GetValues(typeof(BO.Enum.Category));
+
+
+        }
+        public enum Categoryenum
+        {
+            Laptop, DesktopComputer, Tablet, Cellphone, Headphones
         }
         public UserWindow()
         {
@@ -96,6 +104,16 @@ namespace PL
             BO.Enum.Category category = (BO.Enum.Category)e.AddedItems[0];
             CatalogList.ItemsSource = bl.Product?.GetProductListBySort(p => (BO.Enum.Category)p?.Category == category);
             Clear.Visibility = Visibility.Visible;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(CatalogList.ItemsSource);
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("Category");
+            view.GroupDescriptions.Add(groupDescription);
+            var button = (Button)sender;
+            button.IsEnabled=false;
+
         }
     }
 }

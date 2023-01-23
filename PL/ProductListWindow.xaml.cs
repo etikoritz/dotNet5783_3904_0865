@@ -43,13 +43,13 @@ public partial class ProductListWindow : Window
     private void CategorySelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         BO.Enum.Category category = (BO.Enum.Category)e.AddedItems[0];
-        productListView.ItemsSource = bl.Product?.GetProductListBySort( p => (BO.Enum.Category)p?.Category==category);
+        productListView.ItemsSource = bl?.Product?.GetProductListBySort( p => (BO.Enum.Category)p?.Category==category);
         Clear.Visibility = Visibility.Visible;
     }
 
     private void Clear_Click(object sender, RoutedEventArgs e)
     {
-        productListView.ItemsSource = bl.Product.GetProductList(p => p != null);
+        productListView.ItemsSource = bl?.Product.GetProductList(p => p != null);
         Clear.Visibility = Visibility.Hidden;
     }
 

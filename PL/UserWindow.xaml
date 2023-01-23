@@ -17,7 +17,29 @@
                 <GradientStop Color="#6c366e" Offset="1.0" />
             </LinearGradientBrush>
         </Grid.Background>
-        <ListView x:Name="CatalogList" d:ItemsSource="{d:SampleData ItemCount=6}" Margin="37,99,173,44" MouseDoubleClick="CatalogList_MouseDoubleClick">
+        <ListView x:Name="CatalogList" 
+                  d:ItemsSource="{d:SampleData ItemCount=6}" 
+                  Margin="37,99,173,44" 
+                  MouseDoubleClick="CatalogList_MouseDoubleClick">
+            
+            <!--ItemsSource="{Binding Source={StaticResource YourCollectionViewSource}, Path=View}">
+            <ListView.Resources>
+                <CollectionViewSource x:Key="groupingProducts" Source="{Binding CatalogList}">
+                    <CollectionViewSource.GroupDescriptions>
+                        <PropertyGroupDescription PropertyName="Category"/>
+                    </CollectionViewSource.GroupDescriptions>
+                </CollectionViewSource>
+            </ListView.Resources>-->
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock FontWeight="Bold" FontSize="14" Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </ListView.GroupStyle>
+            
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Id" Width="Auto">
@@ -74,5 +96,6 @@
         <Label Name="categoryLabel"  Content="Category:" Grid.Column="0" HorizontalAlignment="Left" Margin="311,60,0,0" VerticalAlignment="Top" Width="103" Height="34" FontFamily="Comic Sans MS"/>
         <ComboBox Name="CategorySelector" FontFamily="Comic Sans MS" SelectionChanged="CategorySelector_SelectionChanged" Margin="383,60,173,344" VerticalAlignment="Stretch"/>
         <Button  x:Name="Clear" Content="Clear" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="202,58,0,0" VerticalAlignment="Top" Height="24" Width="100" Visibility="Collapsed" Click="Clear_Click"/>
+        <Button Content="group" HorizontalAlignment="Left" Margin="711,390,0,0" VerticalAlignment="Top" Click="Button_Click" />
     </Grid>
 </Window>
