@@ -34,14 +34,20 @@ public class NegativePriceException : Exception
     }
 }
 
+
 public class OutOfStockProductException : Exception
 {
-    public override string Message => "ERROR: Product is out of stock!";
+    public OutOfStockProductException(string? message) : base(message)
+    {
+    }
+
+    //public override string Message => "ERROR: Product is out of stock!";
     public override string ToString()
     {
         return Message;
     }
 }
+
 
 public class ProductExistsInOrdersException : Exception
 {

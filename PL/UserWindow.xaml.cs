@@ -39,7 +39,7 @@ namespace PL
             CatalogList.ItemsSource = bl.Product.GetProductList(p => p != null);
             cart = cartWithUserDetails;
             cart.Items = cartWithUserDetails.Items;
-            DataContext = new BO.Cart();
+            DataContext = cartWithUserDetails;
             CategorySelector.ItemsSource = System.Enum.GetValues(typeof(BO.Enum.Category));
             nameOfUser_lable.Content = cartWithUserDetails.CustomerName + "!";
         }
@@ -77,7 +77,8 @@ namespace PL
         private void cartButton_Click(object sender, RoutedEventArgs e)
         {
             //להוסיף בדיקה של יוזר ולהגיע לסל הקניות הספציפי שלו
-            new CartWindow(cart, orderitems).Show();
+            new CartWindow(cart, cart.Items).Show();
+            this.Close();
         }
 
         /// <summary>

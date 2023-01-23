@@ -105,24 +105,32 @@ internal class BoCart : ICart
     /// </summary>
     public int ConfirmOrder(BO.Cart cart)
     {
-        //check if the amaount negetive
-        if (cart.Items.Where(i => i.Amount <= 0).Any())
+        foreach (var item in cart.Items)
         {
-            throw new NegativeIdException();
-        }
-        //check if fthe stock have enogh
-        if (cart.Items.Where(i =>
-        {
-            DO.Product product = (DO.Product)Dal.Product.GetById(i.ProductID);
-            return product.InStock - i.Amount <= 0;
-        }
-        ).Any())
-        {
-            throw new OutOfStockProductException();
-        }
+            //check if the amount is negative
+            if (item.Amount <= 0)
+            {
+                throw new NegativeIdException();
+            }
+            //check if all the items exsist in stock and the stock have enohgf  
+            try
+            {
+                DO.Product product = (DO.Product)Dal.Product.GetById(item.ProductID);
+                if (product.InStock - item.Amount <= 0)
+                {
+                    throw new OutOfStockProductException($"the product {product.Name} is out of stock!");
 
+                }
+            }
+            catch (DO.DataNotExistException ex)
+            {
+                throw new BO.BODataNotExistException(ex.Message);
+            }
+        }
+        
         DO.Order order = new()
         {
+            //id=Dal.Order.*/
             CustomerName = cart.CustomerName,
             CustomerEmail = cart.CustomerEmail,
             CustomerAddress = cart.CustomerAddress,
@@ -131,7 +139,6 @@ internal class BoCart : ICart
             DeliveryDate=DateTime.Today,
         };
         int orderId = Dal.Order.Add(order);
-        //getting the id
         order.ID=orderId;
         
         foreach (var item in cart.Items)
@@ -142,6 +149,7 @@ internal class BoCart : ICart
                 OrderID = orderId,
                 ProductID = item.ProductID,
                 Price = item.Price,
+                
             };
             orderItem.Amount += item.Amount;
             Dal.OrderItem.Add(orderItem);
