@@ -133,5 +133,28 @@ public partial class ProductListWindow : Window
         //}
         
     }
+
+    private void deleteButton_Click(object sender, RoutedEventArgs e)
+    {
+        var button = (Button)sender;
+        var product = (BO.ProductForList)button.DataContext;
+        //var product = (BO.ProductForList)((Button)sender).DataContext;
+        try
+        {
+            string message = "Are you sure you want to delete the product?";
+            var d=MessageBox.Show( " ",message, MessageBoxButton.YesNo);
+            if(d==MessageBoxResult.Yes)
+            {
+                bl?.Product.Delete(product.ID);
+                MessageBox.Show("Product deleted!");
+                productListView.Items.Refresh();
+            }
+        }
+        catch
+        {
+            MessageBox.Show("Error cant delete, the product exist in orders");
+        }
+       
+    }
 }
 

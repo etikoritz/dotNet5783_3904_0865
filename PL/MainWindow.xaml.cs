@@ -59,7 +59,7 @@ public partial class MainWindow : Window
                     TrackOrderWindow trackOrderWindow = new TrackOrderWindow(order);
                     trackOrderWindow.Show();
                 }
-                catch (BO.BODataNotExistException ex)
+                catch
                 {
                     MessageBox.Show("Order ID does not exist, please try again");
                     this.trackOrderTextBox.Text = "";

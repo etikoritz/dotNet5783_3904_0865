@@ -30,7 +30,7 @@
         <Button x:Name="addProductButton" Content="Add new Product" FontFamily="Comic Sans MS" Grid.Row="2" HorizontalAlignment="Left" Margin="695,14,0,14" Padding="5" Click="Button_Click" Width="181"/>
         <ListView 
             x:Name="productListView" 
-            d:ItemsSource="{d:SampleData ItemCount=5}" 
+            d:ItemsSource="{d:SampleData ItemCount=6}" 
             Margin="10,10,210,10" 
             FontFamily="Comic Sans MS"
             MouseDoubleClick="productListView_MouseDoubleClick" Grid.Row="1" >
@@ -73,6 +73,15 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding inStock}" Width="auto" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Add" Width="auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="deleteButton"
+                                        Content="{materialDesign:PackIcon delete}"
+                                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" IsDefault="True" Click="deleteButton_Click"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -133,6 +142,6 @@
         </ListView>
         <Button x:Name="orderButton" Content="Order" HorizontalAlignment="Left" Margin="724,27,0,0" Grid.Row="1" VerticalAlignment="Top" Height="42" Width="122" FontSize="16" Click="orderButton_Click"/>
         <Button x:Name="productButton" Content="Product" HorizontalAlignment="Left" Margin="724,98,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16" Height="42" Width="122" Click="productButton_Click"/>
-
+        
     </Grid>
 </Window>

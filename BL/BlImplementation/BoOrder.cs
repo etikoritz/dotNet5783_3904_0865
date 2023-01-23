@@ -308,22 +308,22 @@ internal class BoOrder : BlApi.IOrder
         //    List<BO.OrderForList?> orderForList = (List<BO.OrderForList?>?)GetOrderList();
         //    orderForList?.Remove(orderForList.Find(o => o?.ID == orderID));
         //}
-        bool OnlyOneItemInOrder = true;
+        //bool OnlyOneItemInOrder = true;
         foreach (var item in from item in orderItems
                              where item?.OrderID == orderID
                              select item)
         {
-            if (item?.ProductID == productID)
-            {
-                DO.Product product = (DO.Product)Dal.Product.GetById(productID);
+            //if (item?.ProductID == productID)
+            //{
+                var product = (DO.Product)Dal.Product.GetById(productID);
                 product.InStock += item.Value.Amount;
                 Dal.Product.Update(product);
                 Dal.OrderItem.Delete(item.Value.ID);
-            }
-            else
-            {
-                OnlyOneItemInOrder = false;
-            }
+            //}
+            //else
+            //{
+            //    OnlyOneItemInOrder = false;
+            //}
         }
 
         //if the order has only one item-the one we deleted, we'll delete the order
@@ -404,34 +404,20 @@ internal class BoOrder : BlApi.IOrder
     public void addAmuntToItemInOrder(int orderID, int productID, int amount)
     {
         List<DO.OrderItem?> orderItems = (List<DO.OrderItem?>)DalApi.Factory.Get().OrderItem.GetList();
-        DO.Product product = (DO.Product)DalApi.Factory.Get().Product.GetById(productID);
-        for (int i = 0; i < orderItems.Count; i++)
+        DO.Product product = (DO.Product)DalApi.Factory.Get()?.Product.GetById(productID);
+        DO.OrderItem item = (DO.OrderItem)orderItems.FirstOrDefault(o => (o?.OrderID == orderID && o?.ProductID == productID));
+
+        if (product.InStock - amount < 0)
         {
-            if (orderItems[i]?.ProductID == productID && orderItems[i]?.OrderID == orderID)
-            {
-                if (product.InStock - amount < 0)
-                {
-                    throw new OutOfStockProductException();
-                }
-                int Amount = 0;
-                Amount = orderItems[i].Value.Amount + amount;
-                product.InStock -= amount;
-                Dal.Product.Update(product);
-
-                DO.OrderItem NewItemDal = new()
-                {
-                    ID = orderID,
-                    OrderID = orderID,
-                    ProductID = productID,
-                    Price = DalApi.Factory.Get().Product.GetById(productID).Value.Price,
-
-                };
-                NewItemDal.Amount += Amount;
-                NewItemDal.TotalPrice += Amount * orderItems[i].Value.Price;
-                Dal.OrderItem.Update(NewItemDal);
-                return;
-            }
+            throw new OutOfStockProductException();
         }
+        item.Amount += amount;
+        item.TotalPrice+= amount * product.Price;
+        Dal.OrderItem.Update(item);
+        product.InStock -= amount;
+        Dal.Product.Update(product);
+        return;
+        
     }
 
     public void SubtractAmuntToItemInOrder(int orderID, int productID, int amount)
