@@ -18,16 +18,14 @@
             </LinearGradientBrush>
         </Grid.Background>
         <TextBox
-            x:Name="AddressTextBox"
+            x:Name="NameTextBox"
+            Text="{Binding CustomerName}"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
             Width="135"
             Height="25"
-            materialDesign:HintAssist.HelperText="Enter your Address"
-            materialDesign:HintAssist.Hint="Address" Margin="125,0,0,132">
-            <TextBox.Text>
-                <Binding Path="CustomerAddress" UpdateSourceTrigger="PropertyChanged"/>
-            </TextBox.Text>
+            materialDesign:HintAssist.HelperText="Enter your Name"
+            materialDesign:HintAssist.Hint="Name" Margin="125,0,0,231">
         </TextBox>
         <TextBox
             x:Name="EmailTextBox"
@@ -40,15 +38,18 @@
             materialDesign:HintAssist.Hint="Email" Margin="125,0,0,186">
         </TextBox>
         <TextBox
-            x:Name="NameTextBox"
-            Text="{Binding CustomerName}"
+            x:Name="AddressTextBox"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
             Width="135"
             Height="25"
-            materialDesign:HintAssist.HelperText="Enter your Name"
-            materialDesign:HintAssist.Hint="Name" Margin="125,0,0,231">
+            materialDesign:HintAssist.HelperText="Enter your Address"
+            materialDesign:HintAssist.Hint="Address" Margin="125,0,0,132" KeyDown="AddressTextBox_KeyDown" TextChanged="AddressTextBox_TextChanged">
+            <TextBox.Text>
+                <Binding Path="CustomerAddress" UpdateSourceTrigger="PropertyChanged"/>
+            </TextBox.Text>
         </TextBox>
+        
         <Label Content="Please enter your details:" HorizontalAlignment="Center" Margin="0,119,0,0" VerticalAlignment="Top" FontSize="16"/>
         <Button Content="Proceed" HorizontalAlignment="Left" Margin="151,362,0,0" VerticalAlignment="Top" Click="Button_Click"/>
 

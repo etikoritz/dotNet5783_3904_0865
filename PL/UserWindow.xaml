@@ -6,7 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"        
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="UserWindow" Height="450" Width="800"
+        Title="UserWindow" Height="450" Width="750"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.Background>
@@ -17,7 +17,7 @@
                 <GradientStop Color="#6c366e" Offset="1.0" />
             </LinearGradientBrush>
         </Grid.Background>
-        <ListView x:Name="CatalogList" d:ItemsSource="{d:SampleData ItemCount=6}" Margin="37,99,173,44" MouseDoubleClick="CatalogList_MouseDoubleClick">
+        <ListView x:Name="CatalogList" d:ItemsSource="{d:SampleData ItemCount=6}" Margin="37,126,38,33" MouseDoubleClick="CatalogList_MouseDoubleClick">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Id" Width="Auto">
@@ -58,7 +58,10 @@
                     <GridViewColumn Header="Add" Width="auto">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button x:Name="addItemButton" Content="+" Width="20" Click="addItemButton_Click"  />
+                                <Button x:Name="addItemButton"
+                                        Click="addItemButton_Click"
+                                        Content="{materialDesign:PackIcon Plus}"
+                                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" IsDefault="True"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -66,13 +69,21 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="cartButton" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="14,14,0,0" Height="50" Width="60" Background="Transparent" BorderBrush="Transparent" Click="cartButton_Click">
+        <Button x:Name="cartButton" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="6,8,0,0" Height="41" Width="61" Background="Transparent" BorderBrush="Transparent" Click="cartButton_Click">
             <materialDesign:PackIcon Kind="Cart" Height="30" Width="30" />
         </Button>
-        <Label Content="Hellow"  HorizontalAlignment="Left" Margin="95,14,0,0" VerticalAlignment="Top" Height="50" Width="144" FontSize="24" FontWeight="Bold"/>
-        <Label Content="{Binding Path=CustomerName, Source= Cart}"  HorizontalAlignment="Left" Margin="202,14,0,0" VerticalAlignment="Top" Height="50" Width="156" FontSize="24"/>
-        <Label Name="categoryLabel"  Content="Category:" Grid.Column="0" HorizontalAlignment="Left" Margin="311,60,0,0" VerticalAlignment="Top" Width="103" Height="34" FontFamily="Comic Sans MS"/>
-        <ComboBox Name="CategorySelector" FontFamily="Comic Sans MS" SelectionChanged="CategorySelector_SelectionChanged" Margin="383,60,173,344" VerticalAlignment="Stretch"/>
-        <Button  x:Name="Clear" Content="Clear" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="202,58,0,0" VerticalAlignment="Top" Height="24" Width="100" Visibility="Collapsed" Click="Clear_Click"/>
+        <Label Content="Hello" HorizontalAlignment="Left" Margin="69,60,0,0" VerticalAlignment="Top" FontSize="24" FontFamily="Comic Sans MS"/>
+        <Label x:Name="nameOfUser_lable"
+               Content="Eti!" 
+               FontSize="24"
+               FontFamily="Comic Sans MS"
+               HorizontalAlignment="Left" 
+               Margin="134,60,0,0" 
+               VerticalAlignment="Top"/>
+        <Label x:Name="cartCounterLabel" Content="0" HorizontalAlignment="Left" Margin="49,11,0,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" FontFamily="Comic Sans MS"/>
+        <Label Content="{Binding Path=CustomerName, Source= Cart}"  HorizontalAlignment="Left" Margin="268,14,0,0" VerticalAlignment="Top" Height="50" Width="156" FontSize="24" FontFamily="Comic Sans MS"/>
+        <Label Name="categoryLabel" Content="Category:" Grid.Column="0" HorizontalAlignment="Left" Margin="307,30,0,0" VerticalAlignment="Top" Width="103" Height="34" FontFamily="Comic Sans MS"/>
+        <ComboBox Name="CategorySelector" FontFamily="Comic Sans MS" SelectionChanged="CategorySelector_SelectionChanged" Margin="379,44,177,360" VerticalAlignment="Stretch"/>
+        <Button x:Name="Clear" Content="Clear" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="616,31,0,0" VerticalAlignment="Top" Height="24" Width="100" Visibility="Visible" Click="Clear_Click"/>
     </Grid>
 </Window>
