@@ -121,7 +121,6 @@ namespace PL
             PropertyGroupDescription groupDescription = new PropertyGroupDescription("Category");
             view.GroupDescriptions.Add(groupDescription);
             var button = (Button)sender;
-
         }
     }
 }

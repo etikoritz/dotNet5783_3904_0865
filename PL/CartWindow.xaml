@@ -17,7 +17,7 @@
                 <GradientStop Color="#6c366e" Offset="1.0" />
             </LinearGradientBrush>
         </Grid.Background>
-        <ListView x:Name="orderItemList" d:ItemsSource="{d:SampleData ItemCount= 7}" Margin="35,73,156,52">
+        <ListView x:Name="orderItemList" d:ItemsSource="{d:SampleData ItemCount= 7}" Margin="35,49,52,76">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Name" Width="Auto">
@@ -83,7 +83,7 @@
             </ListView.View>
         </ListView>
         <Button Content="Confirm order" HorizontalAlignment="Left"
-                Margin="668,379,0,0" VerticalAlignment="Top"
+                Margin="652,385,0,0" VerticalAlignment="Top"
                 RenderTransformOrigin="0.015,0.998"
                 Click="Button_Click"/>
         <Button HorizontalAlignment="Left"

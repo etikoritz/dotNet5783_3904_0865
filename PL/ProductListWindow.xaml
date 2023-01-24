@@ -25,7 +25,7 @@
             <RowDefinition Height="49*"/>
         </Grid.RowDefinitions>
         <Label Name="categoryLabel"  Content="Category:" Grid.Column="0" HorizontalAlignment="Left" Margin="29,0,0,0" VerticalAlignment="Center" Width="103" Height="34" FontFamily="Comic Sans MS"/>
-        <ComboBox Name="CategorySelector" FontFamily="Comic Sans MS" SelectionChanged="CategorySelector_SelectionChanged" Margin="137,12,315,21" VerticalAlignment="Stretch"/>
+        <ComboBox Name="CategorySelector" FontFamily="Comic Sans MS" SelectionChanged="CategorySelector_SelectionChanged" Margin="137,12,491,21" VerticalAlignment="Stretch"/>
         <Button  x:Name="Clear" Content="Clear" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top" Height="24" Width="100" Visibility="Collapsed" Click="Clear_Click" Grid.Column="1"/>
         <Button x:Name="addProductButton" Content="Add new Product" FontFamily="Comic Sans MS" Grid.Row="2" HorizontalAlignment="Left" Margin="695,14,0,14" Padding="5" Click="Button_Click" Width="181"/>
         <ListView 
@@ -76,7 +76,7 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Add" Width="auto">
+                    <GridViewColumn Header="Remove" Width="auto">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Button x:Name="deleteButton"
