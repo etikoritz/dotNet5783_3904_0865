@@ -85,7 +85,7 @@ your orderID is: {id}");
                 new UserWindow(cart1).Show();
                 //orderItemList.Items.Clear();
             }
-            catch(OutOfStockProductException ex)
+            catch(OutOfStockProductSException ex)
             {
                 MessageBox.Show(ex.Message);
             }

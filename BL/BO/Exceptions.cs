@@ -35,9 +35,9 @@ public class NegativePriceException : Exception
 }
 
 
-public class OutOfStockProductException : Exception
+public class OutOfStockProductSException : Exception
 {
-    public OutOfStockProductException(string? message) : base(message)
+    public OutOfStockProductSException(string? message) : base(message)
     {
     }
 

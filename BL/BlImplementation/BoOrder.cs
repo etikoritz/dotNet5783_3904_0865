@@ -346,7 +346,7 @@ internal class BoOrder : BlApi.IOrder
             }
             else
             {
-                throw new OutOfStockProductException("the product is out of stock!");
+                throw new OutOfStockProductSException("the product is out of stock!");
             }
 
             addAmuntToItemInOrder(orderID, productID, 1);
@@ -364,7 +364,7 @@ internal class BoOrder : BlApi.IOrder
             }
             else
             {
-                throw new OutOfStockProductException("the product is out of stock!");
+                throw new OutOfStockProductSException("the product is out of stock!");
             }
 
             DO.OrderItem NewItemDal = new()
@@ -403,7 +403,7 @@ internal class BoOrder : BlApi.IOrder
 
         if (product.InStock - amount < 0)
         {
-            throw new OutOfStockProductException("the product is out of stock!");
+            throw new OutOfStockProductSException("the product is out of stock!");
         }
         item.Amount += amount;
         item.TotalPrice+= amount * product.Price;
