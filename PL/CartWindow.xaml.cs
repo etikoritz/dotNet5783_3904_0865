@@ -48,7 +48,7 @@ namespace PL
             var button = (Button)sender;
             var item = (BO.OrderItem)button.DataContext;
             bl?.Cart.DeleteFromeCart(cart1, item.ProductID);
-            DataContext = items;
+            DataContext = bl?.Cart.GetItemInCartList(cart1);
             orderItemList.Items.Refresh();
         }
        

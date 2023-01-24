@@ -44,13 +44,17 @@ namespace PL
             //RefreshItemListView();
             Dispatcher.Invoke(() => { }, System.Windows.Threading.DispatcherPriority.Render);
         }
-
-        //add view (manager)
+        public OrderWindow(OrderForList order, string readOnly)
+        {
+            InitializeComponent();
+            itemsList.ItemsSource = bl.Order?.GetOrderDetails(o => o?.ID == order.ID).Items;
+            DataContext = bl?.Order?.GetOrderDetails(o => o?.ID == order.ID);
+            this.IsEnabled = false;
+        }
         public OrderWindow()
         {
             InitializeComponent();
-            AddOrderB.Visibility=Visibility.Visible;
-            UpdateOrderB.Visibility = Visibility.Hidden;
+
         }
 
         //update view (manager)
@@ -58,18 +62,8 @@ namespace PL
         {
             InitializeComponent();
             itemsList.ItemsSource = bl.Order?.GetOrderDetails(o =>o?.ID==order.ID).Items;
-            AddOrderB.Visibility = Visibility.Hidden;
-            UpdateOrderB.Visibility = Visibility.Visible;
             DataContext = bl?.Order?.GetOrderDetails(o=>o?.ID == order.ID);
 
-        }
-
-        //user view
-        public OrderWindow(BO.Order order, ICart cart )
-        {
-            InitializeComponent();
-            AddOrderB.Visibility = Visibility.Hidden;
-            UpdateOrderB.Visibility = Visibility.Hidden;
         }
 
         private void subtractItemButton_Click(object sender, RoutedEventArgs e)

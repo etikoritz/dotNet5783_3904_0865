@@ -19,9 +19,9 @@
         </Grid.Background>
         <ListView x:Name="CatalogList" 
                   d:ItemsSource="{d:SampleData ItemCount=6}" 
-                  Margin="37,99,173,44" 
+                  Margin="37,137,84,44" 
                   MouseDoubleClick="CatalogList_MouseDoubleClick">
-            
+
             <!--ItemsSource="{Binding Source={StaticResource YourCollectionViewSource}, Path=View}">
             <ListView.Resources>
                 <CollectionViewSource x:Key="groupingProducts" Source="{Binding CatalogList}">
@@ -39,7 +39,7 @@
                     </GroupStyle.HeaderTemplate>
                 </GroupStyle>
             </ListView.GroupStyle>
-            
+
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Id" Width="Auto">
@@ -104,9 +104,9 @@
                VerticalAlignment="Top"/>
         <Label x:Name="cartCounterLabel" Content="{Binding Path=Amount, Source=Cart}"  HorizontalAlignment="Left" Margin="49,11,0,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" FontFamily="Comic Sans MS"/>
         <Label Content="{Binding Path=CustomerName, Source= Cart}"  HorizontalAlignment="Left" Margin="268,14,0,0" VerticalAlignment="Top" Height="50" Width="156" FontSize="24" FontFamily="Comic Sans MS"/>
-        <Label Name="categoryLabel" Content="Category:" Grid.Column="0" HorizontalAlignment="Left" Margin="307,30,0,0" VerticalAlignment="Top" Width="103" Height="34" FontFamily="Comic Sans MS"/>
-        <ComboBox Name="CategorySelector" FontFamily="Comic Sans MS" SelectionChanged="CategorySelector_SelectionChanged" Margin="379,44,177,360" VerticalAlignment="Stretch"/>
-        <Button Content="group by category" HorizontalAlignment="Left" Margin="596,340,0,0" VerticalAlignment="Top" Click="Button_Click" />
-        <Button x:Name="Clear" Content="Clear" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="616,31,0,0" VerticalAlignment="Top" Height="24" Width="100" Visibility="Visible" Click="Clear_Click"/>
+        <Label Name="categoryLabel" Content="Category:" Grid.Column="0" HorizontalAlignment="Left" Margin="373,84,0,0" VerticalAlignment="Top" Width="103" Height="34" FontFamily="Comic Sans MS"/>
+        <ComboBox Name="CategorySelector" FontFamily="Comic Sans MS" SelectionChanged="CategorySelector_SelectionChanged" Margin="450,81,106,323" VerticalAlignment="Stretch"/>
+        <Button Content="group by category" HorizontalAlignment="Left" Margin="10,395,0,0" VerticalAlignment="Top" Click="Button_Click" />
+        <Button x:Name="Clear" Content="Clear" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="305,79,0,0" VerticalAlignment="Top" Height="35" Width="63" Visibility="Visible" Click="Clear_Click" RenderTransformOrigin="0.511,-1.075"/>
     </Grid>
 </Window>
