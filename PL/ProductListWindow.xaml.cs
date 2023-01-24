@@ -98,18 +98,15 @@ public partial class ProductListWindow : Window
             BO.ProductForList item = (BO.ProductForList)productListView.SelectedItems[0];
             updateProductWindow.updateProductView(item);
         }
-        
-        //Product product = productListView.SelectedItem.GetType(property);
-        
-
     }
 
     private void orderButton_Click(object sender, RoutedEventArgs e)
     {
         addProductButton.Visibility = Visibility.Hidden;
         productListView.Visibility=Visibility.Hidden;
+        CategorySelector.Visibility=Visibility.Hidden;
+        categoryLabel.Visibility=Visibility.Hidden;
         orderListView.Visibility = Visibility.Visible;
-        
     }
 
     private void productButton_Click(object sender, RoutedEventArgs e)
@@ -126,11 +123,18 @@ public partial class ProductListWindow : Window
 
     private void orderListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
     {
-        //if (productListView.SelectedItems.Count >= 1)
-        //{
+        if (orderListView.SelectedItems.Count >= 1)
+        {
             BO.OrderForList item = (BO.OrderForList)orderListView.SelectedItems[0];
-            new OrderWindow(item).Show();
-        //}
+            if(item.Status!= BO.Enum.OrderStatus.Delivered)
+            {
+                new OrderWindow(item).Show();
+            }
+            else
+            {
+                new OrderWindow(item, "readonly").Show();
+            }
+        }
         
     }
 

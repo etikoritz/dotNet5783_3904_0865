@@ -25,9 +25,6 @@ namespace PL
         BlApi.IBl? bl = BlApi.Factory.Get();
         BO.Cart cart;
         private ObservableCollection<BO.OrderItem> orderitems = new ObservableCollection<BO.OrderItem>();
-        public ObservableCollection<BO.OrderForList?> groupingProducts= new ObservableCollection<BO.OrderForList?>();
-        // public IEnumerable<OrderForList?> groupingProducts = new List<OrderForList?>();
-        //public UserWindow(BO.Cart cartWithUserDetails)
 
         /// <summary>
         /// ctor with username
@@ -43,10 +40,6 @@ namespace PL
             DataContext = cartWithUserDetails;
             CategorySelector.ItemsSource = System.Enum.GetValues(typeof(BO.Enum.Category));
             nameOfUser_lable.Content = cartWithUserDetails.CustomerName + "!";
-        }
-        public enum Categoryenum
-        {
-            Laptop, DesktopComputer, Tablet, Cellphone, Headphones
         }
         public UserWindow()
         {
@@ -93,21 +86,20 @@ namespace PL
             int counter = Convert.ToInt32(cartCounterLabel.Content);
             var button = (Button)sender;
             var item = (BO.ProductForList)button.DataContext;
-            bl?.Cart.AddToCart(cart, item.ID);
-
+            cart =bl.Cart.AddToCart(cart, item.ID);
             if (orderitems.Contains(bl?.Cart.GetItemInCartList(cart).FirstOrDefault(o => o?.ProductID == item.ID)))
             {
                 BO.OrderItem updateItem = cart.Items.FirstOrDefault(p => p?.ProductID == item.ID);
                 int index = orderitems.IndexOf(cart.Items.FirstOrDefault(p => p?.ProductID == item.ID));
                 orderitems[index] = updateItem;
-                cartCounterLabel.Content = cart.Items.Count.ToString();
+                //cartCounterLabel.Content = counter++.ToString();
             }
             else
             {
                 orderitems.Add(bl?.Cart.GetItemInCartList(cart).FirstOrDefault(o => o?.ProductID == item.ID));
-                //cartCounterLabel.Content = cart.Amount.ToString();
-                cartCounterLabel.Content = cart.Items.Count.ToString();
+                cartCounterLabel.Content = cart.Amount.ToString();
             }
+            DataContext = cart;
         }
 
         private void Clear_Click(object sender, RoutedEventArgs e)

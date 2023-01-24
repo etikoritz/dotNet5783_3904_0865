@@ -19,7 +19,7 @@
         </Grid.Background>
         <ListView x:Name="CatalogList" 
                   d:ItemsSource="{d:SampleData ItemCount=6}" 
-                  Margin="20,84,141,59" 
+                  Margin="37,99,173,44" 
                   MouseDoubleClick="CatalogList_MouseDoubleClick">
 
             <!--ItemsSource="{Binding Source={StaticResource YourCollectionViewSource}, Path=View}">
