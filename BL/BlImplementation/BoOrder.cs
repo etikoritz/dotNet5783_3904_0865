@@ -287,7 +287,7 @@ internal class BoOrder : BlApi.IOrder
 
 
     /// <summary>
-    /// --inner function for manager fonction-- deleting an item from the order
+    /// --inner function for manager-- deleting an item from order
     /// </summary>
     /// <param name="orderID"></param>
     /// <param name="productID"></param>
@@ -314,7 +314,7 @@ internal class BoOrder : BlApi.IOrder
                              where item?.ProductID == productID
                              select item)
         {
-            var product = (DO.Product)Dal.Product.GetById(productID);
+            DO.Product product = (DO.Product)Dal.Product.GetById(productID);
             product.InStock += item.Value.Amount;
             Dal.Product.Update(product);
             Dal.OrderItem.Delete(item.Value.ID);

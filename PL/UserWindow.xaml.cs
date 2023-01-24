@@ -97,7 +97,7 @@ namespace PL
             else
             {
                 orderitems.Add(bl?.Cart.GetItemInCartList(cart).FirstOrDefault(o => o?.ProductID == item.ID));
-                //cartCounterLabel.Content = counter++.ToString();
+                cartCounterLabel.Content = cart.Amount.ToString();
             }
             DataContext = cart;
         }
