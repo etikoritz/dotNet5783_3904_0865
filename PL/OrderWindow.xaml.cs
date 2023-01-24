@@ -113,7 +113,11 @@ namespace PL
             this.itemsList.ItemsSource = bl?.Order?.GetOrderDetails(o => o?.ID == (DataContext as BO.Order)?.ID)?.Items;
         }
 
-
+        /// <summary>
+        /// button to remove item from cart
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RemoveItemButton_Click(object sender, RoutedEventArgs e)
         {
             var button = (Button)sender;

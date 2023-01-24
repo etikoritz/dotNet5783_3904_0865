@@ -100,12 +100,13 @@ namespace PL
                 BO.OrderItem updateItem = cart.Items.FirstOrDefault(p => p?.ProductID == item.ID);
                 int index = orderitems.IndexOf(cart.Items.FirstOrDefault(p => p?.ProductID == item.ID));
                 orderitems[index] = updateItem;
-                cartCounterLabel.Content = cart.Amount.ToString();
+                cartCounterLabel.Content = cart.Items.Count.ToString();
             }
             else
             {
                 orderitems.Add(bl?.Cart.GetItemInCartList(cart).FirstOrDefault(o => o?.ProductID == item.ID));
-                cartCounterLabel.Content = cart.Amount.ToString();
+                //cartCounterLabel.Content = cart.Amount.ToString();
+                cartCounterLabel.Content = cart.Items.Count.ToString();
             }
         }
 
