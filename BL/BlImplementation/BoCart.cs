@@ -118,7 +118,7 @@ internal class BoCart : ICart
                 DO.Product product = (DO.Product)Dal.Product.GetById(item.ProductID);
                 if (product.InStock - item.Amount <= 0)
                 {
-                    throw new OutOfStockProductException($"the product {product.Name} is out of stock!");
+                    throw new OutOfStockProductSException($"the product {product.Name} is out of stock!");
 
                 }
             }

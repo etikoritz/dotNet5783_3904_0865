@@ -76,7 +76,7 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Add" Width="auto">
+                    <GridViewColumn Header="Remove" Width="auto">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Button x:Name="deleteButton"

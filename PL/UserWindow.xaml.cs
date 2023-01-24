@@ -26,8 +26,9 @@ namespace PL
         BO.Cart cart;
         private ObservableCollection<BO.OrderItem> orderitems = new ObservableCollection<BO.OrderItem>();
         public ObservableCollection<BO.OrderForList?> groupingProducts= new ObservableCollection<BO.OrderForList?>();
-       // public IEnumerable<OrderForList?> groupingProducts = new List<OrderForList?>();
+        // public IEnumerable<OrderForList?> groupingProducts = new List<OrderForList?>();
         //public UserWindow(BO.Cart cartWithUserDetails)
+
         /// <summary>
         /// ctor with username
         /// </summary>
@@ -99,12 +100,12 @@ namespace PL
                 BO.OrderItem updateItem = cart.Items.FirstOrDefault(p => p?.ProductID == item.ID);
                 int index = orderitems.IndexOf(cart.Items.FirstOrDefault(p => p?.ProductID == item.ID));
                 orderitems[index] = updateItem;
-                cartCounterLabel.Content = counter++.ToString();
+                cartCounterLabel.Content = cart.Amount.ToString();
             }
             else
             {
                 orderitems.Add(bl?.Cart.GetItemInCartList(cart).FirstOrDefault(o => o?.ProductID == item.ID));
-                cartCounterLabel.Content = counter++.ToString();
+                cartCounterLabel.Content = cart.Amount.ToString();
             }
         }
 
@@ -127,7 +128,6 @@ namespace PL
             PropertyGroupDescription groupDescription = new PropertyGroupDescription("Category");
             view.GroupDescriptions.Add(groupDescription);
             var button = (Button)sender;
-
         }
     }
 }
