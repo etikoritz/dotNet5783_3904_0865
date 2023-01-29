@@ -37,7 +37,10 @@ public partial class UpdateProductWindow : Window
     public enum State { Add, Update};
     static State state;
 
-
+    /// <summary>
+    /// ctor for user
+    /// </summary>
+    /// <param name="productForList"></param>
     public UpdateProductWindow(BO.ProductForList productForList)
     {
         InitializeComponent();
@@ -48,16 +51,21 @@ public partial class UpdateProductWindow : Window
 
     }
  
+    /// <summary>
+    /// ctor for admin
+    /// </summary>
     public UpdateProductWindow()
     {
         InitializeComponent();
+        DataContext = bl.Product.GetProductList(p => p != null);
         categoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.Enum.Category));
-        
     }
+
     public void AddProducView()
     {
         AddProduct.Visibility = Visibility.Visible;
     }
+
     public void updateProductView(BO.ProductForList product)
     {
         UpdateButton.Visibility=Visibility.Visible;
