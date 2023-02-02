@@ -90,7 +90,6 @@ internal class DalOrder : IOrder
 
     public Order? Get(Func<Order?, bool>? condition)
     {
-
         DO.Order? order = DataSource.orderList.FirstOrDefault(o => condition(o));
         if (order == null)
             throw new DataNotExistException();

@@ -11,14 +11,39 @@ namespace Dal;
 
 internal class OrderXml : IOrder
 {
+    const string s_order = @"Order";  //XML Serializer
+
+    /// <summary>
+    /// Add new order
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
     public int Add(Order item)
     {
-        throw new NotImplementedException();
+        //Deserialize
+        List<DO.Order?> ordersList = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_order);
+        if (s_order.FirstOrDefault(ordr => ordr?.ID == item.ID) != null)
+            throw new Exception("ID elready exist!");
+        ordersList.Add(item);
+        //Serialize
+        XMLTools.SaveListToXMLSerializer(ordersList, s_order);
+        return item.ID;
     }
 
+    /// <summary>
+    /// Delete order by order ID
+    /// </summary>
+    /// <param name="id"></param>
+    /// <exception cref="Exception"></exception>
     public void Delete(int id)
     {
-        throw new NotImplementedException();
+        //Deserialize
+        List<DO.Order?> ordersList = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_order);
+        if (ordersList.RemoveAll(ordr => ordr?.ID == id) == 0)
+            throw new Exception("Missing ID");
+        //Serialize
+        XMLTools.SaveListToXMLSerializer(ordersList, s_order);
     }
 
     public Order? Get(Func<Order?, bool>? condition)
@@ -26,18 +51,39 @@ internal class OrderXml : IOrder
         throw new NotImplementedException();
     }
 
+    /// <summary>
+    /// Get order by its ID
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
     public Order? GetById(int id)
     {
-        throw new NotImplementedException();
+        List<DO.Order?> ordersList = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_order);
+        return ordersList.FirstOrDefault(ordr => ordr?.ID == id) ??
+            throw new Exception("Missing ID");
     }
 
+    /// <summary>
+    /// Get list of all orders
+    /// </summary>
+    /// <param name="filter"></param>
+    /// <returns></returns>
     public IEnumerable<Order?> GetList(Func<Order?, bool>? filter = null)
     {
-        throw new NotImplementedException();
+        List<DO.Order?> ordersList = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_order);
+        if (filter == null)
+            return ordersList.Select(ordr => ordr).OrderBy(ordr => ordr?.ID);
+        return ordersList.Where(filter).OrderBy(ordr => ordr?.ID);
     }
 
+    /// <summary>
+    /// Update order
+    /// </summary>
+    /// <param name="item"></param>
     public void Update(Order item)
     {
-        throw new NotImplementedException();
+        Delete(item.ID);
+        Add(item);
     }
 }

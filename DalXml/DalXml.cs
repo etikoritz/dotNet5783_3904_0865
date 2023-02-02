@@ -24,5 +24,4 @@ sealed internal class DalXml : IDal
     public IOrder Order { get; } = new Dal.OrderXml();
     public IProduct Product { get; } = new Dal.ProductXml();
     public IOrderItem OrderItem { get; } = new Dal.OrderItemXml();
-
 }

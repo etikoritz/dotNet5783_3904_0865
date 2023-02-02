@@ -95,8 +95,6 @@ internal class BoOrder : BlApi.IOrder
         return ordersList;
     }
 
-
-
     /// <summary>
     /// Get order details by its ID
     /// </summary>
@@ -284,7 +282,6 @@ internal class BoOrder : BlApi.IOrder
         }
         return orderTracking;
     }
-
 
     /// <summary>
     /// --inner function for manager-- deleting an item from order
