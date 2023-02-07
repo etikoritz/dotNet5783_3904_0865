@@ -154,7 +154,7 @@ internal class ProductXml : IProduct
     {
         XElement? productRootElem = XMLTools.LoadListFromXMLElement(s_product);
         return (from s in productRootElem?.Elements()
-                where s.ToIntNullable("ID") == id
+                where Convert.ToInt32(s.Parent.Element("ID").Value) == id
                 select (DO.Product?)CreateProductFromXElement(s)).FirstOrDefault()
                 ?? throw new Exception("Missing ID");
     }
@@ -169,7 +169,7 @@ internal class ProductXml : IProduct
     {
         XElement? productRootElem = XMLTools.LoadListFromXMLElement(s_product);
         XElement? prod = (from pr in productRootElem?.Elements()
-                          where pr.Parent.ToIntNullable("ID").Value == doProduct.ID
+                          where Convert.ToInt32(pr.Parent.Element("ID").Value) == doProduct.ID
                           select pr).FirstOrDefault();
         if (prod != null)
             throw new Exception("ID already exist");

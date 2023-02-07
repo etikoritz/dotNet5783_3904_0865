@@ -22,8 +22,8 @@ internal class OrderItemXml : IOrderItem
     {
         //Deserialize
         List<DO.OrderItem?> orderItemsList = XMLTools.LoadListFromXMLSerializer<DO.OrderItem>(s_orderItem);
-        if (s_orderItem.FirstOrDefault(orderItm => orderItm == item.ID) != null)
-            throw new Exception("ID elready exist!");
+        //if (s_orderItem.FirstOrDefault(orderItm => orderItm == item.ID) != null)
+        //    throw new Exception("ID elready exist!");
         orderItemsList.Add(item);
         //Serialize
         XMLTools.SaveListToXMLSerializer(orderItemsList, s_orderItem);
