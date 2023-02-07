@@ -441,6 +441,18 @@ Press 0 to exit");
                 case 3:
                     OptionOrderItem(dalList);
                     break;
+                case 4:
+                    DalApi.IDal? access = DalApi.Factory.Get();
+                    
+                    //xmltool.(access.Product.GetList().ToList(), "Product");
+                    //XMLTools.SaveListToXMLSerializer(access.Order.GetList().ToList(), "Order");
+                    //XMLTools.SaveListToXMLSerializer(access.orderItem.ReadAll().ToList(), "OrderItem");
+
+                    //int lastOrderItemID = access.OrderItem.GetList().Last()?.OrderItemID ?? 0;
+                    //int lastOrderID = access.order.ReadAll().Last()?.OrderID ?? 0;
+                    //XmlTools.SaveConfigXElement("OrderID", lastOrderID);
+                    //XmlTools.SaveConfigXElement("OrderItemID", lastOrderItemID);
+                    break;
                 default:
                     break;
             }

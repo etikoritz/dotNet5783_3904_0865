@@ -2,6 +2,7 @@
 using DO;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -64,23 +65,25 @@ internal class ProductXml : IProduct
     {
         return new DO.Product()
         {
-            ID = s.ToIntNullable("ID") ?? throw new FormatException("id"),
-            Name = (string?)s.Element("Name"),
-            Category = (Enums.Category)s.ToEnumNullable<Enums.Category>("Category"),
-            InStock = s.ToIntNullable("InStock")?? throw new FormatException("id"),
-            Price = (double)(double?)s.Element("Price")
+            //ID = s.ToIntNullable ("ID") ?? throw new FormatException("id"),
+            ID = Convert.ToInt32(s.Parent.Element("ID").Value),
+            Name = s.Parent.Element("Name").Value,
+           // Category = Enums.Category(s.Parent.Element("Category").Value),
+            InStock = Convert.ToInt32(s.Parent.Element("InStock").Value),
+            //?? throw new FormatException("InStock"),
+            Price = Convert.ToDouble(s.Parent.Element("Price").Value)
         };
     }
 
 
-    public List<Product> GetProductsList()
+    public List<DO.Product> GetProductsList()
     {
         LoadData();
         List<Product> products;
         try
         {
             products = (from p in productRoot.Elements()
-                        select new Product()
+                        select new DO.Product()
                         {
                             ID = Convert.ToInt32(p.Element("ID").Value),
                             Name = p.Element("name").Value,
@@ -166,7 +169,7 @@ internal class ProductXml : IProduct
     {
         XElement? productRootElem = XMLTools.LoadListFromXMLElement(s_product);
         XElement? prod = (from pr in productRootElem?.Elements()
-                          where pr.ToIntNullable("ID") == doProduct.ID
+                          where pr.Parent.ToIntNullable("ID").Value == doProduct.ID
                           select pr).FirstOrDefault();
         if (prod != null)
             throw new Exception("ID already exist");
@@ -178,7 +181,7 @@ internal class ProductXml : IProduct
                                     new XElement("Price", doProduct.Price),
                                     new XElement("Category", doProduct.Category));
         productRootElem.Add(productElem);
-        XMLTools.SaveListToXMLElement(productElem, s_product);
+        XMLTools.SaveListToXMLElement(productRootElem, s_product);
         return doProduct.ID;
     }
 
@@ -191,7 +194,7 @@ internal class ProductXml : IProduct
     {
         XElement productRootElem = XMLTools.LoadListFromXMLElement(s_product);
         XElement? prod = (from pr in productRootElem?.Elements()
-                          where (int?)pr.Element("ID") == id
+                          where (int?)pr.Parent.Element("ID") == id
                           select pr).FirstOrDefault() ?? throw new Exception("Missing ID");
 
         prod.Remove(); // remove prod from productRootElem

@@ -1,14 +1,26 @@
 ﻿using DO;
 using DalApi;
 using System.Security.Cryptography;
-
+using System.Xml.Linq;
+using System.Xml;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Schema;
+using System.Xml.XPath;
+//using DalXml;
 namespace Dal;
 
 internal class DalProduct: IProduct
 {
+    //const string productPath = "Product";
+    //static XElement config = DalXml(XmlTools.LoadConfig());
     public int Add(Product m_product)
     {
-        if(m_product.ID == 0)
+        //List<DO.Product?> listProduct = XmlTools.LoadListFromXMLSerializer<DO.Product>(productPath);
+        if (m_product.ID == 0)
         {
             int temp = DataSource.Confing.get_ID_Product;
             m_product.ID = temp;

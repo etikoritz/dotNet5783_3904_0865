@@ -23,7 +23,7 @@ internal class BoProduct :  BlApi.IProduct
     {
 
         //get the products list from dal
-        List<DO.Product?> DalProductList =(List<DO.Product?>)Dal.Product.GetList();
+        IEnumerable<DO.Product?> DalProductList =(IEnumerable<DO.Product?>)Dal.Product.GetList();
         
 
 

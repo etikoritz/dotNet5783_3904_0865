@@ -59,7 +59,7 @@ internal class BoOrder : BlApi.IOrder
     public IEnumerable<BO.OrderForList> GetOrderList(Func<BO.Product?, bool>? condition = null)
     {
         //get the orders list from dal
-        List<DO.Order?> DalOrdersList = (List<DO.Order?>)DalApi.Factory.Get().Order?.GetList();
+        IEnumerable<DO.Order?> DalOrdersList = (IEnumerable<DO.Order?>)DalApi.Factory.Get().Order?.GetList();
 
         //creates new BO orders list
         List<BO.OrderForList> ordersList = new();

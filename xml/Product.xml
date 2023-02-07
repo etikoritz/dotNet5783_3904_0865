@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Product>
+  <ID>111111</ID>
+  <Name>hgvbcv</Name>
+  <InStock>2380</InStock>
+  <Price>80</Price>
+  <Category>Cellphone</Category>
+  <Product>
+    <ID>222222</ID>
+    <Name>hgvbcv</Name>
+    <InStock>2380</InStock>
+    <Price>80</Price>
+    <Category>Laptop</Category>
+  </Product>
+  <Product>
+    <ID>333333</ID>
+    <Name>hgvbcv</Name>
+    <InStock>2380</InStock>
+    <Price>80</Price>
+    <Category>Laptop</Category>
+  </Product>
+</Product>

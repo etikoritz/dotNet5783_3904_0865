@@ -23,7 +23,7 @@ internal class OrderXml : IOrder
     {
         //Deserialize
         List<DO.Order?> ordersList = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_order);
-        if (s_order.FirstOrDefault(ordr => ordr?.ID == item.ID) != null)
+        if (s_order.FirstOrDefault(ordr => ordr == item.ID) != null)
             throw new Exception("ID elready exist!");
         ordersList.Add(item);
         //Serialize
