@@ -60,9 +60,10 @@ public partial class ProductListWindow : Window
     /// <param name="e"></param>
     private void Button_Click(object sender, RoutedEventArgs e)
     {
-        UpdateProductWindow updateProductWindow = new UpdateProductWindow();
-        updateProductWindow.Show();
-        updateProductWindow.AddProducView();
+        //UpdateProductWindow updateProductWindow = new UpdateProductWindow();
+        //updateProductWindow.Show();
+        //updateProductWindow.AddProducView();
+        new UpdateProductWindow().Show();
     }
 
     /// <summary>

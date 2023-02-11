@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using BO;
 using BlApi;
 using System.Linq.Expressions;
-using DO;
+//using DO;
 
 namespace BL;
 
@@ -189,7 +189,7 @@ public class Program
         BO.Product p = new()
         {
             ID = id,
-            Category =((DO.Enums.Category)(BO.Enum.Category)System.Enum.Parse(typeof(BO.Enum.Category), cat!)),
+            Category =(BO.Enum.Category)System.Enum.Parse(typeof(BO.Enum.Category), cat!),
             //Category = (BO.Enums.Category)Enum.Parse(typeof(BO.Enums.Category), cat!),
             //((BO.Enum.Category)typeof(BO.Enum.Category), cat!),
             //Category = (BO.Enum.Category)BO.Enum.Category,cat,
@@ -247,7 +247,7 @@ public class Program
             ID = id,
             Name = name,
             Price = price,
-            Category = ((DO.Enums.Category)(BO.Enum.Category)System.Enum.Parse(typeof(BO.Enum.Category), cat!)),
+            Category = (BO.Enum.Category)System.Enum.Parse(typeof(BO.Enum.Category), cat!),
             //Category = (BO.Enums.Category)Enum.Parse(typeof(BO.Enums.Category), cat!), // convert string to enum
             InStock = amount
         };
@@ -306,7 +306,7 @@ public class Program
         Console.WriteLine("enter order ID");
         if (!int.TryParse(Console.ReadLine(), out int ID)) // converts the input to integer
             throw new BO.IlegalDataException("Ilegal ID");
-        Console.WriteLine(Bl.Order.GetOrderDetails(o=>o.Value.ID == ID)); ;// printing description.
+        Console.WriteLine(Bl.Order.GetOrderDetails(ID));// printing description.
     }
     private static void UpdateDelivery()
     {

@@ -61,7 +61,7 @@ internal class BoProduct :  BlApi.IProduct
                 {
                     ID = p.ID,
                     Name = p.Name,
-                    Category = p.Category,
+                    Category = (BO.Enum.Category)p.Category,
                     Price = p.Price,
                     InStock= p.InStock
                 };
@@ -137,7 +137,7 @@ internal class BoProduct :  BlApi.IProduct
             {
                 ID = product.ID,
                 Name = product.Name,
-                Category=product.Category,
+                Category=(DO.Enums.Category)product.Category,
                 Price = product.Price,
                 InStock=product.InStock,
             };

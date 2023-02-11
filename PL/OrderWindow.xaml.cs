@@ -47,8 +47,10 @@ namespace PL
         public OrderWindow(OrderForList order, string readOnly)
         {
             InitializeComponent();
-            itemsList.ItemsSource = bl.Order?.GetOrderDetails(o => o?.ID == order.ID).Items;
-            DataContext = bl?.Order?.GetOrderDetails(o => o?.ID == order.ID);
+            //itemsList.ItemsSource = bl.Order?.GetOrderDetails(o => o?.ID == order.ID).Items;
+            //DataContext = bl?.Order?.GetOrderDetails(o => o?.ID == order.ID);
+            itemsList.ItemsSource = bl.Order?.GetOrderDetails(order.ID).Items;
+            DataContext = bl?.Order?.GetOrderDetails(order.ID);
             this.IsEnabled = false;
         }
         public OrderWindow()
@@ -61,8 +63,10 @@ namespace PL
         public OrderWindow(OrderForList  order )
         {
             InitializeComponent();
-            itemsList.ItemsSource = bl.Order?.GetOrderDetails(o =>o?.ID==order.ID).Items;
-            DataContext = bl?.Order?.GetOrderDetails(o=>o?.ID == order.ID);
+            //itemsList.ItemsSource = bl.Order?.GetOrderDetails(o =>o?.ID==order.ID).Items;
+            //DataContext = bl?.Order?.GetOrderDetails(o=>o?.ID == order.ID);
+            itemsList.ItemsSource = bl.Order?.GetOrderDetails(order.ID).Items;
+            DataContext = bl?.Order?.GetOrderDetails(order.ID);
 
         }
 
@@ -80,8 +84,10 @@ namespace PL
                 MessageBox.Show("The order is deleted!");
                 Close();
             }
-            this.DataContext = bl?.Order.GetOrderDetails(o => o?.ID == (DataContext as BO.Order)?.ID);
-            this.itemsList.ItemsSource = bl?.Order.GetOrderDetails(o => o?.ID == (DataContext as BO.Order)?.ID).Items;
+            //this.DataContext = bl?.Order.GetOrderDetails(o => o?.ID == (DataContext as BO.Order)?.ID);
+            //this.itemsList.ItemsSource = bl?.Order.GetOrderDetails(o => o?.ID == (DataContext as BO.Order)?.ID).Items;
+            this.DataContext = bl?.Order.GetOrderDetails((DataContext as BO.Order).ID);
+            this.itemsList.ItemsSource = bl?.Order.GetOrderDetails((DataContext as BO.Order).ID).Items;
         }
 
 
@@ -103,8 +109,10 @@ namespace PL
             {
                 MessageBox.Show("product out of stock!");
             }
-            this.DataContext = bl?.Order.GetOrderDetails(o => o?.ID == ((BO.Order)DataContext).ID);
-            this.itemsList.ItemsSource = bl?.Order?.GetOrderDetails(o => o?.ID == (DataContext as BO.Order)?.ID)?.Items;
+            //this.DataContext = bl?.Order.GetOrderDetails(o => o?.ID == ((BO.Order)DataContext).ID);
+            //this.itemsList.ItemsSource = bl?.Order?.GetOrderDetails(o => o?.ID == (DataContext as BO.Order)?.ID)?.Items;
+            this.DataContext = bl?.Order.GetOrderDetails(((BO.Order)DataContext).ID);
+            this.itemsList.ItemsSource = bl?.Order?.GetOrderDetails((DataContext as BO.Order).ID)?.Items;
         }
 
         /// <summary>
@@ -126,8 +134,10 @@ namespace PL
                 Close();
                 new ProductListWindow().RefreshOrderListView();
             }
-            this.DataContext = bl?.Order?.GetOrderDetails(o => o?.ID == ((BO.Order)DataContext).ID);
-            this.itemsList.ItemsSource = bl?.Order?.GetOrderDetails(o => o?.ID == (DataContext as BO.Order)?.ID)?.Items;
+            //this.DataContext = bl?.Order?.GetOrderDetails(o => o?.ID == ((BO.Order)DataContext).ID);
+            //this.itemsList.ItemsSource = bl?.Order?.GetOrderDetails(o => o?.ID == (DataContext as BO.Order)?.ID)?.Items;
+            this.DataContext = bl?.Order?.GetOrderDetails(((BO.Order)DataContext).ID);
+            this.itemsList.ItemsSource = bl?.Order?.GetOrderDetails((DataContext as BO.Order).ID)?.Items;
         }
     }
 

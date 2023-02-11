@@ -11,8 +11,12 @@ namespace Dal;
 
 internal class OrderXml : IOrder
 {
-    const string s_order = @"Order";  //XML Serializer
 
+    static int orderID = 100021;
+    static int orderItemID = 100039;
+    
+    const string s_order = @"Order";  //XML Serializer
+    //const string s_config = @"Config";
     /// <summary>
     /// Add new order
     /// </summary>
@@ -23,8 +27,8 @@ internal class OrderXml : IOrder
     {
         //Deserialize
         List<DO.Order?> ordersList = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_order);
-        if (s_order.FirstOrDefault(ordr => ordr == item.ID) != null)
-            throw new Exception("ID elready exist!");
+        item.ID = orderID;
+        orderID++;
         ordersList.Add(item);
         //Serialize
         XMLTools.SaveListToXMLSerializer(ordersList, s_order);
@@ -48,7 +52,9 @@ internal class OrderXml : IOrder
 
     public Order? Get(Func<Order?, bool>? condition)
     {
-        throw new NotImplementedException();
+        List<DO.Order?> ordersList = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_order);
+        return ordersList.FirstOrDefault(condition) ??
+            throw new Exception("Missing ID");
     }
 
     /// <summary>

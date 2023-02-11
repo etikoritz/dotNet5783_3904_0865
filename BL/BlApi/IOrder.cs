@@ -24,7 +24,8 @@ namespace BlApi
         /// </summary>
         /// <param name="orderID"></param>
         /// <returns></returns>
-        public BO.Order GetOrderDetails(Func<DO.Order?, bool>? condition);
+        //public BO.Order GetOrderDetails(Func<DO.Order?, bool>? condition);
+        public BO.Order GetOrderDetails(int id);
 
         /// <summary>
         /// Update order delivery date in Dal and BO

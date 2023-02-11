@@ -47,7 +47,10 @@ internal class OrderItemXml : IOrderItem
 
     public OrderItem? Get(Func<OrderItem?, bool>? condition)
     {
-        throw new NotImplementedException();
+        List<DO.OrderItem?> orderItems = XMLTools.LoadListFromXMLSerializer<DO.OrderItem>(s_orderItem);
+        return orderItems.FirstOrDefault(condition) ??
+            throw new Exception("Missing ID");
+
     }
 
     /// <summary>

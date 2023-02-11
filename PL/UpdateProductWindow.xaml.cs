@@ -91,7 +91,7 @@ public partial class UpdateProductWindow : Window
             Name = name,
             InStock = inStock,
             Price = price,
-            Category = (DO.Enums.Category)category
+            Category = (BO.Enum.Category)category
         };
         return product;
     }

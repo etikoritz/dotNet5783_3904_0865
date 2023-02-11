@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.Serialization;
-using DO;
-namespace Dal;
 
+namespace Dal;
+using DO;
 
 static class XMLTools
 {
@@ -37,7 +37,8 @@ static class XMLTools
         }
         catch (Exception ex)
         {
-            throw new Exception($"Fail to create XML file: {filePath}", ex);
+            // DO.XMLFileLoadCreateException(filePath, $"fail to create xml file: {filePath}", ex);
+            throw new Exception($"fail to create xml file: {filePath}", ex);
         }
     }
 
@@ -60,7 +61,8 @@ static class XMLTools
         }
         catch (Exception ex)
         {
-            throw new Exception($"Fail to load XML file: {filePath}", ex);
+            //new DO.XMLFileLoadCreateException(filePath, $"fail to load xml file: {filePath}", ex);
+            throw new Exception($"fail to load xml file: {filePath}", ex);
         }
     }
 
@@ -101,21 +103,21 @@ static class XMLTools
         string filePath = $"{s_dir + entity}.xml";
         try
         {
-            if (!File.Exists(filePath))
-                return new();
+            if (!File.Exists(filePath)) return new();
             using FileStream file = new(filePath, FileMode.Open);
             XmlSerializer x = new(typeof(List<T?>));
             return x.Deserialize(file) as List<T?> ?? new();
         }
         catch (Exception ex)
         {
-            throw new Exception($"Fail to load xml file: {filePath}", ex);
+            // DO.XMLFileLoadCreateException(filePath, $"fail to load xml file: {filePath}", ex);
+            throw new Exception($"fail to load xml file: {filePath}", ex);
         }
     }
-    #endregion
+#endregion
 
-    #region Extension Fuctions
-    public static T? ToEnumNullable<T>(this XElement element, string name) where T : struct, Enum =>
+#region Extension Fuctions
+public static T? ToEnumNullable<T>(this XElement element, string name) where T : struct, Enum =>
         Enum.TryParse<T>((string?)element.Element(name), out var result) ? (T?)result : null;
 
     public static DateTime? ToDateTimeNullable(this XElement element, string name) =>

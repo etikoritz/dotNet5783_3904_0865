@@ -1,22 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Product>
-  <ID>111111</ID>
-  <Name>hgvbcv</Name>
-  <InStock>2380</InStock>
-  <Price>80</Price>
-  <Category>Cellphone</Category>
+  <Product>
+    <ID>111111</ID>
+    <Name>hgvbcv</Name>
+    <InStock>2361</InStock>
+    <Price>50</Price>
+    <Category>Laptop</Category>
+  </Product>
   <Product>
     <ID>222222</ID>
     <Name>hgvbcv</Name>
-    <InStock>2380</InStock>
+    <InStock>2363</InStock>
     <Price>80</Price>
-    <Category>Laptop</Category>
+    <Category>Cellphone</Category>
   </Product>
   <Product>
     <ID>333333</ID>
     <Name>hgvbcv</Name>
-    <InStock>2380</InStock>
+    <InStock>2369</InStock>
     <Price>80</Price>
     <Category>Laptop</Category>
+  </Product>
+  <Product>
+    <ID>444444</ID>
+    <Name>rdfcesdvxa</Name>
+    <InStock>31</InStock>
+    <Price>67</Price>
+    <Category>Headphones</Category>
   </Product>
 </Product>
