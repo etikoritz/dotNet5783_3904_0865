@@ -34,11 +34,21 @@
             Margin="10,10,210,10" 
             FontFamily="Comic Sans MS"
             MouseDoubleClick="productListView_MouseDoubleClick" Grid.Row="1" >
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock FontWeight="Bold" FontSize="14" Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </ListView.GroupStyle>
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Center"/>
                 </Style>
             </ListView.ItemContainerStyle>
+            
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Id" Width="Auto">
@@ -142,6 +152,7 @@
         </ListView>
         <Button x:Name="orderButton" Content="Order" HorizontalAlignment="Left" Margin="724,27,0,0" Grid.Row="1" VerticalAlignment="Top" Height="42" Width="122" FontSize="16" Click="orderButton_Click"/>
         <Button x:Name="productButton" Content="Product" HorizontalAlignment="Left" Margin="724,98,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16" Height="42" Width="122" Click="productButton_Click"/>
-        
+        <Button Content="Group by category" HorizontalAlignment="Left" Margin="80,0,0,0" Grid.Row="2" VerticalAlignment="Center" Click="Button_Click_2"/>
+
     </Grid>
 </Window>

@@ -161,5 +161,14 @@ public partial class ProductListWindow : Window
         }
        
     }
+
+    private void Button_Click_2(object sender, RoutedEventArgs e)
+    {
+        CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(productListView.ItemsSource);
+        PropertyGroupDescription groupDescription = new PropertyGroupDescription("Category");
+        view.GroupDescriptions.Add(groupDescription);
+        var button = (Button)sender;
+        Clear.Visibility = Visibility.Visible;
+    }
 }
 

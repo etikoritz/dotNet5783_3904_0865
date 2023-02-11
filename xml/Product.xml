@@ -3,7 +3,7 @@
   <Product>
     <ID>111111</ID>
     <Name>hgvbcv</Name>
-    <InStock>2361</InStock>
+    <InStock>2356</InStock>
     <Price>50</Price>
     <Category>Laptop</Category>
   </Product>
@@ -11,14 +11,14 @@
     <ID>222222</ID>
     <Name>hgvbcv</Name>
     <InStock>2363</InStock>
-    <Price>80</Price>
+    <Price>70</Price>
     <Category>Cellphone</Category>
   </Product>
   <Product>
     <ID>333333</ID>
     <Name>hgvbcv</Name>
     <InStock>2369</InStock>
-    <Price>80</Price>
+    <Price>390</Price>
     <Category>Laptop</Category>
   </Product>
   <Product>
