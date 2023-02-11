@@ -50,7 +50,6 @@ internal class OrderItemXml : IOrderItem
         List<DO.OrderItem?> orderItems = XMLTools.LoadListFromXMLSerializer<DO.OrderItem>(s_orderItem);
         return orderItems.FirstOrDefault(condition) ??
             throw new Exception("Missing ID");
-
     }
 
     /// <summary>

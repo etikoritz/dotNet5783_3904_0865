@@ -2,29 +2,29 @@
 <Product>
   <Product>
     <ID>111111</ID>
-    <Name>hgvbcv</Name>
-    <InStock>2352</InStock>
-    <Price>50</Price>
-    <Category>Laptop</Category>
+    <Name>comp23</Name>
+    <InStock>2</InStock>
+    <Price>5000</Price>
+    <Category>DesktopComputer</Category>
   </Product>
   <Product>
     <ID>222222</ID>
     <Name>hgvbcv</Name>
-    <InStock>2358</InStock>
+    <InStock>2354</InStock>
     <Price>70</Price>
     <Category>Cellphone</Category>
   </Product>
   <Product>
     <ID>333333</ID>
     <Name>hgvbcv</Name>
-    <InStock>2362</InStock>
+    <InStock>2360</InStock>
     <Price>390</Price>
     <Category>Laptop</Category>
   </Product>
   <Product>
     <ID>444444</ID>
     <Name>rdfcesdvxa</Name>
-    <InStock>25</InStock>
+    <InStock>21</InStock>
     <Price>67</Price>
     <Category>Headphones</Category>
   </Product>
