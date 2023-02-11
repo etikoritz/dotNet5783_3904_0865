@@ -12,9 +12,9 @@ namespace Dal;
 internal class OrderXml : IOrder
 {
 
-    static int orderID = 100021;
-    static int orderItemID = 100039;
-    
+    //static int orderID = 100021;
+    //static int orderItemID = 100039;
+    const string s_config = @"Config";
     const string s_order = @"Order";  //XML Serializer
     //const string s_config = @"Config";
     /// <summary>
@@ -27,8 +27,12 @@ internal class OrderXml : IOrder
     {
         //Deserialize
         List<DO.Order?> ordersList = XMLTools.LoadListFromXMLSerializer<DO.Order>(s_order);
-        item.ID = orderID;
-        orderID++;
+        //item.ID = orderID;
+        //orderID++;
+        var config = XMLTools.LoadConfig();
+        item.ID = Convert.ToInt32(config.Element("OrderID").Value);
+        (config.Element("OrderID").Value) = item.ID++.ToString();
+        XMLTools.SaveConfigXElement("OrderID", item.ID++);
         ordersList.Add(item);
         //Serialize
         XMLTools.SaveListToXMLSerializer(ordersList, s_order);

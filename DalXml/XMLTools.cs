@@ -11,7 +11,7 @@ using DO;
 
 static class XMLTools
 {
-    const string s_dir = @"..\xml\";
+    static string? s_dir = Directory.GetParent(Directory.GetCurrentDirectory())?.FullName + @"\xml\";
 
     //ממצגת 10 של אפרת
     static XMLTools()
@@ -114,10 +114,43 @@ static class XMLTools
             throw new Exception($"fail to load xml file: {filePath}", ex);
         }
     }
-#endregion
 
-#region Extension Fuctions
-public static T? ToEnumNullable<T>(this XElement element, string name) where T : struct, Enum =>
+
+
+
+    public static void SaveConfigXElement(string entity, int serial)
+    {
+        string filePath = $"{s_dir}Config.xml";
+        try
+        {
+            XElement? config = XElement.Load(filePath);
+            config.Element(entity)!.Value = serial.ToString();
+            config.Save(filePath);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"fail to load xml file: {filePath}", ex);
+        }
+    }
+
+
+    public static XElement LoadConfig()
+    {
+        string filePath = $"{s_dir}config.xml";
+        try
+        {
+            XElement? config = XElement.Load(filePath);
+            return config;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"fail to load xml file: {filePath}", ex);
+        }
+    }
+    #endregion
+
+    #region Extension Fuctions
+    public static T? ToEnumNullable<T>(this XElement element, string name) where T : struct, Enum =>
         Enum.TryParse<T>((string?)element.Element(name), out var result) ? (T?)result : null;
 
     public static DateTime? ToDateTimeNullable(this XElement element, string name) =>
@@ -128,7 +161,10 @@ public static T? ToEnumNullable<T>(this XElement element, string name) where T :
 
     public static int? ToIntNullable(this XElement element, string name) =>
         int.TryParse((string?)element.Element(name), out var result) ? (int?)result : null;}
-    #endregion
+#endregion
+
+
+
 
 
 
