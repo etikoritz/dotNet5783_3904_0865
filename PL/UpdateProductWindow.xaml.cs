@@ -48,7 +48,8 @@ public partial class UpdateProductWindow : Window
         categoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.Enum.Category));
         //for user the window is for view only
         fieldsGrid.IsEnabled = false;
-
+        AddProduct.Visibility = Visibility.Collapsed;
+        UpdateButton.Visibility = Visibility.Visible;
     }
  
     /// <summary>
@@ -59,6 +60,8 @@ public partial class UpdateProductWindow : Window
         InitializeComponent();
         DataContext = bl.Product.GetProductList(p => p != null);
         categoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.Enum.Category));
+        AddProduct.Visibility = Visibility.Visible;
+        UpdateButton.Visibility = Visibility.Collapsed;
     }
 
     public void AddProducView()
