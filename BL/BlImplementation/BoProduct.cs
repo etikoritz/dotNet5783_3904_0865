@@ -224,7 +224,7 @@ internal class BoProduct :  BlApi.IProduct
     public IEnumerable<BO.ProductForList> GetProductListBySort(Func<DO.Product?, bool>? condition)
     {
         ////get the products list from dal
-        List<DO.Product?>? DalProductList = (List<DO.Product?>?)Dal.Product.DoGetProductListBySort(condition);
+        IEnumerable<DO.Product?>? DalProductList = (IEnumerable<DO.Product?>?)Dal.Product.DoGetProductListBySort(condition);
 
 
 
