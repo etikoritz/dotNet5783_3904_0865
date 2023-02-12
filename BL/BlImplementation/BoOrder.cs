@@ -291,21 +291,6 @@ internal class BoOrder : BlApi.IOrder
     internal void deleteItemFromOrder(int orderID, int productID)
     {
         IEnumerable<DO.OrderItem?>? orderItems = (IEnumerable<DO.OrderItem?>?)DalApi.Factory.Get()?.OrderItem.GetList();
-        ////List<DO.Order?>? orders = (List<DO.Order?>?)DalApi.Factory.Get()?.Order.GetList();
-        //DO.OrderItem orderItem = (DO.OrderItem)DalApi.Factory.Get()?.OrderItem.Get(o => (o?.ProductID == productID) && (o?.OrderID == orderID));
-        ////BO.Order order = (BO.Order)GetOrderDetails(o =>o?.ID == orderID);
-        //DO.Product product = (DO.Product)Dal.Product.Get(p => p?.ID == productID);
-        //product.InStock += orderItem.Amount;
-        //Dal.Product.Update(product);
-        //Dal.OrderItem.Delete((int)orderItem.ID);
-        ////if (ordersBO?.FirstOrDefault(o=>o?.ID==orderID)?.Items?.Capacity==0)
-        //if (orderItems.Exists(o => o?.OrderID==orderID))
-        //{
-        //    //ordersBO.Remove(ordersBO.FirstOrDefault(o=>o?.ID==orderID));
-        //    List<BO.OrderForList?> orderForList = (List<BO.OrderForList?>?)GetOrderList();
-        //    orderForList?.Remove(orderForList.Find(o => o?.ID == orderID));
-        //}
-        //bool OnlyOneItemInOrder = true;
         foreach (var item in from item in orderItems
                              where item?.OrderID == orderID
                              where item?.ProductID == productID

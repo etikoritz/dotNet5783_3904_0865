@@ -212,14 +212,6 @@ internal class ProductXml : IProduct
         XElement? prod = (from pr in productRootElem?.Elements()
                           where pr.ToIntNullable("ID").Value == item.ID
                           select pr).FirstOrDefault();
-        //productRootElem.up
-
-        //XElement pr = new XElement("Product",
-        //                            new XElement("ID", item.ID),
-        //                            new XElement("Name", item.Name),
-        //                            new XElement("InStock", item.InStock),
-        //                            new XElement("Price", item.Price),
-        //                            new XElement("Category", item.Category));
         prod.Element("ID").Value = (item.ID).ToString();
         prod.Element("Name").Value = item.Name;
         prod.Element("InStock").Value = (item.InStock).ToString();

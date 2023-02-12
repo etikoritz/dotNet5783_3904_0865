@@ -22,15 +22,15 @@
         <Label x:Name="PriceLabel" Content="Price:" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="84,170,0,0" VerticalAlignment="Top"/>
         <Label x:Name="InStockLabel" Content="In Stock:" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="84,200,0,0" VerticalAlignment="Top" Height="31" Width="59"/>
         <Label x:Name="CategoryLabel"  Content="Category:" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="84,107,0,0" VerticalAlignment="Top" Height="26" Width="69"/>
-        <Grid x:Name="fieldsGrid" IsEnabled="True">
-            <TextBox x:Name="productIdTextBox" Text="{Binding ID}" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="197,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="117" Height="26"/>
-            <ComboBox x:Name="categoryComboBox" Text="{Binding Category}" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="197,110,0,0" VerticalAlignment="Top" Width="117" Height="25" />
-            <TextBox x:Name="nameTextBox" Text="{Binding Name}" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="197,145,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-            <TextBox x:Name="priceTextBox" Text="{Binding Price}" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="197,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-            <TextBox x:Name="inStockTextBox" Text="{Binding inStock}" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="197,204,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Grid x:Name="fieldsGrid"  IsEnabled="True" DataContext="{Binding}"  >
+            <TextBox x:Name="productIdTextBox" Text="{Binding Path=ID}" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="197,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="117" Height="26"/>
+            <ComboBox x:Name="categoryComboBox" Text="{Binding Path=Category}" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="197,110,0,0" VerticalAlignment="Top" Width="117" Height="25" />
+            <TextBox x:Name="nameTextBox" Text="{Binding Path= Name}" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="197,145,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
+            <TextBox x:Name="priceTextBox" Text="{Binding Path= Price}" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="197,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
+            <TextBox x:Name="inStockTextBox" Text="{Binding Path= InStock}" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="197,204,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         </Grid>
-    <Button x:Name="AddProduct" Content="Add" FontFamily="Comic Sans MS" HorizontalAlignment="Center" Margin="0,277,0,0" VerticalAlignment="Top" Height="32" Width="80" Visibility="Collapsed" Click="AddProduct_Click"/>
-        <Button x:Name="UpdateButton" Content="Update" FontFamily="Comic Sans MS" HorizontalAlignment="Center" Margin="0,277,0,0" VerticalAlignment="Top" Visibility="Collapsed" Height="32" Width="80" Click="UpdateButton_Click"/>
+        <Button x:Name="AddProduct" Content="Add" FontFamily="Comic Sans MS" HorizontalAlignment="Center" Margin="0,277,0,0" VerticalAlignment="Top" Height="32" Width="80" Visibility="{Binding IsButtonVisible, Converter={StaticResource BoolToVis}}" Click="AddProduct_Click"/>
+        <Button x:Name="UpdateButton" Content="Update" FontFamily="Comic Sans MS" HorizontalAlignment="Center" Margin="0,277,0,0" VerticalAlignment="Top" Visibility="{Binding IsUpdateButtonVisible, Converter={StaticResource BoolToVis}}" Height="32" Width="80" Click="UpdateButton_Click"/>
 
     </Grid>
 </Window>

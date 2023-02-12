@@ -112,7 +112,7 @@ namespace PL
             //this.DataContext = bl?.Order.GetOrderDetails(o => o?.ID == ((BO.Order)DataContext).ID);
             //this.itemsList.ItemsSource = bl?.Order?.GetOrderDetails(o => o?.ID == (DataContext as BO.Order)?.ID)?.Items;
             this.DataContext = bl?.Order.GetOrderDetails(((BO.Order)DataContext).ID);
-            this.itemsList.ItemsSource = bl?.Order?.GetOrderDetails((DataContext as BO.Order).ID)?.Items;
+            this.itemsList.ItemsSource = ((BO.Order)DataContext)?.Items;
         }
 
         /// <summary>

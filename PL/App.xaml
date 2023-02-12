@@ -15,7 +15,7 @@
             <!accent 
             <SolidColorBrush x:Key="SecondaryHueMidBrush" Color="#FF9B629D"/>
             <SolidColorBrush x:Key="SecondaryHueMidForegroundBrush" Color="#FFFFFF"/>-->
-
+            <BooleanToVisibilityConverter x:Key="BoolToVis" />
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />

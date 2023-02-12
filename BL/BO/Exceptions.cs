@@ -27,7 +27,7 @@ public class NoProductNameException : Exception
 
 public class NegativePriceException : Exception
 {
-    public override string Message => "ERROR: Wrong product price!";
+    public override string Message => "ERROR: the price is not valid";
     public override string ToString()
     {
         return Message;

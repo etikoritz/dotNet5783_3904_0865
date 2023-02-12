@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Dal;
 
@@ -85,7 +86,23 @@ internal class OrderItemXml : IOrderItem
     /// <param name="item"></param>
     public void Update(OrderItem item)
     {
-        Delete(item.ID);
-        Add(item);
+        XElement? orderItemRootElem = XMLTools.LoadListFromXMLElement(s_orderItem);
+        XElement? itm = (from pr in orderItemRootElem?.Elements()
+                          where pr.ToIntNullable("ProductID").Value == item.ProductID
+                          where pr.ToIntNullable("OrderID").Value == item.OrderID
+                          select pr).FirstOrDefault();
+        itm.Element("ID").Value = (item.ID).ToString();
+        itm.Element("OrderID").Value = item.OrderID.ToString();
+        itm.Element("Amount").Value = (item.Amount).ToString();
+        itm.Element("Price").Value = (item.Price).ToString();
+        itm.Element("ProductID").Value = (item.ProductID).ToString();
+        XElement? lastItem = (from pr in orderItemRootElem?.Elements()
+                               where pr.ToIntNullable("ProductID").Value == item.ProductID
+                               where pr.ToIntNullable("OrderID").Value==item.OrderID
+                               select pr).FirstOrDefault();
+        lastItem = itm;
+        //productRootElem.Document.Nodes
+        XMLTools.SaveListToXMLElement(orderItemRootElem, s_orderItem);
+        //return item.ID;
     }
 }
