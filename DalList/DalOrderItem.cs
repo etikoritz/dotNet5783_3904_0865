@@ -63,7 +63,7 @@ internal class DalOrderItem: IOrderItem
     /// </summary>
     /// <param name="id"></param>
     /// <exception cref="DataNotExistException"></exception>
-    public void Delete(int orderItemID)
+    public void Delete(int orderItemID, int productID)
     {
         //for (int i = 0; i < DataSource.orderItemList.Count; i++)
         //{
@@ -72,7 +72,7 @@ internal class DalOrderItem: IOrderItem
         //DataSource.orderItemList.Remove(DataSource.orderItemList.FirstOrDefault(o=>((o?.OrderID== DataSource.orderItemList[i]?.OrderID) &&(o?.ProductID== DataSource.orderItemList[i]?.ProductID))));
         try
         {
-            DataSource.orderItemList.Remove(DataSource.orderItemList.FirstOrDefault(o => o?.ID == orderItemID));
+            DataSource.orderItemList.Remove(DataSource.orderItemList.FirstOrDefault(orderItm => ((orderItm?.ID == orderItemID) && (orderItm?.ProductID == productID))));
         }
         catch
         {
@@ -88,7 +88,18 @@ internal class DalOrderItem: IOrderItem
         //}
         //throw new DataNotExistException();
     }
-
+    public void Delete(int orderItemID)
+    {
+        try
+        {
+            DataSource.orderItemList.Remove(DataSource.orderItemList.FirstOrDefault(orderItm => orderItm?.ID == orderItemID));
+        }
+        catch
+        {
+            throw new DataNotExistException();
+        }
+        return;
+    }
     /// <summary>
     /// Update existing OrderItem
     /// </summary>

@@ -299,7 +299,7 @@ internal class BoOrder : BlApi.IOrder
             DO.Product product = (DO.Product)Dal.Product.GetById(productID);
             product.InStock += item.Value.Amount;
             Dal.Product.Update(product);
-            Dal.OrderItem.Delete(item.Value.ID);
+            Dal.OrderItem.Delete(item.Value.ID, productID);
         }
 
         //if the order has only one item-the one we deleted, we'll delete the order

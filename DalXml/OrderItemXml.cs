@@ -40,7 +40,16 @@ internal class OrderItemXml : IOrderItem
     {
         //Deserialize
         List<DO.OrderItem?> orderItemsList = XMLTools.LoadListFromXMLSerializer<DO.OrderItem>(s_orderItem);
-        if (orderItemsList.RemoveAll(orderItm => orderItm?.ID == id) == 0)
+        if (orderItemsList.RemoveAll(orderItm => orderItm?.ID == id )==0)
+            throw new Exception("Missing ID");
+        //Serialize
+        XMLTools.SaveListToXMLSerializer(orderItemsList, s_orderItem);
+    }
+    public void Delete(int id, int productID)
+    {
+        //Deserialize
+        List<DO.OrderItem?> orderItemsList = XMLTools.LoadListFromXMLSerializer<DO.OrderItem>(s_orderItem);
+        if (orderItemsList.RemoveAll(orderItm => ((orderItm?.ID == id) && (orderItm?.ProductID == productID )))==0)
             throw new Exception("Missing ID");
         //Serialize
         XMLTools.SaveListToXMLSerializer(orderItemsList, s_orderItem);

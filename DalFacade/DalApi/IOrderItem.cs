@@ -10,4 +10,5 @@ namespace DalApi;
 public interface IOrderItem : ICrud<DO.OrderItem>
 {
     //List<OrderItem?> GetList();
+    void Delete(int orderId, int productID);
 }
