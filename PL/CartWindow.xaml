@@ -83,7 +83,7 @@
             </ListView.View>
         </ListView>
         <Button Content="Confirm order" HorizontalAlignment="Left"
-                Margin="652,385,0,0" VerticalAlignment="Top"
+                Margin="652,377,0,0" VerticalAlignment="Top"
                 RenderTransformOrigin="0.015,0.998"
                 Click="Button_Click"/>
         <Button HorizontalAlignment="Left"

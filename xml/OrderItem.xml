@@ -97,19 +97,67 @@
     <TotalPrice>-70</TotalPrice>
   </OrderItem>
   <OrderItem>
-    <ID>0</ID>
-    <ProductID>222222</ProductID>
-    <OrderID>0</OrderID>
-    <Price>70</Price>
-    <Amount>1</Amount>
-    <TotalPrice>0</TotalPrice>
-  </OrderItem>
-  <OrderItem>
     <ID>100027</ID>
     <ProductID>222222</ProductID>
     <OrderID>100027</OrderID>
     <Price>70</Price>
     <Amount>3</Amount>
     <TotalPrice>70</TotalPrice>
+  </OrderItem>
+  <OrderItem>
+    <ID>100028</ID>
+    <ProductID>111111</ProductID>
+    <OrderID>100028</OrderID>
+    <Price>5000</Price>
+    <Amount>1</Amount>
+    <TotalPrice>0</TotalPrice>
+  </OrderItem>
+  <OrderItem>
+    <ID>100028</ID>
+    <ProductID>222222</ProductID>
+    <OrderID>100028</OrderID>
+    <Price>70</Price>
+    <Amount>1</Amount>
+    <TotalPrice>0</TotalPrice>
+  </OrderItem>
+  <OrderItem>
+    <ID>100028</ID>
+    <ProductID>333333</ProductID>
+    <OrderID>100028</OrderID>
+    <Price>390</Price>
+    <Amount>1</Amount>
+    <TotalPrice>0</TotalPrice>
+  </OrderItem>
+  <OrderItem>
+    <ID>100029</ID>
+    <ProductID>444444</ProductID>
+    <OrderID>100029</OrderID>
+    <Price>67</Price>
+    <Amount>2</Amount>
+    <TotalPrice>0</TotalPrice>
+  </OrderItem>
+  <OrderItem>
+    <ID>100029</ID>
+    <ProductID>222222</ProductID>
+    <OrderID>100029</OrderID>
+    <Price>70</Price>
+    <Amount>1</Amount>
+    <TotalPrice>0</TotalPrice>
+  </OrderItem>
+  <OrderItem>
+    <ID>100029</ID>
+    <ProductID>111111</ProductID>
+    <OrderID>100029</OrderID>
+    <Price>5000</Price>
+    <Amount>0</Amount>
+    <TotalPrice>0</TotalPrice>
+  </OrderItem>
+  <OrderItem>
+    <ID>100029</ID>
+    <ProductID>333333</ProductID>
+    <OrderID>100029</OrderID>
+    <Price>390</Price>
+    <Amount>1</Amount>
+    <TotalPrice>0</TotalPrice>
   </OrderItem>
 </ArrayOfOrderItem>
