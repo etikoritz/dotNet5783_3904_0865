@@ -103,30 +103,30 @@ public partial class OrderWindow : Window
         this.itemsList.ItemsSource = bl?.Order.GetOrderDetails((DataContext as BO.Order).ID).Items;
     }
 
-    /// <summary>
-    /// Clicking on the "+" to add one more item to order
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    private void addToItemButton_Click(object sender, RoutedEventArgs e)
-    {
-        var button = (Button)sender;
-        var item = (BO.OrderItem)button.DataContext;
-        int amount = 1;
-        try
-        {
-            bl?.Order.UpdateOrderByManager(((BO.Order)DataContext).ID, item.ProductID, "addAmount", amount);
-        }
-        catch 
-        {
-            MessageBox.Show("product out of stock!");
-        }
-        //this.DataContext = bl?.Order.GetOrderDetails(o => o?.ID == ((BO.Order)DataContext).ID);
-        //this.itemsList.ItemsSource = bl?.Order?.GetOrderDetails(o => o?.ID == (DataContext as BO.Order)?.ID)?.Items;
 
-        this.DataContext = bl?.Order.GetOrderDetails(((BO.Order)DataContext).ID);
-        this.itemsList.ItemsSource = bl?.Order?.GetOrderDetails((DataContext as BO.Order).ID)?.Items;
-    }
+
+
+
+
+
+        private void addToItemButton_Click(object sender, RoutedEventArgs e)
+        {
+            var button = (Button)sender;
+            var item = (BO.OrderItem)button.DataContext;
+            int amount = 1;
+            try
+            {
+                bl?.Order.UpdateOrderByManager(((BO.Order)DataContext).ID, item.ProductID, "addAmount", amount);
+            }
+            catch 
+            {
+                MessageBox.Show("product out of stock!");
+            }
+            //this.DataContext = bl?.Order.GetOrderDetails(o => o?.ID == ((BO.Order)DataContext).ID);
+            //this.itemsList.ItemsSource = bl?.Order?.GetOrderDetails(o => o?.ID == (DataContext as BO.Order)?.ID)?.Items;
+            this.DataContext = bl?.Order.GetOrderDetails(((BO.Order)DataContext).ID);
+            this.itemsList.ItemsSource = ((BO.Order)DataContext)?.Items;
+        }
 
     /// <summary>
     /// button to remove item from cart

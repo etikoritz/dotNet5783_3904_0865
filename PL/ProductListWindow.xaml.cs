@@ -92,12 +92,12 @@ public partial class ProductListWindow : Window
     private DataTable dt = new DataTable();
     private void productListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
     {
-        UpdateProductWindow updateProductWindow = new UpdateProductWindow();
-        updateProductWindow.Show();
+        
         if (productListView.SelectedItems.Count >= 1)
         {
             BO.ProductForList item = (BO.ProductForList)productListView.SelectedItems[0];
-            updateProductWindow.updateProductView(item);
+            //updateProductWindow.updateProductView(item);
+            new UpdateProductWindow(item).Show();
         }
     }
 

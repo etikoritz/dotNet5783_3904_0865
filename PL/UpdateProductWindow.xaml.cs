@@ -1,8 +1,10 @@
 ﻿using BlApi;
+using MaterialDesignThemes.Wpf.Converters;
 //using DO;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +18,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+
 namespace PL;
 
 /// <summary>
@@ -26,6 +29,11 @@ public partial class UpdateProductWindow : Window
     private static IBl bl = BlApi.Factory.Get();
     BlApi.IBl? bl2 = BlApi.Factory.Get();
     private ObservableCollection<BO.OrderItem> orderitems = new ObservableCollection<BO.OrderItem>();
+    private static BO.Product? Product1;
+    //  BO.Product product;
+
+
+
 
     //public static void State(string state)
     //{
@@ -34,8 +42,9 @@ public partial class UpdateProductWindow : Window
     //    if(state=="update")
     //        UpdateButton.Visibility=Visibility.Visible;
     //}
-    public enum State { Add, Update};
-    static State state;
+
+
+
 
     /// <summary>
     /// ctor for user
@@ -46,44 +55,49 @@ public partial class UpdateProductWindow : Window
         InitializeComponent();
         DataContext = bl.Product.GetProductList(p => p != null);
         categoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.Enum.Category));
-        //for user the window is for view only
-        fieldsGrid.IsEnabled = false;
-        AddProduct.Visibility = Visibility.Collapsed;
         UpdateButton.Visibility = Visibility.Visible;
+        AddProduct.Visibility = Visibility.Hidden;
+        this.DataContext = bl.Product.GetProductDetails(productForList.ID);
+
     }
- 
+
     /// <summary>
     /// ctor for admin
     /// </summary>
     public UpdateProductWindow()
     {
         InitializeComponent();
-        DataContext = bl.Product.GetProductList(p => p != null);
+        //DataContext = bl.Product.GetProductList(p => p != null);
         categoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.Enum.Category));
+        UpdateButton.Visibility = Visibility.Hidden;
         AddProduct.Visibility = Visibility.Visible;
-        UpdateButton.Visibility = Visibility.Collapsed;
+        DataContext = new BO.Product();
+        
+
+        //DataContext = new items();
     }
 
-    public void AddProducView()
-    {
-        AddProduct.Visibility = Visibility.Visible;
-    }
+    //public void AddProducView()
+    //{
+    //    AddProduct.Visibility = Visibility.Visible;
+    //}
 
-    public void updateProductView(BO.ProductForList product)
-    {
-        UpdateButton.Visibility=Visibility.Visible;
+    //public void updateProductView(BO.ProductForList product)
+    //{
+    //    UpdateButton.Visibility=Visibility.Visible;
 
-        productIdTextBox.Text = (product.ID).ToString();
-        productIdTextBox.IsReadOnly= true;
-        priceTextBox.Text = (product.Price).ToString();
-        inStockTextBox.Text = (product.inStock).ToString();
-        nameTextBox.Text=product.Name;
-        categoryComboBox.Text= product.Category.ToString();
-    }
+    //    productIdTextBox.Text = (product.ID).ToString();
+    //    productIdTextBox.IsReadOnly= true;
+    //    priceTextBox.Text = (product.Price).ToString();
+    //    inStockTextBox.Text = (product.inStock).ToString();
+    //    nameTextBox.Text=product.Name;
+    //    categoryComboBox.Text= product.Category.ToString();
+
 
     private BO.Product Read()
     {
-        int.TryParse(productIdTextBox.Text, out int id);
+        int.TryParse((DataContext as BO.Product).ID.ToString(), out int id);
+
         string name = nameTextBox.Text;
         int.TryParse(inStockTextBox.Text, out int inStock);
         int.TryParse(priceTextBox.Text, out int price);
@@ -100,7 +114,9 @@ public partial class UpdateProductWindow : Window
     }
     private void UpdateButton_Click(object sender, RoutedEventArgs e)
     {
-        BO.Product product = Read();
+
+        var button = (Button)sender;
+        var product = (BO.Product)button.DataContext;
         bl.Product.Update(product);
         MessageBox.Show("product updated seccessfully!");
         ProductListWindow productListWindow = new ProductListWindow();
@@ -109,10 +125,20 @@ public partial class UpdateProductWindow : Window
 
     private void AddProduct_Click(object sender, RoutedEventArgs e)
     {
-        BO.Product product = Read();
-        bl.Product.Add(product);
-        MessageBox.Show("product added seccessfully!");
-        ProductListWindow productListWindow = new ProductListWindow();
-        Close();
+        var button = (Button)sender;
+        var product = (BO.Product)button.DataContext;
+        try
+        {
+            bl.Product.Add(product);
+            MessageBox.Show("product added seccessfully!");
+            ProductListWindow productListWindow = new ProductListWindow();
+            Close();
+        }
+        catch(Exception ex)
+        {
+            MessageBox.Show(ex.Message);
+        }
+
+
     }
 }

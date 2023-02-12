@@ -125,12 +125,12 @@ internal class BoProduct :  BlApi.IProduct
         //check product propriety
         if (product.ID <= 0) 
             throw new BO.NegativeIdException();
-        if (product.Name == "") 
+        if (product.Name==null) 
             throw new BO.NoProductNameException();
         if (product.Price <= 0) 
             throw new BO.NegativePriceException();
         if(product.InStock<=0)
-            throw new BO.OutOfStockProductSException("the product is out of stock!");
+            throw new BO.OutOfStockProductSException("Not enough product in stock!");
         else
         {
             DO.Product newProduct = new()

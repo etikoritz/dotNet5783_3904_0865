@@ -154,14 +154,16 @@ internal class BoCart : ICart
         {
             DO.OrderItem orderItem = new DO.OrderItem()
             {
-                ID = order.ID,
+                //ID = order.ID,
                 OrderID = orderId,
                 ProductID = item.ProductID,
                 Price = item.Price,
 
             };
+            //שיניתי פה שהordorderitem.id יהיה id נפרד
             orderItem.Amount += item.Amount;
-            Dal.OrderItem.Add(orderItem);
+            int id=Dal.OrderItem.Add(orderItem);
+            orderItem.ID = id;
             orderlist.Add(order);
             DO.Product product = (DO.Product)Dal.Product.GetById(item.ProductID);
             product.InStock -= item.Amount;
