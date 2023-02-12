@@ -371,7 +371,7 @@ internal class BoOrder : BlApi.IOrder
     }
 
     /// <summary>
-    /// --inner function for manager fonction-- updating the AMOUNT of an item in the order (manager fonction)
+    /// updating the AMOUNT of an item in the order (manager fonction)
     /// </summary>
     /// <param name="orderID"></param>
     /// <param name="productID"></param>
@@ -393,9 +393,14 @@ internal class BoOrder : BlApi.IOrder
         product.InStock -= amount;
         Dal.Product.Update(product);
         return;
-        
     }
 
+    /// <summary>
+    /// updating the AMOUNT of an item in the order (manager fonction)
+    /// </summary>
+    /// <param name="orderID"></param>
+    /// <param name="productID"></param>
+    /// <param name="amount"></param>
     public void SubtractAmuntToItemInOrder(int orderID, int productID, int amount)
     {
         IEnumerable<DO.OrderItem?>? orderItems = (IEnumerable<DO.OrderItem?>?)DalApi.Factory.Get()?.OrderItem.GetList();
@@ -475,7 +480,6 @@ internal class BoOrder : BlApi.IOrder
     /// <param name="action"></param>
     /// <param name="amount"></param>
     /// <exception cref="OutOfStockProductException"></exception>
-    /// 
     public void UpdateOrderByManager(int orderID, int productID, string action, int amount=1)
     {
         //deleting an item from the order

@@ -128,7 +128,6 @@ internal class DalOrderItem: IOrderItem
 
     public OrderItem? Get(Func<OrderItem?, bool>? condition)
     {
-
         DO.OrderItem? orderItem = DataSource.orderItemList.FirstOrDefault(o => condition(o));
         if (orderItem == null)
             throw new DataNotExistException();
