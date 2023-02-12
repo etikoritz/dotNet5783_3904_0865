@@ -51,8 +51,12 @@ namespace PL
             DataContext = bl?.Cart.GetItemInCartList(cart1);
             orderItemList.Items.Refresh();
         }
-       
 
+        /// <summary>
+        /// click on the "+" to add item to order
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void addToItemButton_Click(object sender, RoutedEventArgs e)
         {
             var button = (Button)sender;
@@ -61,36 +65,52 @@ namespace PL
             DataContext = bl?.Cart.GetItemInCartList(cart1);
             orderItemList.Items.Refresh();
         }
+
+        /// <summary>
+        /// click on the "-" to subtract item from order
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void subtractItemButton_Click(object sender, RoutedEventArgs e)
         {
             var button = (Button)sender;
             var item = (BO.OrderItem)button.DataContext;
-            int amount = 1;
-            bl?.Cart.UpdateAmount(cart1, item.ProductID, amount);
+            if (item.Amount == 1)
+                RemoveItemButton_Click(sender, e);
+            else
+                bl?.Cart.UpdateAmount(cart1, item.ProductID, 1);
             DataContext = bl?.Cart.GetItemInCartList(cart1);
             orderItemList.Items.Refresh();
         }
 
+        /// <summary>
+        /// click on confirm order button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (cart1.Items.Count != 0)
             {
-                //new UserWindow().Close();
-                int id = bl.Cart.ConfirmOrder(cart1);
-                MessageBox.Show(@$"your order is confirmed!
+                try
+                {
+                    //new UserWindow().Close();
+                    int id = bl.Cart.ConfirmOrder(cart1);
+                    MessageBox.Show(@$"your order is confirmed!
 your orderID is: {id}");
-                cart1.Items.Clear();
-                cart1.TotalPrice = 0;
-                this.Close();
-                new UserWindow(cart1).Show();
-                //orderItemList.Items.Clear();
+                    cart1.Items.Clear();
+                    cart1.TotalPrice = 0;
+                    this.Close();
+                    new UserWindow(cart1).Show();
+                    //orderItemList.Items.Clear();
+                }
+                catch (OutOfStockProductSException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
-            catch(OutOfStockProductSException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            
-
+            else
+                MessageBox.Show("Please add items to cart");
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)

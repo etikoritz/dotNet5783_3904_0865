@@ -41,10 +41,19 @@ namespace PL
             CategorySelector.ItemsSource = System.Enum.GetValues(typeof(BO.Enum.Category));
             nameOfUser_lable.Content = cartWithUserDetails.CustomerName + "!";
         }
+
+        /// <summary>
+        /// default ctor
+        /// </summary>
         public UserWindow()
         {
             InitializeComponent();
         }
+
+        /// <summary>
+        /// ctor with username
+        /// </summary>
+        /// <param name="username"></param>
         public UserWindow(string username)
         {
             InitializeComponent();
@@ -52,6 +61,11 @@ namespace PL
             nameOfUser_lable.Content = username + "!";
         }
 
+        /// <summary>
+        /// double click on item from list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CatalogList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (CatalogList.SelectedItems.Count >= 1)
@@ -61,7 +75,6 @@ namespace PL
                 new UpdateProductWindow(prod).Show();
             }
         }
-
 
         /// <summary>
         /// Go to cart button

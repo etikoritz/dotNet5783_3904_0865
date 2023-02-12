@@ -198,10 +198,16 @@ internal class BoCart : ICart
         }
         return cart;
     }
+
+    /// <summary>
+    /// delete product from cart
+    /// </summary>
+    /// <param name="cart"></param>
+    /// <param name="ProductId"></param>
+    /// <returns></returns>
     public BO.Cart? DeleteFromeCart(BO.Cart cart, int ProductId)
     {
-        
-            DO.Product product = (DO.Product)Dal.Product.GetById(ProductId);
+        DO.Product product = (DO.Product)Dal.Product.GetById(ProductId);
         int count = -1;
 
         foreach (var item in
@@ -221,8 +227,8 @@ internal class BoCart : ICart
         cart.Items?.RemoveAt(count);
 
         return cart;
-        
     }
+
     public IEnumerable<BO.OrderItem> GetItemInCartList(BO.Cart cart)
     {
         return cart.Items;
