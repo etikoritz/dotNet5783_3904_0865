@@ -25,7 +25,7 @@ namespace PL
         BlApi.IBl? bl = BlApi.Factory.Get();
         BO.Cart cart;
         private ObservableCollection<BO.OrderItem> orderitems = new ObservableCollection<BO.OrderItem>();
-
+        private readonly int Amount;
         /// <summary>
         /// ctor with username
         /// </summary>
@@ -40,6 +40,8 @@ namespace PL
             DataContext = cartWithUserDetails;
             CategorySelector.ItemsSource = System.Enum.GetValues(typeof(BO.Enum.Category));
             nameOfUser_lable.Content = cartWithUserDetails.CustomerName + "!";
+            cartCounterLabel.Content = cart.Amount.ToString();
+
         }
 
         /// <summary>
@@ -110,8 +112,9 @@ namespace PL
             else
             {
                 orderitems.Add(bl?.Cart.GetItemInCartList(cart).FirstOrDefault(o => o?.ProductID == item.ID));
-                cartCounterLabel.Content = cart.Amount.ToString();
+                
             }
+            cartCounterLabel.Content = cart.Amount.ToString();
             DataContext = cart;
         }
 

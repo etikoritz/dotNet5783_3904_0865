@@ -17,6 +17,8 @@
                 <GradientStop Color="#6c366e" Offset="1.0" />
             </LinearGradientBrush>
         </Grid.Background>
+        <Label x:Name="cartCounterLabel"   Content="{Binding Path=Amount, Source=cart}"  HorizontalAlignment="Left" Margin="72,14,0,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" FontFamily="Comic Sans MS" Height="28" Width="18"/>
+
         <ListView x:Name="CatalogList" 
                   d:ItemsSource="{d:SampleData ItemCount=6}" 
                   Margin="37,99,173,44" 
@@ -86,9 +88,11 @@
                                         IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" IsDefault="True"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
+                        
                     </GridViewColumn>
 
                 </GridView>
+                
             </ListView.View>
         </ListView>
         <Button x:Name="cartButton" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="6,8,0,0" Height="41" Width="61" Background="Transparent" BorderBrush="Transparent" Click="cartButton_Click">
@@ -102,8 +106,7 @@
                HorizontalAlignment="Left" 
                Margin="188,12,0,0" 
                VerticalAlignment="Top"/>
-        <Label x:Name="cartCounterLabel" Content="{Binding Path=Amount, Source=cart}" HorizontalAlignment="Left" Margin="49,11,0,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" FontFamily="Comic Sans MS"/>
-        <Label Content="{Binding Path=CustomerName, Source= Cart}"  HorizontalAlignment="Left" Margin="268,14,0,0" VerticalAlignment="Top" Height="50" Width="156" FontSize="24" FontFamily="Comic Sans MS"/>
+        <Label Content="{Binding Path=Amount, Source= Cart}"  HorizontalAlignment="Left" Margin="268,14,0,0" VerticalAlignment="Top" Height="50" Width="156" FontSize="24" FontFamily="Comic Sans MS"/>
         <Label Name="categoryLabel" Content="Category:" Grid.Column="0" HorizontalAlignment="Left" Margin="343,30,0,0" VerticalAlignment="Top" Height="34" FontFamily="Comic Sans MS"/>
         <ComboBox Name="CategorySelector" FontFamily="Comic Sans MS" SelectionChanged="CategorySelector_SelectionChanged" Margin="419,44,137,360" VerticalAlignment="Stretch"/>
         <Button HorizontalAlignment="Left" Margin="684,75,0,0" VerticalAlignment="Top" Click="Button_Click" Width="100" Height="60">

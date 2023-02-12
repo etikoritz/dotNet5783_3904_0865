@@ -99,6 +99,7 @@ namespace PL
                     MessageBox.Show(@$"your order is confirmed!
 your orderID is: {id}");
                     cart1.Items.Clear();
+                    cart1.Amount = 0;
                     cart1.TotalPrice = 0;
                     this.Close();
                     new UserWindow(cart1).Show();

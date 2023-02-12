@@ -3,21 +3,21 @@
   <Product>
     <ID>111111</ID>
     <Name>hgvbcv</Name>
-    <InStock>2341</InStock>
+    <InStock>2335</InStock>
     <Price>50</Price>
     <Category>Laptop</Category>
   </Product>
   <Product>
     <ID>222222</ID>
     <Name>hgvbcv</Name>
-    <InStock>2346</InStock>
+    <InStock>2331</InStock>
     <Price>70</Price>
     <Category>Cellphone</Category>
   </Product>
   <Product>
     <ID>333333</ID>
     <Name>hgvbcv</Name>
-    <InStock>2360</InStock>
+    <InStock>2348</InStock>
     <Price>390</Price>
     <Category>Laptop</Category>
   </Product>
@@ -31,7 +31,7 @@
   <Product>
     <ID>555555</ID>
     <Name>Asus VivoBook</Name>
-    <InStock>70</InStock>
+    <InStock>66</InStock>
     <Price>2500</Price>
     <Category>DesktopComputer</Category>
   </Product>
