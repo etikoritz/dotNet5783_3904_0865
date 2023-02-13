@@ -26,15 +26,7 @@ internal class BoCart : ICart
         //where item.ProductID == id
         //select item)
         List<BO.OrderItem?>? items = cart?.Items;
-        //if(cart.Items!=null)
-        //{
-        //foreach (var item in items)
-        //{
-        //    if (item?.ProductID == id)
-        //    {
-        //if (product.InStock - item.Amount >= 0)
-        //if(items?.Count!=0)
-        //{
+
         foreach (var item in
     from item in cart?.Items
     where item.ProductID == id
@@ -46,22 +38,8 @@ internal class BoCart : ICart
             cart.Amount++;
             return cart;
         }
-        //}
 
-
-        //}
-        //else throw new OutOfStockProductException();
-        // }
-        // }
-        //}
-
-        //from item
-        //{
-
-        //}
-        //if (items?.Count == 0)
-        //{
-        DO.OrderItem newItemDO = new DO.OrderItem//maybe its DO
+        DO.OrderItem newItemDO = new DO.OrderItem
         {
             ProductID = id,
             Price = product.Price,
@@ -69,7 +47,7 @@ internal class BoCart : ICart
             Amount = 1
         };
         int itemID = Dal.OrderItem.Add(newItemDO);
-        BO.OrderItem newItemBO = new BO.OrderItem//maybe its DO
+        BO.OrderItem newItemBO = new BO.OrderItem
         {
             ID = itemID,
             Name = product.Name,
@@ -80,30 +58,8 @@ internal class BoCart : ICart
         };
         cart.Amount++;
         cart.Items?.Add(newItemBO);
-        //product.InStock -= 1;
-        //Dal.Product.Update(product);
         cart.TotalPrice += product.Price;
         return cart;
-        //}
-
-        //if (product.InStock > 0)// add the item to cart 
-        //{
-        //    BO.OrderItem newItem = new BO.OrderItem//maybe its DO
-        //    {
-        //        //ID=orderID,
-        //        Name = product.Name,
-        //        ProductID = id,
-        //        Price = product.Price,
-        //        TotalPrice = product.Price,
-        //        Amount = 1
-        //    };
-        //    cart?.Items?.Add(newItem);
-        //    //product.InStock -= 1;
-        //    //Dal.Product.Update(product);
-        //    cart.TotalPrice += product.Price;
-        //    return cart;
-        //}
-        //else throw new OutOfStockProductException();
     }
 
     /// <summary>

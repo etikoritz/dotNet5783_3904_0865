@@ -313,14 +313,14 @@ public class Program
         Console.WriteLine("enter order ID");
         if (!int.TryParse(Console.ReadLine(), out int ID)) // converts the input to integer
             throw new BO.IlegalDataException("Ilegal ID");
-        Bl.Order.UpdateOrderDelivery(ID);
+        Bl.Order.UpdateOrderDelivery(ID, DateTime.MinValue);
     }
     private static void UpdateShipping()
     {
         Console.WriteLine("enter order ID");
         if (!int.TryParse(Console.ReadLine(), out int ID)) // converts the input to integer
             throw new BO.IlegalDataException("Ilegal ID");
-        Bl.Order.UpdateOrderSupply(ID);
+        Bl.Order.UpdateOrderSupply(ID, DateTime.MinValue);
     }
     private static void TrackOrder()
     {
