@@ -35,4 +35,25 @@
     <Price>2500</Price>
     <Category>DesktopComputer</Category>
   </Product>
+  <Product>
+    <ID>666666</ID>
+    <Name>Galaxy tab s8</Name>
+    <InStock>22</InStock>
+    <Price>2300</Price>
+    <Category>Tablet</Category>
+  </Product>
+  <Product>
+    <ID>111112</ID>
+    <Name>galaxy s20</Name>
+    <InStock>18</InStock>
+    <Price>1890</Price>
+    <Category>Cellphone</Category>
+  </Product>
+  <Product>
+    <ID>111113</ID>
+    <Name>hp headphone</Name>
+    <InStock>30</InStock>
+    <Price>350</Price>
+    <Category>Headphones</Category>
+  </Product>
 </Product>
