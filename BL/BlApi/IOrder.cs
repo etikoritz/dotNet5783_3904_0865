@@ -33,7 +33,7 @@ namespace BlApi
         /// </summary>
         /// <param name="orderID"></param>
         /// <returns>BO updated order</returns>
-        public Order UpdateOrderDelivery(int orderID);
+        public Order UpdateOrderDelivery(int orderID, DateTime date);
 
         /// <summary>
         /// Update order supply date in Dal and BO
@@ -41,7 +41,7 @@ namespace BlApi
         /// </summary>
         /// <param name="orderID"></param>
         /// <returns>BO updated order</returns>
-        public Order UpdateOrderSupply(int orderID);
+        public Order UpdateOrderSupply(int orderID, DateTime date);
 
         /// <summary>
         /// Get order tracking information by its ID

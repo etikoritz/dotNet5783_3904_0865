@@ -171,19 +171,28 @@ internal class BoOrder : BlApi.IOrder
     /// <returns>the updated order</returns>
     /// <exception cref="BO.BODataNotExistException"></exception>
     /// <exception cref="BO.OrderAlreadyShippedException"></exception>
-    public BO.Order UpdateOrderDelivery(int orderID)
+    public BO.Order UpdateOrderDelivery(int orderID, DateTime date)
     {
         BO.Order order = new BO.Order();
         try
         {
             DO.Order dalOrder = (DO.Order)DalApi.Factory.Get().Order?.Get(o=>o?.ID ==orderID);
-            if (dalOrder.ShipDate == null || dalOrder.ShipDate > DateTime.Today)
+            if (dalOrder.ShipDate >= DateTime.Today)
             {
                 //update BO entity
                 order = GetOrderDetails(orderID);
-                order.ShipDate = DateTime.Now;
-                //update DO entity
-                dalOrder.ShipDate = DateTime.Now;
+                if (date > DateTime.MinValue)
+                {
+                    order.ShipDate = DateTime.Today;
+                    //update DO entity
+                    dalOrder.ShipDate = DateTime.Today;
+                }
+                else
+                {
+                    order.ShipDate = date;
+                    dalOrder.ShipDate = date;
+                }
+                
                 try
                 {
                     Dal.Order.Update(dalOrder);
@@ -210,19 +219,28 @@ internal class BoOrder : BlApi.IOrder
     /// <returns>the updated order</returns>
     /// <exception cref="BO.BODataNotExistException"></exception>
     /// <exception cref="BO.OrderAlreadySuppliedException"></exception>
-    public BO.Order UpdateOrderSupply(int orderID)
+    public BO.Order UpdateOrderSupply(int orderID, DateTime date)
     {
         BO.Order order = new BO.Order();
         try
         {
             DO.Order dalOrder = (DO.Order)DalApi.Factory.Get().Order?.GetById(orderID);
-            if (dalOrder.ShipDate != null && dalOrder.DeliveryDate == null)
+            if (dalOrder.DeliveryDate>DateTime.Today)
             {
-                //update BO entity
                 order = GetOrderDetails(orderID);
-                order.DeliveryDate = DateTime.Today;
-                //update DO entity
-                dalOrder.DeliveryDate = DateTime.Today;
+                if (date==DateTime.MinValue)
+                {
+                    //update BO entity
+                   
+                    order.DeliveryDate = DateTime.Today;
+                    //update DO entity
+                    dalOrder.DeliveryDate = DateTime.Today;
+                }
+                else
+                {
+                    order.DeliveryDate = date;
+                    dalOrder.DeliveryDate = date;
+                }
                 try
                 {
                     Dal.Order.Update(dalOrder);

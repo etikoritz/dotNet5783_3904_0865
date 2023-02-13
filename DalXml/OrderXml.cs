@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using DalApi;
 using DO;
 
@@ -93,7 +94,24 @@ internal class OrderXml : IOrder
     /// <param name="item"></param>
     public void Update(Order item)
     {
-        Delete(item.ID);
-        Add(item);
+        //Delete(item.ID);
+        //Add(item);
+        XElement? orderRootElem = XMLTools.LoadListFromXMLElement(s_order);
+        XElement? prod = (from pr in orderRootElem?.Elements()
+                          where pr.ToIntNullable("ID").Value == item.ID
+                          select pr).FirstOrDefault();
+        prod.Element("ID").Value = (item.ID).ToString();
+        prod.Element("CustomerEmail").Value = item.CustomerEmail;
+        prod.Element("ShipDate").Value = ((item.ShipDate).Value).ToString("yyyy-MM-ddTHH:mm:sszzz");
+        prod.Element("DeliveryDate").Value = ((item.DeliveryDate).Value).ToString("yyyy-MM-ddTHH:mm:sszzz");
+        prod.Element("CustomerAddress").Value = item.CustomerAddress;
+        prod.Element("CustomerName").Value = item.CustomerName;
+        prod.Element("OrderDate").Value = ((item.OrderDate).Value).ToString("yyyy-MM-ddTHH:mm:sszzz");
+        XElement? lastPrdct = (from pr in orderRootElem?.Elements()
+                               where pr.ToIntNullable("ID").Value == item.ID
+                               select pr).FirstOrDefault();
+        lastPrdct = prod;
+        //productRootElem.Document.Nodes
+        XMLTools.SaveListToXMLElement(orderRootElem, s_order);
     }
 }

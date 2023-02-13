@@ -12,6 +12,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Xml.XPath;
@@ -32,18 +33,11 @@ public partial class OrderWindow : Window
 
     private ObservableCollection<BO.OrderItem> items = new ObservableCollection<BO.OrderItem>();
 
-
-    //public void RefreshItemListView()
-    //{
-    //    Dispatcher.Invoke(() => { }, System.Windows.Threading.DispatcherPriority.Render);
-    //}
-
     private void refreshWindow(object sender, EventArgs e)
     {
         //RefreshItemListView();
         Dispatcher.Invoke(() => { }, System.Windows.Threading.DispatcherPriority.Render);
     }
-
     /// <summary>
     /// Ctor
     /// </summary>
@@ -68,13 +62,14 @@ public partial class OrderWindow : Window
     }
 
     //update view (manager)
-    public OrderWindow(OrderForList  order )
+    public OrderWindow(OrderForList order)
     {
         InitializeComponent();
         //itemsList.ItemsSource = bl.Order?.GetOrderDetails(o =>o?.ID==order.ID).Items;
         //DataContext = bl?.Order?.GetOrderDetails(o=>o?.ID == order.ID);
         itemsList.ItemsSource = bl.Order?.GetOrderDetails(order.ID).Items;
         DataContext = bl?.Order?.GetOrderDetails(order.ID);
+        // DeliveryDatePicker.Text = ((BO.Order)DataContext).DeliveryDate.ToString();
 
     }
 
@@ -86,13 +81,13 @@ public partial class OrderWindow : Window
     private void subtractItemButton_Click(object sender, RoutedEventArgs e)
     {
         var button = (Button)sender;
-        var item =(BO.OrderItem)button.DataContext;
+        var item = (BO.OrderItem)button.DataContext;
         int amount = 1;
         try
         {
             bl?.Order.UpdateOrderByManager(((BO.Order)DataContext).ID, item.ProductID, "subtract", amount);
         }
-        catch(BO.BODataNotExistException ex)
+        catch (BO.BODataNotExistException ex)
         {
             MessageBox.Show("The order is deleted!");
             Close();
@@ -100,6 +95,7 @@ public partial class OrderWindow : Window
         //this.DataContext = bl?.Order.GetOrderDetails(o => o?.ID == (DataContext as BO.Order)?.ID);
         //this.itemsList.ItemsSource = bl?.Order.GetOrderDetails(o => o?.ID == (DataContext as BO.Order)?.ID).Items;
         this.DataContext = bl?.Order.GetOrderDetails((DataContext as BO.Order).ID);
+
         this.itemsList.ItemsSource = bl?.Order.GetOrderDetails((DataContext as BO.Order).ID).Items;
     }
 
@@ -109,24 +105,24 @@ public partial class OrderWindow : Window
 
 
 
-        private void addToItemButton_Click(object sender, RoutedEventArgs e)
+    private void addToItemButton_Click(object sender, RoutedEventArgs e)
+    {
+        var button = (Button)sender;
+        var item = (BO.OrderItem)button.DataContext;
+        int amount = 1;
+        try
         {
-            var button = (Button)sender;
-            var item = (BO.OrderItem)button.DataContext;
-            int amount = 1;
-            try
-            {
-                bl?.Order.UpdateOrderByManager(((BO.Order)DataContext).ID, item.ProductID, "addAmount", amount);
-            }
-            catch 
-            {
-                MessageBox.Show("product out of stock!");
-            }
-            //this.DataContext = bl?.Order.GetOrderDetails(o => o?.ID == ((BO.Order)DataContext).ID);
-            //this.itemsList.ItemsSource = bl?.Order?.GetOrderDetails(o => o?.ID == (DataContext as BO.Order)?.ID)?.Items;
-            this.DataContext = bl?.Order.GetOrderDetails(((BO.Order)DataContext).ID);
-            this.itemsList.ItemsSource = ((BO.Order)DataContext)?.Items;
+            bl?.Order.UpdateOrderByManager(((BO.Order)DataContext).ID, item.ProductID, "addAmount", amount);
         }
+        catch
+        {
+            MessageBox.Show("product out of stock!");
+        }
+        //this.DataContext = bl?.Order.GetOrderDetails(o => o?.ID == ((BO.Order)DataContext).ID);
+        //this.itemsList.ItemsSource = bl?.Order?.GetOrderDetails(o => o?.ID == (DataContext as BO.Order)?.ID)?.Items;
+        this.DataContext = bl?.Order.GetOrderDetails(((BO.Order)DataContext).ID);
+        this.itemsList.ItemsSource = ((BO.Order)DataContext)?.Items;
+    }
 
     /// <summary>
     /// button to remove item from cart
@@ -136,7 +132,7 @@ public partial class OrderWindow : Window
     private void RemoveItemButton_Click(object sender, RoutedEventArgs e)
     {
         var button = (Button)sender;
-        var item =(BO.OrderItem)button.DataContext;
+        var item = (BO.OrderItem)button.DataContext;
         try
         {
             bl?.Order.UpdateOrderByManager(((BO.Order)DataContext).ID, item.ProductID, "remove");
@@ -151,5 +147,49 @@ public partial class OrderWindow : Window
         //this.itemsList.ItemsSource = bl?.Order?.GetOrderDetails(o => o?.ID == (DataContext as BO.Order)?.ID)?.Items;
         this.DataContext = bl?.Order?.GetOrderDetails(((BO.Order)DataContext).ID);
         this.itemsList.ItemsSource = bl?.Order?.GetOrderDetails((DataContext as BO.Order).ID)?.Items;
+    }
+
+    
+
+    private void DeliveryDatePicker_SelectedDateChanged_1(object sender, SelectionChangedEventArgs e)
+    {
+        if (this.IsEnabled == false) return; //so if the file is for reading only the message box wont show up
+        var item = (BO.Order)DataContext;
+        DatePicker datePicker = sender as DatePicker;
+        if (datePicker.SelectedDate.HasValue)
+        {
+            // Do something with the selected date
+            DateTime selectedDate = datePicker.SelectedDate.Value;
+            try
+            {
+                bl.Order.UpdateOrderSupply(item.ID, selectedDate.Date);
+                this.DataContext = bl?.Order?.GetOrderDetails(((BO.Order)DataContext).ID);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+    }
+
+    private void ShippingDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (this.IsEnabled == false) return; //so if the file is for reading only the message box wont show up
+        var item = (BO.Order)DataContext;
+        DatePicker datePicker = sender as DatePicker;
+        if (datePicker.SelectedDate.HasValue)
+        {
+            // Do something with the selected date
+            DateTime selectedDate = datePicker.SelectedDate.Value;
+            try
+            {
+                bl.Order.UpdateOrderDelivery(item.ID, selectedDate.Date);
+                this.DataContext = bl?.Order?.GetOrderDetails(((BO.Order)DataContext).ID);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
     }
 }

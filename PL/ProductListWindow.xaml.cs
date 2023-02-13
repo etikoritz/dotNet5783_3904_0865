@@ -26,10 +26,6 @@ public partial class ProductListWindow : Window
     BlApi.IBl? bl = BlApi.Factory.Get();
 
 
-    public ProductListWindow(string name, string email, string address)
-    {
-
-    }
 
     public ProductListWindow()
     {
@@ -60,9 +56,6 @@ public partial class ProductListWindow : Window
     /// <param name="e"></param>
     private void Button_Click(object sender, RoutedEventArgs e)
     {
-        //UpdateProductWindow updateProductWindow = new UpdateProductWindow();
-        //updateProductWindow.Show();
-        //updateProductWindow.AddProducView();
         new UpdateProductWindow().Show();
     }
 
@@ -133,7 +126,7 @@ public partial class ProductListWindow : Window
             }
             else
             {
-                new OrderWindow(item, "readonly").Show();
+                new OrderWindow(item,"readonly").Show();
             }
         }
         
