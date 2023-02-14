@@ -95,7 +95,7 @@ public partial class SimulationWindow : Window
     {
         Simulator.Simulator.RegisterForSimulationCompleteEvent(HandleSimulationComplete);
         Simulator.Simulator.RegisterForUpdateEvent(HandleSimulationUpdate);
-        Simulator.Simulator.StartSimulation();
+        Simulator.Simulator.Activate();
         stopWatch.Start();
         while (isTimerRun)
         {
@@ -116,7 +116,6 @@ public partial class SimulationWindow : Window
             isTimerRun = false;
         }
         Close();
-
     }
 
 
@@ -127,7 +126,6 @@ public partial class SimulationWindow : Window
 
     private void HandleSimulationUpdate(BO.Order? order, DateTime newTime, int delay)
     {
-
         var ta = new Tuple<BO.Order?, DateTime, int>(order, newTime, delay);
         timerworker.ReportProgress(1, ta);
     }
@@ -142,16 +140,16 @@ public partial class SimulationWindow : Window
 
     public static readonly DependencyProperty idProperty =
         DependencyProperty.Register("ID", typeof(int), typeof(SimulationWindow), new PropertyMetadata(null));
+    
+
     public int progresPer
     {
         get { return (int)GetValue(progresPerProperty); }
         set { SetValue(progresPerProperty, value); }
     }
+
     public static readonly DependencyProperty progresPerProperty =
         DependencyProperty.Register("progresPer", typeof(int), typeof(SimulationWindow), new PropertyMetadata(null));
-
-
-
 
     public BO.Enum.OrderStatus? OldStatus
     {
@@ -188,7 +186,4 @@ public partial class SimulationWindow : Window
 
     public static readonly DependencyProperty StartTimeProperty =
         DependencyProperty.Register("StartTime", typeof(DateTime?), typeof(SimulationWindow), new PropertyMetadata(null));
-
-
-
 }
