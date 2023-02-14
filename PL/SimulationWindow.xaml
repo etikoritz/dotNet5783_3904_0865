@@ -1,0 +1,47 @@
+﻿<Window x:Class="PL.SimulationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="SimulationWindow" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="WhiteSmoke" Offset="0.0" />
+                <GradientStop Color="#cd91ce" Offset="0.5" />
+                <GradientStop Color="#FF9B629D" Offset="0.8" />
+                <GradientStop Color="#6c366e" Offset="1.0" />
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <Grid x:Name="CLockGrid" Margin="464,54,47,217">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="WhiteSmoke" Offset="0.0"/>
+                    <GradientStop Color="LightGray" Offset="0.3"/>
+                    <GradientStop Color="Gray" Offset="0.75"/>
+                    <GradientStop Color="DimGray" Offset="1.0"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="12*"/>
+                <RowDefinition Height="10*"/>
+            </Grid.RowDefinitions>
+            <Button x:Name="startTimerBtn" Content="Start" Background="#cd91ce" Margin="10" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Height="45" Width="100" FontFamily="Comic Sans MS" Click="StartTimer_Click"/>
+            <Button x:Name="endTimerBtn_Copy" Content="End" Background="#cd91ce" Margin="10" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Height="45" Width="100" FontFamily="Comic Sans MS" Click="EndTimer_Click"/>
+            <TextBlock x:Name="TimerTextBlock" Text="00:00:00" FontSize="50" Grid.ColumnSpan="2" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Comic Sans MS"/>
+        </Grid>
+
+
+        <Button x:Name="endSimulationBtn" Content="End simulation" HorizontalAlignment="Left" Margin="552,356,0,0" VerticalAlignment="Top" FontSize="16" Height="42" Width="196" Click="EndSimulation_Click"/>
+
+    </Grid>
+</Window>
