@@ -63,7 +63,7 @@ namespace BlApi
         /// for the simulator - find the oldest order exist
         /// </summary>
         /// <returns>id of the oldest order</returns>
-        public int? GetOldestOrderID();
+        public BO.Order? GetOldestOrderID();
 
         //public int ChooseNextOrder();
     }
