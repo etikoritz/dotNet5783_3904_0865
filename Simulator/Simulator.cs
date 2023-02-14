@@ -49,8 +49,8 @@ public static class Simulator
                 Thread.Sleep(1000);
             }
 
-
             Report(simulationFinished);//to report that simulation ended
+
         }).Start();
     }
 }
