@@ -22,7 +22,6 @@ namespace PL;
 /// <summary>
 /// Interaction logic for Simulator.xaml
 /// </summary>
-
 public partial class SimulationWindow : Window
 {
     int DelayMain = 0;
@@ -42,13 +41,7 @@ public partial class SimulationWindow : Window
         timerworker.WorkerSupportsCancellation = true;
         timerworker.RunWorkerAsync();
         isTimerRun = true;
-
-
     }
-    //protected override void OnClosing(CancelEventArgs e)
-    //{
-    //    e.Cancel= true; 
-    //}
 
     private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
     {
@@ -89,8 +82,6 @@ public partial class SimulationWindow : Window
     }
 
 
-
-
     private void Worker_DoWork(object sender, DoWorkEventArgs e)
     {
         Simulator.Simulator.RegisterForSimulationCompleteEvent(HandleSimulationComplete);
@@ -106,6 +97,11 @@ public partial class SimulationWindow : Window
         }
     }
 
+    /// <summary>
+    /// Stops the simulation and close the window
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void stop_simulation(object sender, RoutedEventArgs e)
     {
         Simulator.Simulator.UnregisterFromUpdateEvent(HandleSimulationUpdate);
@@ -118,6 +114,21 @@ public partial class SimulationWindow : Window
         Close();
     }
 
+
+    ///// <summary>
+    ///// Method to block the option to close the window
+    ///// </summary>
+    ///// <param name="sender"></param>
+    ///// <param name="e"></param>
+    //private void Window_Closing(object sender, CancelEventArgs e)
+    //{
+    //    bool _myClosing = false;
+    //    if (!_myClosing)
+    //    { // Won't allow to cancel the window!!! It is not me!!!
+    //        e.Cancel = true;
+    //        MessageBox.Show("Can't close window during simulation!");
+    //    }
+    //}
 
     private void HandleSimulationComplete()
     {
