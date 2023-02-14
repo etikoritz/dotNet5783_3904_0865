@@ -13,6 +13,19 @@ public static class Simulator
     static readonly IBl bl = BlApi.Factory.Get();
     private static volatile bool _deactivateRequested = false;
 
+
+
+
+    private static volatile bool Running;
+
+    public delegate void SimulationCompleteEventHandler();
+    public static event SimulationCompleteEventHandler Simulation_Completed;
+
+    public delegate void UpdateEventHandler(BO.Order? order, DateTime newTime, int delay);
+    public static event UpdateEventHandler Updated;
+    public static Random random = new Random();
+    public static BO.Order? order = new BO.Order();
+
     /// <summary>
     /// To activate the simulator
     /// </summary>
@@ -54,4 +67,35 @@ public static class Simulator
 
         }).Start();
     }
+
+
+    public static void StopSimulation()
+    {
+        Running = false;
+
+    }
+
+    public static void RegisterForSimulationCompleteEvent(SimulationCompleteEventHandler e_handler)
+    {
+        Simulation_Completed += e_handler;
+    }
+
+    public static void UnregisterFromSimulationCompleteEvent(SimulationCompleteEventHandler e_handler)
+    {
+        Simulation_Completed -= e_handler;
+    }
+
+    public static void RegisterForUpdateEvent(UpdateEventHandler e_handler)
+    {
+        Updated += e_handler;
+    }
+
+    public static void UnregisterFromUpdateEvent(UpdateEventHandler e_handler)
+    {
+        Updated -= e_handler;
+    }
+
+
+
+
 }
