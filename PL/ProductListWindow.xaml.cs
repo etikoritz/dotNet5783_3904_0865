@@ -25,8 +25,6 @@ public partial class ProductListWindow : Window
 {
     BlApi.IBl? bl = BlApi.Factory.Get();
 
-
-
     public ProductListWindow()
     {
         InitializeComponent();
@@ -129,7 +127,6 @@ public partial class ProductListWindow : Window
                 new OrderWindow(item,"readonly").Show();
             }
         }
-        
     }
 
     private void deleteButton_Click(object sender, RoutedEventArgs e)
@@ -140,8 +137,8 @@ public partial class ProductListWindow : Window
         try
         {
             string message = "Are you sure you want to delete the product?";
-            var d=MessageBox.Show( " ",message, MessageBoxButton.YesNo);
-            if(d==MessageBoxResult.Yes)
+            var d = MessageBox.Show(" ", message, MessageBoxButton.YesNo);
+            if (d == MessageBoxResult.Yes)
             {
                 bl?.Product.Delete(product.ID);
                 MessageBox.Show("Product deleted!");
@@ -155,13 +152,23 @@ public partial class ProductListWindow : Window
        
     }
 
-    private void Button_Click_2(object sender, RoutedEventArgs e)
+    private void GroupByCategory_Click(object sender, RoutedEventArgs e)
     {
         CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(productListView.ItemsSource);
         PropertyGroupDescription groupDescription = new PropertyGroupDescription("Category");
         view.GroupDescriptions.Add(groupDescription);
         var button = (Button)sender;
         Clear.Visibility = Visibility.Visible;
+    }
+
+    /// <summary>
+    /// starts simulation
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void StartSimulation_Click(object sender, RoutedEventArgs e)
+    {
+        new SimulationWindow().Show();
     }
 }
 

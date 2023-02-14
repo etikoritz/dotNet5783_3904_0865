@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace Simulator;
 
@@ -19,9 +20,9 @@ public static class Simulator
     {
         new Thread(() =>
         {
-            bool active = true;
+            bool activeSimulator = true;
             Random random = new Random();
-            while (active)
+            while (activeSimulator)
             {
                 int? oldestOrderID = bl.Order.GetOldestOrderID();
                 BO.Order order = bl.Order.GetOrderDetails((int)oldestOrderID);
