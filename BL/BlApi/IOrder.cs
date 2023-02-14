@@ -56,7 +56,13 @@ namespace BlApi
         /// <param name="orderID"></param>
         /// <returns></returns>
         public void UpdateOrderByManager(int orderID, int productID, string action, int amount=1);
+
         public void addAmuntToItemInOrder(int orderID, int productID, int amount);
 
+        /// <summary>
+        /// for the simulator - find the oldest order exist
+        /// </summary>
+        /// <returns>id of the oldest order</returns>
+        public int GetOldestOrderID(string request);
     }
 }

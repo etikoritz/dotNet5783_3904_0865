@@ -168,7 +168,8 @@ internal class BoOrder : BlApi.IOrder
     /// Update order delivery by order ID
     /// </summary>
     /// <param name="orderID"></param>
-    /// <returns>the updated order</returns>
+    /// <param name="date"></param>
+    /// <returns></returns>
     /// <exception cref="BO.BODataNotExistException"></exception>
     /// <exception cref="BO.OrderAlreadyShippedException"></exception>
     public BO.Order UpdateOrderDelivery(int orderID, DateTime date)
@@ -216,7 +217,8 @@ internal class BoOrder : BlApi.IOrder
     /// Update order supply by order ID
     /// </summary>
     /// <param name="orderID"></param>
-    /// <returns>the updated order</returns>
+    /// <param name="date"></param>
+    /// <returns></returns>
     /// <exception cref="BO.BODataNotExistException"></exception>
     /// <exception cref="BO.OrderAlreadySuppliedException"></exception>
     public BO.Order UpdateOrderSupply(int orderID, DateTime date)
@@ -522,6 +524,35 @@ internal class BoOrder : BlApi.IOrder
         {
             SubtractAmuntToItemInOrder(orderID, productID, amount);
         }
+    }
+
+    /// <summary>
+    /// Find the oldest order exist by orderDate (for the simulator)
+    /// </summary>
+    /// <returns></returns>
+    /// <exception cref="NotImplementedException"></exception>
+    public int GetOldestOrderID(string request = "orderDate")
+    {
+        IEnumerable<OrderForList> orderList = GetOrderList();
+        IEnumerable<BO.Order> orders = orderList.Select(o => GetOrderDetails(o.ID));
+        try
+        {
+            if (request == "orderDate")
+            {
+                //find the order with the oldest orderDate
+                return orders.OrderBy(o => o.OrderDate).FirstOrDefault().ID;
+            }
+            else if (request == "shipDate")
+            {
+                //find the order with the oldest shippingDate
+                return orders.OrderBy(o => o.ShipDate).FirstOrDefault().ID;
+            }
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("Error finding order");
+        }
+        return -1;
     }
 }
 
