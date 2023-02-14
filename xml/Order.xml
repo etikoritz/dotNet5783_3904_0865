@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfOrder xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Order>
     <ID>100023</ID>
@@ -78,7 +78,7 @@
     <CustomerEmail>@gmail.com</CustomerEmail>
     <CustomerAddress>fd</CustomerAddress>
     <OrderDate>2023-02-12T00:00:00+02:00</OrderDate>
-    <ShipDate>2023-02-15T00:00:00+02:00</ShipDate>
+    <ShipDate>2023-02-14T00:00:00+02:00</ShipDate>
     <DeliveryDate>2023-02-16T00:00:00+02:00</DeliveryDate>
   </Order>
   <Order>
@@ -105,7 +105,7 @@
     <CustomerEmail>@gmail.com</CustomerEmail>
     <CustomerAddress>rfed</CustomerAddress>
     <OrderDate>2023-02-12T00:00:00+02:00</OrderDate>
-    <ShipDate>2023-02-15T00:00:00+02:00</ShipDate>
+    <ShipDate>2023-02-14T00:00:00+02:00</ShipDate>
     <DeliveryDate>2023-02-16T00:00:00+02:00</DeliveryDate>
   </Order>
   <Order>
@@ -123,7 +123,7 @@
     <CustomerEmail>@gmail.com</CustomerEmail>
     <CustomerAddress>recd</CustomerAddress>
     <OrderDate>2023-02-12T00:00:00+02:00</OrderDate>
-    <ShipDate>2023-02-15T00:00:00+02:00</ShipDate>
+    <ShipDate>2023-02-14T00:00:00+02:00</ShipDate>
     <DeliveryDate>2023-02-16T00:00:00+02:00</DeliveryDate>
   </Order>
   <Order>

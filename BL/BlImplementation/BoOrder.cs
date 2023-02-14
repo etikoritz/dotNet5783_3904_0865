@@ -538,9 +538,9 @@ internal class BoOrder : BlApi.IOrder
         try
         {
             //find the order with the oldest orderDate
-            var oldestOrder = orders.Where(o => o.Status.ToString() == "Confirmed").OrderBy(o => o.OrderDate).FirstOrDefault();
+            BO.Order? oldestOrder = orders.Where(o => o.Status.ToString() == "Confirmed").OrderBy(o => o.OrderDate).FirstOrDefault();
             //find the order with the oldest shippingDate
-            var oldestShipping = orders.Where(o => o.Status.ToString() == "Shipped").OrderBy(o => o.ShipDate).FirstOrDefault();
+            BO.Order? oldestShipping = orders.Where(o => o.Status.ToString() == "Shipped").OrderBy(o => o.ShipDate).FirstOrDefault();
 
             if (oldestOrder?.OrderDate < oldestShipping?.ShipDate)
                 return oldestOrder;
