@@ -531,28 +531,26 @@ internal class BoOrder : BlApi.IOrder
     /// </summary>
     /// <returns></returns>
     /// <exception cref="NotImplementedException"></exception>
-    public int GetOldestOrderID(string request = "orderDate")
+    public int? GetOldestOrderID()
     {
         IEnumerable<OrderForList> orderList = GetOrderList();
         IEnumerable<BO.Order> orders = orderList.Select(o => GetOrderDetails(o.ID));
         try
         {
-            if (request == "orderDate")
-            {
-                //find the order with the oldest orderDate
-                return orders.OrderBy(o => o.OrderDate).FirstOrDefault().ID;
-            }
-            else if (request == "shipDate")
-            {
-                //find the order with the oldest shippingDate
-                return orders.OrderBy(o => o.ShipDate).FirstOrDefault().ID;
-            }
+            //find the order with the oldest orderDate
+            var oldestOrder = orders.OrderBy(o => o.OrderDate).FirstOrDefault();
+            //find the order with the oldest shippingDate
+            var oldestShipping = orders.OrderBy(o => o.ShipDate).FirstOrDefault();
+
+            if (oldestOrder.OrderDate < oldestShipping.ShipDate)
+                return oldestOrder.ID;
+            return oldestShipping.ID;
         }
         catch (Exception ex)
         {
             throw new Exception("Error finding order");
         }
-        return -1;
+        return null;
     }
 
 
