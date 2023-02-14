@@ -554,5 +554,16 @@ internal class BoOrder : BlApi.IOrder
         }
         return -1;
     }
+
+
+
+    public int ChooseNextOrder()
+    {
+        IEnumerable<BO.OrderForList> orders = GetOrderList();
+        IEnumerable<BO.OrderForList> shippedOrders = orders.Where(o => o.Status.ToString() == "Shipped");
+        IEnumerable<BO.OrderForList> confirmedOrders = orders.Where(o => o.Status.ToString() == "Confirmed");
+        BO.OrderForList oldestshippedOrder= shippedOrders.Max(  )
+
+    }
 }
 

@@ -64,5 +64,7 @@ namespace BlApi
         /// </summary>
         /// <returns>id of the oldest order</returns>
         public int GetOldestOrderID(string request);
+
+        public int ChooseNextOrder();
     }
 }
