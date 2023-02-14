@@ -554,14 +554,18 @@ internal class BoOrder : BlApi.IOrder
     }
 
 
-
-    public int ChooseNextOrder()
-    {
-        IEnumerable<BO.OrderForList> orders = GetOrderList();
-        IEnumerable<BO.OrderForList> shippedOrders = orders.Where(o => o.Status.ToString() == "Shipped");
-        IEnumerable<BO.OrderForList> confirmedOrders = orders.Where(o => o.Status.ToString() == "Confirmed");
-        BO.OrderForList oldestshippedOrder= shippedOrders.Max(  )
-
-    }
+    //public int ChooseNextOrder()
+    //{
+    //    IEnumerable<OrderForList> orderList = GetOrderList();
+    //    IEnumerable<BO.Order> orders = orderList.Select(o => GetOrderDetails(o.ID));
+    //    IEnumerable<BO.Order> shippedOrders = orders.Where(o => o.Status.ToString() == "Shipped");
+    //    IEnumerable<BO.Order> confirmedOrders = orders.Where(o => o.Status.ToString() == "Confirmed");
+    //    BO.Order? maxObjectShipped = shippedOrders.OrderByDescending(x => x.ShipDate).FirstOrDefault();
+    //    BO.Order? maxObjectConfirmed = confirmedOrders.OrderByDescending(x => x.OrderDate).FirstOrDefault();
+    //    if (maxObjectShipped?.ShipDate > maxObjectConfirmed?.OrderDate)
+    //        return maxObjectConfirmed.ID;
+    //    else
+    //        return maxObjectShipped.ID;
+    //}
 }
 
