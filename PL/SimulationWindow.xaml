@@ -36,14 +36,11 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-                <Label x:Name="IDLabel" Content="ID:" Grid.Row="0"  VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
-                <TextBlock Text="{Binding ID}" x:Name="ID" Grid.Column="1"  VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="103" Height="24" TextAlignment="Left"/>
+            <Label x:Name="IDLabel" Content="ID:" Grid.Row="0" FontFamily="Comic Sans MS" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+            <TextBlock Text="{Binding ID}" x:Name="ID" Grid.Column="1" FontFamily="Comic Sans MS" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="103" Height="24" TextAlignment="Left"/>
 
-                <Label x:Name="Oldstat" Content="Old Status:" Grid.Row="1"  VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
-                <TextBlock x:Name="OldStatus" Text="{Binding OldStatus}" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="103" Height="24" Grid.Column="1" />
-
-            <Label x:Name="Oldstat" Content="Old Status:" FontFamily="Comic Sans MS" Grid.Row="1"  VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
-            <TextBlock x:Name="OldStatus" Text="{Binding OldStatus}" FontFamily="Comic Sans MS" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="200" Height="24" Grid.Column="1" />
+            <Label x:Name="Oldstat" Content="Old Status:" Grid.Row="1" FontFamily="Comic Sans MS" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+            <TextBlock x:Name="OldStatus" Text="{Binding OldStatus}" FontFamily="Comic Sans MS" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="103" Height="24" Grid.Column="1" />
 
             <Label x:Name="oldDate" Content="Start Time:" Grid.Row="2" FontFamily="Comic Sans MS" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
             <TextBlock x:Name="StartTime"  Text="{Binding StartTime}" FontFamily="Comic Sans MS" Grid.Column="1" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="200" Height="24" />
