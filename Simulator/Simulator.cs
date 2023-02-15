@@ -82,6 +82,10 @@ public static class Simulator
                 bl.Order.UpdateOrderSupply(order.ID, DateTime.MinValue);
             }
         }
+        else
+        {
+            StopSimulation();
+        }
     }
 
     /// <summary>

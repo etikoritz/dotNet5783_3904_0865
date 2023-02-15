@@ -181,7 +181,7 @@ internal class BoOrder : BlApi.IOrder
             
                 //update BO entity
             order = GetOrderDetails(orderID);
-            if (date > DateTime.MinValue)
+            if (date == DateTime.MinValue)
             {
                 order.ShipDate = DateTime.Today;
                 //update DO entity
@@ -226,9 +226,9 @@ internal class BoOrder : BlApi.IOrder
         try
         {
             DO.Order dalOrder = (DO.Order)DalApi.Factory.Get().Order?.GetById(orderID);
-            if (dalOrder.DeliveryDate>DateTime.Today)
-            {
-                order = GetOrderDetails(orderID);
+            order = GetOrderDetails(orderID);
+            
+                
                 if (date==DateTime.MinValue)
                 {
                     //update BO entity
@@ -250,9 +250,6 @@ internal class BoOrder : BlApi.IOrder
                 {
                     throw new BO.BODataNotExistException(ex.Message);
                 }
-            }
-            else
-                throw new BO.OrderAlreadySuppliedException();
         }
         catch (DO.DataNotExistException ex)
         {
@@ -537,19 +534,25 @@ internal class BoOrder : BlApi.IOrder
         try
         {
             //find the order with the oldest orderDate
-            BO.Order? oldestOrder = orders.Where(o => o.Status.ToString() == "Confirmed").OrderBy(o => o.OrderDate).FirstOrDefault();
+            BO.Order? oldestOrder = orders.Where(o => o.Status.ToString() == "Confirmed").OrderBy(o => o?.OrderDate).FirstOrDefault();
             //find the order with the oldest shippingDate
-            BO.Order? oldestShipping = orders.Where(o => o.Status.ToString() == "Shipped").OrderBy(o => o.ShipDate).FirstOrDefault();
-
-            if (oldestOrder?.OrderDate < oldestShipping?.ShipDate)
+            BO.Order? oldestShipping = orders.Where(o => o.Status.ToString() == "Shipped").OrderBy(o => o?.ShipDate).FirstOrDefault();
+            if (oldestOrder == null && oldestShipping != null)
+                return oldestShipping;
+            if (oldestOrder != null && oldestShipping == null)
+                return oldestOrder;
+            if(oldestOrder== null && oldestShipping == null)
+                return null;
+            if (oldestOrder.OrderDate.Value <= oldestShipping.ShipDate.Value)
                 return oldestOrder;
             return oldestShipping;
         }
         catch (Exception ex)
         {
-            throw new Exception("Error finding order");
+            //throw new Exception("Error finding order");
+            return null;
         }
-        return null;
+       
     }
 
 
