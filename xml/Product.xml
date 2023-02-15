@@ -38,7 +38,7 @@
   <Product>
     <ID>666666</ID>
     <Name>Galaxy tab s8</Name>
-    <InStock>22</InStock>
+    <InStock>80</InStock>
     <Price>2300</Price>
     <Category>Tablet</Category>
   </Product>
@@ -55,5 +55,12 @@
     <InStock>30</InStock>
     <Price>350</Price>
     <Category>Headphones</Category>
+  </Product>
+  <Product>
+    <ID>876543</ID>
+    <Name>Dell xr</Name>
+    <InStock>270</InStock>
+    <Price>3000</Price>
+    <Category>Laptop</Category>
   </Product>
 </Product>

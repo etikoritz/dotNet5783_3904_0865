@@ -47,55 +47,55 @@
         <StackPanel>
             <StackPanel.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                <GradientStop Color="WhiteSmoke" Offset="0.0" />
-                <GradientStop Color="#cd91ce" Offset="0.5" />
-                <GradientStop Color="#FF9B629D" Offset="0.8" />
-                <GradientStop Color="#6c366e" Offset="1.0" />
+                    <GradientStop Color="WhiteSmoke" Offset="0.0" />
+                    <GradientStop Color="#cd91ce" Offset="0.5" />
+                    <GradientStop Color="#FF9B629D" Offset="0.8" />
+                    <GradientStop Color="#6c366e" Offset="1.0" />
                 </LinearGradientBrush>
             </StackPanel.Background>
-        <Grid x:Name="ProductDetailsGrid" Margin="109,38,0,0" VerticalAlignment="Top">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
+            <Grid x:Name="ProductDetailsGrid" Margin="109,38,0,0" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-            <Label x:Name="IDLabel" Content="ID:" Grid.Row="0"  VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
-            <TextBlock Text="{Binding ID}" Grid.Column="1" Grid.Row="0"  VerticalAlignment="Bottom" HorizontalAlignment="Left" />
+                <Label x:Name="IDLabel" Content="ID:" Grid.Row="0"  VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                <TextBlock Text="{Binding ID}" x:Name="ID" Grid.Column="1"  VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="103" Height="24" TextAlignment="Left"/>
 
-            <Label x:Name="Oldstat" Content="Old Status:" Grid.Row="1"  VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
-            <TextBlock Text="{Binding OldStatus}" Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
+                <Label x:Name="Oldstat" Content="Old Status:" Grid.Row="1"  VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                <TextBlock x:Name="OldStatus" Text="{Binding OldStatus}" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="103" Height="24" Grid.Column="1" />
 
-            <Label x:Name="oldDate" Content="Start Time:" Grid.Row="2"  VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
-            <TextBlock Text="{Binding StartTime}" Grid.Column="1" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
+                <Label x:Name="oldDate" Content="Start Time:" Grid.Row="2"  VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                <TextBlock x:Name="StartTime"  Text="{Binding StartTime}" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Width="103" Height="24" />
 
-            <Label x:Name="newstatus" Content="New Status:" Grid.Row="3" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
-            <TextBlock Text="{Binding NewStatus}" Grid.Column="1" Grid.Row="3" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
+                <Label x:Name="newstatus" Content="New Status:" Grid.Row="3" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                <TextBlock x:Name="NewStatus" Text="{Binding NewStatus}" Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Width="103" Height="24" />
 
-            <Label Content="Expected Time:" Grid.Row="4"  VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
-            <TextBlock Text="{Binding ExpectedDate}" Grid.Column="1" Grid.Row="4" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
+                <Label Content="Expected Time:" Grid.Row="4"  VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                <TextBlock x:Name="ExpectedDate" Text="{Binding ExpectedDate}" Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center" Width="103" Height="24" />
 
-        </Grid>
-        <TextBlock x:Name="TimerBlock" Text="00:00:00" TextAlignment="Center" FontSize="45" Foreground="Black" />
+            </Grid>
+            <TextBlock x:Name="TimerBlock" Text="00:00:00" TextAlignment="Center" FontSize="45" Foreground="Black" />
 
-        <ProgressBar x:Name="ProgressBar" Width="200" Margin="0,25,0,0" Height="20" Value="{Binding progresPer}"/>
+            <ProgressBar x:Name="ProgressBar" Width="200" Margin="0,25,0,0" Height="20" Value="{Binding progresPer}"/>
 
-        <Button Content="Stop" HorizontalAlignment="Left" Margin="360,25,0,0" Click="stop_simulation" Foreground="#FFF8F7F7" Height="29" Width="72">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black"/>
-                    <GradientStop Color="#FF454C67" Offset="1"/>
-                </LinearGradientBrush>
-            </Button.Background>
-        </Button>
-    </StackPanel>
+            <Button Content="Stop" HorizontalAlignment="Left" Margin="360,25,0,0" Click="stop_simulation" Foreground="#FFF8F7F7" Height="29" Width="72">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="#FF454C67" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+        </StackPanel>
 
     </Grid>
     <!--/Grid>-->

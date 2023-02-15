@@ -531,7 +531,7 @@ internal class BoOrder : BlApi.IOrder
     /// </summary>
     /// <returns></returns>
     /// <exception cref="NotImplementedException"></exception>
-    public int? GetOldestOrderID()
+    public BO.Order? GetOldestOrderID()
     {
         IEnumerable<OrderForList> orderList = GetOrderList();
         IEnumerable<BO.Order> orders = orderList.Select(o => GetOrderDetails(o.ID));
@@ -542,9 +542,9 @@ internal class BoOrder : BlApi.IOrder
             //find the order with the oldest shippingDate
             BO.Order? oldestShipping = orders.Where(o => o.Status.ToString() == "Shipped").OrderBy(o => o.ShipDate).FirstOrDefault();
 
-            if (oldestOrder.OrderDate < oldestShipping.ShipDate)
-                return oldestOrder.ID;
-            return oldestShipping.ID;
+            if (oldestOrder?.OrderDate < oldestShipping?.ShipDate)
+                return oldestOrder;
+            return oldestShipping;
         }
         catch (Exception ex)
         {

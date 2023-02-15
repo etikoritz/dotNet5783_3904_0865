@@ -42,29 +42,47 @@ public static class Simulator
 
     private static void RunSimulation()
     {
-        int? oldestOrderID = bl.Order.GetOldestOrderID();
-        BO.Order order = bl.Order.GetOrderDetails((int)oldestOrderID);
+        ////int? oldestOrderID = bl.Order.GetOldestOrderID();
+        ////BO.Order order = bl.Order.GetOrderDetails((int)(int?)oldestOrderID);
+        //BO.Order? order = bl.Order.GetOldestOrderID();
+        ////update the DELIVERY to be SHIPPED
+        //if (order != null)
+        //{
+        //    //how long it takes to collect/supply the order
+        //    int delay = random.Next(3, 11);
+        //    DateTime time = DateTime.Now + new TimeSpan(delay * 1000);
 
-        //update the DELIVERY to be SHIPPED
+        //    //report is an event
+        //    Updated(order, time, delay);
+        //    Thread.Sleep(delay * 1000);
+
+        //    if (order.Status.ToString() == "Confirmed")
+        //        bl.Order.UpdateOrderDelivery(order.ID, DateTime.MinValue);
+        //    else if (order.Status.ToString() == "Shipped")
+        //        bl.Order.UpdateOrderSupply(order.ID, DateTime.MinValue);
+
+        //    //Report(finished);//to report that handeling the order has ended
+        //}
+
+
+        DateTime new_date = new DateTime();
+        order = bl.Order.GetOldestOrderID();
         if (order != null)
         {
-            //how long it takes to collect/supply the order
-            int delay = random.Next(3, 11);
-            DateTime time = DateTime.Now + new TimeSpan(delay * 1000);
-
-            //report is an event
-            Updated(order, time, delay);
-            Thread.Sleep(delay * 1000);
-
-            if (order.Status.ToString() == "Confirmed")
-                bl.Order.UpdateOrderDelivery((int)oldestOrderID, time);
-            else if (order.Status.ToString() == "Shipped")
-                bl.Order.UpdateOrderSupply((int)oldestOrderID, time);
-
-            //Report(finished);//to report that handeling the order has ended
+            int time_delay = random.Next(3, 11);
+            new_date = DateTime.Now + new TimeSpan(0, 0, time_delay);
+            Updated(order, new_date, time_delay);
+            Thread.Sleep(time_delay * 1000);
+            if (order.Status == BO.Enum.OrderStatus.Confirmed)
+            {
+                bl.Order.UpdateOrderDelivery(order.ID, DateTime.MinValue);
+            }
+            else if (order.Status == BO.Enum.OrderStatus.Shipped)
+            {
+                bl.Order.UpdateOrderSupply(order.ID, DateTime.MinValue);
+            }
         }
     }
-
     /// <summary>
     /// To stop the simulation
     /// </summary>
@@ -108,4 +126,9 @@ public static class Simulator
     {
         Updated -= e_handler;
     }
+
+
+
+
+
 }

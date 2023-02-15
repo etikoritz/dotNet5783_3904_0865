@@ -53,7 +53,7 @@ public partial class SimulationWindow : Window
             this.TimerBlock.Text = timerText;
             if (DelayMain != 0)
             {
-                progresPer = (DelayMain - r + 1) * (100 / DelayMain);
+                this.ProgressBar.Value = (DelayMain - r + 1) * (100 / DelayMain);
                 r--;
             }
 
@@ -61,23 +61,23 @@ public partial class SimulationWindow : Window
         else
         {
             var args = (Tuple<BO.Order?, DateTime, int>)e.UserState!;
-            ID = args.Item1!.ID;
-            OldStatus = args.Item1?.Status;
+            this.ID.Text = args.Item1!.ID.ToString();
+            OldStatus.Text = args.Item1?.Status.ToString();
 
             if (args.Item1?.Status == BO.Enum.OrderStatus.Confirmed)
             {
-                StartTime = DateTime.Now;
-                NewStatus = BO.Enum.OrderStatus.Shipped;
+                this.StartTime.Text = DateTime.Now.ToString();
+                this.NewStatus.Text = BO.Enum.OrderStatus.Shipped.ToString();
             }
             else
             {
-                NewStatus = BO.Enum.OrderStatus.Delivered;
-                StartTime = DateTime.Now;
+                this.NewStatus.Text = (BO.Enum.OrderStatus.Delivered).ToString();
+                this.StartTime.Text = DateTime.Now.ToString();
             }
-            ExpectedDate = args.Item2;
-            DelayMain = args.Item3;
+            this.ExpectedDate.Text = args.Item2.ToString();
+            this.DelayMain = args.Item3;
             r = DelayMain;
-            progresPer = 0;
+            this.ProgressBar.Value = 0;
         }
     }
 
@@ -142,59 +142,58 @@ public partial class SimulationWindow : Window
     }
 
 
-    public int ID
-    {
-        get { return (int)GetValue(idProperty); }
-        set { SetValue(idProperty, value); }
-    }
+    //public int ID
+    //{
+    //    get { return (int)GetValue(idProperty); }
+    //    set { SetValue(idProperty, value); }
+    //}
 
 
-    public static readonly DependencyProperty idProperty =
-        DependencyProperty.Register("ID", typeof(int), typeof(SimulationWindow), new PropertyMetadata(null));
-    
+    //public static readonly DependencyProperty idProperty = DependencyProperty.Register("ID", typeof(int), typeof(SimulationWindow), new PropertyMetadata(null));
 
-    public int progresPer
-    {
-        get { return (int)GetValue(progresPerProperty); }
-        set { SetValue(progresPerProperty, value); }
-    }
 
-    public static readonly DependencyProperty progresPerProperty =
-        DependencyProperty.Register("progresPer", typeof(int), typeof(SimulationWindow), new PropertyMetadata(null));
+    //public int progresPer
+    //{
+    //    get { return (int)GetValue(progresPerProperty); }
+    //    set { SetValue(progresPerProperty, value); }
+    //}
 
-    public BO.Enum.OrderStatus? OldStatus
-    {
-        get { return (BO.Enum.OrderStatus?)GetValue(OldStatusProperty); }
-        set { SetValue(OldStatusProperty, value); }
-    }
-
-    public static readonly DependencyProperty OldStatusProperty =
-        DependencyProperty.Register("OldStatus", typeof(BO.Enum.OrderStatus?), typeof(SimulationWindow), new PropertyMetadata(null));
-
-    public BO.Enum.OrderStatus? NewStatus
-    {
-        get { return (BO.Enum.OrderStatus?)GetValue(NewStatusProperty); }
-        set { SetValue(NewStatusProperty, value); }
-    }
-
-    public static readonly DependencyProperty NewStatusProperty =
-        DependencyProperty.Register("NewStatus", typeof(BO.Enum.OrderStatus?), typeof(SimulationWindow), new PropertyMetadata(null));
-
-    public DateTime? ExpectedDate
-    {
-        get { return (DateTime?)GetValue(ExpectedDateProperty); }
-        set { SetValue(ExpectedDateProperty, value); }
-    }
-
-    public static readonly DependencyProperty ExpectedDateProperty =
-        DependencyProperty.Register("ExpectedDate", typeof(DateTime?), typeof(SimulationWindow), new PropertyMetadata(null));
-
-    public DateTime? StartTime
-    {
-        get { return (DateTime?)GetValue(StartTimeProperty); }
-        set { SetValue(StartTimeProperty, value); }
-    }
-
-    public static readonly DependencyProperty StartTimeProperty =
-        DependencyProperty.Register("StartTime", typeof(DateTime?), typeof(SimulationWindow), new PropertyMetadata(null));
+    //public static readonly DependencyProperty progresPerProperty =
+    //    DependencyProperty.Register("progresPer", typeof(int), typeof(SimulationWindow), new PropertyMetadata(null));
 }
+//    public BO.Enum.OrderStatus? OldStatus
+//    {
+//        get { return (BO.Enum.OrderStatus?)GetValue(OldStatusProperty); }
+//        set { SetValue(OldStatusProperty, value); }
+//    }
+
+//    public static readonly DependencyProperty OldStatusProperty =
+//        DependencyProperty.Register("OldStatus", typeof(BO.Enum.OrderStatus?), typeof(SimulationWindow), new PropertyMetadata(null));
+
+//    public BO.Enum.OrderStatus? NewStatus
+//    {
+//        get { return (BO.Enum.OrderStatus?)GetValue(NewStatusProperty); }
+//        set { SetValue(NewStatusProperty, value); }
+//    }
+
+//    public static readonly DependencyProperty NewStatusProperty =
+//        DependencyProperty.Register("NewStatus", typeof(BO.Enum.OrderStatus?), typeof(SimulationWindow), new PropertyMetadata(null));
+
+//    public DateTime? ExpectedDate
+//    {
+//        get { return (DateTime?)GetValue(ExpectedDateProperty); }
+//        set { SetValue(ExpectedDateProperty, value); }
+//    }
+
+//    public static readonly DependencyProperty ExpectedDateProperty =
+//        DependencyProperty.Register("ExpectedDate", typeof(DateTime?), typeof(SimulationWindow), new PropertyMetadata(null));
+
+//    public DateTime? StartTime
+//    {
+//        get { return (DateTime?)GetValue(StartTimeProperty); }
+//        set { SetValue(StartTimeProperty, value); }
+//    }
+
+//    public static readonly DependencyProperty StartTimeProperty =
+//        DependencyProperty.Register("StartTime", typeof(DateTime?), typeof(SimulationWindow), new PropertyMetadata(null));
+//}
