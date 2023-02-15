@@ -5,7 +5,7 @@
 		<CustomerName>svx</CustomerName>
 		<CustomerEmail>@gmail.com</CustomerEmail>
 		<CustomerAddress>fsdc</CustomerAddress>
-		<OrderDate>2023-02-7T00:00:00+02:00</OrderDate>
+		<OrderDate>2023-02-07T00:00:00+02:00</OrderDate>
 		<ShipDate>2023-02-15T00:00:00+02:00</ShipDate>
 		<DeliveryDate>2023-02-20T00:00:00+02:00</DeliveryDate>
 	</Order>
