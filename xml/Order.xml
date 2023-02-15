@@ -105,8 +105,8 @@
     <CustomerEmail>@gmail.com</CustomerEmail>
     <CustomerAddress>rfed</CustomerAddress>
     <OrderDate>2023-02-12T00:00:00+02:00</OrderDate>
-    <ShipDate>2023-02-15T00:00:00+02:00</ShipDate>
-    <DeliveryDate>2023-02-16T00:00:00+02:00</DeliveryDate>
+    <ShipDate>2023-02-14T00:00:00+02:00</ShipDate>
+    <DeliveryDate>2023-02-15T00:00:00+02:00</DeliveryDate>
   </Order>
   <Order>
     <ID>100038</ID>
@@ -134,5 +134,14 @@
     <OrderDate>2023-02-13T00:00:00+02:00</OrderDate>
     <ShipDate>2023-02-13T00:00:00+02:00</ShipDate>
     <DeliveryDate>2023-02-13T00:00:00+02:00</DeliveryDate>
+  </Order>
+  <Order>
+    <ID>100041</ID>
+    <CustomerName>michal</CustomerName>
+    <CustomerEmail>michal@gmail.com</CustomerEmail>
+    <CustomerAddress>asdfghj</CustomerAddress>
+    <OrderDate>2023-02-15T00:00:00+02:00</OrderDate>
+    <ShipDate>2023-02-18T00:00:00+02:00</ShipDate>
+    <DeliveryDate>2023-02-19T00:00:00+02:00</DeliveryDate>
   </Order>
 </ArrayOfOrder>

@@ -7,9 +7,9 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         WindowStyle="None"
-        Title="SimulationWindow" Height="450" Width="800"
+        Title="SimulationWindow" Height="450" Width="450"
         WindowStartupLocation="CenterScreen">
-    <!--Grid>
+    <Grid>
         <Grid.Background>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                 <GradientStop Color="WhiteSmoke" Offset="0.0" />
@@ -18,54 +18,23 @@
                 <GradientStop Color="#6c366e" Offset="1.0" />
             </LinearGradientBrush>
         </Grid.Background>
-
-        <Grid x:Name="CLockGrid" Margin="464,54,47,217">
-            <Grid.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="WhiteSmoke" Offset="0.0"/>
-                    <GradientStop Color="LightGray" Offset="0.3"/>
-                    <GradientStop Color="Gray" Offset="0.75"/>
-                    <GradientStop Color="DimGray" Offset="1.0"/>
-                </LinearGradientBrush>
-            </Grid.Background>
+        <!--<Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>-->
+        <Grid x:Name="ProductDetailsGrid" HorizontalAlignment="Center" VerticalAlignment="Top" Width="320" Margin="0,81,0,0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="12*"/>
-                <RowDefinition Height="10*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Button x:Name="startTimerBtn" Content="Start" Background="#cd91ce" Margin="10" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Height="45" Width="100" FontFamily="Comic Sans MS" Click="StartTimer_Click"/>
-            <Button x:Name="endTimerBtn_Copy" Content="End" Background="#cd91ce" Margin="10" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Height="45" Width="100" FontFamily="Comic Sans MS" Click="EndTimer_Click"/>
-            <TextBlock x:Name="TimerTextBlock" Text="00:00:00" FontSize="50" Grid.ColumnSpan="2" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Comic Sans MS"/>
-      
-</Grid>
-
-        <Button x:Name="endSimulationBtn" Content="End simulation" HorizontalAlignment="Left" Margin="552,356,0,0" VerticalAlignment="Top" FontSize="16" Height="42" Width="196" Click="EndSimulation_Click"/>-->
-    <Grid>
-        <StackPanel>
-            <StackPanel.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="WhiteSmoke" Offset="0.0" />
-                    <GradientStop Color="#cd91ce" Offset="0.5" />
-                    <GradientStop Color="#FF9B629D" Offset="0.8" />
-                    <GradientStop Color="#6c366e" Offset="1.0" />
-                </LinearGradientBrush>
-            </StackPanel.Background>
-            <Grid x:Name="ProductDetailsGrid" Margin="109,38,0,0" VerticalAlignment="Top">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
 
                 <Label x:Name="IDLabel" Content="ID:" Grid.Row="0"  VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
                 <TextBlock Text="{Binding ID}" x:Name="ID" Grid.Column="1"  VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="103" Height="24" TextAlignment="Left"/>
@@ -73,21 +42,28 @@
                 <Label x:Name="Oldstat" Content="Old Status:" Grid.Row="1"  VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
                 <TextBlock x:Name="OldStatus" Text="{Binding OldStatus}" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="103" Height="24" Grid.Column="1" />
 
-                <Label x:Name="oldDate" Content="Start Time:" Grid.Row="2"  VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
-                <TextBlock x:Name="StartTime"  Text="{Binding StartTime}" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Width="103" Height="24" />
+            <Label x:Name="Oldstat" Content="Old Status:" FontFamily="Comic Sans MS" Grid.Row="1"  VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+            <TextBlock x:Name="OldStatus" Text="{Binding OldStatus}" FontFamily="Comic Sans MS" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="200" Height="24" Grid.Column="1" />
 
-                <Label x:Name="newstatus" Content="New Status:" Grid.Row="3" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
-                <TextBlock x:Name="NewStatus" Text="{Binding NewStatus}" Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Width="103" Height="24" />
+            <Label x:Name="oldDate" Content="Start Time:" Grid.Row="2" FontFamily="Comic Sans MS" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+            <TextBlock x:Name="StartTime"  Text="{Binding StartTime}" FontFamily="Comic Sans MS" Grid.Column="1" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="200" Height="24" />
 
-                <Label Content="Expected Time:" Grid.Row="4"  VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
-                <TextBlock x:Name="ExpectedDate" Text="{Binding ExpectedDate}" Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center" Width="103" Height="24" />
+            <Label x:Name="newstatus" Content="New Status:" Grid.Row="3" FontFamily="Comic Sans MS" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+            <TextBlock x:Name="NewStatus" Text="{Binding NewStatus}" FontFamily="Comic Sans MS" Grid.Column="1" Grid.Row="3" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="200" Height="24" />
 
-            </Grid>
-            <TextBlock x:Name="TimerBlock" Text="00:00:00" TextAlignment="Center" FontSize="45" Foreground="Black" />
+            <Label Content="Expected Time:" Grid.Row="4"  VerticalAlignment="Bottom" FontFamily="Comic Sans MS" HorizontalAlignment="Right"/>
+            <TextBlock x:Name="ExpectedDate" Text="{Binding ExpectedDate}" Grid.Column="1" FontFamily="Comic Sans MS" Grid.Row="4" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="200" Height="24" />
+        </Grid>
 
-            <ProgressBar x:Name="ProgressBar" Width="200" Margin="0,25,0,0" Height="20" Value="{Binding progresPer}"/>
-
-            <Button Content="Stop" HorizontalAlignment="Left" Margin="360,25,0,0" Click="stop_simulation" Foreground="#FFF8F7F7" Height="29" Width="72">
+        <Grid x:Name="TimerGrid" HorizontalAlignment="Center" VerticalAlignment="Top" Height="120" Width="166" Margin="0,262,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock x:Name="TimerBlock" Text="00:00:00" FontFamily="Comic Sans MS" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="35" Foreground="Black" Width="214" />
+            <ProgressBar x:Name="ProgressBar" Width="150" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="15" Value="{Binding progresPer}"/>
+            <Button Content="Stop" Grid.Row="2" HorizontalAlignment="Center" FontFamily="Comic Sans MS" VerticalAlignment="Center" Click="stop_simulation" Foreground="#FFF8F7F7" Height="29" Width="70">
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="Black"/>
@@ -95,8 +71,6 @@
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>
-        </StackPanel>
-
+        </Grid>
     </Grid>
-    <!--/Grid>-->
 </Window>
