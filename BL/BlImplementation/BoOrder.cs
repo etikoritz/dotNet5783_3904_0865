@@ -106,40 +106,40 @@ internal class BoOrder : BlApi.IOrder
     {
         //if (condition > 0)
         //{
-            try
+        try
+        {
+            DO.Order dalOrder = (DO.Order)DalApi.Factory.Get().Order?.Get(o => o?.ID == id);
+            //DO.Order dalOrder = (DO.Order)Dal.Order.GetById(orderID);
+            BO.Order order = new()
             {
-                DO.Order dalOrder=(DO.Order)DalApi.Factory.Get().Order?.Get(o=>o?.ID==id);
-                //DO.Order dalOrder = (DO.Order)Dal.Order.GetById(orderID);
-                BO.Order order = new()
-                {
-                    ID = dalOrder.ID,
-                    CustomerName = dalOrder.CustomerName,
-                    CustomerEmail = dalOrder.CustomerEmail,
-                    CustomerAddress = dalOrder.CustomerAddress,
-                    OrderDate = dalOrder.OrderDate,
-                    ShipDate = dalOrder.ShipDate,
-                    DeliveryDate = dalOrder.DeliveryDate
-                };
-                //order Status
-                order.Status = OrderStatus(order);
+                ID = dalOrder.ID,
+                CustomerName = dalOrder.CustomerName,
+                CustomerEmail = dalOrder.CustomerEmail,
+                CustomerAddress = dalOrder.CustomerAddress,
+                OrderDate = dalOrder.OrderDate,
+                ShipDate = dalOrder.ShipDate,
+                DeliveryDate = dalOrder.DeliveryDate
+            };
+            //order Status
+            order.Status = OrderStatus(order);
 
-                //order TotalPrice
-                order.TotalPrice = 0;
-                //List<DO.OrderItem?> orderItemList = (List<DO.OrderItem?>)dalList.OrderItem?.GetList();
-                IEnumerable<DO.OrderItem?> orderItemList = (IEnumerable<DO.OrderItem?>)DalApi.Factory.Get().OrderItem?.GetList();
-                //to get all the products from the specific order
-                foreach (var item in
-                         from DO.OrderItem item in orderItemList
-                         where item.OrderID == order.ID
-                         select item)
-                {
-                    order.TotalPrice += item.Price * item.Amount;
-                }
+            //order TotalPrice
+            order.TotalPrice = 0;
+            //List<DO.OrderItem?> orderItemList = (List<DO.OrderItem?>)dalList.OrderItem?.GetList();
+            IEnumerable<DO.OrderItem?> orderItemList = (IEnumerable<DO.OrderItem?>)DalApi.Factory.Get().OrderItem?.GetList();
+            //to get all the products from the specific order
+            foreach (var item in
+                     from DO.OrderItem item in orderItemList
+                     where item.OrderID == order.ID
+                     select item)
+            {
+                order.TotalPrice += item.Price * item.Amount;
+            }
 
 
             //order Items
             order.Items = new List<BO.OrderItem>();
-                IEnumerable<DO.OrderItem?> orderItemList2 = (IEnumerable<DO.OrderItem?>)DalApi.Factory.Get().OrderItem?.GetList();
+            IEnumerable<DO.OrderItem?> orderItemList2 = (IEnumerable<DO.OrderItem?>)DalApi.Factory.Get().OrderItem?.GetList();
             foreach (var (item, item1) in from DO.OrderItem item in orderItemList2
                                           where item.OrderID == order.ID
                                           let item1 = new BO.OrderItem()
@@ -157,11 +157,11 @@ internal class BoOrder : BlApi.IOrder
             }
 
             return order;
-            }
-            catch (DO.DataNotExistException ex)
-            {
-                throw new BO.BODataNotExistException(ex.Message);
-            }
+        }
+        catch (DO.DataNotExistException ex)
+        {
+            throw new BO.BODataNotExistException(ex.Message);
+        }
     }
 
     /// <summary>
@@ -177,34 +177,33 @@ internal class BoOrder : BlApi.IOrder
         BO.Order order = new BO.Order();
         try
         {
-            DO.Order dalOrder = (DO.Order)DalApi.Factory.Get().Order?.Get(o=>o?.ID ==orderID);
-            if (dalOrder.ShipDate >= DateTime.Today)
-            {
+            DO.Order dalOrder = (DO.Order)DalApi.Factory.Get().Order.Get(o=>o?.ID ==orderID);
+            
                 //update BO entity
-                order = GetOrderDetails(orderID);
-                if (date > DateTime.MinValue)
-                {
-                    order.ShipDate = DateTime.Today;
-                    //update DO entity
-                    dalOrder.ShipDate = DateTime.Today;
-                }
-                else
-                {
-                    order.ShipDate = date;
-                    dalOrder.ShipDate = date;
-                }
-                
-                try
-                {
-                    Dal.Order.Update(dalOrder);
-                }
-                catch (DO.DataNotExistException ex)
-                {
-                    throw new BO.BODataNotExistException(ex.Message);
-                }
+            order = GetOrderDetails(orderID);
+            if (date > DateTime.MinValue)
+            {
+                order.ShipDate = DateTime.Today;
+                //update DO entity
+                dalOrder.ShipDate = DateTime.Today;
             }
             else
-                throw new BO.OrderAlreadyShippedException();
+            {
+                order.ShipDate = date;
+                dalOrder.ShipDate = date;
+            }
+
+            try
+            {
+                    Dal.Order.Update(dalOrder);
+                
+            }
+            catch (DO.DataNotExistException ex)
+            {
+                throw new BO.BODataNotExistException(ex.Message);
+            }
+            
+           
         }
         catch (DO.DataNotExistException ex)
         {

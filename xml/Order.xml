@@ -79,7 +79,7 @@
     <CustomerAddress>fd</CustomerAddress>
     <OrderDate>2023-02-12T00:00:00+02:00</OrderDate>
     <ShipDate>2023-02-14T00:00:00+02:00</ShipDate>
-    <DeliveryDate>2023-02-16T00:00:00+02:00</DeliveryDate>
+    <DeliveryDate>2023-02-15T00:00:00+02:00</DeliveryDate>
   </Order>
   <Order>
     <ID>100035</ID>
@@ -105,7 +105,7 @@
     <CustomerEmail>@gmail.com</CustomerEmail>
     <CustomerAddress>rfed</CustomerAddress>
     <OrderDate>2023-02-12T00:00:00+02:00</OrderDate>
-    <ShipDate>2023-02-14T00:00:00+02:00</ShipDate>
+    <ShipDate>2023-02-15T00:00:00+02:00</ShipDate>
     <DeliveryDate>2023-02-16T00:00:00+02:00</DeliveryDate>
   </Order>
   <Order>
@@ -123,8 +123,8 @@
     <CustomerEmail>@gmail.com</CustomerEmail>
     <CustomerAddress>recd</CustomerAddress>
     <OrderDate>2023-02-12T00:00:00+02:00</OrderDate>
-    <ShipDate>2023-02-14T00:00:00+02:00</ShipDate>
-    <DeliveryDate>2023-02-16T00:00:00+02:00</DeliveryDate>
+    <ShipDate>2023-02-15T00:00:00+02:00</ShipDate>
+    <DeliveryDate>2023-02-07T00:00:00+02:00</DeliveryDate>
   </Order>
   <Order>
     <ID>100040</ID>

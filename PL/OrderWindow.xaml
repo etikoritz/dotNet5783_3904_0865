@@ -149,7 +149,7 @@
                 <Binding Path="ShipDate" UpdateSourceTrigger="PropertyChanged"/>
             </DatePicker.Text>-->
             <DatePicker.SelectedDate>
-                <Binding Path="ShipDate" UpdateSourceTrigger="PropertyChanged"/>
+                <Binding Path="ShipDate"/>
             </DatePicker.SelectedDate>
         </DatePicker>
 

@@ -68,7 +68,7 @@
                 </Grid.RowDefinitions>
 
                 <Label x:Name="IDLabel" Content="ID:" Grid.Row="0"  VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
-                <TextBlock Text="{Binding ID}" x:Name="ID" Grid.Column="1"  VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="103" Height="24" TextAlignment="Left"/>
+                <TextBlock Text="{Binding ID}" x:Name="ID" Grid.Column="1"  VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="103" Height="24" TextAlignment="Left"/>
 
                 <Label x:Name="Oldstat" Content="Old Status:" Grid.Row="1"  VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
                 <TextBlock x:Name="OldStatus" Text="{Binding OldStatus}" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="103" Height="24" Grid.Column="1" />

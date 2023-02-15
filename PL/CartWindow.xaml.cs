@@ -22,7 +22,6 @@ namespace PL
     /// </summary>
     public partial class CartWindow : Window
     {
-        static int count = 0;
         private ObservableCollection<BO.OrderItem?> items = new ObservableCollection<BO.OrderItem?>();
         BlApi.IBl? bl = BlApi.Factory.Get();
         BO.Cart cart1;

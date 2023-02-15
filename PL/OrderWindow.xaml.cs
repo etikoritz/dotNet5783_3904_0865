@@ -70,6 +70,8 @@ public partial class OrderWindow : Window
         itemsList.ItemsSource = bl.Order?.GetOrderDetails(order.ID).Items;
         DataContext = bl?.Order?.GetOrderDetails(order.ID);
         // DeliveryDatePicker.Text = ((BO.Order)DataContext).DeliveryDate.ToString();
+        if (order.Status.ToString()=="Shipped")
+            ShippingDatePicker.IsEnabled = false;
 
     }
 
@@ -94,13 +96,10 @@ public partial class OrderWindow : Window
         }
         //this.DataContext = bl?.Order.GetOrderDetails(o => o?.ID == (DataContext as BO.Order)?.ID);
         //this.itemsList.ItemsSource = bl?.Order.GetOrderDetails(o => o?.ID == (DataContext as BO.Order)?.ID).Items;
-        this.DataContext = bl?.Order.GetOrderDetails((DataContext as BO.Order).ID);
+        this.DataContext = bl?.Order.GetOrderDetails(((BO.Order)DataContext).ID);
 
-        this.itemsList.ItemsSource = bl?.Order.GetOrderDetails((DataContext as BO.Order).ID).Items;
+        this.itemsList.ItemsSource = (DataContext as BO.Order)?.Items;
     }
-
-
-
 
 
 
@@ -121,7 +120,7 @@ public partial class OrderWindow : Window
         //this.DataContext = bl?.Order.GetOrderDetails(o => o?.ID == ((BO.Order)DataContext).ID);
         //this.itemsList.ItemsSource = bl?.Order?.GetOrderDetails(o => o?.ID == (DataContext as BO.Order)?.ID)?.Items;
         this.DataContext = bl?.Order.GetOrderDetails(((BO.Order)DataContext).ID);
-        this.itemsList.ItemsSource = ((BO.Order)DataContext)?.Items;
+        this.itemsList.ItemsSource = (DataContext as BO.Order)?.Items;
     }
 
     /// <summary>
@@ -145,24 +144,24 @@ public partial class OrderWindow : Window
         }
         //this.DataContext = bl?.Order?.GetOrderDetails(o => o?.ID == ((BO.Order)DataContext).ID);
         //this.itemsList.ItemsSource = bl?.Order?.GetOrderDetails(o => o?.ID == (DataContext as BO.Order)?.ID)?.Items;
-        this.DataContext = bl?.Order?.GetOrderDetails(((BO.Order)DataContext).ID);
-        this.itemsList.ItemsSource = bl?.Order?.GetOrderDetails((DataContext as BO.Order).ID)?.Items;
+        this.DataContext = bl?.Order.GetOrderDetails(((BO.Order)DataContext).ID);
+        this.itemsList.ItemsSource = (DataContext as BO.Order)?.Items;
     }
 
-    
+
 
     private void DeliveryDatePicker_SelectedDateChanged_1(object sender, SelectionChangedEventArgs e)
     {
         if (this.IsEnabled == false) return; //so if the file is for reading only the message box wont show up
         var item = (BO.Order)DataContext;
-        DatePicker datePicker = sender as DatePicker;
+        DatePicker datePicker = (DatePicker)sender;
         if (datePicker.SelectedDate.HasValue)
         {
             // Do something with the selected date
             DateTime selectedDate = datePicker.SelectedDate.Value;
             try
             {
-                bl.Order.UpdateOrderSupply(item.ID, selectedDate.Date);
+                bl?.Order.UpdateOrderSupply(item.ID, selectedDate.Date);
                 this.DataContext = bl?.Order?.GetOrderDetails(((BO.Order)DataContext).ID);
             }
             catch (Exception ex)
@@ -176,20 +175,27 @@ public partial class OrderWindow : Window
     {
         if (this.IsEnabled == false) return; //so if the file is for reading only the message box wont show up
         var item = (BO.Order)DataContext;
-        DatePicker datePicker = sender as DatePicker;
-        if (datePicker.SelectedDate.HasValue)
+        DatePicker datePicker = (DatePicker)sender;
+        //if (datePicker.SelectedDate.HasValue)
+        try
         {
             // Do something with the selected date
             DateTime selectedDate = datePicker.SelectedDate.Value;
-            try
-            {
-                bl.Order.UpdateOrderDelivery(item.ID, selectedDate.Date);
-                this.DataContext = bl?.Order?.GetOrderDetails(((BO.Order)DataContext).ID);
-            }
+
+            if (selectedDate < DateTime.Today)
+                MessageBox.Show("you cant choose date that passed");
+            if (selectedDate > item.DeliveryDate)
+                MessageBox.Show("you cant use the samedate for both delivery and shipping");
+
+            bl?.Order.UpdateOrderDelivery(item.ID, selectedDate.Date);
+                
+        }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
+            this.DataContext = bl?.Order?.GetOrderDetails(((BO.Order)DataContext).ID);
         }
     }
-}
+
+
