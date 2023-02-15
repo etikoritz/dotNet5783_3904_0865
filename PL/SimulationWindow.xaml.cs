@@ -43,11 +43,15 @@ public partial class SimulationWindow : Window
         isTimerRun = true;
     }
 
+    /// <summary>
+    /// prograss bar
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
     {
         if (e.ProgressPercentage == 0)
         {
-
             string timerText = stopWatch.Elapsed.ToString();
             timerText = timerText.Substring(0, 8);
             this.TimerBlock.Text = timerText;
@@ -56,7 +60,6 @@ public partial class SimulationWindow : Window
                 this.ProgressBar.Value = (DelayMain - r + 1) * (100 / DelayMain);
                 r--;
             }
-
         }
         else
         {
@@ -93,7 +96,6 @@ public partial class SimulationWindow : Window
             int index = DelayMain;
             timerworker.ReportProgress(0);
             Thread.Sleep(1000);
-
         }
     }
 

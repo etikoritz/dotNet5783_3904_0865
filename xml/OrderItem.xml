@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfOrderItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <OrderItem>
     <ID>100021</ID>
@@ -588,6 +588,54 @@
     <ID>100040</ID>
     <ProductID>222222</ProductID>
     <OrderID>100040</OrderID>
+    <Price>70</Price>
+    <Amount>2</Amount>
+    <TotalPrice>0</TotalPrice>
+  </OrderItem>
+  <OrderItem>
+    <ID>0</ID>
+    <ProductID>111111</ProductID>
+    <OrderID>0</OrderID>
+    <Price>50</Price>
+    <Amount>1</Amount>
+    <TotalPrice>0</TotalPrice>
+  </OrderItem>
+  <OrderItem>
+    <ID>0</ID>
+    <ProductID>333333</ProductID>
+    <OrderID>0</OrderID>
+    <Price>390</Price>
+    <Amount>1</Amount>
+    <TotalPrice>0</TotalPrice>
+  </OrderItem>
+  <OrderItem>
+    <ID>0</ID>
+    <ProductID>222222</ProductID>
+    <OrderID>0</OrderID>
+    <Price>70</Price>
+    <Amount>1</Amount>
+    <TotalPrice>0</TotalPrice>
+  </OrderItem>
+  <OrderItem>
+    <ID>100041</ID>
+    <ProductID>111111</ProductID>
+    <OrderID>100041</OrderID>
+    <Price>50</Price>
+    <Amount>1</Amount>
+    <TotalPrice>0</TotalPrice>
+  </OrderItem>
+  <OrderItem>
+    <ID>100041</ID>
+    <ProductID>333333</ProductID>
+    <OrderID>100041</OrderID>
+    <Price>390</Price>
+    <Amount>1</Amount>
+    <TotalPrice>0</TotalPrice>
+  </OrderItem>
+  <OrderItem>
+    <ID>100041</ID>
+    <ProductID>222222</ProductID>
+    <OrderID>100041</OrderID>
     <Price>70</Price>
     <Amount>2</Amount>
     <TotalPrice>0</TotalPrice>
