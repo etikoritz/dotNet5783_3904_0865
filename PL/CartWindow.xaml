@@ -95,5 +95,7 @@
                 <SolidColorBrush Color="#FF9E9E9E" Opacity="0"/>
             </Button.Background>
         </Button>
+        <Label Content="Price:" HorizontalAlignment="Left" Margin="152,360,0,0" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="227,364,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="{Binding Path=TotalPrice}" Height="16" Width="59"/>
     </Grid>
 </Window>

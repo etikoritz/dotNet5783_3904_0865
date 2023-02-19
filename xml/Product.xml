@@ -3,7 +3,7 @@
   <Product>
     <ID>111111</ID>
     <Name>hgvbcv</Name>
-    <InStock>2324</InStock>
+    <InStock>2323</InStock>
     <Price>50</Price>
     <Category>Laptop</Category>
   </Product>
@@ -17,14 +17,14 @@
   <Product>
     <ID>333333</ID>
     <Name>hgvbcv</Name>
-    <InStock>2341</InStock>
+    <InStock>2340</InStock>
     <Price>390</Price>
     <Category>Laptop</Category>
   </Product>
   <Product>
     <ID>444444</ID>
     <Name>rdfcesdvxa</Name>
-    <InStock>14</InStock>
+    <InStock>13</InStock>
     <Price>67</Price>
     <Category>Headphones</Category>
   </Product>
