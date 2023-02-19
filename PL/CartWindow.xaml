@@ -17,7 +17,7 @@
                 <GradientStop Color="#6c366e" Offset="1.0" />
             </LinearGradientBrush>
         </Grid.Background>
-        <ListView x:Name="orderItemList" d:ItemsSource="{d:SampleData ItemCount= 7}" Margin="35,49,52,76">
+        <ListView x:Name="orderItemList" d:ItemsSource="{d:SampleData ItemCount= 7}" Margin="35,49,49,110">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Name" Width="Auto">
@@ -95,7 +95,7 @@
                 <SolidColorBrush Color="#FF9E9E9E" Opacity="0"/>
             </Button.Background>
         </Button>
-        <Label Content="Price:" HorizontalAlignment="Left" Margin="152,360,0,0" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="227,364,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="{Binding Path=TotalPrice}" Height="16" Width="59"/>
+        <Label Content="Price:" FontFamily="Comic Sans MS" HorizontalAlignment="Left" Margin="41,353,0,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
+        <TextBlock Name="priceBox" HorizontalAlignment="Left" Margin="104,358,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="{Binding Path=TotalPrice, Mode=TwoWay}" Height="20" Width="61" FontSize="18"/>
     </Grid>
 </Window>

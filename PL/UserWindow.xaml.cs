@@ -40,7 +40,7 @@ namespace PL
             DataContext = cartWithUserDetails;
             CategorySelector.ItemsSource = System.Enum.GetValues(typeof(BO.Enum.Category));
             nameOfUser_lable.Content = cartWithUserDetails.CustomerName + "!";
-            cartCounterLabel.Content = cart.Amount.ToString();
+            //cartCounterLabel.Content = cart.Amount.ToString();
 
         }
 
@@ -73,8 +73,8 @@ namespace PL
             if (CatalogList.SelectedItems.Count >= 1)
             {
                 BO.ProductForList prod = (BO.ProductForList)CatalogList.SelectedItems[0];
-
-                new UpdateProductWindow(prod).Show();
+                string readOnly=" ";
+                new UpdateProductWindow(prod, readOnly).Show();
             }
         }
 
@@ -137,6 +137,7 @@ namespace PL
             PropertyGroupDescription groupDescription = new PropertyGroupDescription("Category");
             view.GroupDescriptions.Add(groupDescription);
             var button = (Button)sender;
+            Clear.Visibility=Visibility.Visible;
         }
     }
 }

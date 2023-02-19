@@ -60,6 +60,17 @@ public partial class UpdateProductWindow : Window
         this.DataContext = bl.Product.GetProductDetails(productForList.ID);
 
     }
+    public UpdateProductWindow(BO.ProductForList productForList, string readOnly)
+    {
+        InitializeComponent();
+        DataContext = bl.Product.GetProductList(p => p != null);
+        categoryComboBox.ItemsSource = Enum.GetValues(typeof(BO.Enum.Category));
+        UpdateButton.Visibility = Visibility.Hidden;
+        AddProduct.Visibility = Visibility.Hidden;
+        this.DataContext = bl.Product.GetProductDetails(productForList.ID);
+        this.IsEnabled=false;
+
+    }
 
     /// <summary>
     /// ctor for admin

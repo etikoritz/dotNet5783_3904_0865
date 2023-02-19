@@ -36,6 +36,7 @@ internal class BoCart : ICart
             item.TotalPrice += product.Price * item.Amount;
             Dal.Product.Update(product);
             cart.Amount++;
+            cart.TotalPrice += product.Price;
             return cart;
         }
 
@@ -133,20 +134,38 @@ internal class BoCart : ICart
     public BO.Cart UpdateAmount(BO.Cart cart, int productId, int newAmount)
     {
         DO.Product product = (DO.Product)Dal.Product.GetById(productId);
-        if (cart.Items.Exists(o => o?.ProductID == productId))
+        if (cart.Items.Exists(o => o.ProductID == productId))
         {
             var item = cart.Items.FirstOrDefault(o => o?.ProductID == productId);
-            if (!(item.Amount - newAmount < 0))
+            if (!(item?.Amount - newAmount <= 0))
             {
                 item.Amount -= newAmount;
                 cart.TotalPrice -= item.Price * newAmount;
                 cart.Amount -= newAmount;
                 return cart;
             }
-            if (item.Amount - newAmount == 0)
+            if (item?.Amount - newAmount == 0)
             {
                 DeleteFromeCart(cart, product.ID);
             }
+        }
+        else
+        {
+            throw new NotImplementedException();
+        }
+        return cart;
+    }
+    public BO.Cart AddAmount(BO.Cart cart, int productId, int newAmount)
+    {
+        DO.Product product = (DO.Product)Dal.Product.GetById(productId);
+        if (cart.Items.Exists(o => o.ProductID == productId))
+        {
+            var item = cart.Items.FirstOrDefault(o => o?.ProductID == productId);
+                item.Amount += newAmount;
+                cart.TotalPrice += item.Price * newAmount;
+                cart.Amount += newAmount;
+                return cart;
+            
         }
         else
         {
@@ -172,15 +191,18 @@ internal class BoCart : ICart
         select item)
         {
             BO.OrderItem deleteItem = item;
-            product.InStock += item.Amount;
-            //items?.Remove(item);
-            Dal.OrderItem.Delete(item.ID);
-            Dal.Product.Update(product);
+            //product.InStock += item.Amount;
+            //Items?.Remove(item);
+            Dal.OrderItem.Delete(item.ID, ProductId);
+            //Dal.Product.Update(product);
             cart.Amount -= item.Amount;
             cart.TotalPrice -= product.Price * item.Amount;
             count++;
+          
         }
-        cart.Items?.RemoveAt(count);
+        //cart.Items?.RemoveAt(count);
+        BO.OrderItem? item1 = cart.Items?.FirstOrDefault(o => o?.ProductID == ProductId);
+        cart.Items?.Remove(item1);
 
         return cart;
     }

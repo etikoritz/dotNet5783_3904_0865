@@ -41,4 +41,5 @@ public interface ICart
     public int ConfirmOrder(Cart cart);
     public BO.Cart? DeleteFromeCart(BO.Cart cart, int ProductId);
     public IEnumerable<BO.OrderItem> GetItemInCartList(BO.Cart cart);
+    public BO.Cart AddAmount(BO.Cart cart, int productId, int newAmount);
 }

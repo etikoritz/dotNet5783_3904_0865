@@ -47,10 +47,11 @@ namespace PL
             var button = (Button)sender;
             var item = (BO.OrderItem)button.DataContext;
             bl?.Cart.DeleteFromeCart(cart1, item.ProductID);
-            DataContext = bl?.Cart.GetItemInCartList(cart1);
+            DataContext = cart1;
             orderItemList.Items.Refresh();
-        }
+            priceBox.Text = cart1.TotalPrice.ToString();
 
+        }
         /// <summary>
         /// click on the "+" to add item to order
         /// </summary>
@@ -61,8 +62,10 @@ namespace PL
             var button = (Button)sender;
             var item = (BO.OrderItem)button.DataContext;
             bl?.Cart.AddToCart(cart1, item.ProductID);
-            DataContext = bl?.Cart.GetItemInCartList(cart1);
+            DataContext = cart1;
             orderItemList.Items.Refresh();
+            priceBox.Text = cart1.TotalPrice.ToString();
+
         }
 
         /// <summary>
@@ -78,8 +81,10 @@ namespace PL
                 RemoveItemButton_Click(sender, e);
             else
                 bl?.Cart.UpdateAmount(cart1, item.ProductID, 1);
-            DataContext = bl?.Cart.GetItemInCartList(cart1);
+            DataContext = cart1;
             orderItemList.Items.Refresh();
+            priceBox.Text = cart1.TotalPrice.ToString();
+
         }
 
         /// <summary>
