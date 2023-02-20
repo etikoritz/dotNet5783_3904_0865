@@ -2,30 +2,30 @@
 <Product>
   <Product>
     <ID>111111</ID>
-    <Name>hgvbcv</Name>
-    <InStock>2323</InStock>
-    <Price>50</Price>
+    <Name>lenovo yoga</Name>
+    <InStock>248</InStock>
+    <Price>2500</Price>
     <Category>Laptop</Category>
   </Product>
   <Product>
     <ID>222222</ID>
-    <Name>hgvbcv</Name>
-    <InStock>2317</InStock>
+    <Name>galaxi s21</Name>
+    <InStock>201</InStock>
     <Price>70</Price>
     <Category>Cellphone</Category>
   </Product>
   <Product>
     <ID>333333</ID>
-    <Name>hgvbcv</Name>
-    <InStock>2340</InStock>
-    <Price>390</Price>
+    <Name>apple mac</Name>
+    <InStock>151</InStock>
+    <Price>3000</Price>
     <Category>Laptop</Category>
   </Product>
   <Product>
     <ID>444444</ID>
-    <Name>rdfcesdvxa</Name>
-    <InStock>13</InStock>
-    <Price>67</Price>
+    <Name>airpods pro</Name>
+    <InStock>50</InStock>
+    <Price>400</Price>
     <Category>Headphones</Category>
   </Product>
   <Product>
@@ -62,5 +62,12 @@
     <InStock>270</InStock>
     <Price>3000</Price>
     <Category>Laptop</Category>
+  </Product>
+  <Product>
+    <ID>124574</ID>
+    <Name>ipad 12.9</Name>
+    <InStock>200</InStock>
+    <Price>4000</Price>
+    <Category>Tablet</Category>
   </Product>
 </Product>

@@ -195,8 +195,8 @@ internal class BoOrder : BlApi.IOrder
 
             try
             {
-                    Dal.Order.Update(dalOrder);
-                
+                Dal.Order.Update(dalOrder);
+
             }
             catch (DO.DataNotExistException ex)
             {

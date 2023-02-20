@@ -70,9 +70,11 @@ public partial class OrderWindow : Window
         itemsList.ItemsSource = bl.Order?.GetOrderDetails(order.ID).Items;
         DataContext = bl?.Order?.GetOrderDetails(order.ID);
         // DeliveryDatePicker.Text = ((BO.Order)DataContext).DeliveryDate.ToString();
-        if (order.Status.ToString()=="Shipped")
+        if (order.Status.ToString() == "Shipped")
+        {
             ShippingDatePicker.IsEnabled = false;
-
+            OrderDateTextBox.IsEnabled = false;
+        } 
     }
 
     /// <summary>
@@ -176,26 +178,24 @@ public partial class OrderWindow : Window
         if (this.IsEnabled == false) return; //so if the file is for reading only the message box wont show up
         var item = (BO.Order)DataContext;
         DatePicker datePicker = (DatePicker)sender;
-        //if (datePicker.SelectedDate.HasValue)
-        try
+        DateTime selectedDate = datePicker.SelectedDate.Value;
+        if (datePicker.SelectedDate.HasValue)
         {
             // Do something with the selected date
-            DateTime selectedDate = datePicker.SelectedDate.Value;
 
-            if (selectedDate < DateTime.Today)
-                MessageBox.Show("you cant choose date that passed");
-            if (selectedDate > item.DeliveryDate)
-                MessageBox.Show("you cant use the samedate for both delivery and shipping");
-
-            bl?.Order.UpdateOrderDelivery(item.ID, selectedDate.Date);
-                
-        }
+            try
+            {
+                bl?.Order.UpdateOrderDelivery(item.ID, selectedDate.Date);
+                this.DataContext = bl?.Order?.GetOrderDetails(((BO.Order)DataContext).ID);
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
-            this.DataContext = bl?.Order?.GetOrderDetails(((BO.Order)DataContext).ID);
         }
+
+
     }
+}
 
 
