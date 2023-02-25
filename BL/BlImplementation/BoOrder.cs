@@ -152,7 +152,7 @@ internal class BoOrder : BlApi.IOrder
                                           select (item, item1))
             {
                 item1.TotalPrice = item.Price * item.Amount;
-                item1.Name = DalApi.Factory.Get().Product.GetById(item.ProductID)?.Name;////////////////////////////////////////////////////////////////////////////////
+                item1.Name = DalApi.Factory.Get().Product.GetById(item.ProductID)?.Name;
                 order.Items.Add(item1);
             }
 
@@ -376,13 +376,6 @@ internal class BoOrder : BlApi.IOrder
             NewItemDal.ID = id;
             return;
         }
-        //foreach (var item in orderForLists)
-        //{
-        //    if (item.ID == orderID)
-        //    {
-        //        orderForLists.Add(item);
-        //    }
-        //}
         return;
     }
 
@@ -449,41 +442,6 @@ internal class BoOrder : BlApi.IOrder
             deleteItemFromOrder(orderID, productID);
             //throw new Exception();
         }
-
-
-        //if(product.InStock-amount>0)
-        //{
-        //    for (int i = 0; i < orderItems?.Count; i++)
-        //    {
-        //        if (orderItems[i]?.ProductID == productID && orderItems[i]?.OrderID == orderID)
-        //        {
-        //            int Amount = 0;
-        //            Amount = orderItems[i].Value.Amount - amount;
-        //            product.InStock += amount;
-        //            Dal.Product.Update(product);
-
-        //            DO.OrderItem NewItemDal = new()
-        //            {
-        //                ID = orderID,
-        //                OrderID = orderID,
-        //                ProductID = productID,
-        //                Price = DalApi.Factory.Get().Product.Get(p => p?.ID == productID).Value.Price,
-
-        //            };
-        //            NewItemDal.Amount = Amount;
-        //            NewItemDal.TotalPrice -= amount * orderItems[i].Value.Price;
-        //            Dal.OrderItem.Update(NewItemDal);
-        //            return;
-        //        }
-        //    }
-        //}
-
-        ////////////////////////// מאפשרים להוסיף רק אחד בכל פעם PL -אולי לא צריך, כי ב  
-        //if (product.InStock - amount < 0)
-        //{
-        //    throw new Exception(
-        //}
-
     }
 
 
@@ -554,20 +512,5 @@ internal class BoOrder : BlApi.IOrder
         }
        
     }
-
-
-    //public int ChooseNextOrder()
-    //{
-    //    IEnumerable<OrderForList> orderList = GetOrderList();
-    //    IEnumerable<BO.Order> orders = orderList.Select(o => GetOrderDetails(o.ID));
-    //    IEnumerable<BO.Order> shippedOrders = orders.Where(o => o.Status.ToString() == "Shipped");
-    //    IEnumerable<BO.Order> confirmedOrders = orders.Where(o => o.Status.ToString() == "Confirmed");
-    //    BO.Order? maxObjectShipped = shippedOrders.OrderByDescending(x => x.ShipDate).FirstOrDefault();
-    //    BO.Order? maxObjectConfirmed = confirmedOrders.OrderByDescending(x => x.OrderDate).FirstOrDefault();
-    //    if (maxObjectShipped?.ShipDate > maxObjectConfirmed?.OrderDate)
-    //        return maxObjectConfirmed.ID;
-    //    else
-    //        return maxObjectShipped.ID;
-    //}
 }
 
